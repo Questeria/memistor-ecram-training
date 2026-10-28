@@ -1,0 +1,461 @@
+{
+ "F1": {
+  "cause": "Not the code (the simulator and runner files have one commit each, older than both run sets) and not the library (both sets record the same torch build). The installed torch's CUDA random kernels size their grid by the GPU's multiprocessor count and threads per multiprocessor (header lines below), and the Philox subsequence and offset of every drawn element follow the grid; the generators of memsim_rev.Streams live on the GPU, so the same seed gives a different initialisation and a different torch.randperm example order on a GPU of another size. The A4000 and the P2000 differ in both. The differences between the runs are therefore different random realisations, not rounding of one realisation. Consistent with this, the probe runs' CIFAR and LM example orders are equal between the A4000 and the P2200 while their initialisations and the MNIST order are not (probe_runs_vs_e3): a draw is device-independent only where the drawing kernel's grid does not depend on the device. Prediction checked by experiment A2-M: the P2200 (other multiprocessor count) gives hashes equal across its own three arms and different from both the A4000's and the P2000's.",
+  "claim": "seed 0 82.02 % (A4000) vs 89.69 % (P2000) is attributed to 'GPU rounding alone'; the five-seed A2-R join mixes matched and unmatched pairs",
+  "code_last_commit": {
+   "sim/memsim_rev.py": "46a6e23a5 2026-10-26T01:07:57-04:00",
+   "sim/pulse_seq_rev2.py": "86e86fe89 2026-10-26T19:38:49-04:00",
+   "sim/run_rev.py": "46a6e23a5 2026-10-26T01:07:57-04:00",
+   "sim/run_rev2.py": "86e86fe89 2026-10-26T19:38:49-04:00",
+   "sim/tasks_rev.py": "46a6e23a5 2026-10-26T01:07:57-04:00"
+  },
+  "mechanism": {
+   "header": "include/ATen/native/cuda/DistributionTemplates.h",
+   "lines": [
+    "49: std::tuple<uint64_t, dim3, dim3> calc_execution_policy(const int64_t total_elements, const uint32_t unroll_factor) {",
+    "54: uint32_t blocks_per_sm = at::cuda::getCurrentDeviceProperties()->maxThreadsPerMultiProcessor / block_size;",
+    "56: static_cast<uint32_t>(at::cuda::getCurrentDeviceProperties()->multiProcessorCount) * blocks_per_sm,",
+    "59: uint64_t counter_offset = ((numel - 1) / (block_size * grid.x * unroll_factor) + 1) * max_generator_offsets_per_curand_call;",
+    "123: auto [counter_offset, grid, block] = calc_execution_policy(numel, unroll_factor);"
+   ],
+   "torch": "2.7.1+cu126"
+  },
+  "p2200": {
+   "cc": "6.1",
+   "max_threads_per_sm": 2048,
+   "name": "Quadro P2200",
+   "sm": 10
+  },
+  "probe_runs_vs_e3": [
+   {
+    "data_equal": true,
+    "device": "Quadro P2200",
+    "e3_device": "NVIDIA RTX A4000",
+    "e3_metric": {
+     "acc": 0.6159,
+     "loss": 1.1386767822265624,
+     "n_eval": 10000,
+     "split": "test"
+    },
+    "init_equal": false,
+    "metric": {
+     "acc": 0.6177,
+     "loss": 1.11388310546875,
+     "n_eval": 10000,
+     "split": "test"
+    },
+    "run": "fidprobe3__cifar_w32__ecram_mo_kim2019__agad__lr0.001__s0__probe",
+    "task": "cifar"
+   },
+   {
+    "data_equal": true,
+    "device": "Quadro P2200",
+    "e3_device": "NVIDIA RTX A4000",
+    "e3_metric": {
+     "bpb": 2.9377905244370606,
+     "split": "test"
+    },
+    "init_equal": false,
+    "metric": {
+     "bpb": 2.887720945120981,
+     "split": "test"
+    },
+    "run": "fidprobe3__lm_w128__protonic_onen2022__cttv2__lr0.0001__s0__probe",
+    "task": "lm"
+   },
+   {
+    "data_equal": false,
+    "device": "Quadro P2200",
+    "e3_device": "NVIDIA RTX A4000",
+    "e3_metric": {
+     "acc": 0.9722,
+     "loss": 0.08485810012817382,
+     "n_eval": 10000,
+     "split": "test"
+    },
+    "init_equal": false,
+    "metric": {
+     "acc": 0.9698,
+     "loss": 0.09602057781219482,
+     "n_eval": 10000,
+     "split": "test"
+    },
+    "run": "fidprobe3__mnist_w128__ecram_li_tang2018__cttv2__lr0.003__s0__probe",
+    "task": "mnist"
+   }
+  ],
+  "record_commits": {
+   "fid (pod seq)": "f5eda7985 2026-10-26T23:05:17-04:00",
+   "fidr (desk seq)": "5afeda818 2026-10-27T03:57:28-04:00"
+  },
+  "rounding_alone_in_paper": true,
+  "rounding_in_response3": true,
+  "seeds": {
+   "0": {
+    "desk_seq_matches_pod": [
+     false
+    ],
+    "pod_matched": true,
+    "pod_triple": [
+     "fp",
+     "seq",
+     "sur"
+    ],
+    "rows": [
+     {
+      "acc": 0.8087,
+      "arm": "sur",
+      "data": "94e43fb28e9bc937",
+      "device": "NVIDIA RTX A4000",
+      "file": "records/revision/runs/e3/e3__mnist_w128__ecram_mo_kim2019__sgd__lr0.003__s0.json",
+      "init": "19f51772c567e748",
+      "seed": 0,
+      "src": "e3",
+      "torch": "2.7.1+cu126"
+     },
+     {
+      "acc": 0.9771,
+      "arm": "fp",
+      "data": "94e43fb28e9bc937",
+      "device": "NVIDIA RTX A4000",
+      "file": "records/revision/runs/e3/e3__mnist_w128__fp_sgd__sgd__lr0.003__s0.json",
+      "init": "19f51772c567e748",
+      "seed": 0,
+      "src": "e3",
+      "torch": "2.7.1+cu126"
+     },
+     {
+      "acc": 0.8202,
+      "arm": "seq",
+      "data": "94e43fb28e9bc937",
+      "device": "NVIDIA RTX A4000",
+      "file": "records/revision/runs/fid/fid__mnist_w128__ecram_mo_kim2019__sgd__lr0.003__s0__seq.json",
+      "init": "19f51772c567e748",
+      "seed": 0,
+      "src": "fid",
+      "torch": "2.7.1+cu126"
+     },
+     {
+      "acc": 0.8969,
+      "arm": "seq",
+      "data": "b7a073918a1db230",
+      "device": "Quadro P2000",
+      "file": "records/revision3/runs/fidr/fidr__mnist_w128__ecram_mo_kim2019__sgd__lr0.003__s0__seq.json",
+      "init": "3d627b7d4bc4d4b1",
+      "seed": 0,
+      "src": "fidr",
+      "torch": "2.7.1+cu126"
+     }
+    ]
+   },
+   "1": {
+    "desk_seq_matches_pod": [],
+    "pod_matched": true,
+    "pod_triple": [
+     "fp",
+     "seq",
+     "sur"
+    ],
+    "rows": [
+     {
+      "acc": 0.9025,
+      "arm": "sur",
+      "data": "0d1cc310ba191a06",
+      "device": "NVIDIA RTX A4000",
+      "file": "records/revision/runs/e3/e3__mnist_w128__ecram_mo_kim2019__sgd__lr0.003__s1.json",
+      "init": "17549434b10839c7",
+      "seed": 1,
+      "src": "e3",
+      "torch": "2.7.1+cu126"
+     },
+     {
+      "acc": 0.9784,
+      "arm": "fp",
+      "data": "0d1cc310ba191a06",
+      "device": "NVIDIA RTX A4000",
+      "file": "records/revision/runs/e3/e3__mnist_w128__fp_sgd__sgd__lr0.003__s1.json",
+      "init": "17549434b10839c7",
+      "seed": 1,
+      "src": "e3",
+      "torch": "2.7.1+cu126"
+     },
+     {
+      "acc": 0.9045,
+      "arm": "seq",
+      "data": "0d1cc310ba191a06",
+      "device": "NVIDIA RTX A4000",
+      "file": "records/revision/runs/fid/fid__mnist_w128__ecram_mo_kim2019__sgd__lr0.003__s1__seq.json",
+      "init": "17549434b10839c7",
+      "seed": 1,
+      "src": "fid",
+      "torch": "2.7.1+cu126"
+     }
+    ]
+   },
+   "2": {
+    "desk_seq_matches_pod": [],
+    "pod_matched": true,
+    "pod_triple": [
+     "fp",
+     "seq",
+     "sur"
+    ],
+    "rows": [
+     {
+      "acc": 0.7983,
+      "arm": "sur",
+      "data": "1dd917f1036ee616",
+      "device": "NVIDIA RTX A4000",
+      "file": "records/revision/runs/e3/e3__mnist_w128__ecram_mo_kim2019__sgd__lr0.003__s2.json",
+      "init": "9faeb6932cc196fa",
+      "seed": 2,
+      "src": "e3",
+      "torch": "2.7.1+cu126"
+     },
+     {
+      "acc": 0.9769,
+      "arm": "fp",
+      "data": "1dd917f1036ee616",
+      "device": "NVIDIA RTX A4000",
+      "file": "records/revision/runs/e3/e3__mnist_w128__fp_sgd__sgd__lr0.003__s2.json",
+      "init": "9faeb6932cc196fa",
+      "seed": 2,
+      "src": "e3",
+      "torch": "2.7.1+cu126"
+     },
+     {
+      "acc": 0.8274,
+      "arm": "seq",
+      "data": "1dd917f1036ee616",
+      "device": "NVIDIA RTX A4000",
+      "file": "records/revision/runs/fid/fid__mnist_w128__ecram_mo_kim2019__sgd__lr0.003__s2__seq.json",
+      "init": "9faeb6932cc196fa",
+      "seed": 2,
+      "src": "fid",
+      "torch": "2.7.1+cu126"
+     }
+    ]
+   },
+   "3": {
+    "desk_seq_matches_pod": [
+     false
+    ],
+    "pod_matched": true,
+    "pod_triple": [
+     "fp",
+     "sur"
+    ],
+    "rows": [
+     {
+      "acc": 0.902,
+      "arm": "sur",
+      "data": "5fff2f216a9091ef",
+      "device": "NVIDIA RTX A4000",
+      "file": "records/revision/runs/e3/e3__mnist_w128__ecram_mo_kim2019__sgd__lr0.003__s3.json",
+      "init": "c26b27308e4b2da4",
+      "seed": 3,
+      "src": "e3",
+      "torch": "2.7.1+cu126"
+     },
+     {
+      "acc": 0.9784,
+      "arm": "fp",
+      "data": "5fff2f216a9091ef",
+      "device": "NVIDIA RTX A4000",
+      "file": "records/revision/runs/e3/e3__mnist_w128__fp_sgd__sgd__lr0.003__s3.json",
+      "init": "c26b27308e4b2da4",
+      "seed": 3,
+      "src": "e3",
+      "torch": "2.7.1+cu126"
+     },
+     {
+      "acc": 0.9071,
+      "arm": "seq",
+      "data": "4e5a6996215b367f",
+      "device": "Quadro P2000",
+      "file": "records/revision3/runs/fidr/fidr__mnist_w128__ecram_mo_kim2019__sgd__lr0.003__s3__seq.json",
+      "init": "f90ef4cccfef5a43",
+      "seed": 3,
+      "src": "fidr",
+      "torch": "2.7.1+cu126"
+     }
+    ]
+   },
+   "4": {
+    "desk_seq_matches_pod": [
+     false
+    ],
+    "pod_matched": true,
+    "pod_triple": [
+     "fp",
+     "sur"
+    ],
+    "rows": [
+     {
+      "acc": 0.9017,
+      "arm": "sur",
+      "data": "bd5488fc9fe4d638",
+      "device": "NVIDIA RTX A4000",
+      "file": "records/revision/runs/e3/e3__mnist_w128__ecram_mo_kim2019__sgd__lr0.003__s4.json",
+      "init": "3a256d89118580dc",
+      "seed": 4,
+      "src": "e3",
+      "torch": "2.7.1+cu126"
+     },
+     {
+      "acc": 0.9779,
+      "arm": "fp",
+      "data": "bd5488fc9fe4d638",
+      "device": "NVIDIA RTX A4000",
+      "file": "records/revision/runs/e3/e3__mnist_w128__fp_sgd__sgd__lr0.003__s4.json",
+      "init": "3a256d89118580dc",
+      "seed": 4,
+      "src": "e3",
+      "torch": "2.7.1+cu126"
+     },
+     {
+      "acc": 0.8774,
+      "arm": "seq",
+      "data": "e3d52ceb38c27497",
+      "device": "Quadro P2000",
+      "file": "records/revision3/runs/fidr/fidr__mnist_w128__ecram_mo_kim2019__sgd__lr0.003__s4__seq.json",
+      "init": "254961cdf56ad54f",
+      "seed": 4,
+      "src": "fidr",
+      "torch": "2.7.1+cu126"
+     }
+    ]
+   }
+  },
+  "torch_versions": [
+   "2.7.1+cu126"
+  ],
+  "v4_a2r_pair_matched_by_seed": {
+   "0": true,
+   "1": true,
+   "2": true,
+   "3": false,
+   "4": false
+  },
+  "verdict": "CONFIRMED"
+ },
+ "F2": {
+  "all_present_and_equal": true,
+  "availability_mentions_draws": false,
+  "files": [
+   {
+    "bytes": 14738834,
+    "file": "fidprobe3__cifar_w32__ecram_mo_kim2019__agad__lr0.001__s0__probe__L3__U600.npz",
+    "sha256_equal": true,
+    "sha256_recorded": "9318854e01c1bd3a159735eb0a8036d92fa4c11094a3df3ec56d95acd3ca9310"
+   },
+   {
+    "bytes": 159073,
+    "file": "fidprobe3__cifar_w32__ecram_mo_kim2019__agad__lr0.001__s0__probe__L4__U600.npz",
+    "sha256_equal": true,
+    "sha256_recorded": "055713cff7a594af1171c08cb6db03aece29e085a24e22f30e4c6a04a911cec2"
+   },
+   {
+    "bytes": 14756559,
+    "file": "fidprobe3__cifar_w32__ecram_mo_kim2019__agad__lr0.001__s0__probe__L3__U2000.npz",
+    "sha256_equal": true,
+    "sha256_recorded": "367f471bbf363928c428f4345c33343d7be0085bb6ab18632fa2d4eded9844d1"
+   },
+   {
+    "bytes": 169714,
+    "file": "fidprobe3__cifar_w32__ecram_mo_kim2019__agad__lr0.001__s0__probe__L4__U2000.npz",
+    "sha256_equal": true,
+    "sha256_recorded": "ecc7d4d3b445ca1781bb92d65f1147f791c2ec6d02a55c03a16882f72b0ad6eb"
+   },
+   {
+    "bytes": 2436035,
+    "file": "fidprobe3__lm_w128__protonic_onen2022__cttv2__lr0.0001__s0__probe__L0__U750.npz",
+    "sha256_equal": true,
+    "sha256_recorded": "a040a0863ae4509f6a5107597bc04c2b98d210b553b4ff808404ed2cb3df1757"
+   },
+   {
+    "bytes": 3073036,
+    "file": "fidprobe3__lm_w128__protonic_onen2022__cttv2__lr0.0001__s0__probe__L9__U750.npz",
+    "sha256_equal": true,
+    "sha256_recorded": "10c519823e3ca7055bae6a7b391b01aca837ec6d7b3a5c5a99414f4a38949097"
+   },
+   {
+    "bytes": 2139293,
+    "file": "fidprobe3__lm_w128__protonic_onen2022__cttv2__lr0.0001__s0__probe__L0__U2250.npz",
+    "sha256_equal": true,
+    "sha256_recorded": "ffb3180f9313e0c45b48b38320996bd26e853cf406d75d105f8eeb2bc6e02149"
+   },
+   {
+    "bytes": 2585400,
+    "file": "fidprobe3__lm_w128__protonic_onen2022__cttv2__lr0.0001__s0__probe__L9__U2250.npz",
+    "sha256_equal": true,
+    "sha256_recorded": "bdab3ba2741f645bad7d07bb70341ea4b8ecfc9e72a7986b46f8c53569390b64"
+   },
+   {
+    "bytes": 21971077,
+    "file": "fidprobe3__mnist_w128__ecram_li_tang2018__cttv2__lr0.003__s0__probe__L0__U1000.npz",
+    "sha256_equal": true,
+    "sha256_recorded": "f34d09ea763c2e3d4fe6ffc77f408d3d6f9237bfdd7813b548c872d5f12aead3"
+   },
+   {
+    "bytes": 244518,
+    "file": "fidprobe3__mnist_w128__ecram_li_tang2018__cttv2__lr0.003__s0__probe__L2__U1000.npz",
+    "sha256_equal": true,
+    "sha256_recorded": "1b81cf51ff0df0c41086bac3b0be902dcabe7dc79da9097de3a4fb1594831e38"
+   },
+   {
+    "bytes": 19388651,
+    "file": "fidprobe3__mnist_w128__ecram_li_tang2018__cttv2__lr0.003__s0__probe__L0__U3500.npz",
+    "sha256_equal": true,
+    "sha256_recorded": "266c46c10f2c0d8f93517469118f29f6da32ce9e82227f17f91e030035d723a8"
+   },
+   {
+    "bytes": 243582,
+    "file": "fidprobe3__mnist_w128__ecram_li_tang2018__cttv2__lr0.003__s0__probe__L2__U3500.npz",
+    "sha256_equal": true,
+    "sha256_recorded": "1ddeceb98029d63ac80eb6382ba4509ce596ff49a3987232ca6d49dd740e7efd"
+   }
+  ],
+  "n": 12,
+  "publishing_mentions_draws": false,
+  "publishing_names": 0,
+  "total_bytes": 81905772,
+  "verdict": "CONFIRMED"
+ },
+ "F3": {
+  "abstract_meets_unqualified": true,
+  "abstract_review_count": [
+   "two"
+  ],
+  "note": "Table sizes are read from the source (\\scriptsize inside \\fitbox, which shrinks a table wider than the text); the printed point sizes are the reviewer's measurements. The '(95)' mark is already defined in Table 6's caption as the excess's 95th percentile and the gain interval (table6_95_tied); v5 states that it is not a joint guarantee. Page 20's blank area is float placement (checked on the v5 render).",
+  "table6_95_tied": true,
+  "table6_fitbox": true,
+  "table6_size": "scriptsize",
+  "table7_fitbox": true,
+  "table7_size": "scriptsize",
+  "verdict": "CONFIRMED"
+ },
+ "all_faults_caught": true,
+ "faults": {
+  "abstract_qualified_detected": {
+   "caught": true
+  },
+  "corrupt_draw_detected": {
+   "caught": true
+  },
+  "desk_hashes_forged_to_pod": {
+   "caught": true
+  },
+  "missing_hash_is_unmatched": {
+   "caught": true
+  },
+  "pod_seed1_fp_order_changed": {
+   "caught": true
+  },
+  "publishing_listing_detected": {
+   "caught": true
+  }
+ },
+ "review": "reviews/REVIEW-4-chatgpt-20261027-full.md",
+ "schema": "altone.x1000.me-revision4.verify.v1"
+}

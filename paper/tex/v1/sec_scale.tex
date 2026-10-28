@@ -1,0 +1,50 @@
+\subsection{Scale: the gap does not grow when every arm has its own learning rate}\label{sec:scale}
+An earlier exploratory screen of ours (Appendix~\ref{app:laneme}) found that the device gap grows with width once the FP
+learning rate is re-tuned per width. If true, that would be a serious obstacle, so we tested it directly.
+
+\paragraph{Design.}
+\begin{itemize}
+\item Widths: CIFAR base channels $c\in\{16,32,64\}$ and LM widths $d\in\{64,128,256\}$, with a fixed training budget.
+\item Arms: FP; and TTv2 and \RETwoBestchopped{} on the protonic and Li-ECRAM devices.
+\item Learning rates: every arm chooses its own on validation at every width, with the edge rule.
+\item Seeds: three test seeds per arm and width.
+\item Verdict: GROWS, SHRINKS or FLAT, by the pre-registered rule (Section~\ref{sec:protocol}).
+\end{itemize}
+
+\paragraph{Result} (Table~\ref{tab:scale}, Fig.~\ref{fig:scale}).
+\begin{itemize}
+\item Of \REFourNArms{} device--algorithm arms, \REFourNGrows{} GROW, \REFourNFlat{} are FLAT and \REFourNShrinks{} SHRINK.
+      The two that shrink are TTv2 on the LM, for both devices.
+\item The earlier observation is therefore \textbf{\REFourConfirmed}.
+\item On the LM the tuned device arms are \emph{better} than FP-SGD, and increasingly so at width 256. The protonic device with
+      \RETwoBestchopped{} is \REFourLmProtonicOnenTwoZeroTwoTwoCttvTwoWTwoFiveSixGap\% at $d=256$ and
+      \REFourLmProtonicOnenTwoZeroTwoTwoCttvTwoWOneTwoEightGap\% at $d=128$.
+\end{itemize}
+
+\paragraph{Why the earlier screen saw growth.}
+\begin{itemize}
+\item The earlier runs, like our specification sweep (Section~\ref{sec:spec}), used the \emph{FP} learning rate for the device.
+\item At width 64 (CIFAR) and 256 (LM) that rate is a poor choice for a Tiki-Taka device. The base protonic device with TTv2 at
+      the FP rate has a gap of \RSpecrelTtvTwoCifarWSixFourBasegap\,pp and \RSpecrelTtvTwoLmWTwoFiveSixBasegap\%.
+\item At its own rate (TTv2: \REFourCifarProtonicOnenTwoZeroTwoTwoTtvTwoWSixFourGap\,pp and
+      \REFourLmProtonicOnenTwoZeroTwoTwoTtvTwoWTwoFiveSixGap\%) the gap is gone.
+\item The device arms chose rates up to \REFourLrRatioMax$\times$ above FP's. TTv2's two-array structure filters the gradient like a leaky
+      accumulator, the analogy to momentum drawn by~\cite{rasch2024}, and tolerates larger steps.
+\end{itemize}
+
+\paragraph{Caveats.}
+\begin{itemize}
+\item Our FP baseline is plain SGD at a fixed budget. At $d=256$ its validation-chosen rate
+      ($\REFourLmFplrWTwoFiveSix$) leaves it at \REFourLmFpWTwoFiveSix{} bits per byte, worse than at $d=128$
+      (\REFourLmFpWOneTwoEight). Part of the analog arms' advantage at $d=256$ is FP-SGD's under-training at this budget, not an
+      analog gain.
+\item Three widths spanning a factor of four are a small range. Our conclusion is limited to it: we find no evidence that the
+      gap grows with width once learning rates are tuned per arm.
+\end{itemize}
+
+\input{tables/scale.tex}
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{figs/fig_scale}
+\caption{Gap against width with every arm at its own validation-chosen learning rate (mean and 95\% interval, 3 seeds); solid:
+protonic, dashed: Li-ECRAM; dotted: the gap line.}\label{fig:scale}
+\end{figure}

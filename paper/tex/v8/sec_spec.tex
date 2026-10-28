@@ -1,0 +1,42 @@
+\subsection{Sensitivity against absolute lines}\label{sec:spec}
+\input{tables/rev_spec_p.tex}
+Around the protonic-inspired base we move one device property at a time (levels, step asymmetry, saturation $\gamma$, write
+noise, reference error, retention) at the base sizes (CIFAR $c=32$, LM $d=128$), three seeds paired with FP-SGD of the same seed,
+at FP-SGD's learning rate. Every grid point is labelled against the \emph{absolute} line (2\,pp, 5\,\%), never against the base
+device's own gap (Table~\ref{tab:rev_spec}). The asymmetry sweep is run twice: as before, where the symmetry point
+$u^*=a/(2\gamma)$ moves toward the upper bound and the positive weight range shrinks ($a=0.4$ at $\gamma=0.2$ puts $u^*$ on the
+bound); and with each device's range re-centred on its symmetry point, so that only the up/down dynamics change.
+
+\paragraph{The pre-registered sheet (TTv2) establishes no threshold.} Its base point is itself UNRESOLVED on both tasks
+(\RVSpecTtvTwoCifarBaseGap\,pp on CIFAR, \RVSpecTtvTwoLmBaseGap\,\% on the LM), so by the pre-registered rule every axis is ``not
+established''. It still shows the confound the review pointed out: at $a=0.4$ the gap is \RVSpecTtvTwoCifarAsymAtZeroPFourGap\,pp
+on CIFAR when the symmetry point moves onto the bound, but \RVSpecTtvTwoCifarAsymFixedspAtZeroPFourGap\,pp when it is held at
+mid-range. The earlier ``asymmetry limit'' was mostly lost weight range.
+
+\paragraph{The chopped-TTv2 sheet (added after the main table, deviation R3).} On CIFAR the base passes
+(\RVSpecCttvTwoCifarBaseGap\,pp, \RVSpecCttvTwoCifarBaseLabel), and the sheet establishes: step asymmetry up to
+\RVSpecCttvTwoCifarAsymThr{} with the symmetry point moving (at 0.4 the gap jumps to \RVSpecCttvTwoCifarAsymAtZeroPFourGap\,pp,
+when $u^*$ reaches the bound), and reference error up to \RVSpecCttvTwoCifarRefErrThr{} of the half range. With the symmetry point
+held at mid-range, version 2 borrowed the ordinary base (whose range is $[-1.125, +0.875]$) as this sweep's anchor and omitted
+its zero point (deviation R5); both are now run with each device's range re-centred (range $[-1, 1]$, pre-registered after the
+second review). The recentred base passes (\RVSpecCttvTwoCifarAsymFixedspAtZeroPZeroFiveGap\,pp) and so does $a=0$
+(\RVSpecCttvTwoCifarAsymFixedspAtZeroPZeroGap\,pp), so the held-symmetry threshold \RVSpecCttvTwoCifarAsymFixedspThr{} is now
+established by its own runs; it differs from the unrecentred base by \RXFixCttvTwoCifarRmu\,pp (95\,\% interval
+[\RXFixCttvTwoCifarRmuLo, \RXFixCttvTwoCifarRmuHi]). No point fails: up to $a=0.4$ the mean gap stays at
+\RVSpecCttvTwoCifarAsymFixedspAtZeroPFourGap\,pp and the intervals merely include the line. Levels,
+saturation, write noise and finite retention are not established: neighbouring grid values are UNRESOLVED with three seeds,
+while the clear failures are no saturation ($\gamma=0$: \RVSpecCttvTwoCifarGammaAtZeroPZeroGap\,pp), strong saturation
+($\gamma=1$: \RVSpecCttvTwoCifarGammaAtOnePZeroGap\,pp), reference error 0.2 (\RVSpecCttvTwoCifarRefErrAtZeroPTwoGap\,pp) and
+retention of $10^3$ updates or less. On the LM the base is \RVSpecCttvTwoLmBaseLabel{} with three seeds
+(\RVSpecCttvTwoLmBaseGap\,\%; it passed with five seeds in the main table), so no LM threshold is established.
+
+\paragraph{How to read the sheet.} These are one-at-a-time ranges around one base device, for one algorithm setting, at FP-SGD's
+learning rate, with three seeds; they are exploratory, not fabrication tolerances. Combined deviations, other algorithm
+settings and independent device populations are not covered. A near-zero saturation fails here because, with these settings,
+the accumulator's decay comes from the device (Section~\ref{sec:main}); it is not a general requirement for training. The rule
+is deliberately stringent: an UNRESOLVED point at the best end of an axis blocks a threshold even where intermediate points pass.
+``Not established'' therefore does not mean that no grid value passed (on CIFAR with c-TTv2 the 500, 1000 and 2000 level points
+pass, \RVSpecCttvTwoCifarNStatesAtFiveZeroZeroPZeroGap, \RVSpecCttvTwoCifarNStatesAtOneZeroZeroZeroGap{} and
+\RVSpecCttvTwoCifarNStatesAtTwoZeroZeroZeroPZeroGap\,pp, while 5000 levels give \RVSpecCttvTwoCifarNStatesAtFiveZeroZeroZeroPZeroGap\,pp,
+UNRESOLVED), and it does not show that more levels harm hardware training in general.
+

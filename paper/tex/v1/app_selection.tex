@@ -1,0 +1,18 @@
+\section{Hyperparameter selection}\label{app:selection}
+Learning rates and algorithm settings were selected on validation splits only, with seed 0.
+\begin{itemize}
+\item \textbf{MNIST learning rate.} The FP grid was $\{3\times10^{-4},10^{-3},3\times10^{-3},10^{-2}\}$, extended by the edge
+      rule. The choice is \RLrMnist{}.
+\item \textbf{TT-family settings.} They were chosen on MNIST validation with a mid-quality device (128 levels, asymmetry 0.1,
+      $\gamma$ 0.3, $c_{2c}$ 0.5, $\sigma_r$ 0.02):
+      \begin{itemize}
+      \item TTv2: $\lambda\in\{0.1,0.3,1,3\}$ and a period of 16 or 64 batches, with or without a matched $A$ learning rate;
+      \item c-TTv2: $\lambda\in\{0.1,0.3\}$, $\rho\in\{0.05,0.2\}$, with or without reset;
+      \item AGAD: $\lambda\in\{0.1,0.3\}$, $\rho\in\{0.05,0.2\}$, $\beta\in\{0.3,1\}$.
+      \end{itemize}
+\item \textbf{Derived choices.} The better chopped algorithm (\RETwoBestchopped{}) is used in the scale study, and the best of
+      the three (\RETwoSalgo{}) in the specification sheet.
+\item \textbf{CIFAR and LM learning rates} were chosen per width (Section~\ref{sec:scale}).
+\end{itemize}
+
+\input{tables/e2.tex}

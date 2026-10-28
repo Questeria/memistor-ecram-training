@@ -1,0 +1,115 @@
+{
+ "algo": "sgd",
+ "alpha": null,
+ "arm": "fp_adam",
+ "budget": {
+  "batch": 128,
+  "epochs": 10
+ },
+ "data_sha256": "b7a073918a1db230c58834b689054ccd2632cfd6a283ff8a58f42e83ff11ebe1",
+ "device": "Quadro P2000",
+ "diverged": false,
+ "hist": [
+  {
+   "epoch": 1,
+   "train_loss": 0.32524453898965616
+  },
+  {
+   "epoch": 2,
+   "train_loss": 0.15443375949815158
+  },
+  {
+   "epoch": 3,
+   "train_loss": 0.10613905188642737
+  },
+  {
+   "epoch": 4,
+   "train_loss": 0.07683299137995793
+  },
+  {
+   "epoch": 5,
+   "train_loss": 0.05758056107100907
+  },
+  {
+   "epoch": 6,
+   "train_loss": 0.04459707887022645
+  },
+  {
+   "epoch": 7,
+   "train_loss": 0.03402492549869564
+  },
+  {
+   "epoch": 8,
+   "train_loss": 0.02511624022797271
+  },
+  {
+   "epoch": 9,
+   "train_loss": 0.01876522499920327
+  },
+  {
+   "epoch": 10,
+   "train_loss": 0.015149042045041954
+  }
+ ],
+ "host": "Domain3",
+ "init_sha256": "3d627b7d4bc4d4b15d521b2ce44b07bdbae76f6ce2f516b8861b4a0d0e505fc5",
+ "layers": [],
+ "lr": 0.001,
+ "metric": {
+  "acc": 0.9812,
+  "loss": 0.0718486312866211,
+  "n_eval": 5000,
+  "split": "val"
+ },
+ "results_are": "DEV",
+ "rng": "split",
+ "samples": 550000,
+ "scale": 1.0,
+ "schema": "altone.x1000.me.run.v1",
+ "schema_paper": "altone.x1000.me-paper.run.v1",
+ "schema_revision": "altone.x1000.me-revision.run.v1",
+ "seconds": 16.43,
+ "seed": 0,
+ "spec": {
+  "asym": 0.0,
+  "asym_d2d": 0.0,
+  "bound_d2d": 0.0,
+  "bounds_model": "paper",
+  "c2c": 0.0,
+  "d2d": 0.0,
+  "gamma_d2d": 0.0,
+  "gamma_dn": 0.0,
+  "gamma_dn_dtod": 0.0,
+  "gamma_up": 0.0,
+  "gamma_up_dtod": 0.0,
+  "ideal_float": false,
+  "n_states": 1000000000.0,
+  "name": "custom",
+  "recenter_sp": false,
+  "ref_err": 0.0,
+  "tau_steps": "inf",
+  "u_hi": 1.0,
+  "u_lo": -1.0
+ },
+ "tag": "fplr__mnist_w128__fp_adam__sgd__lr0.001__s0",
+ "task": "mnist",
+ "torch": "2.7.1+cu126",
+ "ucfg": {
+  "BL": 31,
+  "agad_beta": 0.5,
+  "algo": "sgd",
+  "lr": 0.001,
+  "tt_cols": 0,
+  "tt_gamma": 0.0,
+  "tt_h_forget": false,
+  "tt_lambda": 0.2,
+  "tt_lr_ratio": 1.0,
+  "tt_max_pulses": 31,
+  "tt_period": 64,
+  "tt_reset": true,
+  "tt_reset_iters": 2,
+  "tt_reset_max": 62,
+  "tt_rho": 0.1
+ },
+ "width": 128
+}

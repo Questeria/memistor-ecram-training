@@ -1,0 +1,83 @@
+\section{A roadmap for groups with device and fabrication resources}\label{sec:roadmap}
+The simulations narrow what has to be shown in hardware. We propose four stages. Each has pass criteria taken from this paper's
+specification sheet (Tables~\ref{tab:spec} and~\ref{tab:specrel}) and main results, so a group can decide quickly whether its
+device is worth an array.
+
+\paragraph{Stage 1: single-device characterisation} (tens of devices, no array).
+\begin{itemize}
+\item \textbf{Measurement.} Apply at least 1000 up and 1000 down pulses at the intended pulse width and voltage, and repeat at
+      least three times on at least 32 devices. Fit our device model to the records:
+      \begin{itemize}
+      \item step against state (giving $\gamma_\pm$);
+      \item up/down asymmetry $a$;
+      \item cycle-to-cycle noise $c_{2c}$ (scatter over step);
+      \item device-to-device spreads;
+      \item drift time constant.
+      \end{itemize}
+      The fitting script and the catalog format are in the release.
+\item \textbf{Pass for TTv2-class training} (others at a protonic-like base):
+      \begin{itemize}
+      \item asymmetry \RSpecrelTtvTwoCifarWThreeTwoAsym;
+      \item saturation $0<\gamma$ and $\gamma$ \RSpecrelTtvTwoCifarWThreeTwoGamma{};
+      \item write noise \RSpecrelTtvTwoCifarWThreeTwoCTwoc{} steps;
+      \item levels \RSpecrelTtvTwoCifarWThreeTwoNStates;
+      \item retention $\tau$ \RSpecrelTtvTwoCifarWThreeTwoTauSteps{} updates.
+      \end{itemize}
+      These are the CIFAR $c=32$ degradation thresholds. The LM thresholds are similar (Table~\ref{tab:specrel}).
+\item \textbf{Endurance.} On the Li-ECRAM and protonic devices, the tolerant algorithms applied at most \RPpwrLmMax{} pulses per weight per row on our LM. A
+      training run over $10^{10}$ rows therefore needs about \REndurTenTen{} pulses per weight, shared by its two devices. The more than $10^9$ updates reported for protonic ECRAM in
+2026~\cite{xu2026} would cover this.
+\end{itemize}
+
+\paragraph{Stage 2: the symmetry point.} This is the specification the simulations single out.
+\begin{itemize}
+\item \textbf{Measurement.} Program each device's reference to its symmetry point by alternating pulses, and measure the
+      residual reference error $\sigma_r$ (in units of the half-range) and its drift over hours and over $10^6$ cycles.
+\item \textbf{Pass for TTv2:} $\sigma_r$ \RSpecrelTtvTwoCifarWThreeTwoRefErr{}, stable over the training time.
+\item \textbf{Otherwise:} show that chopped TTv2 or AGAD tolerates the measured offsets. Our validation reproduces their
+      robustness up to $\sigma_r=0.5$ on a coarse device (Section~\ref{sec:validation}).
+\end{itemize}
+
+\paragraph{Stage 3: small arrays with hardware in the loop.}
+\begin{itemize}
+\item \textbf{Hardware.} Two $64\times64$ arrays per layer, the $A$ and $C$ arrays of the Tiki-Taka family.
+\item \textbf{Protocol.}
+      \begin{enumerate}
+      \item Run the forward and backward passes digitally on the host from the arrays' read weights.
+      \item Apply each update on chip as stochastic pulse coincidences on $A$, with column reads of $A$ into a host buffer $H$
+            and threshold pulses into $C$.
+      \item Reset or chop as the algorithm requires.
+      \end{enumerate}
+\item \textbf{Workloads.} A linear-regression test (a target matrix learned to below 5\% of its untrained error, as in our
+      checks), then an MNIST MLP on $8\times8$ downsampled digits (64 inputs).
+\item \textbf{Prediction first.} Before training, fit the Stage~1 device model, run this paper's simulator with that fit, and
+      record the predicted accuracy and its seed interval. The pass criterion is that the hardware lands inside the predicted
+      interval and within 2\,pp of FP. The second condition shows the device works; the first makes the simulator falsifiable.
+\end{itemize}
+
+\paragraph{Stage 4: full arrays and in-memory reads.}
+\begin{itemize}
+\item \textbf{Hardware.} $256\times256$ tiles, enough for the 784--256--128--10 MLP with six to eight tiles per array type,
+      then the CIFAR network of this paper.
+\item \textbf{Measurement.} Move the forward and backward MVMs on chip. Measure the system energy per weight per row with the
+      periphery, against this paper's model (Section~\ref{sec:energy}).
+\item \textbf{The energy target} is reads at about \REnNeedTops\,TOPS/W including the ADCs, for a 100$\times$ advantage over an
+      H100 at its measured utilisation.
+\end{itemize}
+
+\paragraph{The 1960 memistor.} Appendix~\ref{app:bench} gives a bench replication with hobby parts and safety notes. It can
+measure the memistor's missing parameters and place the cell on the same specification sheet. It is a historical and
+educational experiment: by energy, the memistor cannot compete.
+
+\paragraph{What to report.} For any device, report the fields of our catalog with their provenance: levels, $\gamma_\pm$, $a$,
+$c_{2c}$, spreads, retention, reference error, pulse energy and voltage. Fitted parameters with their fitting procedure are
+more useful to the field than headline level counts.
+
+\section{Conclusion}
+In simulation, memistor-class three-terminal electrochemical weights can train small networks to the exact-update baseline,
+provided the devices saturate, their reference is accurate (or a chopped algorithm removes the need for it) and a Tiki-Taka-family
+algorithm moves the gradient. Two published specifications, Li-ECRAM and protonic, meet these conditions. Plain SGD does not
+work on any of them. Under a fair per-arm tuning, the gap does not grow with width over the range we could test. Counting the
+periphery, the energy advantage over a well-used H100 is about \REnRatioMin$\times$ today, rising past 100$\times$ only with read
+periphery several times better than the best measured analog-AI chip. The remaining questions are experimental, and we have tried
+to make them cheap to ask.

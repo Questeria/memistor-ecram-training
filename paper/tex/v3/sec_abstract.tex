@@ -1,0 +1,17 @@
+\begin{abstract}
+Widrow and Hoff stored neural-network weights in memistors, three-terminal electrochemical cells, in 1960; lithium-ion,
+metal-oxide and protonic ECRAM are their modern descendants. We ask, in simulation, how close such devices come to digital
+training when every weight update is made of device pulses and the reads are kept ideal (fp32). We compare plain SGD and three
+Tiki-Taka-family algorithms on five device specifications, on MNIST, a CIFAR-10 subset and a byte-level language model, with five
+seeds that share initialisation and data order across arms. Against SGD with exact updates at the same learning rate,
+\RVAllThreeFpN{} pairings (Li-ECRAM and protonic-inspired, each with chopped TTv2 or AGAD) stay within the pre-set margins on all
+three tasks, while plain SGD exceeds them on every published device. Against a separately tuned digital Adam no pairing does: on
+the language model the best analog result is \RVLmAdamBestGap\,\% worse in bits per byte. Over a factor of four in width no
+arm's gap grows detectably beyond the margin; endpoint equivalence was established for one CIFAR pairing only, and an analysis
+paired by seed detects sub-margin growth for another. A sensitivity sheet with three seeds establishes only a few one-at-a-time
+ranges and shows that an earlier asymmetry limit was mostly lost weight range. Against explicit pulse streams the aggregate
+update holds on \RXProbeSurPassN{} of \RXProbeN{} probes and preserves the ranking of the tested cells (one failing SGD cell moves by more than the pre-set 1\,pp), but fails where clipping
+removes nearly all of an update. A conditional energy projection, borrowing an analog inference chip's read efficiency, gives
+\RVenSysMin--\RVenChipMax$\times$ less energy per weight-row than an H100, for cells that pass the margin under ideal reads. This
+version repairs the simulator after two independent reviews and reports how much each repair moved the original results.
+\end{abstract}

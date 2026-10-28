@@ -1,0 +1,1899 @@
+{
+ "deposit": "memistor-ecram-training",
+ "built_by": "the author's deposit builder (make_deposit.py), run on the author's desk from the paper's sources",
+ "verified_at": "2026-10-28 03:02 ET (UTC-4)",
+ "environment": {
+  "python": "3.13.15",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "numpy": "2.5.2",
+  "torch": "2.7.1+cu126",
+  "matplotlib": "3.9.2",
+  "pillow": "13.0.0",
+  "cuda_visible_to_children": "False"
+ },
+ "a_clean_room": {
+  "room": "copy of the deposit, outside the author's repository; every command ran with its cwd inside the copy",
+  "started": "2026-10-28 02:41 ET (UTC-4)",
+  "finished": "2026-10-28 02:59 ET (UTC-4)",
+  "seconds_total": 1084.1,
+  "sums_in_room_before_anything_ran": {
+   "returncode": 0,
+   "tail": "SUMS_OK 3336 files"
+  },
+  "data": [
+   {
+    "step": "fetch_data.py --only mnist (real download)",
+    "returncode": 0,
+    "seconds": 1.8,
+    "tail": "DATA_OK mnist"
+   },
+   {
+    "step": "CIFAR-10 and enwik8: copied from the desk's local copies (no large download)"
+   },
+   {
+    "step": "fetch_data.py --verify-only",
+    "returncode": 0,
+    "tail": "DATA_OK mnist cifar10 enwik8"
+   }
+  ],
+  "reproduce_all": {
+   "all_ok": true,
+   "file_status_counts": {
+    "identical": 53,
+    "normalised": 14
+   },
+   "steps": [
+    {
+     "id": "cpu_only_guard",
+     "kind": "check",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 4.9,
+     "rewrote": 0
+    },
+    {
+     "id": "energy_system",
+     "kind": "regen",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 0.5,
+     "rewrote": 1
+    },
+    {
+     "id": "analyze",
+     "kind": "regen",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 0.6,
+     "rewrote": 15
+    },
+    {
+     "id": "make_figures",
+     "kind": "regen",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 8.0,
+     "rewrote": 12
+    },
+    {
+     "id": "compare_curves",
+     "kind": "regen",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 82.3,
+     "rewrote": 1
+    },
+    {
+     "id": "analyze_d1",
+     "kind": "regen",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 0.2,
+     "rewrote": 1
+    },
+    {
+     "id": "energy_rev",
+     "kind": "regen",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 0.3,
+     "rewrote": 1
+    },
+    {
+     "id": "analyze_rev",
+     "kind": "regen",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 0.9,
+     "rewrote": 9
+    },
+    {
+     "id": "make_figures_rev",
+     "kind": "regen",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 2.9,
+     "rewrote": 2
+    },
+    {
+     "id": "analyze_rev2",
+     "kind": "regen",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 4.5,
+     "rewrote": 14
+    },
+    {
+     "id": "analyze_rev3",
+     "kind": "regen",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 0.5,
+     "rewrote": 6
+    },
+    {
+     "id": "analyze_rev4",
+     "kind": "regen",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 0.5,
+     "rewrote": 6
+    },
+    {
+     "id": "make_abstract_v5",
+     "kind": "regen",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 0.1,
+     "rewrote": 1
+    },
+    {
+     "id": "rebuild_draw_tables",
+     "kind": "regen",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 100.6,
+     "rewrote": 0
+    },
+    {
+     "id": "selftest_analyze_rev4",
+     "kind": "check",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 0.4,
+     "rewrote": 0
+    },
+    {
+     "id": "selftest_rebuild_draw_tables",
+     "kind": "check",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 195.7,
+     "rewrote": 0
+    },
+    {
+     "id": "fetch_data_selftest",
+     "kind": "check",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 0.8,
+     "rewrote": 0
+    },
+    {
+     "id": "bench_parts",
+     "kind": "check",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 0.1,
+     "rewrote": 0
+    },
+    {
+     "id": "bench_selftest",
+     "kind": "check",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 0.1,
+     "rewrote": 0
+    },
+    {
+     "id": "test_memsim_laneME",
+     "kind": "check",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 13.2,
+     "rewrote": 0
+    },
+    {
+     "id": "test_paper",
+     "kind": "check",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 25.3,
+     "rewrote": 0
+    },
+    {
+     "id": "test_rev",
+     "kind": "check",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 260.8,
+     "rewrote": 0
+    },
+    {
+     "id": "test_rev2",
+     "kind": "check",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 88.9,
+     "rewrote": 0
+    },
+    {
+     "id": "test_rev3",
+     "kind": "check",
+     "ok": true,
+     "returncode": 0,
+     "seconds": 170.9,
+     "rewrote": 0
+    }
+   ],
+   "nothing_trained": true,
+   "gpu_used": false
+  },
+  "known_difference": {},
+  "normalised_files": {
+   "paper/tex/figs/fig_energy.pdf": "figure PDF identical except the /CreationDate stamp",
+   "paper/tex/figs/fig_energy.png": "figure PNG: same decoded RGBA pixels; compressed bytes differ",
+   "paper/tex/figs/fig_main.pdf": "figure PDF identical except the /CreationDate stamp",
+   "paper/tex/figs/fig_main.png": "figure PNG: same decoded RGBA pixels; compressed bytes differ",
+   "paper/tex/figs/fig_oat_cifar.pdf": "figure PDF identical except the /CreationDate stamp",
+   "paper/tex/figs/fig_oat_cifar.png": "figure PNG: same decoded RGBA pixels; compressed bytes differ",
+   "paper/tex/figs/fig_oat_lm.pdf": "figure PDF identical except the /CreationDate stamp",
+   "paper/tex/figs/fig_oat_lm.png": "figure PNG: same decoded RGBA pixels; compressed bytes differ",
+   "paper/tex/figs/fig_rev_main.pdf": "figure PDF identical except the /CreationDate stamp",
+   "paper/tex/figs/fig_rev_main.png": "figure PNG: same decoded RGBA pixels; compressed bytes differ",
+   "paper/tex/figs/fig_scale.pdf": "figure PDF identical except the /CreationDate stamp",
+   "paper/tex/figs/fig_scale.png": "figure PNG: same decoded RGBA pixels; compressed bytes differ",
+   "paper/tex/figs/fig_validation.pdf": "figure PDF identical except the /CreationDate stamp",
+   "paper/tex/figs/fig_validation.png": "figure PNG: same decoded RGBA pixels; compressed bytes differ"
+  },
+  "files_not_matching": [],
+  "rebuild_draw_tables_prints_ALL_OK": true,
+  "mutation_tests": [
+   {
+    "id": "M1_changed_run_record_metric",
+    "expect": "reproduce_all.py exits 1 (REPRODUCE_FAILED)",
+    "returncode": 1,
+    "caught": true,
+    "file": "paper/records/runs/e3/e3__cifar_w32__ecram_li_tang2018__agad__lr0.001__s0.json"
+   },
+   {
+    "id": "M2_flipped_byte_in_a_draw_file",
+    "expect": "no ALL_OK",
+    "returncode": 1,
+    "caught": true,
+    "tail": "HashMismatch: fidprobe3__cifar_w32__ecram_mo_kim2019__agad__lr0.001__s0__probe__L4__U600.npz"
+   },
+   {
+    "id": "M3_tampered_source_file",
+    "expect": "--sums exits 1",
+    "returncode": 1,
+    "caught": true
+   },
+   {
+    "id": "M4_edited_table_in_the_deposit",
+    "expect": "reproduce_all.py exits 1",
+    "returncode": 1,
+    "caught": true
+   }
+  ],
+  "path_fixes_in_the_deposit_copy": [
+   {
+    "file": "paper/sim/tasks.py",
+    "old": "\"H:/x1000/ep/raw/mnist\"",
+    "new": "os.path.join(os.path.dirname(os.path.abspath(__file__)), \"..\", \"..\", \"data\", \"mnist\")"
+   },
+   {
+    "file": "paper/sim/tasks.py",
+    "old": "\"H:/x1000/memistor/cifar-10-batches-py\"",
+    "new": "os.path.join(os.path.dirname(os.path.abspath(__file__)), \"..\", \"..\", \"data\", \"cifar-10-batches-py\")"
+   },
+   {
+    "file": "paper/sim/tasks.py",
+    "old": "\"C:/Projects/Cryptum/tests/corpus/external/enwik8\"",
+    "new": "os.path.join(os.path.dirname(os.path.abspath(__file__)), \"..\", \"..\", \"data\", \"enwik8\")"
+   },
+   {
+    "file": "paper/sim/tasks_rev.py",
+    "old": "\"H:/x1000/ep/raw/mnist\"",
+    "new": "os.path.join(os.path.dirname(os.path.abspath(__file__)), \"..\", \"..\", \"data\", \"mnist\")"
+   },
+   {
+    "file": "paper/sim/tasks_rev.py",
+    "old": "\"H:/x1000/memistor/cifar-10-batches-py\"",
+    "new": "os.path.join(os.path.dirname(os.path.abspath(__file__)), \"..\", \"..\", \"data\", \"cifar-10-batches-py\")"
+   },
+   {
+    "file": "paper/sim/tasks_rev.py",
+    "old": "\"C:/Projects/Cryptum/tests/corpus/external/enwik8\"",
+    "new": "os.path.join(os.path.dirname(os.path.abspath(__file__)), \"..\", \"..\", \"data\", \"enwik8\")"
+   },
+   {
+    "file": "sim/tasks.py",
+    "old": "\"H:/x1000/ep/raw/mnist\"",
+    "new": "os.path.join(os.path.dirname(os.path.abspath(__file__)), \"..\", \"data\", \"mnist\")"
+   },
+   {
+    "file": "sim/tasks.py",
+    "old": "\"H:/x1000/memistor/cifar-10-batches-py\"",
+    "new": "os.path.join(os.path.dirname(os.path.abspath(__file__)), \"..\", \"data\", \"cifar-10-batches-py\")"
+   },
+   {
+    "file": "sim/tasks.py",
+    "old": "\"C:/Projects/Cryptum/tests/corpus/external/enwik8\"",
+    "new": "os.path.join(os.path.dirname(os.path.abspath(__file__)), \"..\", \"data\", \"enwik8\")"
+   },
+   {
+    "file": "paper/sim/sweep_rev3.py",
+    "old": "\"H:/x1000/memistor-paper/rev3/draws\"",
+    "new": "os.path.join(os.path.dirname(os.path.abspath(__file__)), \"..\", \"draws\", \"rev3\")"
+   },
+   {
+    "file": "paper/revision4/rebuild_draw_tables.py",
+    "old": "\"H:/x1000/memistor-paper/rev3/draws\"",
+    "new": "os.path.join(os.path.dirname(os.path.abspath(__file__)), \"..\", \"draws\", \"rev3\")"
+   },
+   {
+    "file": "paper/revision4/verify_findings_4.py",
+    "old": "\"H:/x1000/memistor-paper/rev3/draws\"",
+    "new": "os.path.join(os.path.dirname(os.path.abspath(__file__)), \"..\", \"draws\", \"rev3\")"
+   }
+  ],
+  "privacy_redactions": [
+   {
+    "file": "paper/RESPONSE-TO-REVIEW.md",
+    "what": "Windows account name in local link targets -> <user>",
+    "occurrences": 1
+   },
+   {
+    "file": "paper/reviews/REVIEW-1-chatgpt-20261026-full.md",
+    "what": "Windows account name in local link targets -> <user>",
+    "occurrences": 8
+   },
+   {
+    "file": "paper/reviews/REVIEW-2-chatgpt-20261026-full.md",
+    "what": "Windows account name in local link targets -> <user>",
+    "occurrences": 8
+   },
+   {
+    "file": "paper/reviews/REVIEW-3-chatgpt-20261027-full.md",
+    "what": "Windows account name in local link targets -> <user>",
+    "occurrences": 6
+   },
+   {
+    "file": "paper/reviews/REVIEW-4-chatgpt-20261027-full.md",
+    "what": "Windows account name in local link targets -> <user>",
+    "occurrences": 3
+   },
+   {
+    "file": "paper/reviews/REVIEW-5-chatgpt-20261027-full.md",
+    "what": "Windows account name in local link targets -> <user>",
+    "occurrences": 3
+   },
+   {
+    "file": "paper/reviews/REVIEW-6-chatgpt-20261027-full.md",
+    "what": "Windows account name in local link targets -> <user>",
+    "occurrences": 2
+   },
+   {
+    "file": "paper/reviews/REVIEW-7-chatgpt-20261027-full.md",
+    "what": "Windows account name in local link targets -> <user>",
+    "occurrences": 3
+   },
+   {
+    "file": "paper/reviews/REVIEW-1-chatgpt-20261026-full.md",
+    "what": "P1: the author's private project path up to and including the study folder (C:/Projects/<private repository>/ops/<private folder>/phase2/memistor/) removed, leaving the study-relative path (paper/...); P2: the reviewer's local output folder (C:/Users/<account>/.codex/visualizations/<date>/<id>/paper-review/) shortened to paper-review[-vN]/",
+    "occurrences": 31
+   },
+   {
+    "file": "paper/reviews/REVIEW-2-chatgpt-20261026-full.md",
+    "what": "P1: the author's private project path up to and including the study folder (C:/Projects/<private repository>/ops/<private folder>/phase2/memistor/) removed, leaving the study-relative path (paper/...); P2: the reviewer's local output folder (C:/Users/<account>/.codex/visualizations/<date>/<id>/paper-review/) shortened to paper-review[-vN]/",
+    "occurrences": 28
+   },
+   {
+    "file": "paper/reviews/REVIEW-3-chatgpt-20261027-full.md",
+    "what": "P1: the author's private project path up to and including the study folder (C:/Projects/<private repository>/ops/<private folder>/phase2/memistor/) removed, leaving the study-relative path (paper/...); P2: the reviewer's local output folder (C:/Users/<account>/.codex/visualizations/<date>/<id>/paper-review/) shortened to paper-review[-vN]/",
+    "occurrences": 17
+   },
+   {
+    "file": "paper/reviews/REVIEW-4-chatgpt-20261027-full.md",
+    "what": "P1: the author's private project path up to and including the study folder (C:/Projects/<private repository>/ops/<private folder>/phase2/memistor/) removed, leaving the study-relative path (paper/...); P2: the reviewer's local output folder (C:/Users/<account>/.codex/visualizations/<date>/<id>/paper-review/) shortened to paper-review[-vN]/; P3: the author's draws folder (H:/x1000/memistor-paper/rev3/draws) replaced by the deposit's own paper/draws/rev3",
+    "occurrences": 11
+   },
+   {
+    "file": "paper/reviews/REVIEW-5-chatgpt-20261027-full.md",
+    "what": "P1: the author's private project path up to and including the study folder (C:/Projects/<private repository>/ops/<private folder>/phase2/memistor/) removed, leaving the study-relative path (paper/...); P2: the reviewer's local output folder (C:/Users/<account>/.codex/visualizations/<date>/<id>/paper-review/) shortened to paper-review[-vN]/",
+    "occurrences": 8
+   },
+   {
+    "file": "paper/reviews/REVIEW-6-chatgpt-20261027-full.md",
+    "what": "P1: the author's private project path up to and including the study folder (C:/Projects/<private repository>/ops/<private folder>/phase2/memistor/) removed, leaving the study-relative path (paper/...); P2: the reviewer's local output folder (C:/Users/<account>/.codex/visualizations/<date>/<id>/paper-review/) shortened to paper-review[-vN]/",
+    "occurrences": 7
+   },
+   {
+    "file": "paper/reviews/REVIEW-7-chatgpt-20261027-full.md",
+    "what": "P1: the author's private project path up to and including the study folder (C:/Projects/<private repository>/ops/<private folder>/phase2/memistor/) removed, leaving the study-relative path (paper/...); P2: the reviewer's local output folder (C:/Users/<account>/.codex/visualizations/<date>/<id>/paper-review/) shortened to paper-review[-vN]/",
+    "occurrences": 5
+   },
+   {
+    "file": "paper/reviews/review-3-support/check_v3.py",
+    "what": "P1: the author's private project path up to and including the study folder (C:/Projects/<private repository>/ops/<private folder>/phase2/memistor/) removed, leaving the study-relative path (paper/...)",
+    "occurrences": 1
+   },
+   {
+    "file": "paper/reviews/review-3-support/new-record-manifest.json",
+    "what": "P1: the author's private project path up to and including the study folder (C:/Projects/<private repository>/ops/<private folder>/phase2/memistor/) removed, leaving the study-relative path (paper/...)",
+    "occurrences": 1011
+   },
+   {
+    "file": "paper/reviews/review-3-support/SHA256SUMS.txt",
+    "what": "comment line added: check_v3.py and new-record-manifest.json were redacted, their digests are those of the originals",
+    "occurrences": 1
+   }
+  ],
+  "remaining_mentions_of_the_author_repository_in_code": {
+   "files": {},
+   "note": "check_v3.py is the reviewer's own script for review 3 (a record, not a reproduction step)."
+  },
+  "not_rerun": [
+   "cite/cite_check.py (needs the network: it re-verifies every reference against Crossref, arXiv and live URLs; its result is the deposited records/CITE-CHECK.json)",
+   "LaTeX/pandoc builds (pod/build_rev*.sh need tectonic/pandoc; the built PDFs and HTML are deposited)",
+   "revision*/verify_findings*.py and check_build_v*.py (review-time verification scripts; several read the author's git history or desk build trees; kept as record)",
+   "every training run (re-training is out of scope; see ENVIRONMENT.md on seeds across GPU models)"
+  ]
+ },
+ "b_secret_and_privacy_scan": {
+  "files_scanned": 3337,
+  "raw_hits": 190,
+  "raw_hits_by_category": {
+   "handle_outside_reviews": 190
+  },
+  "unjustified_hits": 0,
+  "unjustified": [],
+  "justified": [
+   {
+    "file": "CITATION.cff",
+    "line": 14,
+    "category": "handle_outside_reviews",
+    "text": "\"https://g...m-trai",
+    "justification": "the GitHub account name inside the repository URL (the owner's public GitHub account); required for the link"
+   },
+   {
+    "file": "paper/PUBLISHING.md",
+    "line": 56,
+    "category": "handle_outside_reviews",
+    "text": " public re...m-trai",
+    "justification": "the GitHub account name inside the repository URL (the owner's public GitHub account); required for the link"
+   },
+   {
+    "file": "paper/README.md",
+    "line": 35,
+    "category": "handle_outside_reviews",
+    "text": "/main.pdf`...nthrop",
+    "justification": "the paper folder's readme (written at version 1) describes that version's PDF authors; history"
+   },
+   {
+    "file": "paper/README.md",
+    "line": 35,
+    "category": "handle_outside_reviews",
+    "text": "ld/main-ar...iv's  ",
+    "justification": "the paper folder's readme (written at version 1) describes that version's PDF authors; history"
+   },
+   {
+    "file": "paper/build/v1/main-arxiv.pdf#text",
+    "line": 3,
+    "category": "handle_outside_reviews",
+    "text": "perimental...resear",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v1/main-arxiv.pdf#text",
+    "line": 936,
+    "category": "handle_outside_reviews",
+    "text": "ions and u... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v1/main-arxiv.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "43458 -30....64 Tf ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v1/main-arxiv.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": " Tf 0 -24....27(ed)",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v1/main.html",
+    "line": 7,
+    "category": "handle_outside_reviews",
+    "text": "e=\"author\"...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v1/main.html",
+    "line": 91,
+    "category": "handle_outside_reviews",
+    "text": "> <p class...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v1/main.html",
+    "line": 2174,
+    "category": "handle_outside_reviews",
+    "text": "d use of A... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v1/main.html",
+    "line": 2176,
+    "category": "handle_outside_reviews",
+    "text": "e experime..., ran ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v1/main.html",
+    "line": 2181,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v1/main.pdf#text",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "rimental r...resear",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v1/main.pdf#text",
+    "line": 947,
+    "category": "handle_outside_reviews",
+    "text": "ions and u... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v1/main.pdf#text",
+    "line": 947,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v1/main.pdf#text",
+    "line": 948,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v1/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "20634 -30....64 Tf ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v1/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": " Tf 0 -24....26(ed)",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v1/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "(ts)-342(u...ion,)-",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v1/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": ")]TJ 0 -13...the)-3",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v2/main-arxiv.pdf#text",
+    "line": 3,
+    "category": "handle_outside_reviews",
+    "text": "perimental...resear",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v2/main-arxiv.pdf#text",
+    "line": 721,
+    "category": "handle_outside_reviews",
+    "text": "ions and u... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v2/main-arxiv.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "43458 -30....64 Tf ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v2/main-arxiv.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": " Tf 0 -24....27(ed)",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v2/main.html",
+    "line": 7,
+    "category": "handle_outside_reviews",
+    "text": "e=\"author\"...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v2/main.html",
+    "line": 91,
+    "category": "handle_outside_reviews",
+    "text": "> <p class...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v2/main.pdf#text",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "rimental r...resear",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v2/main.pdf#text",
+    "line": 726,
+    "category": "handle_outside_reviews",
+    "text": "ions and u... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v2/main.pdf#text",
+    "line": 726,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v2/main.pdf#text",
+    "line": 727,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v2/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "20634 -30....64 Tf ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v2/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": " Tf 0 -24....26(ed)",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v2/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "(ts)-342(u...ion,)-",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v2/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": ")]TJ 0 -13...the)-3",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/arxiv-source.tar.gz!main-arxiv.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "uthorblock...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/arxiv-source.tar.gz!body.tex",
+    "line": 34,
+    "category": "handle_outside_reviews",
+    "text": "efined\\arx... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/arxiv-source.tar.gz!body.tex",
+    "line": 41,
+    "category": "handle_outside_reviews",
+    "text": "aved recor... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/arxiv-source.tar.gz!body.tex",
+    "line": 42,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/arxiv-source.tar.gz!body.tex",
+    "line": 46,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/main-arxiv.pdf#text",
+    "line": 3,
+    "category": "handle_outside_reviews",
+    "text": "perimental...resear",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/main-arxiv.pdf#text",
+    "line": 1020,
+    "category": "handle_outside_reviews",
+    "text": "ions and u... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/main-arxiv.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "43458 -30....64 Tf ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/main-arxiv.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": " Tf 0 -24....27(ed)",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/main.html",
+    "line": 7,
+    "category": "handle_outside_reviews",
+    "text": "e=\"author\"...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/main.html",
+    "line": 91,
+    "category": "handle_outside_reviews",
+    "text": "> <p class...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/main.pdf#text",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "rimental r...resear",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/main.pdf#text",
+    "line": 1025,
+    "category": "handle_outside_reviews",
+    "text": "ions and u... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/main.pdf#text",
+    "line": 1025,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/main.pdf#text",
+    "line": 1026,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "20634 -30....64 Tf ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": " Tf 0 -24....26(ed)",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "(ts)-342(u...ion,)-",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v3/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": ")]TJ 0 -13...the)-3",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/arxiv-source.tar.gz!main-arxiv.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "uthorblock...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/arxiv-source.tar.gz!body.tex",
+    "line": 38,
+    "category": "handle_outside_reviews",
+    "text": "efined\\arx... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/arxiv-source.tar.gz!body.tex",
+    "line": 45,
+    "category": "handle_outside_reviews",
+    "text": "aved recor... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/arxiv-source.tar.gz!body.tex",
+    "line": 46,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/arxiv-source.tar.gz!body.tex",
+    "line": 50,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/main-arxiv.pdf#text",
+    "line": 3,
+    "category": "handle_outside_reviews",
+    "text": "perimental...resear",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/main-arxiv.pdf#text",
+    "line": 1067,
+    "category": "handle_outside_reviews",
+    "text": "ions and u... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/main-arxiv.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "43458 -30....64 Tf ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/main-arxiv.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": " Tf 0 -24....27(ed)",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/main.html",
+    "line": 7,
+    "category": "handle_outside_reviews",
+    "text": "e=\"author\"...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/main.html",
+    "line": 91,
+    "category": "handle_outside_reviews",
+    "text": "> <p class...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/main.pdf#text",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "rimental r...resear",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/main.pdf#text",
+    "line": 1073,
+    "category": "handle_outside_reviews",
+    "text": "ions and u... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/main.pdf#text",
+    "line": 1073,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/main.pdf#text",
+    "line": 1074,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "20634 -30....64 Tf ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": " Tf 0 -24....26(ed)",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "(ts)-342(u...ion,)-",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v4/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": ")]TJ 0 -13...the)-3",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/arxiv-source.tar.gz!main-arxiv.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "uthorblock...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/arxiv-source.tar.gz!body.tex",
+    "line": 42,
+    "category": "handle_outside_reviews",
+    "text": "efined\\arx... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/arxiv-source.tar.gz!body.tex",
+    "line": 49,
+    "category": "handle_outside_reviews",
+    "text": "aved recor... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/arxiv-source.tar.gz!body.tex",
+    "line": 50,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/arxiv-source.tar.gz!body.tex",
+    "line": 54,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/main-arxiv.pdf#text",
+    "line": 3,
+    "category": "handle_outside_reviews",
+    "text": "perimental...resear",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/main-arxiv.pdf#text",
+    "line": 1110,
+    "category": "handle_outside_reviews",
+    "text": "ions and u... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/main-arxiv.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "43458 -30....64 Tf ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/main-arxiv.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": " Tf 0 -24....27(ed)",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/main.html",
+    "line": 7,
+    "category": "handle_outside_reviews",
+    "text": "e=\"author\"...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/main.html",
+    "line": 91,
+    "category": "handle_outside_reviews",
+    "text": "> <p class...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/main.pdf#text",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "rimental r...resear",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/main.pdf#text",
+    "line": 1117,
+    "category": "handle_outside_reviews",
+    "text": "ions and u... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/main.pdf#text",
+    "line": 1117,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/main.pdf#text",
+    "line": 1118,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "20634 -30....64 Tf ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": " Tf 0 -24....26(ed)",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "(ts)-342(u...ion,)-",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v5/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": ")]TJ 0 -13...the)-3",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/arxiv-source.tar.gz!main-arxiv.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "uthorblock...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/arxiv-source.tar.gz!body.tex",
+    "line": 42,
+    "category": "handle_outside_reviews",
+    "text": "efined\\arx... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/arxiv-source.tar.gz!body.tex",
+    "line": 49,
+    "category": "handle_outside_reviews",
+    "text": "aved recor... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/arxiv-source.tar.gz!body.tex",
+    "line": 50,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/arxiv-source.tar.gz!body.tex",
+    "line": 54,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/main-arxiv.pdf#text",
+    "line": 3,
+    "category": "handle_outside_reviews",
+    "text": "perimental...resear",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/main-arxiv.pdf#text",
+    "line": 1113,
+    "category": "handle_outside_reviews",
+    "text": "ions and u... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/main-arxiv.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "43458 -30....64 Tf ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/main-arxiv.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": " Tf 0 -24....27(ed)",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/main.html",
+    "line": 7,
+    "category": "handle_outside_reviews",
+    "text": "e=\"author\"...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/main.html",
+    "line": 91,
+    "category": "handle_outside_reviews",
+    "text": "> <p class...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/main.html",
+    "line": 3084,
+    "category": "handle_outside_reviews",
+    "text": "d use of A... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/main.html",
+    "line": 3086,
+    "category": "handle_outside_reviews",
+    "text": "e experime..., ran ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/main.html",
+    "line": 3091,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/main.pdf#text",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "rimental r...resear",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/main.pdf#text",
+    "line": 1119,
+    "category": "handle_outside_reviews",
+    "text": "ions and u... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/main.pdf#text",
+    "line": 1119,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/main.pdf#text",
+    "line": 1120,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "20634 -30....64 Tf ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": " Tf 0 -24....26(ed)",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "(ts)-342(u...ion,)-",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v6/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": ")]TJ 0 -13...the)-3",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/arxiv-source.tar.gz!main-arxiv.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "uthorblock...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/arxiv-source.tar.gz!body.tex",
+    "line": 42,
+    "category": "handle_outside_reviews",
+    "text": "efined\\arx... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/arxiv-source.tar.gz!body.tex",
+    "line": 49,
+    "category": "handle_outside_reviews",
+    "text": "aved recor... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/arxiv-source.tar.gz!body.tex",
+    "line": 50,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/arxiv-source.tar.gz!body.tex",
+    "line": 54,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/main-arxiv.pdf#text",
+    "line": 3,
+    "category": "handle_outside_reviews",
+    "text": "perimental...resear",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/main-arxiv.pdf#text",
+    "line": 1113,
+    "category": "handle_outside_reviews",
+    "text": "ions and u... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/main-arxiv.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "43458 -30....64 Tf ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/main-arxiv.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": " Tf 0 -24....27(ed)",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/main.html",
+    "line": 7,
+    "category": "handle_outside_reviews",
+    "text": "e=\"author\"...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/main.html",
+    "line": 91,
+    "category": "handle_outside_reviews",
+    "text": "> <p class...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/main.html",
+    "line": 3084,
+    "category": "handle_outside_reviews",
+    "text": "d use of A... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/main.html",
+    "line": 3086,
+    "category": "handle_outside_reviews",
+    "text": "e experime..., ran ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/main.html",
+    "line": 3091,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/main.pdf#text",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "rimental r...resear",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/main.pdf#text",
+    "line": 1119,
+    "category": "handle_outside_reviews",
+    "text": "ions and u... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/main.pdf#text",
+    "line": 1119,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/main.pdf#text",
+    "line": 1120,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "20634 -30....64 Tf ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": " Tf 0 -24....26(ed)",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": "(ts)-342(u...ion,)-",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/build/v7/main.pdf#stream",
+    "line": 1,
+    "category": "handle_outside_reviews",
+    "text": ")]TJ 0 -13...the)-3",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/pod/html_prep.py",
+    "line": 34,
+    "category": "handle_outside_reviews",
+    "text": "S +       ...nthrop",
+    "justification": "build recipes of versions 1-6 that rewrite the old author line in the HTML; same history as above"
+   },
+   {
+    "file": "paper/pod/html_prep_rev3.py",
+    "line": 35,
+    "category": "handle_outside_reviews",
+    "text": "S +       ...nthrop",
+    "justification": "build recipes of versions 1-6 that rewrite the old author line in the HTML; same history as above"
+   },
+   {
+    "file": "paper/pod/html_prep_rev4.py",
+    "line": 35,
+    "category": "handle_outside_reviews",
+    "text": "S +       ...nthrop",
+    "justification": "build recipes of versions 1-6 that rewrite the old author line in the HTML; same history as above"
+   },
+   {
+    "file": "paper/pod/html_prep_rev5.py",
+    "line": 120,
+    "category": "handle_outside_reviews",
+    "text": "S +       ...nthrop",
+    "justification": "build recipes of versions 1-6 that rewrite the old author line in the HTML; same history as above"
+   },
+   {
+    "file": "paper/pod/html_prep_rev6.py",
+    "line": 131,
+    "category": "handle_outside_reviews",
+    "text": "S +       ...nthrop",
+    "justification": "build recipes of versions 1-6 that rewrite the old author line in the HTML; same history as above"
+   },
+   {
+    "file": "paper/tex/v1/body.tex",
+    "line": 28,
+    "category": "handle_outside_reviews",
+    "text": "efined\\arx... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v1/body.tex",
+    "line": 35,
+    "category": "handle_outside_reviews",
+    "text": "ased recor... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v1/body.tex",
+    "line": 36,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v1/body.tex",
+    "line": 40,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v1/main-arxiv.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "uthorblock...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v1/main.tex",
+    "line": 2,
+    "category": "handle_outside_reviews",
+    "text": "hosen by t...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v1/main.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "rblock}{% ...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v2/body.tex",
+    "line": 31,
+    "category": "handle_outside_reviews",
+    "text": "efined\\arx... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v2/body.tex",
+    "line": 38,
+    "category": "handle_outside_reviews",
+    "text": "ased recor... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v2/body.tex",
+    "line": 39,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v2/body.tex",
+    "line": 43,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v2/main-arxiv.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "uthorblock...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v2/main.tex",
+    "line": 2,
+    "category": "handle_outside_reviews",
+    "text": "hosen by t...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v2/main.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "rblock}{% ...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v3/body.tex",
+    "line": 34,
+    "category": "handle_outside_reviews",
+    "text": "efined\\arx... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v3/body.tex",
+    "line": 41,
+    "category": "handle_outside_reviews",
+    "text": "aved recor... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v3/body.tex",
+    "line": 42,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v3/body.tex",
+    "line": 46,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v3/main-arxiv.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "uthorblock...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v3/main.tex",
+    "line": 2,
+    "category": "handle_outside_reviews",
+    "text": "hosen by t...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v3/main.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "rblock}{% ...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v4/body.tex",
+    "line": 38,
+    "category": "handle_outside_reviews",
+    "text": "efined\\arx... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v4/body.tex",
+    "line": 45,
+    "category": "handle_outside_reviews",
+    "text": "aved recor... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v4/body.tex",
+    "line": 46,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v4/body.tex",
+    "line": 50,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v4/main-arxiv.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "uthorblock...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v4/main.tex",
+    "line": 2,
+    "category": "handle_outside_reviews",
+    "text": "hosen by t...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v4/main.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "rblock}{% ...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v5/body.tex",
+    "line": 42,
+    "category": "handle_outside_reviews",
+    "text": "efined\\arx... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v5/body.tex",
+    "line": 49,
+    "category": "handle_outside_reviews",
+    "text": "aved recor... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v5/body.tex",
+    "line": 50,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v5/body.tex",
+    "line": 54,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v5/main-arxiv.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "uthorblock...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v5/main.tex",
+    "line": 2,
+    "category": "handle_outside_reviews",
+    "text": "hosen by t...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v5/main.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "rblock}{% ...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v6/body.tex",
+    "line": 42,
+    "category": "handle_outside_reviews",
+    "text": "efined\\arx... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v6/body.tex",
+    "line": 49,
+    "category": "handle_outside_reviews",
+    "text": "aved recor... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v6/body.tex",
+    "line": 50,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v6/body.tex",
+    "line": 54,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v6/main-arxiv.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "uthorblock...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v6/main.tex",
+    "line": 2,
+    "category": "handle_outside_reviews",
+    "text": "hosen by t...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v6/main.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "rblock}{% ...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v7/body.tex",
+    "line": 42,
+    "category": "handle_outside_reviews",
+    "text": "efined\\arx... study",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v7/body.tex",
+    "line": 49,
+    "category": "handle_outside_reviews",
+    "text": "aved recor... direc",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v7/body.tex",
+    "line": 50,
+    "category": "handle_outside_reviews",
+    "text": "e experime...ran th",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v7/body.tex",
+    "line": 54,
+    "category": "handle_outside_reviews",
+    "text": "of this pa...uthor ",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v7/main-arxiv.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "uthorblock...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v7/main.tex",
+    "line": 2,
+    "category": "handle_outside_reviews",
+    "text": "hosen by t...nthrop",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   },
+   {
+    "file": "paper/tex/v7/main.tex",
+    "line": 4,
+    "category": "handle_outside_reviews",
+    "text": "rblock}{% ...penden",
+    "justification": "archived versions 1-7 of the paper (PDF, HTML, LaTeX, arXiv source): their author line named the owner's handle. They are immutable history, cited by hash in the records; versions 8 and 9 (current) carry the owner's name and have no hit. Fix not possible without altering hashed history; flagged to the owner."
+   }
+  ],
+  "patterns": [
+   "auth_header",
+   "aws_access_key",
+   "aws_secret_context",
+   "email",
+   "github_token",
+   "jwt",
+   "openai_anthropic_key",
+   "personal_dir",
+   "private_key_block",
+   "private_project_name",
+   "r2_s3_endpoint",
+   "runpod_key",
+   "slack_google_token",
+   "handle_outside_reviews",
+   "high_entropy",
+   "secret_file_name"
+  ],
+  "tool": "paper/deposit_scan.py (--selftest plants one of every pattern; each is caught)"
+ },
+ "c_sizes": {
+  "files": 3337,
+  "total_bytes": 123339740,
+  "total_mb": 123.3,
+  "largest": [
+   {
+    "bytes": 21971077,
+    "file": "paper/draws/rev3/fidprobe3__mnist_w128__ecram_li_tang2018__cttv2__lr0.003__s0__probe__L0__U1000.npz"
+   },
+   {
+    "bytes": 19388651,
+    "file": "paper/draws/rev3/fidprobe3__mnist_w128__ecram_li_tang2018__cttv2__lr0.003__s0__probe__L0__U3500.npz"
+   },
+   {
+    "bytes": 14756559,
+    "file": "paper/draws/rev3/fidprobe3__cifar_w32__ecram_mo_kim2019__agad__lr0.001__s0__probe__L3__U2000.npz"
+   },
+   {
+    "bytes": 14738834,
+    "file": "paper/draws/rev3/fidprobe3__cifar_w32__ecram_mo_kim2019__agad__lr0.001__s0__probe__L3__U600.npz"
+   },
+   {
+    "bytes": 3073036,
+    "file": "paper/draws/rev3/fidprobe3__lm_w128__protonic_onen2022__cttv2__lr0.0001__s0__probe__L9__U750.npz"
+   },
+   {
+    "bytes": 2585400,
+    "file": "paper/draws/rev3/fidprobe3__lm_w128__protonic_onen2022__cttv2__lr0.0001__s0__probe__L9__U2250.npz"
+   }
+  ],
+  "files_over_50MB": []
+ },
+ "source_equality": {
+  "identical_to_source": 3293,
+  "differ_from_source": [],
+  "added_by_the_builder": [
+   ".gitattributes",
+   ".gitignore",
+   ".zenodo.json",
+   "CITATION.cff",
+   "DEPOSIT-PATCHES.json",
+   "ENVIRONMENT.md",
+   "LICENSE",
+   "LICENSE-DATA",
+   "README.md",
+   "REDACTIONS.md",
+   "RELEASE-NOTES.md",
+   "SHA256SUMS",
+   "fetch_data.py",
+   "reproduce_all.py"
+  ],
+  "patched_redacted_or_snapshot": [
+   "paper/PUBLISHING.md",
+   "paper/RESPONSE-TO-REVIEW.md",
+   "paper/draws/rev3/fidprobe3__cifar_w32__ecram_mo_kim2019__agad__lr0.001__s0__probe__L3__U2000.npz",
+   "paper/draws/rev3/fidprobe3__cifar_w32__ecram_mo_kim2019__agad__lr0.001__s0__probe__L3__U600.npz",
+   "paper/draws/rev3/fidprobe3__cifar_w32__ecram_mo_kim2019__agad__lr0.001__s0__probe__L4__U2000.npz",
+   "paper/draws/rev3/fidprobe3__cifar_w32__ecram_mo_kim2019__agad__lr0.001__s0__probe__L4__U600.npz",
+   "paper/draws/rev3/fidprobe3__lm_w128__protonic_onen2022__cttv2__lr0.0001__s0__probe__L0__U2250.npz",
+   "paper/draws/rev3/fidprobe3__lm_w128__protonic_onen2022__cttv2__lr0.0001__s0__probe__L0__U750.npz",
+   "paper/draws/rev3/fidprobe3__lm_w128__protonic_onen2022__cttv2__lr0.0001__s0__probe__L9__U2250.npz",
+   "paper/draws/rev3/fidprobe3__lm_w128__protonic_onen2022__cttv2__lr0.0001__s0__probe__L9__U750.npz",
+   "paper/draws/rev3/fidprobe3__mnist_w128__ecram_li_tang2018__cttv2__lr0.003__s0__probe__L0__U1000.npz",
+   "paper/draws/rev3/fidprobe3__mnist_w128__ecram_li_tang2018__cttv2__lr0.003__s0__probe__L0__U3500.npz",
+   "paper/draws/rev3/fidprobe3__mnist_w128__ecram_li_tang2018__cttv2__lr0.003__s0__probe__L2__U1000.npz",
+   "paper/draws/rev3/fidprobe3__mnist_w128__ecram_li_tang2018__cttv2__lr0.003__s0__probe__L2__U3500.npz",
+   "paper/reviews/REVIEW-1-chatgpt-20261026-full.md",
+   "paper/reviews/REVIEW-2-chatgpt-20261026-full.md",
+   "paper/reviews/REVIEW-3-chatgpt-20261027-full.md",
+   "paper/reviews/REVIEW-4-chatgpt-20261027-full.md",
+   "paper/reviews/REVIEW-5-chatgpt-20261027-full.md",
+   "paper/reviews/REVIEW-6-chatgpt-20261027-full.md",
+   "paper/reviews/REVIEW-7-chatgpt-20261027-full.md",
+   "paper/reviews/review-3-support/SHA256SUMS.txt",
+   "paper/reviews/review-3-support/check_v3.py",
+   "paper/reviews/review-3-support/new-record-manifest.json",
+   "paper/revision4/rebuild_draw_tables.py",
+   "paper/revision4/verify_findings_4.py",
+   "paper/sim/sweep_rev3.py",
+   "paper/sim/tasks.py",
+   "paper/sim/tasks_rev.py",
+   "sim/tasks.py"
+  ]
+ },
+ "overall_ok": true
+}

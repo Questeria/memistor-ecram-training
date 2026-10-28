@@ -1,0 +1,158 @@
+{
+ "algo": "agad",
+ "alpha": null,
+ "arm": "device",
+ "budget": {
+  "batch": 128,
+  "epochs": 10
+ },
+ "device": "NVIDIA RTX A4000",
+ "diverged": false,
+ "hist": [
+  {
+   "epoch": 1,
+   "train_loss": 1.9086035704001403
+  },
+  {
+   "epoch": 2,
+   "train_loss": 1.4664486616085737
+  },
+  {
+   "epoch": 3,
+   "train_loss": 1.3079383067595654
+  },
+  {
+   "epoch": 4,
+   "train_loss": 1.1961365724221253
+  },
+  {
+   "epoch": 5,
+   "train_loss": 1.1458603296524439
+  },
+  {
+   "epoch": 6,
+   "train_loss": 1.1952706361428285
+  },
+  {
+   "epoch": 7,
+   "train_loss": 1.2700965098845654
+  },
+  {
+   "epoch": 8,
+   "train_loss": 1.2459394992926183
+  },
+  {
+   "epoch": 9,
+   "train_loss": 1.172688215206831
+  },
+  {
+   "epoch": 10,
+   "train_loss": 1.104209215213091
+  }
+ ],
+ "host": "3fd2b2279cd1",
+ "layers": [
+  {
+   "mean_pd": 0.001514487235974043,
+   "mean_px": 0.07098500667474208,
+   "pulses": 276324992.0,
+   "pulses_per_weight_per_row": 0.003128253179624436,
+   "rows": 102236160,
+   "shape": [
+    32,
+    27
+   ]
+  },
+  {
+   "mean_pd": 0.006701550116905799,
+   "mean_px": 0.05320425767164964,
+   "pulses": 5120259584.0,
+   "pulses_per_weight_per_row": 0.01086863438967626,
+   "rows": 25559040,
+   "shape": [
+    64,
+    288
+   ]
+  },
+  {
+   "mean_pd": 0.013545524157010592,
+   "mean_px": 0.07948073851756561,
+   "pulses": 7590302208.0,
+   "pulses_per_weight_per_row": 0.032223452054537256,
+   "rows": 6389760,
+   "shape": [
+    64,
+    576
+   ]
+  },
+  {
+   "mean_pd": 0.0646917245326898,
+   "mean_px": 0.23654542580629007,
+   "pulses": 4925576704.0,
+   "pulses_per_weight_per_row": 0.37639390994340943,
+   "rows": 99840,
+   "shape": [
+    128,
+    1024
+   ]
+  },
+  {
+   "mean_pd": 0.29857252072065305,
+   "mean_px": 0.2561012072440905,
+   "pulses": 311938816.0,
+   "pulses_per_weight_per_row": 2.440927483974359,
+   "rows": 99840,
+   "shape": [
+    10,
+    128
+   ]
+  }
+ ],
+ "lr": 0.001,
+ "metric": {
+  "acc": 0.5714,
+  "loss": 1.2367525024414063,
+  "n_eval": 10000,
+  "split": "test"
+ },
+ "results_are": "DEV",
+ "samples": 100000,
+ "scale": 1.0,
+ "schema": "altone.x1000.me.run.v1",
+ "schema_paper": "altone.x1000.me-paper.run.v1",
+ "seconds": 99.78,
+ "seed": 0,
+ "spec": {
+  "asym": 0.0,
+  "asym_d2d": 0.02,
+  "bound_d2d": 0.05,
+  "c2c": 0.3,
+  "d2d": 0.1,
+  "gamma_d2d": 0.0,
+  "gamma_dn": 0.5085,
+  "gamma_up": 0.1153,
+  "ideal_float": false,
+  "n_states": 1000.0,
+  "name": "ecram_li_tang2018_papermap",
+  "ref_err": 0.02,
+  "tau_steps": "inf"
+ },
+ "tag": "d1__cifar_w32__ecram_li_tang2018_papermap__agad__lr0.001__s0__old",
+ "task": "cifar",
+ "torch": "2.7.1+cu126",
+ "ucfg": {
+  "BL": 31,
+  "agad_beta": 0.3,
+  "algo": "agad",
+  "lr": 0.001,
+  "tt_cols": 0,
+  "tt_gamma": 0.0,
+  "tt_lambda": 0.1,
+  "tt_lr_ratio": 10.0,
+  "tt_max_pulses": 31,
+  "tt_period": 16,
+  "tt_reset": false,
+  "tt_rho": 0.05
+ },
+ "width": 32
+}

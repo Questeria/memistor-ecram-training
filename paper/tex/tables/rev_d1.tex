@@ -1,0 +1,27 @@
+\begin{table*}[t]\centering\scriptsize\caption{Diagnostic D1: mean gap to FP-SGD of the same simulator (pp, 3 seeds; P/F/U against 2 pp) at the original selections. Columns: orig. = the original simulator; ideal = the repaired random streams with the original ideal reset; then the reset replaced by the pulse reset (pulse), 31 alternating pulse pairs (alt.), or none; publ. = the published-style TTv2. The AIHWKIT-mapped Li-ECRAM row uses the pulse reset for TTv2 and c-TTv2. CIFAR here is a 10-epoch slice.}\label{tab:rev_d1}
+\begin{tabular}{lllcccccc}\toprule Task & Device & Alg. & orig. & ideal & pulse & alt. & none & publ.\\\midrule
+MNIST & Protonic-insp. & SGD & 3.09F & 4.58U &  &  &  & \\
+MNIST & Protonic-insp. & TTv2 & 1.04U & 1.60U & 0.23P & 0.66P & 1.02P & 0.99P\\
+MNIST & Protonic-insp. & c-TTv2 & 0.81P & 0.62U & 0.44P & 0.97U & 1.41P & \\
+MNIST & Protonic-insp. & AGAD & 1.21P & 0.99P &  &  &  & \\
+MNIST & Li (old map) & SGD & 4.79F & 6.47U &  &  &  & \\
+MNIST & Li (old map) & TTv2 & 1.33U & 1.19U & 0.39P & 0.36P & 0.66P & 1.43P\\
+MNIST & Li (old map) & c-TTv2 & 1.51U & 0.98P & 0.80P & 0.68P & 1.00P & \\
+MNIST & Li (old map) & AGAD & 0.96P & 1.00P &  &  &  & \\
+MNIST & Li (AIHWKIT) & SGD &  & 6.99U &  &  &  & \\
+MNIST & Li (AIHWKIT) & TTv2 &  &  & 0.40P &  &  & \\
+MNIST & Li (AIHWKIT) & c-TTv2 &  &  & 0.70P &  &  & \\
+MNIST & Li (AIHWKIT) & AGAD &  & 0.57P &  &  &  & \\
+CIFAR-10ep & Protonic-insp. & SGD & 14.24F & 10.35F &  &  &  & \\
+CIFAR-10ep & Protonic-insp. & TTv2 & 5.28U & 2.53U & 2.04U & -0.83U & -1.97U & 4.17U\\
+CIFAR-10ep & Protonic-insp. & c-TTv2 & 4.59U & 3.41U & 5.97U & -0.43U & 0.65U & \\
+CIFAR-10ep & Protonic-insp. & AGAD & -0.70P & -2.94U &  &  &  & \\
+CIFAR-10ep & Li (old map) & SGD & 17.69F & 16.91F &  &  &  & \\
+CIFAR-10ep & Li (old map) & TTv2 & 4.35F & 2.51U & 2.98U & 0.57U & 0.78U & 5.41U\\
+CIFAR-10ep & Li (old map) & c-TTv2 & 6.08U & 2.27U & 1.63U & 1.48U & 0.99U & \\
+CIFAR-10ep & Li (old map) & AGAD & 0.39U & -1.34U &  &  &  & \\
+CIFAR-10ep & Li (AIHWKIT) & SGD &  & 17.87F &  &  &  & \\
+CIFAR-10ep & Li (AIHWKIT) & TTv2 &  &  & 2.37U &  &  & \\
+CIFAR-10ep & Li (AIHWKIT) & c-TTv2 &  &  & 2.71U &  &  & \\
+CIFAR-10ep & Li (AIHWKIT) & AGAD &  & -1.02U &  &  &  & \\
+\bottomrule\end{tabular}\end{table*}

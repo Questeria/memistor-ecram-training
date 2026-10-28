@@ -1,0 +1,125 @@
+{
+ "algo": "sgd",
+ "arm": "device",
+ "device": "Quadro P2000",
+ "diverged": false,
+ "hist": [
+  {
+   "epoch": 1,
+   "train_loss": 0.41032558575376765
+  },
+  {
+   "epoch": 2,
+   "train_loss": 0.29634247119332247
+  },
+  {
+   "epoch": 3,
+   "train_loss": 0.26821012576143227
+  },
+  {
+   "epoch": 4,
+   "train_loss": 0.2419394139712785
+  },
+  {
+   "epoch": 5,
+   "train_loss": 0.23001103754435387
+  },
+  {
+   "epoch": 6,
+   "train_loss": 0.21959644609884227
+  },
+  {
+   "epoch": 7,
+   "train_loss": 0.21207808887277727
+  },
+  {
+   "epoch": 8,
+   "train_loss": 0.2082607206174266
+  },
+  {
+   "epoch": 9,
+   "train_loss": 0.20173442619038628
+  },
+  {
+   "epoch": 10,
+   "train_loss": 0.19558293827416456
+  }
+ ],
+ "host": "Domain3",
+ "layers": [
+  {
+   "mean_pd": 0.010962479103938405,
+   "mean_px": 0.05045179310569535,
+   "pulses": 1719643318.0,
+   "pulses_per_weight_per_row": 0.015603250708874226,
+   "rows": 549120,
+   "shape": [
+    256,
+    784
+   ]
+  },
+  {
+   "mean_pd": 0.007638107533870582,
+   "mean_px": 0.09184239444720162,
+   "pulses": 345645337.0,
+   "pulses_per_weight_per_row": 0.019209386974503667,
+   "rows": 549120,
+   "shape": [
+    128,
+    256
+   ]
+  },
+  {
+   "mean_pd": 0.009828874121131355,
+   "mean_px": 0.20313785667324954,
+   "pulses": 39100322.0,
+   "pulses_per_weight_per_row": 0.05562923689266463,
+   "rows": 549120,
+   "shape": [
+    10,
+    128
+   ]
+  }
+ ],
+ "lr": 0.003,
+ "metric": {
+  "acc": 0.9451,
+  "loss": 0.18633971328735352,
+  "n_eval": 10000,
+  "split": "test"
+ },
+ "results_are": "DEV",
+ "samples": 550000,
+ "scale": 1.0,
+ "schema": "altone.x1000.me.run.v1",
+ "seconds": 83.08,
+ "seed": 2,
+ "spec": {
+  "asym": 0.05,
+  "asym_d2d": 0.0,
+  "bound_d2d": 0.05,
+  "c2c": 0.3,
+  "d2d": 0.1,
+  "gamma_dn": 0.2,
+  "gamma_up": 0.2,
+  "ideal_float": false,
+  "n_states": 1000,
+  "name": "protonic_onen2022",
+  "ref_err": 0.02,
+  "tau_steps": "inf"
+ },
+ "tag": "CAT_protonic_onen2022__sgd__s2",
+ "task": "mnist",
+ "torch": "2.7.1+cu126",
+ "ucfg": {
+  "BL": 31,
+  "algo": "sgd",
+  "lr": 0.003,
+  "tt_gamma": 0.0,
+  "tt_lambda": 0.2,
+  "tt_lr_ratio": 1.0,
+  "tt_max_pulses": 31,
+  "tt_period": 64,
+  "tt_reset": true
+ }
+}

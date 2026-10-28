@@ -1,0 +1,19 @@
+\begin{table*}[t]\centering\scriptsize\caption{Conditional energy ratios for cells that pass the stated non-inferiority margin under ideal reads: the GPU-to-analog energy ratio per weight per row (12.4 TOPS/W measured chip figure / 6.94 TOPS/W projected system figure of the same inference chip, which includes estimated digital processing), printed only where the cell PASSES against the baseline; fail = the cell FAILS the margin; n.e. = the criterion is not established (UNRESOLVED). No finite-read operating point is demonstrated.}\label{tab:rev_energy}
+\begin{tabular}{llcccccc}\toprule & & \multicolumn{2}{c}{MNIST} & \multicolumn{2}{c}{CIFAR} & \multicolumn{2}{c}{LM}\\ Device & Alg. & FP-SGD & Adam & FP-SGD & Adam & FP-SGD & Adam\\\midrule
+Li-ECRAM & SGD & fail & fail & fail & fail & fail & fail\\
+Li-ECRAM & TTv2 & 32 / 18 & 32 / 18 & fail & fail & n.e. & fail\\
+Li-ECRAM & c-TTv2 & 32 / 18 & 32 / 18 & 32 / 18 & 32 / 18 & 32 / 18 & fail\\
+Li-ECRAM & AGAD & 32 / 18 & 32 / 18 & 32 / 18 & 32 / 18 & 32 / 18 & fail\\
+MO-ECRAM & SGD & fail & fail & fail & fail & fail & fail\\
+MO-ECRAM & TTv2 & n.e. & n.e. & fail & fail & fail & fail\\
+MO-ECRAM & c-TTv2 & 32 / 18 & 32 / 18 & n.e. & n.e. & fail & fail\\
+MO-ECRAM & AGAD & 32 / 18 & 32 / 18 & 32 / 18 & 32 / 18 & fail & fail\\
+Protonic-inspired & SGD & fail & fail & fail & fail & fail & fail\\
+Protonic-inspired & TTv2 & 32 / 18 & 32 / 18 & fail & fail & n.e. & fail\\
+Protonic-inspired & c-TTv2 & 32 / 18 & 32 / 18 & 32 / 18 & n.e. & 32 / 18 & fail\\
+Protonic-inspired & AGAD & 32 / 18 & 32 / 18 & 32 / 18 & 32 / 18 & 32 / 18 & fail\\
+W/WO$_x$ ECRAM & SGD & fail & fail & fail & fail & fail & fail\\
+W/WO$_x$ ECRAM & TTv2 & 32 / 18 & 32 / 18 & fail & fail & fail & fail\\
+W/WO$_x$ ECRAM & c-TTv2 & 32 / 18 & 32 / 18 & fail & fail & fail & fail\\
+W/WO$_x$ ECRAM & AGAD & 32 / 18 & 32 / 18 & fail & fail & fail & fail\\
+\bottomrule\end{tabular}\end{table*}

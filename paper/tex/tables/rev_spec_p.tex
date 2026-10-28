@@ -1,0 +1,32 @@
+% derived by revision4/edit_tex_4b.py from tables/rev_spec.tex: placement [p] instead of [t]
+\begin{table*}[p]\centering\scriptsize\caption{Revised sensitivity sheet (protonic-inspired base; TTv2 = the pre-registered S-ALGO, c-TTv2 added after the main table was seen, deviation R3; 3 seeds paired with FP-SGD): mean gap per grid value with its label against the ABSOLUTE line (P/F/U), and the weakest value that passes with every value toward the best end also passing (-- = not established).}\label{tab:rev_spec}
+\begin{tabular}{llp{8.8cm}l}\toprule Alg., task & Axis & mean gap per value & threshold\\\midrule
+c-TTv2, CIFAR & levels & 5000.0: 2.49U; 2000.0: -2.43P; 1000: -0.85P; 500.0: -1.57P; 200.0: 1.38U; 100.0: 1.68U & --\\
+c-TTv2, CIFAR & asym.\ $a$ (SP moves) & 0.0: -1.43P; 0.05: -0.85P; 0.1: -1.64P; 0.2: -1.16P; 0.4: 42.39F & 0.2\\
+c-TTv2, CIFAR & asym.\ $a$ (SP fixed) & 0.0: -1.43P; 0.05: -0.41P; 0.1: -0.82U; 0.2: -1.38U; 0.4: -0.53U & 0.05\\
+c-TTv2, CIFAR & nonlin.\ $\gamma$ & 0.0: 21.14F; 0.2: -0.85P; 0.5: 1.88U; 1.0: 8.01F; 2.0: 14.77F & --\\
+c-TTv2, CIFAR & noise $c_{2c}$ & 0.0: -0.64U; 0.3: -0.85P; 1.0: -1.34U; 2.0: 0.61U; 4.0: 5.37U & --\\
+c-TTv2, CIFAR & ref.\ err.\ $\sigma_r$ & 0.0: -1.20P; 0.02: -0.85P; 0.05: -1.29P; 0.1: 2.89U; 0.2: 9.31F; 0.5: 34.63F & 0.05\\
+c-TTv2, CIFAR & retention $\tau$ & inf: -0.85P; 100000.0: -1.17U; 10000.0: 3.08U; 1000.0: 33.02F; 100.0: 44.03F & inf\\
+c-TTv2, LM & levels & 5000.0: 2.01U; 2000.0: -2.63U; 1000: -1.84U; 500.0: -0.45U; 200.0: 1.58U; 100.0: 6.54U & --\\
+c-TTv2, LM & asym.\ $a$ (SP moves) & 0.0: -1.68U; 0.05: -1.84U; 0.1: -1.54U; 0.2: -1.85U; 0.4: 37.71U & --\\
+c-TTv2, LM & asym.\ $a$ (SP fixed) & 0.0: -1.62U; 0.05: -2.16U; 0.1: -1.69U; 0.2: -1.70U; 0.4: -1.68U & --\\
+c-TTv2, LM & nonlin.\ $\gamma$ & 0.0: 22.71F; 0.2: -1.84U; 0.5: -0.39U; 1.0: 4.46U; 2.0: 27.27U & --\\
+c-TTv2, LM & noise $c_{2c}$ & 0.0: -1.51U; 0.3: -1.84U; 1.0: -0.21U; 2.0: 4.91U; 4.0: 19.04F & --\\
+c-TTv2, LM & ref.\ err.\ $\sigma_r$ & 0.0: -2.42U; 0.02: -1.84U; 0.05: 1.45U; 0.1: 8.23U; 0.2: 17.53F; 0.5: 30.83F & --\\
+c-TTv2, LM & retention $\tau$ & inf: -1.84U; 100000.0: -1.75U; 10000.0: -3.47U; 1000.0: 28.50F; 100.0: 64.34F & --\\
+TTv2, CIFAR & levels & 5000.0: 0.78U; 2000.0: 1.67U; 1000: 6.35U; 500.0: 4.43U; 200.0: 3.13U; 100.0: 3.12U & --\\
+TTv2, CIFAR & asym.\ $a$ (SP moves) & 0.0: 5.92U; 0.05: 6.35U; 0.1: 5.95F; 0.2: 6.39F; 0.4: 42.92F & --\\
+TTv2, CIFAR & asym.\ $a$ (SP fixed) & 0.0: 5.92U; 0.05: 6.02U; 0.1: 6.12U; 0.2: 4.60U; 0.4: 6.20U & --\\
+TTv2, CIFAR & nonlin.\ $\gamma$ & 0.0: 27.43F; 0.2: 6.35U; 0.5: 9.00F; 1.0: 8.22F; 2.0: 12.20F & --\\
+TTv2, CIFAR & noise $c_{2c}$ & 0.0: 5.79U; 0.3: 6.35U; 1.0: 6.19U; 2.0: 7.18U; 4.0: 9.40F & --\\
+TTv2, CIFAR & ref.\ err.\ $\sigma_r$ & 0.0: 5.08U; 0.02: 6.35U; 0.05: 5.35U; 0.1: 9.94F; 0.2: 18.74F; 0.5: 30.32F & --\\
+TTv2, CIFAR & retention $\tau$ & inf: 6.35U; 100000.0: 4.49U; 10000.0: 5.18U; 1000.0: 40.83F; 100.0: 47.25F & --\\
+TTv2, LM & levels & 5000.0: 7.33U; 2000.0: 4.67U; 1000: 5.15U; 500.0: 5.87U; 200.0: 7.38U; 100.0: 9.64U & --\\
+TTv2, LM & asym.\ $a$ (SP moves) & 0.0: 5.26U; 0.05: 5.15U; 0.1: 5.21U; 0.2: 5.00U; 0.4: 10.38U & --\\
+TTv2, LM & asym.\ $a$ (SP fixed) & 0.0: 5.25U; 0.05: 5.15U; 0.1: 5.28U; 0.2: 5.29U; 0.4: 5.75U & --\\
+TTv2, LM & nonlin.\ $\gamma$ & 0.0: 32.24F; 0.2: 5.15U; 0.5: 11.13U; 1.0: 18.03F; 2.0: 25.84F & --\\
+TTv2, LM & noise $c_{2c}$ & 0.0: 5.14U; 0.3: 5.15U; 1.0: 5.56U; 2.0: 7.85U; 4.0: 15.03U & --\\
+TTv2, LM & ref.\ err.\ $\sigma_r$ & 0.0: 4.59U; 0.02: 5.15U; 0.05: 7.27U; 0.1: 11.43U; 0.2: 19.66F; 0.5: 31.81F & --\\
+TTv2, LM & retention $\tau$ & inf: 5.15U; 100000.0: 5.09U; 10000.0: 3.74U; 1000.0: 30.34F; 100.0: 71.47F & --\\
+\bottomrule\end{tabular}\end{table*}

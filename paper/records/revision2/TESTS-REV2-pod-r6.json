@@ -1,0 +1,76 @@
+{
+ "schema": "altone.x1000.me-revision2.tests.v1",
+ "checks": {
+  "c1_closed_form": {
+   "ok": true,
+   "max_diff_nominal_steps": 1.430511474609375e-05
+  },
+  "c2_counts": {
+   "ok": true,
+   "max_z": 1.3394567966461182
+  },
+  "c3_boundary": {
+   "ok": true,
+   "seq_mean": 31.0,
+   "seq_var": 0.0,
+   "surrogate_p_gt_31": 0.43799999356269836
+  },
+  "c4_transparent": {
+   "ok": true,
+   "same": true,
+   "probes": 2,
+   "probe0": {
+    "layer": 0,
+    "update": 2,
+    "shape": [
+     256,
+     784
+    ],
+    "lost_frac": 0.0
+   }
+  },
+  "c5_seq_routes": {
+   "ok": true,
+   "differs": true,
+   "acc": 0.1911
+  }
+ },
+ "faults": {
+  "c1_down_trains_move_up": {
+   "ok": false,
+   "max_diff_nominal_steps": 40.0
+  },
+  "c2_line_probability_squared": {
+   "ok": false,
+   "max_z": 242.81105041503906
+  },
+  "c3_poisson_instead_of_stream": {
+   "ok": false,
+   "seq_mean": 31.06999969482422,
+   "seq_var": 31.323408126831055,
+   "surrogate_p_gt_31": 0.4580000042915344
+  },
+  "c4_probe_shares_the_run_generator": {
+   "ok": false,
+   "same": false,
+   "probes": 2,
+   "probe0": {
+    "layer": 0,
+    "update": 2,
+    "shape": [
+     256,
+     784
+    ],
+    "lost_frac": 0.0
+   }
+  },
+  "c5_seq_flag_ignored": {
+   "ok": false,
+   "differs": false,
+   "acc": 0.1918
+  }
+ },
+ "all_ok": true,
+ "all_faults_caught": true,
+ "torch": "2.7.1+cu126"
+}

@@ -1,0 +1,66 @@
+\subsection{Sensitivity and the device specification sheet}\label{sec:spec}
+\paragraph{Design.} Around a protonic-like base device we move one parameter at a time while keeping the others at the base:
+\begin{itemize}
+\item the base: 1000 levels, asymmetry 0.05, saturation 0.2, write noise 0.3, no drift, reference error 0.02;
+\item the parameters moved: levels, asymmetry, nonlinearity (saturation $\gamma$), write noise, retention and reference error;
+\item the algorithm: the pre-registered TTv2, our best validation choice, at the FP learning rate;
+\item the sizes: three CIFAR and three LM sizes, with SGD at the base sizes.
+\end{itemize}
+Fig.~\ref{fig:oat} shows the curves.
+
+\paragraph{The pre-registered sheet degenerates.} The rule asks for the weakest value that keeps the gap under the line. On
+CIFAR, the base device's own TTv2 gap at the FP rate is already near or above the line:
+\RSpecrelTtvTwoCifarWOneSixBasegap, \RSpecrelTtvTwoCifarWThreeTwoBasegap{} and \RSpecrelTtvTwoCifarWSixFourBasegap\,pp at
+$c=16$, 32 and 64. Most CIFAR entries therefore read ``not reachable'' (Table~\ref{tab:spec}). Two things cause this: the CIFAR
+baseline's seed noise (Section~\ref{sec:main}) and TTv2's need for its own learning rate at larger widths
+(Section~\ref{sec:scale}). On the LM at $d=64$ and 128 the base passes and the sheet is well defined.
+
+\paragraph{Degradation thresholds.} We therefore add a descriptive reading, labelled as added after the data were seen
+(\texttt{DEVIATIONS-PAPER.md} D1): how far each parameter may move before the gap rises by more than the line over the base
+device's own gap (Table~\ref{tab:specrel}). Its main features are consistent across sizes and tasks:
+
+\begin{description}
+\item[Reference error is the binding specification.] With the symmetry-point reference exact ($\sigma_r=0$) the TTv2 gap
+      vanishes: \ROatTtvTwoCifarWThreeTwoReferrzero\,pp on CIFAR and \ROatTtvTwoLmWOneTwoEightReferrzero\% on the LM at the base
+      sizes. Already at $\sigma_r=0.05$ it reaches \ROatTtvTwoCifarWThreeTwoReferrfive\,pp and
+      \ROatTtvTwoLmWOneTwoEightReferrfive\%. At every size the grid threshold is $\sigma_r$ \RSpecrelTtvTwoCifarWThreeTwoRefErr{} of the half-range;
+      the interpolated crossings lie just above it (Table~\ref{tab:specrel}).
+      This is the offset sensitivity that c-TTv2 and AGAD were designed to remove~\cite{rasch2024}. Their better main-table
+      results (Section~\ref{sec:main}) and our validation (Section~\ref{sec:validation}) say that a specification sheet for
+      them would relax this line.
+\item[The device must saturate.] A constant-step device ($\gamma=0$) fails badly under TTv2
+      (\ROatTtvTwoCifarWThreeTwoGammazero\,pp; \ROatTtvTwoLmWOneTwoEightGammazero\%), as~\cite{rasch2024} predicts for algorithms
+      that rely on the device's own decay toward its symmetry point. Up to $\gamma\approx0.5$ is tolerated.
+\item[Asymmetry up to about 0.2] is tolerated. At 0.4 training collapses (\ROatTtvTwoCifarWThreeTwoAsymfour\,pp).
+\item[Levels matter less than expected.] TTv2 tolerates a few hundred levels: the threshold is \RSpecrelTtvTwoCifarWThreeTwoNStates{}
+      on CIFAR at $c=32$ and \RSpecrelTtvTwoLmWOneTwoEightNStates{} on the LM at $d=128$. With 100 levels the gap is
+      \ROatTtvTwoCifarWThreeTwoLevelshundred\,pp and \ROatTtvTwoLmWOneTwoEightLevelshundred\%. This is far below the thousand
+      levels plain SGD needs~\cite{gokmen2016}.
+\item[Write noise] up to one to two steps per pulse is tolerated. Four steps hurts (\ROatTtvTwoCifarWThreeTwoCtwocfour\,pp;
+      \ROatTtvTwoLmWOneTwoEightCtwocfour\%).
+\item[Retention.] The drift time constant must be \RSpecrelTtvTwoLmWOneTwoEightTauSteps{} training steps on the LM ($d=128$)
+      and \RSpecrelTtvTwoCifarWThreeTwoTauSteps{} on CIFAR ($c=32$). That is
+      several to tens of times the length of our training runs, which are 2340 and 3000 steps. At $10^3$ steps training fails
+      (\ROatTtvTwoCifarWThreeTwoTauthree\,pp; \ROatTtvTwoLmWOneTwoEightTauthree\%). For a real array the required time is this
+      number of steps times the update time per step.
+\item[Plain SGD] stays far above the line at every point of the grid on both tasks. No single parameter, moved alone from a
+      protonic-like device, makes plain SGD work.
+\end{description}
+
+\paragraph{Pairs and the joint specification.} \RPairSentence{} On both tasks the six largest interactions all pair the shortest
+retention ($\tau=10^3$ steps) with a second imperfection. A drifting device compounds every other error, so retention must be
+specified jointly with the rest. Away from fast drift, the pairwise effects are close to additive. The joint specification, with every parameter at its threshold
+at once (Table~\ref{tab:spec}, last column), \RJointSentence
+
+\input{tables/spec.tex}
+\input{tables/spec_rel.tex}
+\input{tables/pairs.tex}
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{figs/fig_oat_cifar}
+\caption{One-at-a-time sensitivity around the protonic base device on the CIFAR-10 subset (TTv2 at the FP learning rate;
+seed 0, plus seed 1 near the line): gap against each parameter at three widths; dashed: the gap line.}\label{fig:oat}
+\end{figure}
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{figs/fig_oat_lm}
+\caption{As Fig.~\ref{fig:oat}, for the character LM.}\label{fig:oatlm}
+\end{figure}

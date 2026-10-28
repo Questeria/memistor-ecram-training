@@ -1,0 +1,136 @@
+{
+ "algo": "cttv2",
+ "alpha": null,
+ "arm": "device",
+ "budget": {
+  "batch": 128,
+  "epochs": 10
+ },
+ "device": "NVIDIA RTX A4000",
+ "diverged": false,
+ "hist": [
+  {
+   "epoch": 1,
+   "train_loss": 0.48329297757093165
+  },
+  {
+   "epoch": 2,
+   "train_loss": 0.28576507212676644
+  },
+  {
+   "epoch": 3,
+   "train_loss": 0.21372743975588213
+  },
+  {
+   "epoch": 4,
+   "train_loss": 0.19551221585218168
+  },
+  {
+   "epoch": 5,
+   "train_loss": 0.14564857393989475
+  },
+  {
+   "epoch": 6,
+   "train_loss": 0.10982682377030521
+  },
+  {
+   "epoch": 7,
+   "train_loss": 0.10342521045035694
+  },
+  {
+   "epoch": 8,
+   "train_loss": 0.10567497484611743
+  },
+  {
+   "epoch": 9,
+   "train_loss": 0.07913199115744282
+  },
+  {
+   "epoch": 10,
+   "train_loss": 0.07085057683202214
+  }
+ ],
+ "host": "3fd2b2279cd1",
+ "layers": [
+  {
+   "mean_pd": 0.0186482285008286,
+   "mean_px": 0.14268841510052446,
+   "pulses": 11983886336.0,
+   "pulses_per_weight_per_row": 0.10873626001974217,
+   "rows": 549120,
+   "shape": [
+    256,
+    784
+   ]
+  },
+  {
+   "mean_pd": 0.01335766043140616,
+   "mean_px": 0.46122241609302156,
+   "pulses": 3431378944.0,
+   "pulses_per_weight_per_row": 0.19070034782925407,
+   "rows": 549120,
+   "shape": [
+    128,
+    256
+   ]
+  },
+  {
+   "mean_pd": 0.020620208242278556,
+   "mean_px": 0.7547530594405595,
+   "pulses": 335252512.0,
+   "pulses_per_weight_per_row": 0.4769741131264569,
+   "rows": 549120,
+   "shape": [
+    10,
+    128
+   ]
+  }
+ ],
+ "lr": 0.003,
+ "metric": {
+  "acc": 0.9729,
+  "loss": 0.08605159645080566,
+  "n_eval": 10000,
+  "split": "test"
+ },
+ "results_are": "DEV",
+ "samples": 550000,
+ "scale": 1.0,
+ "schema": "altone.x1000.me.run.v1",
+ "schema_paper": "altone.x1000.me-paper.run.v1",
+ "seconds": 75.5,
+ "seed": 1,
+ "spec": {
+  "asym": 0.05,
+  "asym_d2d": 0.0,
+  "bound_d2d": 0.05,
+  "c2c": 0.3,
+  "d2d": 0.1,
+  "gamma_d2d": 0.0,
+  "gamma_dn": 0.2,
+  "gamma_up": 0.2,
+  "ideal_float": false,
+  "n_states": 1000,
+  "name": "protonic_onen2022",
+  "ref_err": 0.02,
+  "tau_steps": "inf"
+ },
+ "tag": "d1__mnist_w128__protonic_onen2022__cttv2__lr0.003__s1__old",
+ "task": "mnist",
+ "torch": "2.7.1+cu126",
+ "ucfg": {
+  "BL": 31,
+  "agad_beta": 0.5,
+  "algo": "cttv2",
+  "lr": 0.003,
+  "tt_cols": 0,
+  "tt_gamma": 0.0,
+  "tt_lambda": 0.1,
+  "tt_lr_ratio": 10.0,
+  "tt_max_pulses": 31,
+  "tt_period": 16,
+  "tt_reset": true,
+  "tt_rho": 0.2
+ },
+ "width": 128
+}

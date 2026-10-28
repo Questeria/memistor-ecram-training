@@ -1,0 +1,136 @@
+{
+ "algo": "ttv2",
+ "alpha": 0.6024096385542169,
+ "arm": "device",
+ "budget": {
+  "batch": 16,
+  "epochs": 10
+ },
+ "device": "NVIDIA RTX A4000",
+ "diverged": false,
+ "hist": [
+  {
+   "epoch": 1,
+   "train_loss": 1.0064958984375
+  },
+  {
+   "epoch": 2,
+   "train_loss": 0.9196685546875
+  },
+  {
+   "epoch": 3,
+   "train_loss": 0.9025802083333333
+  },
+  {
+   "epoch": 4,
+   "train_loss": 0.8817979817708334
+  },
+  {
+   "epoch": 5,
+   "train_loss": 0.8578069661458333
+  },
+  {
+   "epoch": 6,
+   "train_loss": 0.84127421875
+  },
+  {
+   "epoch": 7,
+   "train_loss": 0.830446875
+  },
+  {
+   "epoch": 8,
+   "train_loss": 0.8155282552083334
+  },
+  {
+   "epoch": 9,
+   "train_loss": 0.8034349609375
+  },
+  {
+   "epoch": 10,
+   "train_loss": 0.7936954427083334
+  }
+ ],
+ "host": "4954712405bc",
+ "layers": [
+  {
+   "mean_pd": 0.004467532958984375,
+   "mean_px": 0.0164856982421875,
+   "pulses": 29609658368.0,
+   "pulses_per_weight_per_row": 0.24588164965986395,
+   "rows": 600000,
+   "shape": [
+    256,
+    784
+   ]
+  },
+  {
+   "mean_pd": 0.005521514892578125,
+   "mean_px": 0.06746998697916666,
+   "pulses": 5018844160.0,
+   "pulses_per_weight_per_row": 0.2552716145833333,
+   "rows": 600000,
+   "shape": [
+    128,
+    256
+   ]
+  },
+  {
+   "mean_pd": 0.019302135416666668,
+   "mean_px": 0.09504380208333334,
+   "pulses": 230896912.0,
+   "pulses_per_weight_per_row": 0.30064702083333333,
+   "rows": 600000,
+   "shape": [
+    10,
+    128
+   ]
+  }
+ ],
+ "lr": 0.01,
+ "metric": {
+  "acc": 0.7526,
+  "loss": 0.7702556457519532,
+  "n_eval": 10000,
+  "split": "test"
+ },
+ "results_are": "DEV",
+ "samples": 600000,
+ "scale": 1.0,
+ "schema": "altone.x1000.me.run.v1",
+ "schema_paper": "altone.x1000.me-paper.run.v1",
+ "seconds": 495.26,
+ "seed": 0,
+ "spec": {
+  "asym": 0.0,
+  "asym_d2d": 0.0,
+  "bound_d2d": 0.0,
+  "c2c": 0.3,
+  "d2d": 0.3,
+  "gamma_d2d": 0.25301204819277107,
+  "gamma_dn": 1.0,
+  "gamma_up": 1.0,
+  "ideal_float": false,
+  "n_states": 20,
+  "name": "rasch20_sr0.5",
+  "ref_err": 0.5,
+  "tau_steps": "inf"
+ },
+ "tag": "e1b__mnist_gh_w128__rasch20_sr0.5__ttv2__lr0.01__s0",
+ "task": "mnist_gh",
+ "torch": "2.7.1+cu126",
+ "ucfg": {
+  "BL": 31,
+  "agad_beta": 0.5,
+  "algo": "ttv2",
+  "lr": 0.01,
+  "tt_cols": 0,
+  "tt_gamma": 0.0,
+  "tt_lambda": 0.1,
+  "tt_lr_ratio": 10.0,
+  "tt_max_pulses": 31,
+  "tt_period": 16,
+  "tt_reset": true,
+  "tt_rho": 0.1
+ },
+ "width": 128
+}

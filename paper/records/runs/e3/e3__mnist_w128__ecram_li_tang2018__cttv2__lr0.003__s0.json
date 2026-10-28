@@ -1,0 +1,136 @@
+{
+ "algo": "cttv2",
+ "alpha": null,
+ "arm": "device",
+ "budget": {
+  "batch": 128,
+  "epochs": 10
+ },
+ "device": "NVIDIA RTX A4000",
+ "diverged": false,
+ "hist": [
+  {
+   "epoch": 1,
+   "train_loss": 0.4706870481406614
+  },
+  {
+   "epoch": 2,
+   "train_loss": 0.2671338417035439
+  },
+  {
+   "epoch": 3,
+   "train_loss": 0.22613854397149075
+  },
+  {
+   "epoch": 4,
+   "train_loss": 0.1926930567601344
+  },
+  {
+   "epoch": 5,
+   "train_loss": 0.16599615137060206
+  },
+  {
+   "epoch": 6,
+   "train_loss": 0.14051157277780812
+  },
+  {
+   "epoch": 7,
+   "train_loss": 0.11743078698645106
+  },
+  {
+   "epoch": 8,
+   "train_loss": 0.125119055901374
+  },
+  {
+   "epoch": 9,
+   "train_loss": 0.10403752715993317
+  },
+  {
+   "epoch": 10,
+   "train_loss": 0.11161974037721718
+  }
+ ],
+ "host": "4954712405bc",
+ "layers": [
+  {
+   "mean_pd": 0.020722349651487833,
+   "mean_px": 0.14424343153591201,
+   "pulses": 12996043776.0,
+   "pulses_per_weight_per_row": 0.11792011002390466,
+   "rows": 549120,
+   "shape": [
+    256,
+    784
+   ]
+  },
+  {
+   "mean_pd": 0.015373164179163935,
+   "mean_px": 0.4205969039098922,
+   "pulses": 3602022656.0,
+   "pulses_per_weight_per_row": 0.2001839448799898,
+   "rows": 549120,
+   "shape": [
+    128,
+    256
+   ]
+  },
+  {
+   "mean_pd": 0.022278779925722064,
+   "mean_px": 0.7368472510562354,
+   "pulses": 350632288.0,
+   "pulses_per_weight_per_row": 0.49885539590617717,
+   "rows": 549120,
+   "shape": [
+    10,
+    128
+   ]
+  }
+ ],
+ "lr": 0.003,
+ "metric": {
+  "acc": 0.963,
+  "loss": 0.12184279556274415,
+  "n_eval": 10000,
+  "split": "test"
+ },
+ "results_are": "DEV",
+ "samples": 550000,
+ "scale": 1.0,
+ "schema": "altone.x1000.me.run.v1",
+ "schema_paper": "altone.x1000.me-paper.run.v1",
+ "seconds": 73.21,
+ "seed": 0,
+ "spec": {
+  "asym": 0.0,
+  "asym_d2d": 0.02,
+  "bound_d2d": 0.05,
+  "c2c": 0.3,
+  "d2d": 0.1,
+  "gamma_d2d": 0.0,
+  "gamma_dn": 0.5085,
+  "gamma_up": 0.1153,
+  "ideal_float": false,
+  "n_states": 1000.0,
+  "name": "ecram_li_tang2018",
+  "ref_err": 0.02,
+  "tau_steps": "inf"
+ },
+ "tag": "e3__mnist_w128__ecram_li_tang2018__cttv2__lr0.003__s0",
+ "task": "mnist",
+ "torch": "2.7.1+cu126",
+ "ucfg": {
+  "BL": 31,
+  "agad_beta": 0.5,
+  "algo": "cttv2",
+  "lr": 0.003,
+  "tt_cols": 0,
+  "tt_gamma": 0.0,
+  "tt_lambda": 0.1,
+  "tt_lr_ratio": 10.0,
+  "tt_max_pulses": 31,
+  "tt_period": 16,
+  "tt_reset": true,
+  "tt_rho": 0.2
+ },
+ "width": 128
+}

@@ -1,0 +1,238 @@
+{
+ "algo": "cttv2",
+ "alpha": null,
+ "arm": "device",
+ "budget": {
+  "batch": 128,
+  "epochs": 30
+ },
+ "device": "NVIDIA RTX A4000",
+ "diverged": false,
+ "hist": [
+  {
+   "epoch": 1,
+   "train_loss": 2.033378405448718
+  },
+  {
+   "epoch": 2,
+   "train_loss": 1.6879708705804286
+  },
+  {
+   "epoch": 3,
+   "train_loss": 1.5671791663536658
+  },
+  {
+   "epoch": 4,
+   "train_loss": 1.5166183862930689
+  },
+  {
+   "epoch": 5,
+   "train_loss": 1.5483221396421776
+  },
+  {
+   "epoch": 6,
+   "train_loss": 1.6557742387820513
+  },
+  {
+   "epoch": 7,
+   "train_loss": 1.4883897243401942
+  },
+  {
+   "epoch": 8,
+   "train_loss": 1.3746777069874299
+  },
+  {
+   "epoch": 9,
+   "train_loss": 1.3046465164575822
+  },
+  {
+   "epoch": 10,
+   "train_loss": 1.2704725020971053
+  },
+  {
+   "epoch": 11,
+   "train_loss": 1.270908453525641
+  },
+  {
+   "epoch": 12,
+   "train_loss": 1.2390197362655249
+  },
+  {
+   "epoch": 13,
+   "train_loss": 1.1736161647698817
+  },
+  {
+   "epoch": 14,
+   "train_loss": 1.1407060867700822
+  },
+  {
+   "epoch": 15,
+   "train_loss": 1.1089984209109576
+  },
+  {
+   "epoch": 16,
+   "train_loss": 1.077261704664964
+  },
+  {
+   "epoch": 17,
+   "train_loss": 1.0624888493464544
+  },
+  {
+   "epoch": 18,
+   "train_loss": 1.0500487303122497
+  },
+  {
+   "epoch": 19,
+   "train_loss": 1.0277338272485979
+  },
+  {
+   "epoch": 20,
+   "train_loss": 1.0118470803285255
+  },
+  {
+   "epoch": 21,
+   "train_loss": 1.0053775493915265
+  },
+  {
+   "epoch": 22,
+   "train_loss": 0.9761690971178886
+  },
+  {
+   "epoch": 23,
+   "train_loss": 0.9521059867663261
+  },
+  {
+   "epoch": 24,
+   "train_loss": 0.9440501286433294
+  },
+  {
+   "epoch": 25,
+   "train_loss": 0.9258908002804487
+  },
+  {
+   "epoch": 26,
+   "train_loss": 0.9210309737767929
+  },
+  {
+   "epoch": 27,
+   "train_loss": 0.9249264643742487
+  },
+  {
+   "epoch": 28,
+   "train_loss": 0.899868891789363
+  },
+  {
+   "epoch": 29,
+   "train_loss": 0.9061478834885818
+  },
+  {
+   "epoch": 30,
+   "train_loss": 0.9100166712051783
+  }
+ ],
+ "host": "b5ccca52d68f",
+ "layers": [
+  {
+   "mean_pd": 0.002493241709521693,
+   "mean_px": 0.16207533616286057,
+   "pulses": 1518381440.0,
+   "pulses_per_weight_per_row": 0.011459650062012801,
+   "rows": 306708480,
+   "shape": [
+    16,
+    27
+   ]
+  },
+  {
+   "mean_pd": 0.009191160935621995,
+   "mean_px": 0.08836602757119724,
+   "pulses": 8674712576.0,
+   "pulses_per_weight_per_row": 0.024551432175740445,
+   "rows": 76677120,
+   "shape": [
+    32,
+    144
+   ]
+  },
+  {
+   "mean_pd": 0.018689643012152778,
+   "mean_px": 0.13678030682425213,
+   "pulses": 13399044096.0,
+   "pulses_per_weight_per_row": 0.07584475438479345,
+   "rows": 19169280,
+   "shape": [
+    32,
+    288
+   ]
+  },
+  {
+   "mean_pd": 0.0786594488681891,
+   "mean_px": 0.37554235213842146,
+   "pulses": 7893991936.0,
+   "pulses_per_weight_per_row": 0.8043052738548344,
+   "rows": 299520,
+   "shape": [
+    64,
+    512
+   ]
+  },
+  {
+   "mean_pd": 0.4174422826522436,
+   "mean_px": 0.3842544164413061,
+   "pulses": 938224064.0,
+   "pulses_per_weight_per_row": 4.8944147302350425,
+   "rows": 299520,
+   "shape": [
+    10,
+    64
+   ]
+  }
+ ],
+ "lr": 0.003,
+ "metric": {
+  "acc": 0.599,
+  "loss": 1.189231640625,
+  "n_eval": 10000,
+  "split": "test"
+ },
+ "results_are": "DEV",
+ "samples": 300000,
+ "scale": 1.0,
+ "schema": "altone.x1000.me.run.v1",
+ "schema_paper": "altone.x1000.me-paper.run.v1",
+ "seconds": 203.53,
+ "seed": 0,
+ "spec": {
+  "asym": 0.05,
+  "asym_d2d": 0.0,
+  "bound_d2d": 0.05,
+  "c2c": 0.3,
+  "d2d": 0.1,
+  "gamma_d2d": 0.0,
+  "gamma_dn": 0.2,
+  "gamma_up": 0.2,
+  "ideal_float": false,
+  "n_states": 1000,
+  "name": "protonic_onen2022",
+  "ref_err": 0.02,
+  "tau_steps": "inf"
+ },
+ "tag": "e4__cifar_w16__protonic_onen2022__cttv2__lr0.003__s0",
+ "task": "cifar",
+ "torch": "2.7.1+cu126",
+ "ucfg": {
+  "BL": 31,
+  "agad_beta": 0.5,
+  "algo": "cttv2",
+  "lr": 0.003,
+  "tt_cols": 0,
+  "tt_gamma": 0.0,
+  "tt_lambda": 0.1,
+  "tt_lr_ratio": 10.0,
+  "tt_max_pulses": 31,
+  "tt_period": 16,
+  "tt_reset": true,
+  "tt_rho": 0.2
+ },
+ "width": 16
+}

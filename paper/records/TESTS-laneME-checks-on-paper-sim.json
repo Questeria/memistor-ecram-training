@@ -1,0 +1,94 @@
+{
+ "all_ok": true,
+ "checks": {
+  "c_asym_drift": {
+   "detail": "net du = 0.020000, want 0.020000",
+   "passed": true
+  },
+  "c_c2c_noise": {
+   "detail": "std 8.034e-04, want 8.000e-04",
+   "passed": true
+  },
+  "c_constant_step_reference": {
+   "detail": "max |w_read - w| = 9.36e-04 (tol 2e-3, one step)",
+   "passed": true
+  },
+  "c_drift": {
+   "detail": "u -0.090204, want -0.090204",
+   "passed": true
+  },
+  "c_fp_equivalence": {
+   "detail": "max |dW| = 7.153e-07 (tol 1e-5)",
+   "passed": true
+  },
+  "c_level_step": {
+   "detail": "step 0.031250, want 0.031250",
+   "passed": true
+  },
+  "c_pulse_mean": {
+   "detail": "max rel err of mean step = 0.0326 (tol 0.05)",
+   "passed": true
+  },
+  "c_symmetry_point": {
+   "detail": "u converged 0.30000, tile.ustar 0.30000, analytic 0.30000",
+   "passed": true
+  },
+  "c_ttv2_learns": {
+   "detail": "mse sgd 7.10e-13, ttv2 1.24e-05, untrained 1.50e+00 (both < 1% of untrained)",
+   "passed": true
+  }
+ },
+ "faults": {
+  "TT transfer sign flipped": {
+   "caught": true,
+   "check": "c_ttv2_learns",
+   "detail": "mse sgd 7.10e-13, ttv2 8.01e+12, untrained 1.50e+00 (both < 1% of untrained)"
+  },
+  "apply_exact sign flipped": {
+   "caught": true,
+   "check": "c_fp_equivalence",
+   "detail": "max |dW| = 7.060e+00 (tol 1e-5)"
+  },
+  "asymmetry ignored": {
+   "caught": true,
+   "check": "c_asym_drift",
+   "detail": "net du = 0.000000, want 0.020000"
+  },
+  "constant-step reference at a bound (the D1 bug)": {
+   "caught": true,
+   "check": "c_constant_step_reference",
+   "detail": "max |w_read - w| = 5.00e-01 (tol 2e-3, one step)"
+  },
+  "drift relaxes to 0 not bare": {
+   "caught": true,
+   "check": "c_drift",
+   "detail": "u 0.303266, want -0.090204"
+  },
+  "pulse slots BL dropped": {
+   "caught": true,
+   "check": "c_pulse_mean",
+   "detail": "max rel err of mean step = 0.9683 (tol 0.05)"
+  },
+  "pulse up/down swapped": {
+   "caught": true,
+   "check": "c_pulse_mean",
+   "detail": "max rel err of mean step = 1.9827 (tol 0.05)"
+  },
+  "step size halved": {
+   "caught": true,
+   "check": "c_level_step",
+   "detail": "step 0.015625, want 0.031250"
+  },
+  "symmetry point sign": {
+   "caught": true,
+   "check": "c_symmetry_point",
+   "detail": "u converged 0.30000, tile.ustar -0.30000, analytic 0.30000"
+  },
+  "write noise ~ n not sqrt(n)": {
+   "caught": true,
+   "check": "c_c2c_noise",
+   "detail": "std 3.214e-03, want 8.000e-04"
+  }
+ },
+ "schema": "altone.x1000.me.tests.v1"
+}

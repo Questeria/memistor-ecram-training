@@ -1,0 +1,136 @@
+{
+ "algo": "cttv2",
+ "alpha": 0.6024096385542169,
+ "arm": "device",
+ "budget": {
+  "batch": 16,
+  "epochs": 10
+ },
+ "device": "NVIDIA RTX A4000",
+ "diverged": false,
+ "hist": [
+  {
+   "epoch": 1,
+   "train_loss": 0.7704369791666666
+  },
+  {
+   "epoch": 2,
+   "train_loss": 0.5262125
+  },
+  {
+   "epoch": 3,
+   "train_loss": 0.49490244140625
+  },
+  {
+   "epoch": 4,
+   "train_loss": 0.4877538411458333
+  },
+  {
+   "epoch": 5,
+   "train_loss": 0.4721639973958333
+  },
+  {
+   "epoch": 6,
+   "train_loss": 0.47363382161458334
+  },
+  {
+   "epoch": 7,
+   "train_loss": 0.4650027669270833
+  },
+  {
+   "epoch": 8,
+   "train_loss": 0.46379345703125
+  },
+  {
+   "epoch": 9,
+   "train_loss": 0.45897272135416667
+  },
+  {
+   "epoch": 10,
+   "train_loss": 0.45321048177083334
+  }
+ ],
+ "host": "4954712405bc",
+ "layers": [
+  {
+   "mean_pd": 0.00400938232421875,
+   "mean_px": 0.012945485026041667,
+   "pulses": 29488461824.0,
+   "pulses_per_weight_per_row": 0.24487522108843537,
+   "rows": 600000,
+   "shape": [
+    256,
+    784
+   ]
+  },
+  {
+   "mean_pd": 0.005921826985677083,
+   "mean_px": 0.05455403971354167,
+   "pulses": 4979778048.0,
+   "pulses_per_weight_per_row": 0.253284609375,
+   "rows": 600000,
+   "shape": [
+    128,
+    256
+   ]
+  },
+  {
+   "mean_pd": 0.01358408935546875,
+   "mean_px": 0.09878638671875,
+   "pulses": 219006176.0,
+   "pulses_per_weight_per_row": 0.2851642916666667,
+   "rows": 600000,
+   "shape": [
+    10,
+    128
+   ]
+  }
+ ],
+ "lr": 0.01,
+ "metric": {
+  "acc": 0.8714,
+  "loss": 0.4269094665527344,
+  "n_eval": 10000,
+  "split": "test"
+ },
+ "results_are": "DEV",
+ "samples": 600000,
+ "scale": 1.0,
+ "schema": "altone.x1000.me.run.v1",
+ "schema_paper": "altone.x1000.me-paper.run.v1",
+ "seconds": 497.39,
+ "seed": 0,
+ "spec": {
+  "asym": 0.0,
+  "asym_d2d": 0.0,
+  "bound_d2d": 0.0,
+  "c2c": 0.3,
+  "d2d": 0.3,
+  "gamma_d2d": 0.25301204819277107,
+  "gamma_dn": 1.0,
+  "gamma_up": 1.0,
+  "ideal_float": false,
+  "n_states": 20,
+  "name": "rasch20_sr0.5",
+  "ref_err": 0.5,
+  "tau_steps": "inf"
+ },
+ "tag": "e1b__mnist_gh_w128__rasch20_sr0.5__cttv2__lr0.01__s0",
+ "task": "mnist_gh",
+ "torch": "2.7.1+cu126",
+ "ucfg": {
+  "BL": 31,
+  "agad_beta": 0.5,
+  "algo": "cttv2",
+  "lr": 0.01,
+  "tt_cols": 0,
+  "tt_gamma": 0.0,
+  "tt_lambda": 0.1,
+  "tt_lr_ratio": 10.0,
+  "tt_max_pulses": 31,
+  "tt_period": 16,
+  "tt_reset": true,
+  "tt_rho": 0.2
+ },
+ "width": 128
+}

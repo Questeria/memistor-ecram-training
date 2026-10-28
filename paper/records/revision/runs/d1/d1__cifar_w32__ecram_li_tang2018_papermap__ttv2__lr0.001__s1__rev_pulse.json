@@ -1,0 +1,201 @@
+{
+ "algo": "ttv2",
+ "alpha": null,
+ "arm": "device",
+ "budget": {
+  "batch": 128,
+  "epochs": 10
+ },
+ "data_sha256": "de0c80916dead1a612a189127706b56459f8bb98c974f3b58296db7e1c180938",
+ "device": "NVIDIA RTX A4000",
+ "diverged": false,
+ "hist": [
+  {
+   "epoch": 1,
+   "train_loss": 2.0029175587189503
+  },
+  {
+   "epoch": 2,
+   "train_loss": 1.5688448196802385
+  },
+  {
+   "epoch": 3,
+   "train_loss": 1.4394775781876001
+  },
+  {
+   "epoch": 4,
+   "train_loss": 1.3499602293356872
+  },
+  {
+   "epoch": 5,
+   "train_loss": 1.361439435909956
+  },
+  {
+   "epoch": 6,
+   "train_loss": 1.4635140834710536
+  },
+  {
+   "epoch": 7,
+   "train_loss": 1.5066717098920772
+  },
+  {
+   "epoch": 8,
+   "train_loss": 1.4610748291015625
+  },
+  {
+   "epoch": 9,
+   "train_loss": 1.3651701120229869
+  },
+  {
+   "epoch": 10,
+   "train_loss": 1.3350000626001604
+  }
+ ],
+ "host": "3fd2b2279cd1",
+ "init_sha256": "b6feafb0fcc1dfd38957d18f0300dc5da0e3f0022cdde0a24edff650ad1f0fc6",
+ "layers": [
+  {
+   "clip_call_frac": 0.0,
+   "mean_pd": 0.0015859700166262114,
+   "mean_px": 0.0506376217573117,
+   "pulses": 220196240.0,
+   "pulses_per_weight_per_row": 0.0024928240581342186,
+   "reset": "pulse",
+   "reset_extra_reads": 49920.0,
+   "reset_pulses": 1425884.0,
+   "reset_resid_steps": 1.546132092598157,
+   "rows": 102236160,
+   "shape": [
+    32,
+    27
+   ],
+   "update_lost_frac": -7.317534533868297e-08
+  },
+  {
+   "clip_call_frac": 0.0,
+   "mean_pd": 0.007608169164413061,
+   "mean_px": 0.038268727522629956,
+   "pulses": 4376162816.0,
+   "pulses_per_weight_per_row": 0.009289160617056735,
+   "reset": "pulse",
+   "reset_extra_reads": 898560.0,
+   "reset_pulses": 26498042.0,
+   "reset_resid_steps": 2.547028579059829,
+   "rows": 25559040,
+   "shape": [
+    64,
+    288
+   ],
+   "update_lost_frac": -1.177710649002961e-07
+  },
+  {
+   "clip_call_frac": 0.011538461538461539,
+   "mean_pd": 0.01437969819093362,
+   "mean_px": 0.06443717663104717,
+   "pulses": 6943533056.0,
+   "pulses_per_weight_per_row": 0.0294776938240073,
+   "reset": "pulse",
+   "reset_extra_reads": 1797120.0,
+   "reset_pulses": 52252176.0,
+   "reset_resid_steps": 3.6115509815705127,
+   "rows": 6389760,
+   "shape": [
+    64,
+    576
+   ],
+   "update_lost_frac": 1.4869908371295537e-07
+  },
+  {
+   "clip_call_frac": 1.0,
+   "mean_pd": 0.08115413861396985,
+   "mean_px": 0.20468442867963743,
+   "pulses": 5662799872.0,
+   "pulses_per_weight_per_row": 0.43272971128806087,
+   "reset": "pulse",
+   "reset_extra_reads": 6389760.0,
+   "reset_pulses": 117336784.0,
+   "reset_resid_steps": 4.586250500801282,
+   "rows": 99840,
+   "shape": [
+    128,
+    1024
+   ],
+   "update_lost_frac": 0.019061644268326905
+  },
+  {
+   "clip_call_frac": 1.0,
+   "mean_pd": 0.3541318844526242,
+   "mean_px": 0.24077625763721955,
+   "pulses": 353252096.0,
+   "pulses_per_weight_per_row": 2.7642047275641026,
+   "reset": "pulse",
+   "reset_extra_reads": 62400.0,
+   "reset_pulses": 2178026.0,
+   "reset_resid_steps": 189.31844551282052,
+   "rows": 99840,
+   "shape": [
+    10,
+    128
+   ],
+   "update_lost_frac": 0.6036889772332197
+  }
+ ],
+ "lr": 0.001,
+ "metric": {
+  "acc": 0.5067,
+  "loss": 1.39570400390625,
+  "n_eval": 10000,
+  "split": "test"
+ },
+ "results_are": "DEV",
+ "rng": "split",
+ "samples": 100000,
+ "scale": 1.0,
+ "schema": "altone.x1000.me.run.v1",
+ "schema_paper": "altone.x1000.me-paper.run.v1",
+ "schema_revision": "altone.x1000.me-revision.run.v1",
+ "seconds": 105.23,
+ "seed": 1,
+ "spec": {
+  "asym": 0.0,
+  "asym_d2d": 0.02,
+  "bound_d2d": 0.05,
+  "bounds_model": "paper",
+  "c2c": 0.3,
+  "d2d": 0.1,
+  "gamma_d2d": 0.0,
+  "gamma_dn": 0.5085,
+  "gamma_dn_dtod": 0.0,
+  "gamma_up": 0.1153,
+  "gamma_up_dtod": 0.0,
+  "ideal_float": false,
+  "n_states": 1000.0,
+  "name": "ecram_li_tang2018_papermap",
+  "recenter_sp": false,
+  "ref_err": 0.02,
+  "tau_steps": "inf",
+  "u_hi": 1.0,
+  "u_lo": -1.0
+ },
+ "tag": "d1__cifar_w32__ecram_li_tang2018_papermap__ttv2__lr0.001__s1__rev_pulse",
+ "task": "cifar",
+ "torch": "2.7.1+cu126",
+ "ucfg": {
+  "BL": 31,
+  "agad_beta": 0.5,
+  "algo": "ttv2",
+  "lr": 0.001,
+  "tt_cols": 0,
+  "tt_gamma": 0.0,
+  "tt_h_forget": false,
+  "tt_lambda": 0.1,
+  "tt_lr_ratio": 10.0,
+  "tt_max_pulses": 31,
+  "tt_period": 16,
+  "tt_reset": "pulse",
+  "tt_reset_iters": 2,
+  "tt_reset_max": 62,
+  "tt_rho": 0.1
+ },
+ "width": 32
+}

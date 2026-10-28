@@ -1,0 +1,136 @@
+{
+ "algo": "sgd",
+ "alpha": null,
+ "arm": "device",
+ "budget": {
+  "batch": 128,
+  "epochs": 10
+ },
+ "device": "NVIDIA RTX A4000",
+ "diverged": false,
+ "hist": [
+  {
+   "epoch": 1,
+   "train_loss": 0.5075096717247596
+  },
+  {
+   "epoch": 2,
+   "train_loss": 0.4207731304746686
+  },
+  {
+   "epoch": 3,
+   "train_loss": 0.4102489053508341
+  },
+  {
+   "epoch": 4,
+   "train_loss": 0.39729173922594335
+  },
+  {
+   "epoch": 5,
+   "train_loss": 0.3843743739983974
+  },
+  {
+   "epoch": 6,
+   "train_loss": 0.38422964669607734
+  },
+  {
+   "epoch": 7,
+   "train_loss": 0.37915138653664043
+  },
+  {
+   "epoch": 8,
+   "train_loss": 0.37946381824555653
+  },
+  {
+   "epoch": 9,
+   "train_loss": 0.3770672991559222
+  },
+  {
+   "epoch": 10,
+   "train_loss": 0.3744060454112944
+  }
+ ],
+ "host": "4954712405bc",
+ "layers": [
+  {
+   "mean_pd": 0.05121618951117242,
+   "mean_px": 0.1016387654906942,
+   "pulses": 16750911488.0,
+   "pulses_per_weight_per_row": 0.15199004864183435,
+   "rows": 549120,
+   "shape": [
+    256,
+    784
+   ]
+  },
+  {
+   "mean_pd": 0.030443290230277534,
+   "mean_px": 0.15847825270432692,
+   "pulses": 2313507840.0,
+   "pulses_per_weight_per_row": 0.12857418460445805,
+   "rows": 549120,
+   "shape": [
+    128,
+    256
+   ]
+  },
+  {
+   "mean_pd": 0.044507437041311555,
+   "mean_px": 0.5117348553139569,
+   "pulses": 440760352.0,
+   "pulses_per_weight_per_row": 0.6270833788607226,
+   "rows": 549120,
+   "shape": [
+    10,
+    128
+   ]
+  }
+ ],
+ "lr": 0.003,
+ "metric": {
+  "acc": 0.9136,
+  "loss": 0.32899715423583986,
+  "n_eval": 10000,
+  "split": "test"
+ },
+ "results_are": "DEV",
+ "samples": 550000,
+ "scale": 1.0,
+ "schema": "altone.x1000.me.run.v1",
+ "schema_paper": "altone.x1000.me-paper.run.v1",
+ "seconds": 20.39,
+ "seed": 1,
+ "spec": {
+  "asym": 0.0,
+  "asym_d2d": 0.02,
+  "bound_d2d": 0.05,
+  "c2c": 2.0,
+  "d2d": 0.1,
+  "gamma_d2d": 0.0,
+  "gamma_dn": 0.7342,
+  "gamma_up": 0.4152,
+  "ideal_float": false,
+  "n_states": 7088.679379031686,
+  "name": "ecram_mo_kim2019",
+  "ref_err": 0.02,
+  "tau_steps": "inf"
+ },
+ "tag": "e3__mnist_w128__ecram_mo_kim2019__sgd__lr0.003__s1",
+ "task": "mnist",
+ "torch": "2.7.1+cu126",
+ "ucfg": {
+  "BL": 31,
+  "agad_beta": 0.5,
+  "algo": "sgd",
+  "lr": 0.003,
+  "tt_cols": 0,
+  "tt_gamma": 0.0,
+  "tt_lambda": 0.2,
+  "tt_lr_ratio": 1.0,
+  "tt_max_pulses": 31,
+  "tt_period": 64,
+  "tt_reset": true,
+  "tt_rho": 0.1
+ },
+ "width": 128
+}

@@ -1,0 +1,136 @@
+{
+ "algo": "sgd",
+ "alpha": null,
+ "arm": "device",
+ "budget": {
+  "batch": 128,
+  "epochs": 10
+ },
+ "device": "NVIDIA RTX A4000",
+ "diverged": false,
+ "hist": [
+  {
+   "epoch": 1,
+   "train_loss": 0.4125174142263986
+  },
+  {
+   "epoch": 2,
+   "train_loss": 0.2965894579053759
+  },
+  {
+   "epoch": 3,
+   "train_loss": 0.2612599192799388
+  },
+  {
+   "epoch": 4,
+   "train_loss": 0.24581978537819602
+  },
+  {
+   "epoch": 5,
+   "train_loss": 0.23263245695954435
+  },
+  {
+   "epoch": 6,
+   "train_loss": 0.22063922659778373
+  },
+  {
+   "epoch": 7,
+   "train_loss": 0.21143092086543014
+  },
+  {
+   "epoch": 8,
+   "train_loss": 0.2097885558655212
+  },
+  {
+   "epoch": 9,
+   "train_loss": 0.20108295431781759
+  },
+  {
+   "epoch": 10,
+   "train_loss": 0.20115597598202578
+  }
+ ],
+ "host": "4954712405bc",
+ "layers": [
+  {
+   "mean_pd": 0.010844235542492989,
+   "mean_px": 0.05073447772117206,
+   "pulses": 1715599360.0,
+   "pulses_per_weight_per_row": 0.015566557698254126,
+   "rows": 549120,
+   "shape": [
+    256,
+    784
+   ]
+  },
+  {
+   "mean_pd": 0.007782835171217129,
+   "mean_px": 0.09033993452023237,
+   "pulses": 347058336.0,
+   "pulses_per_weight_per_row": 0.01928791499638057,
+   "rows": 549120,
+   "shape": [
+    128,
+    256
+   ]
+  },
+  {
+   "mean_pd": 0.009858066051990003,
+   "mean_px": 0.20372603267500727,
+   "pulses": 39410436.0,
+   "pulses_per_weight_per_row": 0.056070445667613635,
+   "rows": 549120,
+   "shape": [
+    10,
+    128
+   ]
+  }
+ ],
+ "lr": 0.003,
+ "metric": {
+  "acc": 0.9477,
+  "loss": 0.17537902297973632,
+  "n_eval": 10000,
+  "split": "test"
+ },
+ "results_are": "DEV",
+ "samples": 550000,
+ "scale": 1.0,
+ "schema": "altone.x1000.me.run.v1",
+ "schema_paper": "altone.x1000.me-paper.run.v1",
+ "seconds": 19.93,
+ "seed": 2,
+ "spec": {
+  "asym": 0.05,
+  "asym_d2d": 0.0,
+  "bound_d2d": 0.05,
+  "c2c": 0.3,
+  "d2d": 0.1,
+  "gamma_d2d": 0.0,
+  "gamma_dn": 0.2,
+  "gamma_up": 0.2,
+  "ideal_float": false,
+  "n_states": 1000,
+  "name": "protonic_onen2022",
+  "ref_err": 0.02,
+  "tau_steps": "inf"
+ },
+ "tag": "e3__mnist_w128__protonic_onen2022__sgd__lr0.003__s2",
+ "task": "mnist",
+ "torch": "2.7.1+cu126",
+ "ucfg": {
+  "BL": 31,
+  "agad_beta": 0.5,
+  "algo": "sgd",
+  "lr": 0.003,
+  "tt_cols": 0,
+  "tt_gamma": 0.0,
+  "tt_lambda": 0.2,
+  "tt_lr_ratio": 1.0,
+  "tt_max_pulses": 31,
+  "tt_period": 64,
+  "tt_reset": true,
+  "tt_rho": 0.1
+ },
+ "width": 128
+}

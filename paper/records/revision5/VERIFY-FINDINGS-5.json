@@ -1,0 +1,160 @@
+{
+ "reviewed_html_sha256": "e8718e33f935a298d40b24697a79d2084f84cb578020ffc9973411ac03839fd9",
+ "review_cites_html_sha256": "e8718e33f935a298d40b24697a79d2084f84cb578020ffc9973411ac03839fd9",
+ "review_cites_pdf_sha256": "1d4cfb3c6d8d8fa085e802f0e0596525e8923d98d8bb2afe6786f08d59ad1f3f",
+ "pdf_sha256": "1d4cfb3c6d8d8fa085e802f0e0596525e8923d98d8bb2afe6786f08d59ad1f3f",
+ "same_files_as_reviewed": true,
+ "F1": {
+  "finding": "HTML export is incomplete (drops energy, discussion, roadmap, conclusion, availability, statements, two appendices)",
+  "headings_missing_v5": [
+   "A conditional energy projection for the weight-matrix operations",
+   "Discussion",
+   "Limitations",
+   "A proposed roadmap for groups with device and fabrication resources",
+   "Conclusion",
+   "Code and data availability",
+   "Author contributions and use of AI",
+   "Acknowledgments",
+   "Appendix A: Bench replication of the 1960 memistor",
+   "Appendix B: Hyperparameter selection"
+  ],
+  "n_headings_source": 34,
+  "n_headings_html": 45,
+  "sentinels_absent_in_v5_html": {
+   "Section 5 energy analysis (first sentence)": true,
+   "Section 6 discussion": true,
+   "Section 7 roadmap": true,
+   "Section 8 conclusion": true,
+   "Section 9 availability": true,
+   "Author contributions and use of AI": true,
+   "Acknowledgments": true,
+   "Appendix A bench": true,
+   "Appendix B hyperparameter selection": true,
+   "Appendix C simulator checks (heading)": true,
+   "Section 4.5 explanatory text": true
+  },
+  "pandoc_log_bytes": 0,
+  "verdict": "CONFIRMED"
+ },
+ "F2": {
+  "finding": "rows of the simulator-checks table sit under the sensitivity table's caption",
+  "caption_starts": "Revised sensitivity sheet (protonic-inspired base; TTv2 = the pre-regi",
+  "html_header_cells": [
+   "Check",
+   "Result",
+   "Planted faults caught"
+  ],
+  "html_first_cells": [
+   "c_asym_drift",
+   "pass",
+   "asymmetry ignored"
+  ],
+  "source_header_row": "Alg., task & Axis & mean gap per value & threshold",
+  "source_first_data_row": "c-TTv2, CIFAR & levels & 5000.0: 2.49U; 2000.0: -2",
+  "n_sensitivity_rows_in_source": 28,
+  "tables_check_problems_v5": [
+   {
+    "table": "Revised sensitivity sheet (protonic-inspired base; TTv2 = the pre-registered S-A",
+    "why": "header of the source table is not under its caption"
+   },
+   {
+    "table": "Conditional energy ratios for cells that pass the stated non-inferiority margin ",
+    "why": "caption not in the HTML"
+   },
+   {
+    "table": "Revised settings (repaired simulator), chosen on MNIST validation with the mid d",
+    "why": "caption not in the HTML"
+   },
+   {
+    "table": "Simulator checks and the planted faults each one catches (records/TESTS-PAPER.js",
+    "why": "caption not in the HTML"
+   }
+  ],
+  "verdict": "CONFIRMED"
+ },
+ "F3": {
+  "finding": "nine reference labels are unresolved in the HTML",
+  "unresolved_v5": [
+   "app:bench",
+   "app:checks",
+   "app:selection",
+   "sec:availability",
+   "sec:discussion",
+   "sec:energy",
+   "sec:limits",
+   "sec:roadmap",
+   "tab:rev_selection"
+  ],
+  "n": 9,
+  "old_html_check_rc_v5": 0,
+  "note": "pod/html_check.py (rc 0) greps raw \\ref, \\cite, '[@' and '???' only; pandoc prints an unresolved \\ref as [label]",
+  "verdict": "CONFIRMED"
+ },
+ "F4": {
+  "finding": "v4 HTML has the same defect and earlier checks missed it",
+  "unresolved_v4": [
+   "app:bench",
+   "app:checks",
+   "app:selection",
+   "sec:availability",
+   "sec:discussion",
+   "sec:energy",
+   "sec:limits",
+   "sec:roadmap",
+   "tab:rev_selection"
+  ],
+  "n": 9,
+  "headings_missing_v4": [
+   "A conditional energy projection for the weight-matrix operations",
+   "Discussion",
+   "Limitations",
+   "A proposed roadmap for groups with device and fabrication resources",
+   "Conclusion",
+   "Code and data availability",
+   "Author contributions and use of AI",
+   "Acknowledgments",
+   "Appendix A: Bench replication of the 1960 memistor",
+   "Appendix B: Hyperparameter selection"
+  ],
+  "tables_problems_v4": [
+   {
+    "table": "Revised sensitivity sheet (protonic-inspired base; TTv2 = the pre-registered S-A",
+    "why": "header of the source table is not under its caption"
+   },
+   {
+    "table": "Conditional energy ratios for cells that pass the stated non-inferiority margin ",
+    "why": "caption not in the HTML"
+   },
+   {
+    "table": "Revised settings (repaired simulator), chosen on MNIST validation with the mid d",
+    "why": "caption not in the HTML"
+   }
+  ],
+  "old_html_check_rc_v4": 0,
+  "same_as_v5": true,
+  "verdict": "CONFIRMED"
+ },
+ "F5a": {
+  "finding": "Appendix F says the saved draws 'joined the deposit' while Section 9 says nothing has been deposited",
+  "appendix_f_phrase": true,
+  "section9_nothing_deposited": true,
+  "verdict": "CONFIRMED"
+ },
+ "F5b": {
+  "finding": "'rebuilt from the arrays alone' is too broad: the script also uses the probe records",
+  "phrase_in_sec_fidelity": true,
+  "phrase_in_PUBLISHING": true,
+  "script_deepcopies_probe_record": true,
+  "script_reads_draws_sha_boot_layer_from_record": true,
+  "lost_frac_copied_not_recomputed": true,
+  "verdict": "CONFIRMED"
+ },
+ "verdicts": {
+  "F1": "CONFIRMED",
+  "F2": "CONFIRMED",
+  "F3": "CONFIRMED",
+  "F4": "CONFIRMED",
+  "F5a": "CONFIRMED",
+  "F5b": "CONFIRMED"
+ }
+}

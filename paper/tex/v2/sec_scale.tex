@@ -1,0 +1,28 @@
+\subsection{Width}\label{sec:scale}
+An earlier lane of this project saw the device gap grow with model width. Here every arm (protonic-inspired and Li-ECRAM, each
+with TTv2 and c-TTv2) gets its own learning rate at every width by the edge rule on validation, and then five test seeds per
+width; FP-SGD uses its own selected rate (Table~\ref{tab:rev_width}). The initial weight scale grows with the width as in the
+rest of the paper ($\alpha$ set from the initialisation bound), which is one mapping policy, not every fixed physical mapping.
+
+\paragraph{The test.} The endpoint contrast $D$ (the mean gap at the widest minus the narrowest width) is tested for
+equivalence within the gap lines (TOST at 5\,\%). The original paper's ``FLAT'' label is withdrawn: it did not test equivalence
+and covered large non-monotonic changes.
+
+\paragraph{CIFAR ($c=16$, 32, 64).} \RVEFourCifarNEquivalent{} arm is equivalent within $\pm2$\,pp (Li-ECRAM c-TTv2,
+$D=\RVEFourCifarEcramLiTangTwoZeroOneEightCttvTwoD$\,pp, 90\,\% interval [\RVEFourCifarEcramLiTangTwoZeroOneEightCttvTwoLo,
+\RVEFourCifarEcramLiTangTwoZeroOneEightCttvTwoHi]); for \RVEFourCifarNNoEvidenceOfGrowthBeyondTheMargin{} arm there is no evidence
+of growth beyond the margin (protonic-inspired TTv2); \RVEFourCifarNInconclusive{} arms are inconclusive (Li-ECRAM TTv2,
+$D=\RVEFourCifarEcramLiTangTwoZeroOneEightTtvTwoD$\,pp; protonic-inspired c-TTv2, $D=\RVEFourCifarProtonicOnenTwoZeroTwoTwoCttvTwoD$\,pp).
+Five seeds are not enough to settle a 2\,pp margin on this subset.
+
+\paragraph{The LM ($d=64$, 128, 256).} All \RVEFourLmNShrinks{} arms have a gap that shrinks with width (for example Li-ECRAM
+c-TTv2 from \RVEFourLmEcramLiTangTwoZeroOneEightCttvTwoWSixFourGap\,\% to \RVEFourLmEcramLiTangTwoZeroOneEightCttvTwoWTwoFiveSixGap\,\%).
+This is not a favourable scaling law: FP-SGD itself gets worse at the largest width under the fixed budget
+(\RVEFourLmFpWOneTwoEight{} bits per byte at $d=128$, \RVEFourLmFpWTwoFiveSix{} at $d=256$), so a gap that turns negative partly
+measures a weaker baseline. Converged or quality-matched baselines would be needed to speak of scaling.
+
+\paragraph{What can be said.} Across a factor of four in width, after per-arm learning-rate selection, our pre-registered test
+detected no growth of the device gap on either task; on CIFAR it established equivalence for one arm only, and on the LM the
+apparent shrinkage reflects the FP-SGD baseline at a fixed budget. Width is not resolved by this study.
+
+\input{tables/rev_width.tex}

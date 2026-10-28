@@ -1,0 +1,98 @@
+{
+ "schema": "altone.x1000.me-revision3.tests.v1",
+ "checks": {
+  "c1_paired_noise_free": {
+   "ok": true,
+   "floor_paired": 6.042928259721973e-08,
+   "floor_independent": 0.09264882244733405,
+   "excess_paired": 1.5214784219754593e-07,
+   "rel_mean_err": 1.6370908368378334e-07
+  },
+  "c2_bias_found": {
+   "ok": true,
+   "biased": {
+    "excess_paired": 0.09723266258267263,
+    "excess_independent": 0.0,
+    "excess_paired_p95": 0.11027670673702733,
+    "rel_mean_err": 0.10436724666183857,
+    "floor_paired": 0.03792534116995111,
+    "floor_independent": 0.10501744707875264
+   },
+   "unbiased": {
+    "excess_paired": 0.0,
+    "excess_paired_p95": 0.0472759245723856,
+    "gain_ratio_minus1_p025": -0.0067510329313573755,
+    "gain_ratio_minus1_p975": 0.0015022992851745909
+   }
+  },
+  "c3_dependence": {
+   "ok": true,
+   "rms": 0.3327734892906041,
+   "rms_hetero": 0.33277348929060424,
+   "aligned": 0.33273185571042285,
+   "signed": -0.0026055908424818175,
+   "v3_pooled_signed": -0.0026058177796301632,
+   "gram_equals_bruteforce": true
+  },
+  "c4_runner": {
+   "ok": true,
+   "same": true,
+   "probes": 2,
+   "fields": true,
+   "seq0": {
+    "floor_paired": 0.06670317565241025,
+    "floor_independent": 0.215512031695749,
+    "excess_paired_p95": 0.06697089337330955
+   }
+  }
+ },
+ "faults": {
+  "c1_slot_fresh_firings": {
+   "ok": false,
+   "floor_paired": 0.09369660917880712,
+   "floor_independent": 0.09352209781225385,
+   "excess_paired": 0.0,
+   "rel_mean_err": 0.0888928612954296
+  },
+  "c2_no_bias_planted": {
+   "ok": false,
+   "biased": {
+    "excess_paired": 0.0,
+    "excess_independent": 0.0,
+    "excess_paired_p95": 0.0472759245723856,
+    "rel_mean_err": 0.034883002374583444,
+    "floor_paired": 0.035653701181395055,
+    "floor_independent": 0.09994833904221498
+   },
+   "unbiased": {
+    "excess_paired": 0.0,
+    "excess_paired_p95": 0.0472759245723856,
+    "gain_ratio_minus1_p025": -0.0067510329313573755,
+    "gain_ratio_minus1_p975": 0.0015022992851745909
+   }
+  },
+  "c3_pooled_normalisation": {
+   "ok": false,
+   "rms": 0.33279843503492224,
+   "rms_hetero": 0.9888361470658831,
+   "aligned": 0.3327462738324448,
+   "signed": -0.002605686071388247,
+   "v3_pooled_signed": -0.0026058177796301632,
+   "gram_equals_bruteforce": false
+  },
+  "c4_probe_shares_the_run_generator": {
+   "ok": false,
+   "same": false,
+   "probes": 2,
+   "fields": true,
+   "seq0": {
+    "floor_paired": 0.06692661951981797,
+    "floor_independent": 0.2134395228185012,
+    "excess_paired_p95": 0.06661105227259632
+   }
+  }
+ },
+ "all_ok": true,
+ "all_faults_caught": true,
+ "torch": "2.7.1+cu126"
+}

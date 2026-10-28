@@ -1,0 +1,167 @@
+{
+ "algo": "sgd",
+ "alpha": null,
+ "arm": "device",
+ "budget": {
+  "batch": 128,
+  "epochs": 10
+ },
+ "data_sha256": "94e43fb28e9bc937cdff5b06ae9d45e71f835369f17dc35b6f3220e3a15defcc",
+ "device": "NVIDIA RTX A4000",
+ "diverged": false,
+ "hist": [
+  {
+   "epoch": 1,
+   "train_loss": 0.41752564045654866
+  },
+  {
+   "epoch": 2,
+   "train_loss": 0.3007808231807255
+  },
+  {
+   "epoch": 3,
+   "train_loss": 0.2645795061871722
+  },
+  {
+   "epoch": 4,
+   "train_loss": 0.2478341411599468
+  },
+  {
+   "epoch": 5,
+   "train_loss": 0.22592516990252587
+  },
+  {
+   "epoch": 6,
+   "train_loss": 0.2173597429182146
+  },
+  {
+   "epoch": 7,
+   "train_loss": 0.2091549426525623
+  },
+  {
+   "epoch": 8,
+   "train_loss": 0.2051523737696223
+  },
+  {
+   "epoch": 9,
+   "train_loss": 0.2017225074323463
+  },
+  {
+   "epoch": 10,
+   "train_loss": 0.19663974788639096
+  }
+ ],
+ "host": "f7bc4ec7dcdb",
+ "init_sha256": "19f51772c567e74870ce852cb40835b288acbbd87307814907d68defc5dfd442",
+ "layers": [
+  {
+   "clip_call_frac": 0.0,
+   "mean_pd": 0.010831029042775258,
+   "mean_px": 0.051143747609812065,
+   "pulses": 1724041600.0,
+   "pulses_per_weight_per_row": 0.015643158692126326,
+   "reset": "ideal",
+   "reset_extra_reads": 0.0,
+   "reset_pulses": 0.0,
+   "reset_resid_steps": null,
+   "rows": 549120,
+   "shape": [
+    256,
+    784
+   ],
+   "update_lost_frac": 7.424556480728484e-08
+  },
+  {
+   "clip_call_frac": 0.0,
+   "mean_pd": 0.00773517724239465,
+   "mean_px": 0.09066118716082094,
+   "pulses": 346155680.0,
+   "pulses_per_weight_per_row": 0.01923774950432055,
+   "reset": "ideal",
+   "reset_extra_reads": 0.0,
+   "reset_pulses": 0.0,
+   "reset_resid_steps": null,
+   "rows": 549120,
+   "shape": [
+    128,
+    256
+   ],
+   "update_lost_frac": 1.8490447284413847e-07
+  },
+  {
+   "clip_call_frac": 0.0,
+   "mean_pd": 0.009841604166097574,
+   "mean_px": 0.2025843907069493,
+   "pulses": 39077008.0,
+   "pulses_per_weight_per_row": 0.05559606734411422,
+   "reset": "ideal",
+   "reset_extra_reads": 0.0,
+   "reset_pulses": 0.0,
+   "reset_resid_steps": null,
+   "rows": 549120,
+   "shape": [
+    10,
+    128
+   ],
+   "update_lost_frac": 0.0
+  }
+ ],
+ "lr": 0.003,
+ "metric": {
+  "acc": 0.9108,
+  "loss": 0.27956069869995115,
+  "n_eval": 10000,
+  "split": "test"
+ },
+ "results_are": "DEV",
+ "rng": "split",
+ "samples": 550000,
+ "scale": 1.0,
+ "schema": "altone.x1000.me.run.v1",
+ "schema_paper": "altone.x1000.me-paper.run.v1",
+ "schema_revision": "altone.x1000.me-revision.run.v1",
+ "seconds": 23.48,
+ "seed": 0,
+ "spec": {
+  "asym": 0.05,
+  "asym_d2d": 0.0,
+  "bound_d2d": 0.05,
+  "bounds_model": "paper",
+  "c2c": 0.3,
+  "d2d": 0.1,
+  "gamma_d2d": 0.0,
+  "gamma_dn": 0.2,
+  "gamma_dn_dtod": 0.0,
+  "gamma_up": 0.2,
+  "gamma_up_dtod": 0.0,
+  "ideal_float": false,
+  "n_states": 1000,
+  "name": "protonic_onen2022",
+  "recenter_sp": false,
+  "ref_err": 0.02,
+  "tau_steps": "inf",
+  "u_hi": 1.0,
+  "u_lo": -1.0
+ },
+ "tag": "e3__mnist_w128__protonic_onen2022__sgd__lr0.003__s0",
+ "task": "mnist",
+ "torch": "2.7.1+cu126",
+ "ucfg": {
+  "BL": 31,
+  "agad_beta": 0.5,
+  "algo": "sgd",
+  "lr": 0.003,
+  "tt_cols": 0,
+  "tt_gamma": 0.0,
+  "tt_h_forget": false,
+  "tt_lambda": 0.2,
+  "tt_lr_ratio": 1.0,
+  "tt_max_pulses": 31,
+  "tt_period": 64,
+  "tt_reset": true,
+  "tt_reset_iters": 2,
+  "tt_reset_max": 62,
+  "tt_rho": 0.1
+ },
+ "width": 128
+}

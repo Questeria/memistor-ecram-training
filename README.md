@@ -1,0 +1,147 @@
+# Can memistor-class electrochemical weights train neural networks?
+
+Code, records and pulse draws for the paper "Can memistor-class electrochemical weights train neural networks?" (Anthony DeMarco, independent researcher; version 9, October 28, 2026).
+The study asks, in simulation, how close memistor-class electrochemical weights (Li-ion, metal-oxide and protonic ECRAM) come to
+digital training when every weight update is made of device pulses. **All results are simulations**; nothing here is a
+measurement of a physical device (the `bench/` folder is a measurement protocol for a future one).
+
+This repository mirrors the author's study folder, so the paths the paper prints resolve as stated, for example, from the
+paper directory of the deposit (`paper/`): `python -B revision4/rebuild_draw_tables.py --draws draws/rev3`.
+
+## Layout
+
+| Path | Contents |
+|---|---|
+| `paper/` | the paper: `tex/` (sources, generated number macros, tables, figures; `tex/v1..v8` are the archived versions), `build/` (built PDFs and HTML, current and `v1..v8`), the plans, deviations and responses, `analyze.py`, `make_figures.py`, `revision*/` (analysis and verification scripts per revision), `sim/` (the repaired simulator, pulse streams, probes and their checks), `pod/` (pod run and build scripts), `energy/`, `cite/` (citation check), `records/` (every run record and result file), `reviews/` (the seven independent reviews), `draws/rev3/` (the 12 saved pulse-draw archives) |
+| `sim/`, `records/` | the first study (lane ME): the original simulator and its checks, the device catalog (`records/CATALOG.json`), the tuned Tiki-Taka choice (`records/TT-CHOICE.json`) and its run records |
+| `bench/`, `BENCH.md` | the bench protocol (parts list, Arduino sketch, analysis) |
+| `energy/`, `pod/` | lane ME's energy model and pod payload scripts |
+| `PLAN.md`, `DEVIATIONS.md`, `VERDICT.md`, `LITERATURE.md`, `README-lane-ME.md` | lane ME's plan, deviations, verdict, literature notes and readme |
+| `fetch_data.py` | downloads MNIST, CIFAR-10 and enwik8 into `data/` and checks the digests the paper pins |
+| `reproduce_all.py` | regenerates the paper's numbers, tables and figures from the records and compares them byte for byte |
+| `ENVIRONMENT.md`, `SHA256SUMS`, `VERIFY.json`, `DEPOSIT-PATCHES.json`, `RELEASE-NOTES.md` | environment, digests of every file, the clean-room verification, the path edits made for this deposit, release notes |
+| `REDACTIONS.md` | exactly what was shortened or redacted for privacy in the reviews and the review-3 support files, in which files; the unredacted originals are kept by the author |
+
+Left out on purpose: the pod session records (they hold account identifiers), scratch folders, caches, and the datasets.
+
+## Licensing
+
+- Code (`*.py`, `*.sh`, `*.ino`, build scripts): **MIT** (`LICENSE`).
+- Records, the saved pulse draws, the device catalog, text (paper, plans, deviations, responses, reviews) and figures:
+  **CC BY 4.0** (`LICENSE-DATA`).
+- MNIST, CIFAR-10 and enwik8 are not distributed here; they keep their own terms.
+- The independent reviews in `paper/reviews/` are written by ChatGPT (OpenAI) and included as part of the record.
+
+## Environment
+
+See `ENVIRONMENT.md`. In short: runs used torch 2.7.1+cu126 and NumPy 2.2.6 on Python 3.10.12 (pods, RTX A4000) and on the author's
+desk (Quadro P2000 / P2200). The same seed draws a different initialisation and example order on a different GPU model
+(review-4 finding), so training runs are not re-run here; reproduction starts from the saved records and draws. The analysis and
+checks run on CPU with Python 3.10+, NumPy and torch; the figure steps need matplotlib 3.9.2.
+
+## Quick start
+
+    python fetch_data.py                 # MNIST, CIFAR-10, enwik8 into data/ (about 0.2 GB), digests checked
+    python fetch_data.py --verify-only   # check existing copies
+    python -B reproduce_all.py --sums    # checks every file against SHA256SUMS (run it before the generators, which overwrite files in place)
+    cd paper && python -B revision4/rebuild_draw_tables.py --draws draws/rev3      # prints ALL_OK
+    python -B reproduce_all.py --fast    # regenerate every number file, table and figure, byte-compared (generators overwrite in place: use a copy)
+    python -B reproduce_all.py           # also the simulators' CPU checks (about half an hour)
+
+## What rebuilds what
+
+Derived by `reproduce_all.py` in the author's clean-room run (`VERIFY.json`): 24 of 24 steps passed
+(a step passes when its command exits 0 and prints its token if one is required; the files the generators rewrote are then compared
+with the deposit's copies: 53 byte-identical, 14 identical after one stated normalisation (figure PDFs: only the creation-date stamp; figure PNGs: same decoded pixels, different compressed bytes across platforms), and 0 with a documented difference (none: version 9 of the paper corrected the one count that differed in version 8, `\RVnDev`, and `paper/revision8/check_numbers_fresh.py` fails on any stale `numbers*.tex`). Docstrings of the older scripts show the author's desk interpreter (`H:/x1000/bench/venv/Scripts/python.exe`):
+read it as `python`.
+
+| Paper item | File | Command that rebuilds it |
+|---|---|---|
+| Figure `fig_energy` | `paper/tex/figs/fig_energy.pdf, .png` | (from `paper`) `python -B make_figures.py --records records --out tex/figs` |
+| Figure `fig:main` | `paper/tex/figs/fig_main.pdf, .png` | (from `paper`) `python -B make_figures.py --records records --out tex/figs` |
+| Figure `fig_oat_cifar` | `paper/tex/figs/fig_oat_cifar.pdf, .png` | (from `paper`) `python -B make_figures.py --records records --out tex/figs` |
+| Figure `fig_oat_lm` | `paper/tex/figs/fig_oat_lm.pdf, .png` | (from `paper`) `python -B make_figures.py --records records --out tex/figs` |
+| Figure `fig:rev_main` | `paper/tex/figs/fig_rev_main.pdf, .png` | (from `paper`) `python -B revision/make_figures_rev.py --results records/revision/RESULTS-REVISION.json --out tex/figs` |
+| Figure `fig_scale` | `paper/tex/figs/fig_scale.pdf, .png` | (from `paper`) `python -B make_figures.py --records records --out tex/figs` |
+| Figure `fig:validation` | `paper/tex/figs/fig_validation.pdf, .png` | (from `paper`) `python -B make_figures.py --records records --out tex/figs` |
+| Number macros | `paper/tex/numbers.tex` | (from `paper`) `python -I analyze.py` |
+| Number macros | `paper/tex/numbers_rev.tex` | (from `paper`) `python -B revision/analyze_rev.py` |
+| Number macros | `paper/tex/numbers_rev2.tex` | (from `paper`) `python -B revision2/analyze_rev2.py` |
+| Number macros | `paper/tex/numbers_rev3.tex` | (from `paper`) `python -B revision3/analyze_rev3.py` |
+| Number macros | `paper/tex/numbers_rev4.tex` | (from `paper`) `python -B revision4/analyze_rev4.py` |
+| Results record | `paper/records/ENERGY-SYSTEM.json` | (from `paper`) `python -B energy/energy_system.py --runs records/runs/e3 --out records/ENERGY-SYSTEM.json` |
+| Results record | `paper/records/RESULTS-PAPER.json` | (from `paper`) `python -I analyze.py` |
+| Results record | `paper/records/revision/AIHWKIT-COMPARE.json` | (from `paper`) `python -B revision/compare_curves.py records/revision/AIHWKIT-CURVES.json records/revision/AIHWKIT-COMPARE.json` |
+| Results record | `paper/records/revision/D1-ANALYSIS.json` | (from `paper`) `python -B revision/analyze_d1.py` |
+| Results record | `paper/records/revision/ENERGY-REVISION.json` | (from `paper`) `python -B energy/energy_rev.py --runs records/revision/runs/e3 --out records/revision/ENERGY-REVISION.json` |
+| Results record | `paper/records/revision/RESULTS-REVISION.json` | (from `paper`) `python -B revision/analyze_rev.py` |
+| Results record | `paper/records/revision2/RESULTS-REV2.json` | (from `paper`) `python -B revision2/analyze_rev2.py` |
+| Results record | `paper/records/revision3/RESULTS-REV3.json` | (from `paper`) `python -B revision3/analyze_rev3.py` |
+| Results record | `paper/records/revision4/RESULTS-REV4.json` | (from `paper`) `python -B revision4/analyze_rev4.py` |
+| Table `tab:catalog` (archived snapshot) | `paper/tex/tables/catalog.tex` | (from `paper`) `python -I analyze.py` |
+| Table `tab:checks` (in the paper) | `paper/tex/tables/checks.tex` | (from `paper`) `python -I analyze.py` |
+| Table `tab:e1` (in the paper) | `paper/tex/tables/e1.tex` | (from `paper`) `python -I analyze.py` |
+| Table `tab:e1b` (in the paper) | `paper/tex/tables/e1b.tex` | (from `paper`) `python -B revision/analyze_rev.py` |
+| Table `tab:e2` (archived snapshot) | `paper/tex/tables/e2.tex` | (from `paper`) `python -I analyze.py` |
+| Table `tab:energy` (archived snapshot) | `paper/tex/tables/energy.tex` | (from `paper`) `python -I analyze.py` |
+| Table `tab:laneme` (in the paper) | `paper/tex/tables/laneme.tex` | (from `paper`) `python -I analyze.py` |
+| Table `tab:main` (archived snapshot) | `paper/tex/tables/main.tex` | (from `paper`) `python -I analyze.py` |
+| Table `tab:pairs` (archived snapshot) | `paper/tex/tables/pairs.tex` | (from `paper`) `python -I analyze.py` |
+| Table `tab:rev_catalog` (in the paper) | `paper/tex/tables/rev2_catalog.tex` | (from `paper`) `python -B revision2/analyze_rev2.py` |
+| Table `tab:rev2_fid` (archived snapshot) | `paper/tex/tables/rev2_fid.tex` | (from `paper`) `python -B revision2/analyze_rev2.py` |
+| Table `tab:rev2_probe` (archived snapshot) | `paper/tex/tables/rev2_probe.tex` | (from `paper`) `python -B revision2/analyze_rev2.py` |
+| Table `tab:rev_selection` (in the paper) | `paper/tex/tables/rev2_selection.tex` | (from `paper`) `python -B revision2/analyze_rev2.py` |
+| Table `tab:rev3_dep` (archived snapshot) | `paper/tex/tables/rev3_dep.tex` | (from `paper`) `python -B revision3/analyze_rev3.py` |
+| Table `tab:rev3_fid` (in the paper) | `paper/tex/tables/rev3_fid.tex` | (from `paper`) `python -B revision3/analyze_rev3.py` |
+| Table `tab:rev3_probe` (archived snapshot) | `paper/tex/tables/rev3_probe.tex` | (from `paper`) `python -B revision3/analyze_rev3.py` |
+| Table `tab:rev4_a2m` (in the paper) | `paper/tex/tables/rev4_a2m.tex` | (from `paper`) `python -B revision4/analyze_rev4.py` |
+| Table `tab:rev3_dep` (in the paper) | `paper/tex/tables/rev4_dep.tex` | (from `paper`) `python -B revision4/analyze_rev4.py` |
+| Table `tab:rev3_probe` (in the paper) | `paper/tex/tables/rev4_probe_seq.tex` | (from `paper`) `python -B revision4/analyze_rev4.py` |
+| Table `tab:rev4_probe_sur` (in the paper) | `paper/tex/tables/rev4_probe_sur.tex` | (from `paper`) `python -B revision4/analyze_rev4.py` |
+| Table `tab:rev_d1` (in the paper) | `paper/tex/tables/rev_d1.tex` | (from `paper`) `python -B revision/analyze_rev.py` |
+| Table `tab:rev_energy` (in the paper) | `paper/tex/tables/rev_energy.tex` | (from `paper`) `python -B revision/analyze_rev.py` |
+| Table `tab:rev_vs_adam` (in the paper) | `paper/tex/tables/rev_main_vs_adam.tex` | (from `paper`) `python -B revision/analyze_rev.py` |
+| Table `tab:rev_vs_fp` (in the paper) | `paper/tex/tables/rev_main_vs_fp.tex` | (from `paper`) `python -B revision/analyze_rev.py` |
+| Table `tab:rev_spec` (archived snapshot) | `paper/tex/tables/rev_spec.tex` | (from `paper`) `python -B revision/analyze_rev.py` |
+| Table `tab:rev_spec` (in the paper) | `paper/tex/tables/rev_spec_p.tex` | kept as written by the revision edit scripts (`paper/revision*/edit_*.py`); not regenerated |
+| Table `tab:rev_width` (in the paper) | `paper/tex/tables/rev_width.tex` | (from `paper`) `python -B revision/analyze_rev.py` |
+| Table `tab:scale` (archived snapshot) | `paper/tex/tables/scale.tex` | (from `paper`) `python -I analyze.py` |
+| Table `tab:spec` (archived snapshot) | `paper/tex/tables/spec.tex` | (from `paper`) `python -I analyze.py` |
+| Table `tab:specrel` (archived snapshot) | `paper/tex/tables/spec_rel.tex` | (from `paper`) `python -I analyze.py` |
+| Table `tab:catalog` (in the paper) | `paper/tex/tables/v1s_catalog.tex` | (from `paper`) `python -B revision2/analyze_rev2.py` |
+| Table `tab:e2` (in the paper) | `paper/tex/tables/v1s_e2.tex` | (from `paper`) `python -B revision2/analyze_rev2.py` |
+| Table `tab:energy` (in the paper) | `paper/tex/tables/v1s_energy.tex` | (from `paper`) `python -B revision2/analyze_rev2.py` |
+| Table `tab:main` (in the paper) | `paper/tex/tables/v1s_main.tex` | (from `paper`) `python -B revision2/analyze_rev2.py` |
+| Table `tab:pairs` (in the paper) | `paper/tex/tables/v1s_pairs.tex` | (from `paper`) `python -B revision2/analyze_rev2.py` |
+| Table `tab:scale` (in the paper) | `paper/tex/tables/v1s_scale.tex` | (from `paper`) `python -B revision2/analyze_rev2.py` |
+| Table `tab:spec` (in the paper) | `paper/tex/tables/v1s_spec.tex` | (from `paper`) `python -B revision2/analyze_rev2.py` |
+| Table `tab:specrel` (in the paper) | `paper/tex/tables/v1s_spec_rel.tex` | (from `paper`) `python -B revision2/analyze_rev2.py` |
+| Table `tab:v3s_rev2_probe` (in the paper) | `paper/tex/tables/v3s_rev2_probe.tex` | (from `paper`) `python -B revision3/analyze_rev3.py` |
+| Tables `rev4_probe_sur`, `rev4_probe_seq`, `rev4_dep` (probe statistics from the saved draws) | `paper/tex/tables/rev4_*.tex` | (from `paper`) `python -B revision4/rebuild_draw_tables.py --draws draws/rev3`  (prints `ALL_OK`) |
+
+## How to verify
+
+1. `SHA256SUMS` lists every file; the 12 draw files' digests also appear in `paper/PUBLISHING.md` and in each probe record.
+2. `python -B reproduce_all.py --fast` (above) and `cd paper && python -B revision4/rebuild_draw_tables.py --draws draws/rev3`
+   (which also has `--selftest`: it shows the check failing on a perturbed draw and on a wrong hash).
+3. `python fetch_data.py --selftest` shows the data check failing on corrupted copies.
+4. `VERIFY.json` holds the author's clean-room result, the secret and privacy scan, and the size check.
+
+## Not re-run by `reproduce_all.py` (and why)
+
+- Every training run: re-training is out of scope, and a rerun on another GPU model is a different realisation (`ENVIRONMENT.md`).
+- `paper/cite/cite_check.py`: it re-verifies every reference against Crossref, the arXiv API and live URLs, so it needs the network; its
+  result is the deposited `paper/records/CITE-CHECK.json`.
+- The LaTeX/pandoc builds (`paper/pod/build_rev*.sh`, `paper/pod/build_payload_rev*.py`): they need tectonic and pandoc; the built PDFs
+  and HTML are in `paper/build/`.
+- `paper/revision*/verify_findings*.py` and `check_build_v*.py`: the review-time verification scripts as they ran on the author's desk
+  (several read the author's git history or desk build trees); kept as record. The pod launch wrappers that need the author's cloud
+  account and funds ledger are left out of the deposit.
+- `paper/reviews/review-3-support/*` are the reviewer's own check scripts and outputs for review 3; local paths in them are shortened (`REDACTIONS.md`).
+
+## Citation
+
+See `CITATION.cff`. When a DOI exists (Zenodo mints one for each release; cite the concept DOI), it is added to the paper's
+"Code and data availability" section in the next version.
+
+3337 files, 122.9 MB (excluding `SHA256SUMS`).

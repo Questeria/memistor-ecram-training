@@ -1,0 +1,136 @@
+{
+ "algo": "cttv2",
+ "alpha": null,
+ "arm": "device",
+ "budget": {
+  "batch": 128,
+  "epochs": 10
+ },
+ "device": "NVIDIA RTX A4000",
+ "diverged": false,
+ "hist": [
+  {
+   "epoch": 1,
+   "train_loss": 0.38323640267609993
+  },
+  {
+   "epoch": 2,
+   "train_loss": 0.18658594873957424
+  },
+  {
+   "epoch": 3,
+   "train_loss": 0.16767276861728767
+  },
+  {
+   "epoch": 4,
+   "train_loss": 0.1291718916459517
+  },
+  {
+   "epoch": 5,
+   "train_loss": 0.12019227212403481
+  },
+  {
+   "epoch": 6,
+   "train_loss": 0.10467176281766735
+  },
+  {
+   "epoch": 7,
+   "train_loss": 0.103921805784141
+  },
+  {
+   "epoch": 8,
+   "train_loss": 0.10541683810574191
+  },
+  {
+   "epoch": 9,
+   "train_loss": 0.09022179628029847
+  },
+  {
+   "epoch": 10,
+   "train_loss": 0.08758693419414244
+  }
+ ],
+ "host": "4954712405bc",
+ "layers": [
+  {
+   "mean_pd": 0.006297123960125974,
+   "mean_px": 0.06726044341400787,
+   "pulses": 1330921088.0,
+   "pulses_per_weight_per_row": 0.012076164395500332,
+   "rows": 549120,
+   "shape": [
+    256,
+    784
+   ]
+  },
+  {
+   "mean_pd": 0.004110740892814867,
+   "mean_px": 0.188746739100743,
+   "pulses": 373215392.0,
+   "pulses_per_weight_per_row": 0.020741604536007614,
+   "rows": 549120,
+   "shape": [
+    128,
+    256
+   ]
+  },
+  {
+   "mean_pd": 0.006330960058110021,
+   "mean_px": 0.2937037327906469,
+   "pulses": 37562780.0,
+   "pulses_per_weight_per_row": 0.05344172835627914,
+   "rows": 549120,
+   "shape": [
+    10,
+    128
+   ]
+  }
+ ],
+ "lr": 0.003,
+ "metric": {
+  "acc": 0.9688,
+  "loss": 0.11332161254882812,
+  "n_eval": 5000,
+  "split": "val"
+ },
+ "results_are": "DEV",
+ "samples": 550000,
+ "scale": 1.0,
+ "schema": "altone.x1000.me.run.v1",
+ "schema_paper": "altone.x1000.me-paper.run.v1",
+ "seconds": 59.16,
+ "seed": 0,
+ "spec": {
+  "asym": 0.1,
+  "asym_d2d": 0.0,
+  "bound_d2d": 0.0,
+  "c2c": 0.5,
+  "d2d": 0.0,
+  "gamma_d2d": 0.0,
+  "gamma_dn": 0.3,
+  "gamma_up": 0.3,
+  "ideal_float": false,
+  "n_states": 128,
+  "name": "mid_ttsel",
+  "ref_err": 0.02,
+  "tau_steps": "inf"
+ },
+ "tag": "e2__mnist_w128__mid_ttsel__cttv2__lr0.003__s0__g2",
+ "task": "mnist",
+ "torch": "2.7.1+cu126",
+ "ucfg": {
+  "BL": 31,
+  "agad_beta": 0.5,
+  "algo": "cttv2",
+  "lr": 0.003,
+  "tt_cols": 0,
+  "tt_gamma": 0.0,
+  "tt_lambda": 0.1,
+  "tt_lr_ratio": 10.0,
+  "tt_max_pulses": 31,
+  "tt_period": 16,
+  "tt_reset": false,
+  "tt_rho": 0.2
+ },
+ "width": 128
+}

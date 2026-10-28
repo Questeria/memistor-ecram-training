@@ -1,0 +1,50 @@
+{
+ "candidates": {
+  "sgd": [
+   {
+    "asym": 0.1,
+    "c2c": 1.0,
+    "gamma_dn": 0.1,
+    "gamma_up": 0.1,
+    "n_states": 256,
+    "name": "minspec",
+    "ref_err": 0.0,
+    "tau_steps": 10000.0
+   },
+   {
+    "asym": 0.1,
+    "c2c": 1.0,
+    "gamma_dn": 0.0,
+    "gamma_up": 0.0,
+    "n_states": 256,
+    "name": "minspec",
+    "ref_err": 0.0,
+    "tau_steps": 10000.0
+   }
+  ],
+  "ttv2": [
+   {
+    "asym": 0.1,
+    "c2c": 1.0,
+    "gamma_dn": 1.0,
+    "gamma_up": 1.0,
+    "n_states": 64,
+    "name": "minspec",
+    "ref_err": 0.01,
+    "tau_steps": 10000.0
+   }
+  ]
+ },
+ "log": [
+  "sgd: round 0 = per-axis join at states 256",
+  "ttv2: round 0 = per-axis join at states 64",
+  "sgd: round 0 fails (gap 2.737); round 1: gamma 0.1 -> 0",
+  "ttv2: round 0 PASSES gap 1.920",
+  "sgd: round 1 PASSES gap 1.510",
+  "ttv2: round 0 PASSES gap 1.920",
+  "sgd: round 1 PASSES gap 1.510",
+  "ttv2: round 0 PASSES gap 1.920",
+  "sgd: round 1 PASSES gap 1.510",
+  "ttv2: round 0 PASSES gap 1.920"
+ ]
+}

@@ -1,0 +1,741 @@
+{
+ "F1_paired_floor": {
+  "evidence": {
+   "floor_line_as_implemented": [
+    "s[\"vs_slot_noise_floor\"] = math.sqrt(float((s[\"var\"].sum() + ref[\"var\"].sum()) / R)) / rn if rn else None"
+   ],
+   "illustration_paired": {
+    "excess_independent": 0.0,
+    "excess_paired": 0.20000000000000018,
+    "floor_independent": 0.36514837167011077,
+    "floor_paired": 2.1499376424746292e-17,
+    "rel_mean_err": 0.20000000000000018
+   },
+   "illustration_shuffled_pairing": {
+    "excess_independent": 0.0,
+    "excess_paired": 0.0,
+    "floor_independent": 0.36514837167011077,
+    "floor_paired": 0.5163977794943223,
+    "rel_mean_err": 0.20000000000000018
+   },
+   "lm_output_2250": {
+    "draws": 6,
+    "excess_reported": 0.0,
+    "floor_independent": 0.439150697593899,
+    "layer": 9,
+    "passes": true,
+    "rel_mean_err": 0.12801299427663068,
+    "task": "lm",
+    "update": 2250
+   },
+   "n_probes": 12,
+   "n_seq_excess_zero": 12,
+   "n_seq_rel_err_over_0p05": 7,
+   "per_cell_means_and_variances_discarded": true,
+   "probes": [
+    {
+     "draws": 16,
+     "excess_reported": 0.0,
+     "floor_independent": 0.1573614903785845,
+     "layer": 3,
+     "passes": true,
+     "rel_mean_err": 0.1477917269232145,
+     "task": "cifar",
+     "update": 600
+    },
+    {
+     "draws": 16,
+     "excess_reported": 0.0,
+     "floor_independent": 0.0670683368596148,
+     "layer": 4,
+     "passes": true,
+     "rel_mean_err": 0.06550251033376678,
+     "task": "cifar",
+     "update": 600
+    },
+    {
+     "draws": 16,
+     "excess_reported": 0.0,
+     "floor_independent": 0.18023947316716135,
+     "layer": 3,
+     "passes": true,
+     "rel_mean_err": 0.1686582433496109,
+     "task": "cifar",
+     "update": 2000
+    },
+    {
+     "draws": 16,
+     "excess_reported": 0.0,
+     "floor_independent": 0.08912468833862791,
+     "layer": 4,
+     "passes": true,
+     "rel_mean_err": 0.0859628522432454,
+     "task": "cifar",
+     "update": 2000
+    },
+    {
+     "draws": 6,
+     "excess_reported": 0.0,
+     "floor_independent": 0.2217143247686746,
+     "layer": 0,
+     "passes": true,
+     "rel_mean_err": 0.06659556382123467,
+     "task": "lm",
+     "update": 750
+    },
+    {
+     "draws": 6,
+     "excess_reported": 0.0,
+     "floor_independent": 0.3885480165445341,
+     "layer": 9,
+     "passes": true,
+     "rel_mean_err": 0.11470972387345763,
+     "task": "lm",
+     "update": 750
+    },
+    {
+     "draws": 6,
+     "excess_reported": 0.0,
+     "floor_independent": 0.1607762057980217,
+     "layer": 0,
+     "passes": true,
+     "rel_mean_err": 0.04608947776150367,
+     "task": "lm",
+     "update": 2250
+    },
+    {
+     "draws": 6,
+     "excess_reported": 0.0,
+     "floor_independent": 0.439150697593899,
+     "layer": 9,
+     "passes": true,
+     "rel_mean_err": 0.12801299427663068,
+     "task": "lm",
+     "update": 2250
+    },
+    {
+     "draws": 16,
+     "excess_reported": 0.0,
+     "floor_independent": 0.11807613966744887,
+     "layer": 0,
+     "passes": true,
+     "rel_mean_err": 0.038207346623642745,
+     "task": "mnist",
+     "update": 1000
+    },
+    {
+     "draws": 16,
+     "excess_reported": 0.0,
+     "floor_independent": 0.07609014909269542,
+     "layer": 2,
+     "passes": true,
+     "rel_mean_err": 0.02943182121774885,
+     "task": "mnist",
+     "update": 1000
+    },
+    {
+     "draws": 16,
+     "excess_reported": 0.0,
+     "floor_independent": 0.11190397971194177,
+     "layer": 0,
+     "passes": true,
+     "rel_mean_err": 0.03598762151204207,
+     "task": "mnist",
+     "update": 3500
+    },
+    {
+     "draws": 16,
+     "excess_reported": 0.0,
+     "floor_independent": 0.06106622416849459,
+     "layer": 2,
+     "passes": true,
+     "rel_mean_err": 0.023830716084294615,
+     "task": "mnist",
+     "update": 3500
+    }
+   ],
+   "seq_and_slot_share_line_firings": true,
+   "seq_noise_added_once_per_sample": true,
+   "surrogate_draws_its_own_counts": true
+  },
+  "note": "The floor of run_rev2.py line 121 sums the two methods' variances as if their draws were independent, but seq replays slot's line firings (keep_fire/fire). Every seq excess is 0, while the raw relative mean difference exceeds the 0.05 line on several probes, so whether seq meets its line is undetermined from the summaries (the paired cross-moments were not saved). For the surrogate the independent floor is the right one: its Poisson counts are drawn separately from the firings. seq adds its write noise once per sample at the pre-sample state and clips per sample; the paper's text does not say so.",
+  "verdict": "CONFIRMED"
+ },
+ "F2_labels_and_ranking": {
+  "evidence": {
+   "all_mean_order_reversals": [
+    {
+     "pair": [
+      "mnist__ecram_mo_kim2019__agad",
+      "mnist__protonic_onen2022__agad"
+     ],
+     "registered": false,
+     "seq_sep": 0.11666666666666492,
+     "sur_sep": -0.016666666666668495
+    },
+    {
+     "pair": [
+      "cifar__ecram_li_tang2018__cttv2",
+      "cifar__protonic_onen2022__cttv2"
+     ],
+     "registered": false,
+     "seq_sep": 0.84,
+     "sur_sep": -0.2899999999999977
+    }
+   ],
+   "cells": {
+    "cifar__ecram_li_tang2018__cttv2": {
+     "dgap": {
+      "ci95": [
+       -3.2592277520387958,
+       4.292561085372126
+      ],
+      "mean": 0.5166666666666653
+     },
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "seq": {
+      "ci95": [
+       -6.442315717206796,
+       5.202315717206792
+      ],
+      "label": "UNRESOLVED",
+      "mean": -0.620000000000002
+     },
+     "sur": {
+      "ci95": [
+       -3.893088143426792,
+       1.6197548100934573
+      ],
+      "label": "PASS",
+      "mean": -1.1366666666666674
+     },
+     "task": "cifar"
+    },
+    "cifar__ecram_mo_kim2019__agad": {
+     "dgap": {
+      "ci95": [
+       -1.985613916661625,
+       1.158947249994953
+      ],
+      "mean": -0.41333333333333594
+     },
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "seq": {
+      "ci95": [
+       -3.7637180340282184,
+       0.1303847006948784
+      ],
+      "label": "PASS",
+      "mean": -1.81666666666667
+     },
+     "sur": {
+      "ci95": [
+       -3.2178075192646434,
+       0.41114085259797495
+      ],
+      "label": "PASS",
+      "mean": -1.4033333333333342
+     },
+     "task": "cifar"
+    },
+    "cifar__protonic_onen2022__cttv2": {
+     "dgap": {
+      "ci95": [
+       -2.863591607193864,
+       1.6369249405271993
+      ],
+      "mean": -0.6133333333333324
+     },
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "seq": {
+      "ci95": [
+       -3.9432200044767045,
+       1.0232200044767008
+      ],
+      "label": "PASS",
+      "mean": -1.460000000000002
+     },
+     "sur": {
+      "ci95": [
+       -3.3311704920164558,
+       1.6378371586831162
+      ],
+      "label": "PASS",
+      "mean": -0.8466666666666697
+     },
+     "task": "cifar"
+    },
+    "mnist__ecram_li_tang2018__agad": {
+     "dgap": {
+      "ci95": [
+       -0.6870123422797445,
+       0.36034567561307673
+      ],
+      "mean": -0.16333333333333386
+     },
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "seq": {
+      "ci95": [
+       0.07668813128000856,
+       0.8966452020533211
+      ],
+      "label": "PASS",
+      "mean": 0.48666666666666486
+     },
+     "sur": {
+      "ci95": [
+       -0.2570386503525246,
+       1.557038650352522
+      ],
+      "label": "PASS",
+      "mean": 0.6499999999999987
+     },
+     "task": "mnist"
+    },
+    "mnist__ecram_li_tang2018__cttv2": {
+     "dgap": {
+      "ci95": [
+       -0.9544336114211881,
+       1.0877669447545215
+      ],
+      "mean": 0.06666666666666672
+     },
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "seq": {
+      "ci95": [
+       -1.6960455938072982,
+       3.1827122604739717
+      ],
+      "label": "UNRESOLVED",
+      "mean": 0.7433333333333366
+     },
+     "sur": {
+      "ci95": [
+       -0.7713707995766872,
+       2.124704132910027
+      ],
+      "label": "UNRESOLVED",
+      "mean": 0.6766666666666699
+     },
+     "task": "mnist"
+    },
+    "mnist__ecram_li_tang2018__sgd": {
+     "dgap": {
+      "ci95": [
+       -0.7278536089309284,
+       0.5411869422642521
+      ],
+      "mean": -0.09333333333333815
+     },
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "seq": {
+      "ci95": [
+       1.0285602495893134,
+       12.764773083744018
+      ],
+      "label": "UNRESOLVED",
+      "mean": 6.896666666666666
+     },
+     "sur": {
+      "ci95": [
+       0.5200277444799033,
+       13.459972255520107
+      ],
+      "label": "UNRESOLVED",
+      "mean": 6.990000000000005
+     },
+     "task": "mnist"
+    },
+    "mnist__ecram_mo_kim2019__agad": {
+     "dgap": {
+      "ci95": [
+       -0.07313000000000838,
+       0.29979666666667226
+      ],
+      "mean": 0.11333333333333195
+     },
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "seq": {
+      "ci95": [
+       0.7035432454144531,
+       1.0697900879188773
+      ],
+      "label": "PASS",
+      "mean": 0.8866666666666653
+     },
+     "sur": {
+      "ci95": [
+       0.4821954639693783,
+       1.0644712026972885
+      ],
+      "label": "PASS",
+      "mean": 0.7733333333333333
+     },
+     "task": "mnist"
+    },
+    "mnist__ecram_mo_kim2019__cttv2": {
+     "dgap": {
+      "ci95": [
+       -0.22963648091518354,
+       0.1563031475818509
+      ],
+      "mean": -0.03666666666666633
+     },
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "seq": {
+      "ci95": [
+       0.43341577680906795,
+       1.6599175565242645
+      ],
+      "label": "PASS",
+      "mean": 1.0466666666666662
+     },
+     "sur": {
+      "ci95": [
+       0.44493414065595827,
+       1.7217325260107064
+      ],
+      "label": "PASS",
+      "mean": 1.0833333333333324
+     },
+     "task": "mnist"
+    },
+    "mnist__ecram_mo_kim2019__sgd": {
+     "dgap": {
+      "ci95": [
+       -4.836032790450552,
+       1.996032790450544
+      ],
+      "mean": -1.4200000000000037
+     },
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "seq": {
+      "ci95": [
+       1.2653212394155897,
+       24.08801209391774
+      ],
+      "label": "UNRESOLVED",
+      "mean": 12.676666666666664
+     },
+     "sur": {
+      "ci95": [
+       0.04035367941153112,
+       28.152979653921808
+      ],
+      "label": "UNRESOLVED",
+      "mean": 14.09666666666667
+     },
+     "task": "mnist"
+    },
+    "mnist__protonic_onen2022__agad": {
+     "dgap": {
+      "ci95": [
+       -0.3876484811610061,
+       0.34764848116100305
+      ],
+      "mean": -0.0200000000000015
+     },
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "seq": {
+      "ci95": [
+       0.1732414839875881,
+       1.3667585160124127
+      ],
+      "label": "PASS",
+      "mean": 0.7700000000000004
+     },
+     "sur": {
+      "ci95": [
+       0.15127862754301513,
+       1.4287213724569885
+      ],
+      "label": "PASS",
+      "mean": 0.7900000000000018
+     },
+     "task": "mnist"
+    },
+    "mnist__protonic_onen2022__cttv2": {
+     "dgap": {
+      "ci95": [
+       -0.43671534354954666,
+       0.27004867688287615
+      ],
+      "mean": -0.08333333333333526
+     },
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "seq": {
+      "ci95": [
+       -0.7102117500517852,
+       1.1302117500517834
+      ],
+      "label": "PASS",
+      "mean": 0.20999999999999908
+     },
+     "sur": {
+      "ci95": [
+       -0.2978834861819647,
+       0.8845501528486334
+      ],
+      "label": "PASS",
+      "mean": 0.29333333333333433
+     },
+     "task": "mnist"
+    },
+    "mnist__protonic_onen2022__sgd": {
+     "dgap": {
+      "ci95": [
+       -0.32797666666667136,
+       0.5613100000000083
+      ],
+      "mean": 0.11666666666666847
+     },
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "seq": {
+      "ci95": [
+       0.010218526062667266,
+       9.376448140604001
+      ],
+      "label": "UNRESOLVED",
+      "mean": 4.693333333333334
+     },
+     "sur": {
+      "ci95": [
+       0.1519401243617473,
+       9.001393208971585
+      ],
+      "label": "UNRESOLVED",
+      "mean": 4.576666666666666
+     },
+     "task": "mnist"
+    }
+   },
+   "label_transitions_same_three_seeds": {
+    "cifar__ecram_li_tang2018__cttv2": [
+     "PASS",
+     "UNRESOLVED"
+    ]
+   },
+   "n_registered_reversals": 0,
+   "text_claims_no_swap": true,
+   "text_claims_preservation": true,
+   "text_either_update": true,
+   "text_valid_reference": true,
+   "tt_family_max_abs_dgap": 0.6133333333333324
+  },
+  "note": "Same seeds 0-2 on both arms: CIFAR Li-ECRAM c-TTv2 PASS (surrogate) -> UNRESOLVED (seq); two mean-order reversals below the registered 1 pp separation; MNIST MO-ECRAM SGD is UNRESOLVED on both arms at n = 3 (its n = 5 main-table label is FAIL).",
+  "verdict": "CONFIRMED"
+ },
+ "F3_sub_margin_growth": {
+  "evidence": {
+   "arms": {
+    "ecram_li_tang2018__cttv2": {
+     "paired": {
+      "D": -0.34199999999999786,
+      "ci90": [
+       -1.7895228091384234,
+       1.1055228091384277
+      ],
+      "verdict": "EQUIVALENT"
+     },
+     "welch": {
+      "D": -0.34199999999999786,
+      "ci90": [
+       -1.3435067173104713,
+       0.6595067173104756
+      ],
+      "verdict": "EQUIVALENT"
+     }
+    },
+    "ecram_li_tang2018__ttv2": {
+     "paired": {
+      "D": 1.910000000000003,
+      "ci90": [
+       -1.5288175274183977,
+       5.3488175274184036
+      ],
+      "verdict": "INCONCLUSIVE"
+     },
+     "welch": {
+      "D": 1.9100000000000033,
+      "ci90": [
+       -0.3727019293043896,
+       4.192701929304397
+      ],
+      "verdict": "INCONCLUSIVE"
+     }
+    },
+    "protonic_onen2022__cttv2": {
+     "paired": {
+      "D": 1.7620000000000016,
+      "ci90": [
+       0.14615496363791003,
+       3.377845036362093
+      ],
+      "verdict": "GROWS"
+     },
+     "welch": {
+      "D": 1.7620000000000013,
+      "ci90": [
+       -0.021101612700745287,
+       3.5451016127007478
+      ],
+      "verdict": "INCONCLUSIVE"
+     }
+    },
+    "protonic_onen2022__ttv2": {
+     "paired": {
+      "D": -0.9539999999999926,
+      "ci90": [
+       -3.3647217026741125,
+       1.4567217026741273
+      ],
+      "verdict": "NO EVIDENCE OF GROWTH BEYOND THE MARGIN"
+     },
+     "welch": {
+      "D": -0.9539999999999926,
+      "ci90": [
+       -2.5276580213629583,
+       0.619658021362973
+      ],
+      "verdict": "NO EVIDENCE OF GROWTH BEYOND THE MARGIN"
+     }
+    }
+   },
+   "files_with_sub_margin": [
+    "sec_abstract.tex",
+    "sec_discussion.tex",
+    "sec_roadmap.tex",
+    "sec_scale.tex"
+   ],
+   "paired_upper_at_or_above_margin": [
+    "ecram_li_tang2018__ttv2",
+    "protonic_onen2022__cttv2"
+   ],
+   "text_says_below_or_at_margin": true
+  },
+  "note": "An interval containing 2 pp leaves the size of the growth unresolved against the margin; growth beyond 2 pp is not excluded for protonic c-TTv2 (paired) and Li-ECRAM TTv2 (paired and Welch).",
+  "verdict": "CONFIRMED"
+ },
+ "F4_correlation_statistic": {
+  "evidence": {
+   "draws": 200000,
+   "exact_pair_correlation": 0.3333333333333333,
+   "exact_signed_mean_balanced": -0.0026246719160104987,
+   "offcorr_source": [
+    "off = (s * s).sum() - (res * res).sum()",
+    "v = (res * res).mean()",
+    "return float(off / pairs / v)"
+   ],
+   "simulated_mean_abs_pearson": 0.3333496516647488,
+   "simulated_offcorr_all_same_sign": 0.33335083542501037,
+   "simulated_offcorr_balanced": -0.0025964843248460936,
+   "simulated_offcorr_heterogeneous_scale": 0.01073842030543745,
+   "simulated_rms_pearson": 0.33335775539920925
+  },
+  "note": "The statistic is a pooled, signed, normalised covariance: balanced signs cancel it to -1/381 although every pair has |correlation| 1/3, and unequal cell variances shrink it. It cannot show that dependence is weak. It was descriptive (no pass line), so the A1 pass count does not depend on it.",
+  "verdict": "CONFIRMED"
+ },
+ "F5_history_and_directions": {
+  "evidence": {
+   "app_revision_mentions_review_2": false,
+   "app_revision_says_version2_this_paper": true,
+   "availability_lists": {
+    "PLAN-REVISION-2.md": false,
+    "RESPONSE-TO-REVIEW-2.md": false,
+    "analyze_rev2.py": false,
+    "pulse_seq_rev2.py": false,
+    "run_rev2.py": false
+   },
+   "build_rev2_exists": true,
+   "make_abstract_exists": true,
+   "make_arxiv_source_exists": false,
+   "publishing_attributes_abstract_to_analyze_rev2": true,
+   "publishing_names_make_arxiv_source": true
+  },
+  "note": "Documentation only; the delivered archive is not shown broken.",
+  "verdict": "CONFIRMED"
+ },
+ "minor": {
+  "editorial": {
+   "note": "Length (37 pages of which much is superseded history), dense Table 9 and rotated labels of Figure 2: presentation suggestions, not findings of error.",
+   "verdict": "NOTED (no error)"
+  },
+  "loose_main_arxiv_bbl": {
+   "evidence": {
+    "loose_bbl_exists": true
+   },
+   "note": "The loose tex/main-arxiv.bbl is older than the one inside the archive; the archive is the deliverable.",
+   "verdict": "CONFIRMED (minor)"
+  },
+  "mo_sgd_either_update": {
+   "note": "'far over the line under either update' mixes the n = 5 FAIL with the n = 3 cells, which are UNRESOLVED on both arms.",
+   "verdict": "CONFIRMED (part of finding 2)"
+  },
+  "reset_limitations_bullet": {
+   "evidence": {
+    "bullet_names_which_mean": false
+   },
+   "note": "The limitations bullet quotes one mean residual without saying it is the macro-average over runs.",
+   "verdict": "CONFIRMED (minor)"
+  }
+ },
+ "review": "reviews/REVIEW-3-chatgpt-20261027-full.md",
+ "schema": "verify-findings-3/v1",
+ "self_checks": {
+  "f1_paired_floor_keeps_excess": true,
+  "f1_shuffled_pairing_floor_not_zero": true,
+  "f4_abs_does_not_cancel": true,
+  "f4_balanced_cancels": true,
+  "f4_same_sign_shows_full_correlation": true
+ },
+ "self_checks_all_ok": true,
+ "support": "reviews/review-3-support/ (copies of the reviewer's files, SHA256SUMS.txt)"
+}

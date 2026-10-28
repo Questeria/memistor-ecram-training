@@ -1,0 +1,70 @@
+\section{Discussion}\label{sec:discussion}
+\paragraph{What the simulations say.}
+\begin{itemize}
+\item \textbf{The two best published electrochemical specifications can train.} Both the Li-ECRAM fit and the protonic device
+      reach the exact-update baseline within our gap lines, or within the statistical resolution of five seeds, on all three
+      tasks, provided a Tiki-Taka-family algorithm is used.
+\item \textbf{Plain SGD never does,} on any electrochemical device we tried.
+\item \textbf{Width is not the obstacle} we feared. Once each arm has its own learning rate, the gap does not grow with width
+      over the factor of four we could afford.
+\item \textbf{Two device properties decide.} The decisive specifications are not the number of levels, which TTv2 needs only in
+      the hundreds, but:
+      \begin{itemize}
+      \item an accurately referenced symmetry point, or an algorithm that does not need one;
+      \item a saturating (asymmetric) response that gives the gradient accumulator its decay.
+      \end{itemize}
+      Retention of several training lengths and write noise of up to one or two steps are tolerated.
+\item \textbf{The energy case rests on the periphery,} not on the device. Femtojoule pulses make the update almost free. The
+      forward and backward reads, priced at a measured analog-AI chip's efficiency, set the system at about
+      \REnRatioMin$\times$ an H100's energy per weight-row: useful, but not the thousandfold figures that device-only accounting
+      suggests.
+\end{itemize}
+
+\paragraph{Widrow's memistor.} Taken at its inventor's description (thousands of near-linear levels), the memistor would train
+as well as modern ECRAM on our tasks. The obstacles of 1960 were the missing multilayer rule, wet macroscopic cells and an
+energy per level of tens of microjoules. Accuracy was not the obstacle. The idea survived; the implementation had to shrink by
+about \ROrdersWidrowVsProtonic{} orders of magnitude in energy per update.
+
+\subsection{Limitations}\label{sec:limits}
+\begin{itemize}
+\item \textbf{Simulation only.} Every device is a parametric model.
+      \begin{itemize}
+      \item \RNCatalogEstimated{} of the \RNCatalog{} catalog entries rest partly or wholly on estimates.
+      \item The protonic device's write noise and spreads are estimates. A 2026 measurement on BEOL-compatible protonic
+            ECRAM~\cite{xu2026} reports 3\% cycle-to-cycle and 21\% device-to-device variability. These lie inside our tolerated
+            region, but we did not refit the catalog to them.
+      \item The model has no state-dependent noise beyond the soft bounds, no history effects or relaxation transients
+            beyond a single drift time constant, no temperature, and no endurance limit.
+      \end{itemize}
+\item \textbf{Ideal reads.} We isolate the update. Read noise, IR drop, ADC/DAC quantisation and output bounds would add to
+      every gap; our validation omits them and still matches the published numbers. Real arrays also have line resistance and
+      sneak paths. Three-terminal devices avoid the latter but need access transistors.
+\item \textbf{Small models and short budgets.}
+      \begin{itemize}
+      \item The networks have $10^5$ to $10^6$ weights.
+      \item CIFAR uses a 10{,}000-image subset whose seed noise (\REThreeCifarFpSd\,pp) limits the resolution at the 2\,pp
+            line.
+      \item The LM is a two-layer byte model.
+      \item The width study spans only a factor of four.
+      \end{itemize}
+      Larger models are where the remaining questions are. Simulating every pulse becomes expensive; this is also the
+      experience reported by~\cite{rasch2024}.
+\item \textbf{The baseline is SGD.} The FP baseline and every analog arm are plain-SGD-family learners. Against Adam the best
+      analog LM is still about as far behind as FP-SGD is.
+\item \textbf{Mini-batches.} Our update applies a mini-batch's summed pulses as interleaved, rather than sample by sample. The
+      validation shows that batch 16 reproduces published batch-1 results, but strongly asymmetric devices degrade at larger
+      batches.
+\item \textbf{Algorithm details.} We implemented TTv1, TTv2, c-TTv2 and AGAD from the papers' text, not from the authors'
+      code. Every TT-family arm uses a multi-pulse transfer (up to 31 pulses), and a single settings selection on MNIST is
+      shared by all tasks. Results for c-TTv2 and AGAD could improve with per-task tuning.
+\item \textbf{Energy.}
+      \begin{itemize}
+      \item The MVM efficiency comes from phase-change inference chips.
+      \item ECRAM gate drivers and access devices have no published system-level energy.
+      \item The update periphery is our estimate.
+      \item The GPU figure uses board power and a published utilisation; it ignores host, network and cooling, which would
+            raise the GPU's energy.
+      \end{itemize}
+\item \textbf{Statistics.} Five seeds per cell, no multiplicity correction, and single seeds for most points of the
+      sensitivity grids. Several cells are UNRESOLVED; more seeds, not more conditions, would settle them.
+\end{itemize}

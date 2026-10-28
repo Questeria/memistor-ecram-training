@@ -1,0 +1,27 @@
+\section{The original results (superseded)}\label{app:original}
+The first version of this paper reported the experiments below, run on the original simulator. An independent review found that
+this simulator (i) drew the initialisation, the data order and all device randomness from one shared random stream, so that two
+arms of the same seed did not share their initial weights or their data order; (ii) moved the TTv2 and c-TTv2 accumulator
+straight to its symmetry point while charging 62 pulses it did not apply; and (iii) copied the AIHWKIT preset fields into a
+model with different bounds and no slope spread. The results are kept here unchanged, as preliminary results of that
+simulator; the revised experiments of Sections~\ref{sec:main}--\ref{sec:spec} replace them. The diagnostic of
+Appendix~\ref{app:revision} measures how much each repair moves them.
+
+The original headline readings were: plain SGD failed on every published device and task; the Li-ECRAM fit and the protonic
+device passed or were unresolved on all three tasks with a Tiki-Taka-family algorithm; the original width classifier labelled
+every arm FLAT (which, as the review noted, is not evidence of equivalence); and the original specification sheet was mostly
+"not reachable", which led to a post hoc degradation sheet relative to an already imperfect base (a CIFAR base gap of
+\RVvOneCifarBaseGap\,pp plus 2\,pp admits gaps up to \RVvOneCifarAdmitted\,pp). The best original analog LM cell was
+\RVvOneLiAdamPct\,\% worse in bits per byte than digital Adam (a perplexity ratio of \RVvOnePerplexityRatio).
+
+\input{tables/main.tex}
+\input{tables/scale.tex}
+\input{tables/spec.tex}
+\input{tables/spec_rel.tex}
+\input{tables/pairs.tex}
+\input{tables/energy.tex}
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{figs/fig_main}
+\caption{Original simulator: gap to the exact-update baseline (mean and 95\% interval over 5 seeds; symmetric-log axis); the
+dashed line is the gap line.}\label{fig:main}
+\end{figure}

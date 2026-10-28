@@ -1,0 +1,34 @@
+\begin{abstract}
+In 1960 Widrow and Hoff stored the weights of their adaptive neuron in memistors: three-terminal electrochemical cells whose
+conductance is set by the charge through a third terminal. Their modern descendants are lithium-ion, metal-oxide and protonic
+ECRAM. We ask, in simulation, whether such devices can train neural networks in memory to near-digital accuracy, what
+specifications they need, and what energy advantage survives once the periphery is counted.
+
+\textbf{Simulator and validation.} Our device model includes levels, asymmetry, saturation, write noise, spreads, drift and
+reference error. Every check is shown to fail on a planted fault. We validate it against a published analog-training result:
+for the RPU-baseline device on MNIST we obtain \REOneFpErr\%, \REOneSgdErr\% and \REOneTtvOneErr\% test error for the exact update,
+SGD and Tiki-Taka. The published values are 2.0\%, about 15\% and about 2\%. We also reproduce the published robustness of
+chopped TTv2 and AGAD to reference offsets.
+
+\textbf{Main comparison.} In a pre-registered comparison with five seeds per arm, we test four published device specifications
+and Widrow's memistor on MNIST, a CIFAR-10 subset and a character language model on human-written text.
+\begin{itemize}
+\item Plain SGD fails on every published device and task.
+\item With a Tiki-Taka-family algorithm, the Li-ECRAM and protonic specifications reach the baseline within our gap lines or
+      within five-seed resolution on all three tasks.
+\item The best language-model gap is \REThreeLmBestGap\% [\REThreeLmBestLo, \REThreeLmBestHi].
+\end{itemize}
+
+\textbf{Scale.} When every arm tunes its own learning rate, the gap does not grow with width; an earlier observation of growth
+was a learning-rate artefact.
+
+\textbf{Specification sheet.} Sensitivity sweeps show that the binding specifications are an accurate symmetry-point reference
+($\sigma_r$ \RSpecrelTtvTwoCifarWThreeTwoRefErr{} of the half-range for TTv2) and a saturating response. A few hundred levels suffice.
+
+\textbf{Energy.} With periphery, at the efficiency of a measured analog-AI chip, training energy per weight is about
+\REnRatioMin$\times$ below an H100 at its measured utilisation, \REnRangeLo--\REnRangeHi$\times$ over our sensitivity range. The
+read periphery, not the femtojoule device, dominates.
+
+We release the simulator, the records, a device-experiment roadmap with pass criteria, and a bench replication of the 1960
+memistor.
+\end{abstract}

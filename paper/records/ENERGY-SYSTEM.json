@@ -1,0 +1,3188 @@
+{
+ "device_pulse": {
+  "ecram_li_tang2018": {
+   "e_pulse_j": 1e-15,
+   "label": "PROJECTION (pulse) / ESTIMATE (voltage)",
+   "source": "~1 fJ projected for 100 nm x 100 nm Li-ECRAM [tang2018]; a few volts of gate pulse (ours)",
+   "v": 2.0
+  },
+  "ecram_mo_kim2019": {
+   "e_pulse_j": 1e-15,
+   "label": "ESTIMATE",
+   "source": "the Li-ECRAM projection reused",
+   "v": 2.0
+  },
+  "protonic_onen2022": {
+   "e_pulse_j": 2.5e-15,
+   "label": "PARTLY-PUBLISHED",
+   "source": "~2.5 fJ per 5 ns pulse (gate charging) and 10 V / -8.5 V pulses [onen2022]",
+   "v": 10.0
+  },
+  "widrow1960_claimed": {
+   "e_pulse_j": null,
+   "label": "CLAIM+ESTIMATE",
+   "source": "plating energy per level from Widrow's figures (lane ME ENERGY.json widrow_energy_per_level_j)",
+   "v": null
+  },
+  "wox_ysz_chen2023": {
+   "e_pulse_j": 1e-15,
+   "label": "ESTIMATE",
+   "source": "the Li-ECRAM projection reused; the measured cell used 100 ms pulses at 5 V [chen2023]",
+   "v": 5.0
+  }
+ },
+ "gpu_pj": {
+  "best_case": 7.050777348202639,
+  "central": 10.480414724982689,
+  "worst_case": 11.16991569373155
+ },
+ "inputs": {
+  "adc_j_per_conversion": {
+   "central": 1e-12,
+   "high": 5e-12,
+   "label": "ESTIMATE",
+   "low": 2e-13,
+   "source": "an 8-bit SAR conversion; the range spans the published survey's energy-efficient designs to conservative ones [murmann_adc]"
+  },
+  "array_n": {
+   "central": 1024,
+   "high": 4096,
+   "label": "DESIGN CHOICE",
+   "low": 256,
+   "source": "array dimension N (N x N tiles)"
+  },
+  "e_pulse_j": {
+   "label": "per device, see DEVICE_PULSE"
+  },
+  "gpu_flop_per_weight_row": {
+   "central": 6.0,
+   "label": "STANDARD",
+   "source": "forward 2 + input-gradient 2 + weight-gradient 2 FLOP per weight per row"
+  },
+  "h100_bf16_dense_flops": {
+   "central": 989500000000000.0,
+   "label": "SPEC",
+   "source": "NVIDIA H100 page: BF16 tensor 1,979 TFLOPS with sparsity, i.e. 989.5 dense [nvidiah100]"
+  },
+  "h100_mfu": {
+   "central": 0.405,
+   "high": 0.43,
+   "label": "MEASURED",
+   "low": 0.38,
+   "source": "Llama 3 405B pre-training on 8K-16K H100s: BF16 MFU 38-43 % (380-430 TFLOPs/GPU) [dubey2024]"
+  },
+  "h100_power_w": {
+   "central": 700.0,
+   "high": 700.0,
+   "label": "SPEC (range: ESTIMATE of sustained draw)",
+   "low": 500.0,
+   "source": "NVIDIA H100 product page: max TDP up to 700 W (SXM) [nvidiah100]; low end ESTIMATE"
+  },
+  "line_cap_f_per_cell": {
+   "central": 4e-17,
+   "high": 2e-16,
+   "label": "ESTIMATE",
+   "low": 2e-17,
+   "source": "about 0.2 fF/um interconnect x 0.2 um cell pitch (ours); high: 1 um pitch"
+  },
+  "mvm_mac_per_weight_row": {
+   "central": 2.0,
+   "label": "STANDARD",
+   "source": "one forward and one backward (transpose) read"
+  },
+  "mvm_tops_per_w": {
+   "central": 12.4,
+   "high": 84.0,
+   "label": "MEASURED (central, low) / PROJECTION (high)",
+   "low": 9.76,
+   "source": "12.4 TOPS/W chip-sustained, 14 nm PCM analog-AI chip [ambrogio2023]; 9.76 TOPS/W for 8-bit MVMs, 64-core PCM chip [legallo2023]; 84,000 GOPS/s/W projected RPU system [gokmen2016]"
+  },
+  "rng_j_per_slot": {
+   "central": 2e-14,
+   "high": 1e-13,
+   "label": "ESTIMATE",
+   "low": 5e-15,
+   "source": "one stochastic bit per line per pulse slot (an LFSR plus a comparator; ours)"
+  },
+  "slots_bl": {
+   "central": 31,
+   "label": "SIM",
+   "source": "pulse slots per row (the simulator's BL)"
+  },
+  "sram_add_j": {
+   "central": 1e-12,
+   "high": 3e-12,
+   "label": "ESTIMATE",
+   "low": 2e-13,
+   "source": "one read-add-write of the 16-32 bit buffer H per read weight (ours; cf. [horowitz2014])"
+  }
+ },
+ "mvm_tops_per_w_needed_for_100x": {
+  "cifar__ecram_li_tang2018__agad": 38.667478274613295,
+  "cifar__ecram_li_tang2018__cttv2": 38.661079200014726,
+  "cifar__ecram_li_tang2018__sgd": 38.61727200994923,
+  "cifar__ecram_li_tang2018__ttv2": 38.66707316787172,
+  "cifar__ecram_mo_kim2019__agad": 38.76777985747439,
+  "cifar__ecram_mo_kim2019__cttv2": 38.77535440459438,
+  "cifar__ecram_mo_kim2019__sgd": 38.623608422534126,
+  "cifar__ecram_mo_kim2019__ttv2": 38.79302384552995,
+  "cifar__protonic_onen2022__agad": 39.6217598270454,
+  "cifar__protonic_onen2022__cttv2": 39.397932004609274,
+  "cifar__protonic_onen2022__sgd": 38.73948332807002,
+  "cifar__protonic_onen2022__ttv2": 39.48704091905301,
+  "cifar__widrow1960_claimed__agad": null,
+  "cifar__widrow1960_claimed__cttv2": null,
+  "cifar__widrow1960_claimed__sgd": null,
+  "cifar__widrow1960_claimed__ttv2": null,
+  "cifar__wox_ysz_chen2023__agad": 38.75693341913966,
+  "cifar__wox_ysz_chen2023__cttv2": 38.74102208728418,
+  "cifar__wox_ysz_chen2023__sgd": 38.625751346243945,
+  "cifar__wox_ysz_chen2023__ttv2": 38.744584038202625,
+  "lm__ecram_li_tang2018__agad": 38.67867024512315,
+  "lm__ecram_li_tang2018__cttv2": 38.68094591521151,
+  "lm__ecram_li_tang2018__sgd": 38.62128915570303,
+  "lm__ecram_li_tang2018__ttv2": 38.67760375542307,
+  "lm__ecram_mo_kim2019__agad": 38.8353534889541,
+  "lm__ecram_mo_kim2019__cttv2": 38.86813980014791,
+  "lm__ecram_mo_kim2019__sgd": 38.63639269548358,
+  "lm__ecram_mo_kim2019__ttv2": 38.848181254679155,
+  "lm__protonic_onen2022__agad": 39.640617598300196,
+  "lm__protonic_onen2022__cttv2": 39.65076271553937,
+  "lm__protonic_onen2022__sgd": 38.83643236728231,
+  "lm__protonic_onen2022__ttv2": 39.6039608884644,
+  "lm__widrow1960_claimed__agad": null,
+  "lm__widrow1960_claimed__cttv2": null,
+  "lm__widrow1960_claimed__sgd": null,
+  "lm__widrow1960_claimed__ttv2": null,
+  "lm__wox_ysz_chen2023__agad": 38.742324993565646,
+  "lm__wox_ysz_chen2023__cttv2": 38.74700414291334,
+  "lm__wox_ysz_chen2023__sgd": 38.639667928722666,
+  "lm__wox_ysz_chen2023__ttv2": 38.745272313429,
+  "mnist__ecram_li_tang2018__agad": 39.111178153563195,
+  "mnist__ecram_li_tang2018__cttv2": 39.12942106919788,
+  "mnist__ecram_li_tang2018__sgd": 38.64902527822453,
+  "mnist__ecram_li_tang2018__ttv2": 39.13153776927425,
+  "mnist__ecram_mo_kim2019__agad": 39.225393141332084,
+  "mnist__ecram_mo_kim2019__cttv2": 39.321752386985686,
+  "mnist__ecram_mo_kim2019__sgd": 38.74317119587891,
+  "mnist__ecram_mo_kim2019__ttv2": 39.32362976650476,
+  "mnist__protonic_onen2022__agad": 42.094895670829736,
+  "mnist__protonic_onen2022__cttv2": 41.728049735437565,
+  "mnist__protonic_onen2022__sgd": 39.42016261928303,
+  "mnist__protonic_onen2022__ttv2": 41.783262780313336,
+  "mnist__widrow1960_claimed__agad": null,
+  "mnist__widrow1960_claimed__cttv2": null,
+  "mnist__widrow1960_claimed__sgd": null,
+  "mnist__widrow1960_claimed__ttv2": null,
+  "mnist__wox_ysz_chen2023__agad": 39.397308078888194,
+  "mnist__wox_ysz_chen2023__cttv2": 39.35934901322836,
+  "mnist__wox_ysz_chen2023__sgd": 38.71099777304464,
+  "mnist__wox_ysz_chen2023__ttv2": 39.36630824910809
+ },
+ "note": "central: measured PCM-chip MVM efficiency + central estimates; range: every input at its low/high end (the analog pessimistic total against the GPU's best case, and the reverse)",
+ "rows": {
+  "cifar__ecram_li_tang2018__agad": {
+   "analog_pj": {
+    "central": {
+     "device": 1.9528673172227522e-05,
+     "lines": 0.0013157165268580747,
+     "mvm": 0.3225806451612903,
+     "total": 0.32393868786837143,
+     "tt": 2.2797507050780315e-05
+    },
+    "optimistic": {
+     "device": 1.9528673172227522e-05,
+     "lines": 0.0001280731071790374,
+     "mvm": 0.047619047619047616,
+     "total": 0.04777120890080904,
+     "tt": 4.559501410156063e-06
+    },
+    "pessimistic": {
+     "device": 1.9528673172227522e-05,
+     "lines": 0.024742645134290375,
+     "mvm": 0.4098360655737705,
+     "total": 0.43468942940943617,
+     "tt": 9.119002820312126e-05
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.006984806848604188,
+    "ppwr": 0.01952867317222752,
+    "px": 0.07751440835952067,
+    "reads_pwr": 1.1398753525390158e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "PROJECTION (pulse) / ESTIMATE (voltage)",
+    "source": "~1 fJ projected for 100 nm x 100 nm Li-ECRAM [tang2018]; a few volts of gate pulse (ours)",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.353081362240005,
+    "measured_mvm_only": 32.353081362240005,
+    "range_high": 233.82108074603025,
+    "range_low": 16.220264103918378
+   },
+   "share_of_total_central": {
+    "device": 6.0285090677908666e-05,
+    "lines": 0.004061622078906179,
+    "mvm": 0.9958077168367339,
+    "tt": 7.037599368200135e-05
+   }
+  },
+  "cifar__ecram_li_tang2018__cttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 2.0225939072274132e-05,
+     "lines": 0.0012978971486528692,
+     "mvm": 0.3225806451612903,
+     "total": 0.32392156575606623,
+     "tt": 2.2797507050780315e-05
+    },
+    "optimistic": {
+     "device": 2.0225939072274132e-05,
+     "lines": 0.0001191634180764346,
+     "mvm": 0.047619047619047616,
+     "total": 0.047762996477606484,
+     "tt": 4.559501410156063e-06
+    },
+    "pessimistic": {
+     "device": 2.0225939072274132e-05,
+     "lines": 0.024653548243264347,
+     "mvm": 0.4098360655737705,
+     "total": 0.4346010297843102,
+     "tt": 9.119002820312126e-05
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.007527327708539836,
+    "ppwr": 0.020225939072274133,
+    "px": 0.06260142120506432,
+    "reads_pwr": 1.1398753525390158e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "PROJECTION (pulse) / ESTIMATE (voltage)",
+    "source": "~1 fJ projected for 100 nm x 100 nm Li-ECRAM [tang2018]; a few volts of gate pulse (ours)",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.35479150800079,
+    "measured_mvm_only": 32.35479150800079,
+    "range_high": 233.86128420499176,
+    "range_low": 16.223563371908938
+   },
+   "share_of_total_central": {
+    "device": 6.244085362166213e-05,
+    "lines": 0.004006825373369148,
+    "mvm": 0.9958603540593352,
+    "tt": 7.037971367410684e-05
+   }
+  },
+  "cifar__ecram_li_tang2018__sgd": {
+   "analog_pj": {
+    "central": {
+     "device": 5.520019749347183e-07,
+     "lines": 0.0012230005603387556,
+     "mvm": 0.3225806451612903,
+     "total": 0.323804197723604,
+     "tt": 0.0
+    },
+    "optimistic": {
+     "device": 5.520019749347183e-07,
+     "lines": 8.171512391937785e-05,
+     "mvm": 0.047619047619047616,
+     "total": 0.04770131474494193,
+     "tt": 0.0
+    },
+    "pessimistic": {
+     "device": 5.520019749347183e-07,
+     "lines": 0.02427906530169378,
+     "mvm": 0.4098360655737705,
+     "total": 0.43411568287743924,
+     "tt": 0.0
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.0015362208871617371,
+    "ppwr": 0.0005520019749347181,
+    "px": 0.008192053579576742,
+    "reads_pwr": 0.0
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "PROJECTION (pulse) / ESTIMATE (voltage)",
+    "source": "~1 fJ projected for 100 nm x 100 nm Li-ECRAM [tang2018]; a few volts of gate pulse (ours)",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.366519021870936,
+    "measured_mvm_only": 32.366519021870936,
+    "range_high": 234.16368612598808,
+    "range_low": 16.241701524045688
+   },
+   "share_of_total_central": {
+    "device": 1.70474002133197e-06,
+    "lines": 0.0037769756196388052,
+    "mvm": 0.9962213196403398,
+    "tt": 0.0
+   }
+  },
+  "cifar__ecram_li_tang2018__ttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 2.436049939477498e-05,
+     "lines": 0.001309800917692897,
+     "mvm": 0.3225806451612903,
+     "total": 0.32393760408542877,
+     "tt": 2.2797507050780315e-05
+    },
+    "optimistic": {
+     "device": 2.436049939477498e-05,
+     "lines": 0.00012511530259644852,
+     "mvm": 0.047619047619047616,
+     "total": 0.04777308292244901,
+     "tt": 4.559501410156063e-06
+    },
+    "pessimistic": {
+     "device": 2.436049939477498e-05,
+     "lines": 0.024713067088464487,
+     "mvm": 0.4098360655737705,
+     "total": 0.4346646831898328,
+     "tt": 9.119002820312126e-05
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.008177645783033854,
+    "ppwr": 0.024360499394774977,
+    "px": 0.07155091687252824,
+    "reads_pwr": 1.1398753525390158e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "PROJECTION (pulse) / ESTIMATE (voltage)",
+    "source": "~1 fJ projected for 100 nm x 100 nm Li-ECRAM [tang2018]; a few volts of gate pulse (ours)",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.35318960443628,
+    "measured_mvm_only": 32.35318960443628,
+    "range_high": 233.81190851475705,
+    "range_low": 16.221187551884277
+   },
+   "share_of_total_central": {
+    "device": 7.520120877460906e-05,
+    "lines": 0.004043374097894101,
+    "mvm": 0.9958110484641957,
+    "tt": 7.037622913568306e-05
+   }
+  },
+  "cifar__ecram_mo_kim2019__agad": {
+   "analog_pj": {
+    "central": {
+     "device": 0.0001381669019629725,
+     "lines": 0.0014647182832456611,
+     "mvm": 0.3225806451612903,
+     "total": 0.32420632785354975,
+     "tt": 2.2797507050780315e-05
+    },
+    "optimistic": {
+     "device": 0.0001381669019629725,
+     "lines": 0.00020257398537283059,
+     "mvm": 0.047619047619047616,
+     "total": 0.04796434800779358,
+     "tt": 4.559501410156063e-06
+    },
+    "pessimistic": {
+     "device": 0.0001381669019629725,
+     "lines": 0.025487653916228308,
+     "mvm": 0.4098360655737705,
+     "total": 0.4355530764201649,
+     "tt": 9.119002820312126e-05
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.02473084437541086,
+    "ppwr": 0.1381669019629725,
+    "px": 0.1799310775968965,
+    "reads_pwr": 1.1398753525390158e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.32637312901831,
+    "measured_mvm_only": 32.32637312901831,
+    "range_high": 232.87954819935388,
+    "range_low": 16.188101358744547
+   },
+   "share_of_total_central": {
+    "device": 0.00042616966447794056,
+    "lines": 0.004517858404994805,
+    "mvm": 0.9949856540338912,
+    "tt": 7.031789663611498e-05
+   }
+  },
+  "cifar__ecram_mo_kim2019__cttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 0.00016702935873514764,
+     "lines": 0.0014560111584765133,
+     "mvm": 0.3225806451612903,
+     "total": 0.32422648318555275,
+     "tt": 2.2797507050780315e-05
+    },
+    "optimistic": {
+     "device": 0.00016702935873514764,
+     "lines": 0.0001982204229882567,
+     "mvm": 0.047619047619047616,
+     "total": 0.04798885690218118,
+     "tt": 4.559501410156063e-06
+    },
+    "pessimistic": {
+     "device": 0.00016702935873514764,
+     "lines": 0.025444118292382568,
+     "mvm": 0.4098360655737705,
+     "total": 0.4355384032530913,
+     "tt": 9.119002820312126e-05
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.027915309530391407,
+    "ppwr": 0.16702935873514763,
+    "px": 0.16972473762808715,
+    "reads_pwr": 1.1398753525390158e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.3243635807036,
+    "measured_mvm_only": 32.3243635807036,
+    "range_high": 232.76061183328284,
+    "range_low": 16.188646731354787
+   },
+   "share_of_total_central": {
+    "device": 0.0005151626020615897,
+    "lines": 0.0044907224856251095,
+    "mvm": 0.9949238013869443,
+    "tt": 7.031352536903485e-05
+   }
+  },
+  "cifar__ecram_mo_kim2019__sgd": {
+   "analog_pj": {
+    "central": {
+     "device": 3.0306859081695783e-06,
+     "lines": 0.0012375148351303654,
+     "mvm": 0.3225806451612903,
+     "total": 0.32382119068232884,
+     "tt": 0.0
+    },
+    "optimistic": {
+     "device": 3.0306859081695783e-06,
+     "lines": 8.897226131518275e-05,
+     "mvm": 0.047619047619047616,
+     "total": 0.04771105056627097,
+     "tt": 0.0
+    },
+    "pessimistic": {
+     "device": 3.0306859081695783e-06,
+     "lines": 0.02435163667565183,
+     "mvm": 0.4098360655737705,
+     "total": 0.4341907329353305,
+     "tt": 0.0
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.0033777143229999198,
+    "ppwr": 0.003030685908169578,
+    "px": 0.018055620459552894,
+    "reads_pwr": 0.0
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.364820544632174,
+    "measured_mvm_only": 32.364820544632174,
+    "range_high": 234.11590315364072,
+    "range_low": 16.23889413884105
+   },
+   "share_of_total_central": {
+    "device": 9.359133976944408e-06,
+    "lines": 0.0038215992984362073,
+    "mvm": 0.9961690415675868,
+    "tt": 0.0
+   }
+  },
+  "cifar__ecram_mo_kim2019__ttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 0.0001941834453969314,
+     "lines": 0.0014758436037007798,
+     "mvm": 0.3225806451612903,
+     "total": 0.32427346971743887,
+     "tt": 2.2797507050780315e-05
+    },
+    "optimistic": {
+     "device": 0.0001941834453969314,
+     "lines": 0.00020813664560038995,
+     "mvm": 0.047619047619047616,
+     "total": 0.0480259272114551,
+     "tt": 4.559501410156063e-06
+    },
+    "pessimistic": {
+     "device": 0.0001941834453969314,
+     "lines": 0.0255432805185039,
+     "mvm": 0.4098360655737705,
+     "total": 0.43566471956587444,
+     "tt": 9.119002820312126e-05
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.030903106447591266,
+    "ppwr": 0.1941834453969314,
+    "px": 0.18273084814981191,
+    "reads_pwr": 1.1398753525390158e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.31967984958799,
+    "measured_mvm_only": 32.31967984958799,
+    "range_high": 232.5809482980125,
+    "range_low": 16.183953006863874
+   },
+   "share_of_total_central": {
+    "device": 0.0005988261869407214,
+    "lines": 0.004551231418921755,
+    "mvm": 0.9947796390570478,
+    "tt": 7.03033370896648e-05
+   }
+  },
+  "cifar__protonic_onen2022__agad": {
+   "analog_pj": {
+    "central": {
+     "device": 3.446137590740676e-05,
+     "lines": 0.003792260973724962,
+     "mvm": 0.3225806451612903,
+     "total": 0.32643016501797345,
+     "tt": 2.2797507050780315e-05
+    },
+    "optimistic": {
+     "device": 3.446137590740676e-05,
+     "lines": 0.0013663453306124813,
+     "mvm": 0.047619047619047616,
+     "total": 0.04902441382697766,
+     "tt": 4.559501410156063e-06
+    },
+    "pessimistic": {
+     "device": 3.446137590740676e-05,
+     "lines": 0.03712536736862482,
+     "mvm": 0.4098360655737705,
+     "total": 0.4470870843465058,
+     "tt": 9.119002820312126e-05
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.005443592198146495,
+    "ppwr": 0.013784550362962703,
+    "px": 0.07782490695427163,
+    "reads_pwr": 1.1398753525390158e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 2.5e-15,
+    "label": "PARTLY-PUBLISHED",
+    "source": "~2.5 fJ per 5 ns pulse (gate charging) and 10 V / -8.5 V pulses [onen2022]",
+    "v": 10.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.10614657626886,
+    "measured_mvm_only": 32.10614657626886,
+    "range_high": 227.8439418603482,
+    "range_low": 15.770478716710317
+   },
+   "share_of_total_central": {
+    "device": 0.00010557043925615542,
+    "lines": 0.011617372964034,
+    "mvm": 0.9882072177475657,
+    "tt": 6.98388491441196e-05
+   }
+  },
+  "cifar__protonic_onen2022__cttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 3.6142722472999267e-05,
+     "lines": 0.0032170354520078765,
+     "mvm": 0.3225806451612903,
+     "total": 0.32585662084282196,
+     "tt": 2.2797507050780315e-05
+    },
+    "optimistic": {
+     "device": 3.6142722472999267e-05,
+     "lines": 0.0010787325697539383,
+     "mvm": 0.047619047619047616,
+     "total": 0.04873848241268471,
+     "tt": 4.559501410156063e-06
+    },
+    "pessimistic": {
+     "device": 3.6142722472999267e-05,
+     "lines": 0.034249239760039386,
+     "mvm": 0.4098360655737705,
+     "total": 0.44421263808448597,
+     "tt": 9.119002820312126e-05
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.006214101019667663,
+    "ppwr": 0.014457088989199706,
+    "px": 0.05849873614187674,
+    "reads_pwr": 1.1398753525390158e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 2.5e-15,
+    "label": "PARTLY-PUBLISHED",
+    "source": "~2.5 fJ per 5 ns pulse (gate charging) and 10 V / -8.5 V pulses [onen2022]",
+    "v": 10.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.162656992745134,
+    "measured_mvm_only": 32.162656992745134,
+    "range_high": 229.18062157028632,
+    "range_low": 15.872527577348292
+   },
+   "share_of_total_central": {
+    "device": 0.00011091602920179065,
+    "lines": 0.009872548986996414,
+    "mvm": 0.9899465732104555,
+    "tt": 6.996177334624963e-05
+   }
+  },
+  "cifar__protonic_onen2022__sgd": {
+   "analog_pj": {
+    "central": {
+     "device": 1.6153388055563379e-06,
+     "lines": 0.0015487025781540393,
+     "mvm": 0.3225806451612903,
+     "total": 0.32413096307824996,
+     "tt": 0.0
+    },
+    "optimistic": {
+     "device": 1.6153388055563379e-06,
+     "lines": 0.0002445661328270196,
+     "mvm": 0.047619047619047616,
+     "total": 0.047865229090680195,
+     "tt": 0.0
+    },
+    "pessimistic": {
+     "device": 1.6153388055563379e-06,
+     "lines": 0.025907575390770196,
+     "mvm": 0.4098360655737705,
+     "total": 0.43574525630334626,
+     "tt": 0.0
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.0017558361327858665,
+    "ppwr": 0.0006461355222225351,
+    "px": 0.009139811549602497,
+    "reads_pwr": 0.0
+   },
+   "device_pulse": {
+    "e_pulse_j": 2.5e-15,
+    "label": "PARTLY-PUBLISHED",
+    "source": "~2.5 fJ per 5 ns pulse (gate charging) and 10 V / -8.5 V pulses [onen2022]",
+    "v": 10.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.33388944225166,
+    "measured_mvm_only": 32.33388944225166,
+    "range_high": 233.3617932251041,
+    "range_low": 16.180961803274815
+   },
+   "share_of_total_central": {
+    "device": 4.983599191560023e-06,
+    "lines": 0.004778014921641904,
+    "mvm": 0.9952170014791665,
+    "tt": 0.0
+   }
+  },
+  "cifar__protonic_onen2022__ttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 4.0454742675828634e-05,
+     "lines": 0.0034418382234769505,
+     "mvm": 0.3225806451612903,
+     "total": 0.3260857356344939,
+     "tt": 2.2797507050780315e-05
+    },
+    "optimistic": {
+     "device": 4.0454742675828634e-05,
+     "lines": 0.0011911339554884753,
+     "mvm": 0.047619047619047616,
+     "total": 0.048855195818622084,
+     "tt": 4.559501410156063e-06
+    },
+    "pessimistic": {
+     "device": 4.0454742675828634e-05,
+     "lines": 0.035373253617384755,
+     "mvm": 0.4098360655737705,
+     "total": 0.44534096396203415,
+     "tt": 9.119002820312126e-05
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.006602222275073009,
+    "ppwr": 0.016181897070331453,
+    "px": 0.0653623171919254,
+    "reads_pwr": 1.1398753525390158e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 2.5e-15,
+    "label": "PARTLY-PUBLISHED",
+    "source": "~2.5 fJ per 5 ns pulse (gate charging) and 10 V / -8.5 V pulses [onen2022]",
+    "v": 10.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.14005882406974,
+    "measured_mvm_only": 32.14005882406974,
+    "range_high": 228.63311683777806,
+    "range_low": 15.83231258466429
+   },
+   "share_of_total_central": {
+    "device": 0.00012406167536618018,
+    "lines": 0.010555010070525965,
+    "mvm": 0.9892510156373955,
+    "tt": 6.991261671235384e-05
+   }
+  },
+  "cifar__widrow1960_claimed__agad": {
+   "analog_pj": {
+    "central": {
+     "device": 137546.8788311195,
+     "lines": 0.0012109375,
+     "mvm": 0.3225806451612903,
+     "total": 137547.20264549967,
+     "tt": 2.2797507050780315e-05
+    },
+    "optimistic": {
+     "device": 137546.8788311195,
+     "lines": 7.568359375e-05,
+     "mvm": 0.047619047619047616,
+     "total": 137546.92653041022,
+     "tt": 4.559501410156063e-06
+    },
+    "pessimistic": {
+     "device": 137546.8788311195,
+     "lines": 0.02421875,
+     "mvm": 0.4098360655737705,
+     "total": 137547.3129771251,
+     "tt": 9.119002820312126e-05
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.004563972824803553,
+    "ppwr": 0.009169791922074634,
+    "px": 0.0705584179497475,
+    "reads_pwr": 1.1398753525390158e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": null,
+    "label": "CLAIM+ESTIMATE",
+    "source": "plating energy per level from Widrow's figures (lane ME ENERGY.json widrow_energy_per_level_j)",
+    "v": null
+   },
+   "ratio_gpu_over_analog": {
+    "central": 7.619504085440295e-05,
+    "measured_mvm_only": 7.619504085440295e-05,
+    "range_high": 8.120803550824523e-05,
+    "range_low": 5.126074218094848e-05
+   },
+   "share_of_total_central": {
+    "device": 0.999997645794506,
+    "lines": 8.803795909400997e-09,
+    "mvm": 2.3452359550537515e-06,
+    "tt": 1.6574315298535236e-10
+   }
+  },
+  "cifar__widrow1960_claimed__cttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 157643.01101141353,
+     "lines": 0.0012109375,
+     "mvm": 0.3225806451612903,
+     "total": 157643.33482579366,
+     "tt": 2.2797507050780315e-05
+    },
+    "optimistic": {
+     "device": 157643.01101141353,
+     "lines": 7.568359375e-05,
+     "mvm": 0.047619047619047616,
+     "total": 157643.0587107042,
+     "tt": 4.559501410156063e-06
+    },
+    "pessimistic": {
+     "device": 157643.01101141353,
+     "lines": 0.02421875,
+     "mvm": 0.4098360655737705,
+     "total": 157643.4451574191,
+     "tt": 9.119002820312126e-05
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.005887300091156333,
+    "ppwr": 0.010509534067427568,
+    "px": 0.05037815400846936,
+    "reads_pwr": 1.1398753525390158e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": null,
+    "label": "CLAIM+ESTIMATE",
+    "source": "plating energy per level from Widrow's figures (lane ME ENERGY.json widrow_energy_per_level_j)",
+    "v": null
+   },
+   "ratio_gpu_over_analog": {
+    "central": 6.648181311670576e-05,
+    "measured_mvm_only": 6.648181311670576e-05,
+    "range_high": 7.085574071630909e-05,
+    "range_low": 4.4726105428372844e-05
+   },
+   "share_of_total_central": {
+    "device": 0.9999979459050361,
+    "lines": 7.681501417983615e-09,
+    "mvm": 2.046268848078882e-06,
+    "tt": 1.446144683247983e-10
+   }
+  },
+  "cifar__widrow1960_claimed__sgd": {
+   "analog_pj": {
+    "central": {
+     "device": 11815.978260676588,
+     "lines": 0.0012109375,
+     "mvm": 0.3225806451612903,
+     "total": 11816.302052259249,
+     "tt": 0.0
+    },
+    "optimistic": {
+     "device": 11815.978260676588,
+     "lines": 7.568359375e-05,
+     "mvm": 0.047619047619047616,
+     "total": 11816.0259554078,
+     "tt": 0.0
+    },
+    "pessimistic": {
+     "device": 11815.978260676588,
+     "lines": 0.02421875,
+     "mvm": 0.4098360655737705,
+     "total": 11816.412315492162,
+     "tt": 0.0
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.002010473037669504,
+    "ppwr": 0.0007877318840451058,
+    "px": 0.011009130551692997,
+    "reads_pwr": 0.0
+   },
+   "device_pulse": {
+    "e_pulse_j": null,
+    "label": "CLAIM+ESTIMATE",
+    "source": "plating energy per level from Widrow's figures (lane ME ENERGY.json widrow_energy_per_level_j)",
+    "v": null
+   },
+   "ratio_gpu_over_analog": {
+    "central": 0.0008869453978606495,
+    "measured_mvm_only": 0.0008869453978606495,
+    "range_high": 0.0009453191568709658,
+    "range_low": 0.0005966935783849185
+   },
+   "share_of_total_central": {
+    "device": 0.9999725978921976,
+    "lines": 1.0248024251956826e-07,
+    "mvm": 2.7299627559843366e-05,
+    "tt": 0.0
+   }
+  },
+  "cifar__widrow1960_claimed__ttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 172571.71917495492,
+     "lines": 0.0012109375,
+     "mvm": 0.3225806451612903,
+     "total": 172572.04298933508,
+     "tt": 2.2797507050780315e-05
+    },
+    "optimistic": {
+     "device": 172571.71917495492,
+     "lines": 7.568359375e-05,
+     "mvm": 0.047619047619047616,
+     "total": 172571.76687424563,
+     "tt": 4.559501410156063e-06
+    },
+    "pessimistic": {
+     "device": 172571.71917495492,
+     "lines": 0.02421875,
+     "mvm": 0.4098360655737705,
+     "total": 172572.15332096053,
+     "tt": 9.119002820312126e-05
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.006160890983919596,
+    "ppwr": 0.011504781278330328,
+    "px": 0.05477053076153675,
+    "reads_pwr": 1.1398753525390158e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": null,
+    "label": "CLAIM+ESTIMATE",
+    "source": "plating energy per level from Widrow's figures (lane ME ENERGY.json widrow_energy_per_level_j)",
+    "v": null
+   },
+   "ratio_gpu_over_analog": {
+    "central": 6.0730663805320874e-05,
+    "measured_mvm_only": 6.0730663805320874e-05,
+    "range_high": 6.472620577542764e-05,
+    "range_low": 4.08569819204212e-05
+   },
+   "share_of_total_central": {
+    "device": 0.9999981235988487,
+    "lines": 7.0169969539900255e-09,
+    "mvm": 1.8692520501784044e-06,
+    "tt": 1.3210428906024597e-10
+   }
+  },
+  "cifar__wox_ysz_chen2023__agad": {
+   "analog_pj": {
+    "central": {
+     "device": 7.543929569908863e-06,
+     "lines": 0.001566465935674854,
+     "mvm": 0.3225806451612903,
+     "total": 0.3241774525335859,
+     "tt": 2.2797507050780315e-05
+    },
+    "optimistic": {
+     "device": 7.543929569908863e-06,
+     "lines": 0.00025344781158742694,
+     "mvm": 0.047619047619047616,
+     "total": 0.04788459886161511,
+     "tt": 4.559501410156063e-06
+    },
+    "pessimistic": {
+     "device": 7.543929569908863e-06,
+     "lines": 0.02599639217837427,
+     "mvm": 0.4098360655737705,
+     "total": 0.4359311917099178,
+     "tt": 9.119002820312126e-05
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.0056135180959341665,
+    "ppwr": 0.007543929569908863,
+    "px": 0.04026111876533729,
+    "reads_pwr": 1.1398753525390158e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused; the measured cell used 100 ms pulses at 5 V [chen2023]",
+    "v": 5.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.32925252226443,
+    "measured_mvm_only": 32.32925252226443,
+    "range_high": 233.2673961833163,
+    "range_low": 16.174060223922787
+   },
+   "share_of_total_central": {
+    "device": 2.3270987883178847e-05,
+    "lines": 0.004832124885405356,
+    "mvm": 0.9950742799666793,
+    "tt": 7.03241600321306e-05
+   }
+  },
+  "cifar__wox_ysz_chen2023__cttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 9.7577503640139e-06,
+     "lines": 0.00152186381053988,
+     "mvm": 0.3225806451612903,
+     "total": 0.324135064229245,
+     "tt": 2.2797507050780315e-05
+    },
+    "optimistic": {
+     "device": 9.7577503640139e-06,
+     "lines": 0.00023114674901993998,
+     "mvm": 0.047619047619047616,
+     "total": 0.047864511619841725,
+     "tt": 4.559501410156063e-06
+    },
+    "pessimistic": {
+     "device": 9.7577503640139e-06,
+     "lines": 0.0257733815526994,
+     "mvm": 0.4098360655737705,
+     "total": 0.435710394905037,
+     "tt": 9.119002820312126e-05
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.006918728158811148,
+    "ppwr": 0.009757750364013898,
+    "px": 0.033200795781818525,
+    "reads_pwr": 1.1398753525390158e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused; the measured cell used 100 ms pulses at 5 V [chen2023]",
+    "v": 5.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.33348033451389,
+    "measured_mvm_only": 32.33348033451389,
+    "range_high": 233.36529122969637,
+    "range_low": 16.18225644981308
+   },
+   "share_of_total_central": {
+    "device": 3.0103964183007106e-05,
+    "lines": 0.004695153281730543,
+    "mvm": 0.9952044093975119,
+    "tt": 7.033335657464304e-05
+   }
+  },
+  "cifar__wox_ysz_chen2023__sgd": {
+   "analog_pj": {
+    "central": {
+     "device": 8.434885627177103e-08,
+     "lines": 0.0012462067923937447,
+     "mvm": 0.3225806451612903,
+     "total": 0.32382693630254034,
+     "tt": 0.0
+    },
+    "optimistic": {
+     "device": 8.434885627177103e-08,
+     "lines": 9.331823994687243e-05,
+     "mvm": 0.047619047619047616,
+     "total": 0.04771245020785076,
+     "tt": 0.0
+    },
+    "pessimistic": {
+     "device": 8.434885627177103e-08,
+     "lines": 0.024395096461968725,
+     "mvm": 0.4098360655737705,
+     "total": 0.4342312463845955,
+     "tt": 0.0
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.0007062158280068596,
+    "ppwr": 8.434885627177102e-05,
+    "px": 0.003844660609895702,
+    "reads_pwr": 0.0
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused; the measured cell used 100 ms pulses at 5 V [chen2023]",
+    "v": 5.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.364246299730915,
+    "measured_mvm_only": 32.364246299730915,
+    "range_high": 234.1090353790637,
+    "range_low": 16.23737906221013
+   },
+   "share_of_total_central": {
+    "device": 2.604751082009027e-07,
+    "lines": 0.0038483728581165857,
+    "mvm": 0.9961513666667752,
+    "tt": 0.0
+   }
+  },
+  "cifar__wox_ysz_chen2023__ttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 9.667632295667885e-06,
+     "lines": 0.0015314461059861948,
+     "mvm": 0.3225806451612903,
+     "total": 0.324144556406623,
+     "tt": 2.2797507050780315e-05
+    },
+    "optimistic": {
+     "device": 9.667632295667885e-06,
+     "lines": 0.00023593789674309737,
+     "mvm": 0.047619047619047616,
+     "total": 0.04786921264949655,
+     "tt": 4.559501410156063e-06
+    },
+    "pessimistic": {
+     "device": 9.667632295667885e-06,
+     "lines": 0.025821293029930973,
+     "mvm": 0.4098360655737705,
+     "total": 0.4357582162642002,
+     "tt": 9.119002820312126e-05
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.006897648202289877,
+    "ppwr": 0.009667632295667883,
+    "px": 0.03445830095721912,
+    "reads_pwr": 1.1398753525390158e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused; the measured cell used 100 ms pulses at 5 V [chen2023]",
+    "v": 5.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.33253348803902,
+    "measured_mvm_only": 32.33253348803902,
+    "range_high": 233.34237342733957,
+    "range_low": 16.18048056247723
+   },
+   "share_of_total_central": {
+    "device": 2.9825064479998018e-05,
+    "lines": 0.004724577586504563,
+    "mvm": 0.9951752660520672,
+    "tt": 7.033129694821095e-05
+   }
+  },
+  "lm__ecram_li_tang2018__agad": {
+   "analog_pj": {
+    "central": {
+     "device": 3.436653405598232e-05,
+     "lines": 0.0013230915203099932,
+     "mvm": 0.3225806451612903,
+     "total": 0.3239686207937813,
+     "tt": 3.0517578125e-05
+    },
+    "optimistic": {
+     "device": 3.436653405598232e-05,
+     "lines": 0.00013176060390499662,
+     "mvm": 0.047619047619047616,
+     "total": 0.047791278272633596,
+     "tt": 6.103515625e-06
+    },
+    "pessimistic": {
+     "device": 3.436653405598232e-05,
+     "lines": 0.024779520101549966,
+     "mvm": 0.4098360655737705,
+     "total": 0.4347720225218764,
+     "tt": 0.0001220703125
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.021718038172948928,
+    "ppwr": 0.03436653405598232,
+    "px": 0.06872875239962624,
+    "reads_pwr": 1.52587890625e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "PROJECTION (pulse) / ESTIMATE (voltage)",
+    "source": "~1 fJ projected for 100 nm x 100 nm Li-ECRAM [tang2018]; a few volts of gate pulse (ours)",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.35009211479739,
+    "measured_mvm_only": 32.35009211479739,
+    "range_high": 233.7228903987635,
+    "range_low": 16.21718276007023
+   },
+   "share_of_total_central": {
+    "device": 0.00010607982332294449,
+    "lines": 0.004084011337481332,
+    "mvm": 0.9957157096601202,
+    "tt": 9.419917907551186e-05
+   }
+  },
+  "lm__ecram_li_tang2018__cttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 4.21492861248198e-05,
+     "lines": 0.0013213929288746061,
+     "mvm": 0.3225806451612903,
+     "total": 0.3239747049544147,
+     "tt": 3.0517578125e-05
+    },
+    "optimistic": {
+     "device": 4.21492861248198e-05,
+     "lines": 0.0001309113081873031,
+     "mvm": 0.047619047619047616,
+     "total": 0.04779821172898474,
+     "tt": 6.103515625e-06
+    },
+    "pessimistic": {
+     "device": 4.21492861248198e-05,
+     "lines": 0.024771027144373032,
+     "mvm": 0.4098360655737705,
+     "total": 0.4347713123167683,
+     "tt": 0.0001220703125
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.027157470403398786,
+    "ppwr": 0.0421492861248198,
+    "px": 0.06191948836644491,
+    "reads_pwr": 1.52587890625e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "PROJECTION (pulse) / ESTIMATE (voltage)",
+    "source": "~1 fJ projected for 100 nm x 100 nm Li-ECRAM [tang2018]; a few volts of gate pulse (ours)",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.349484588487705,
+    "measured_mvm_only": 32.349484588487705,
+    "range_high": 233.6889873007139,
+    "range_low": 16.21720925106839
+   },
+   "share_of_total_central": {
+    "device": 0.00013010054637058925,
+    "lines": 0.004078691665327806,
+    "mvm": 0.9956970103782623,
+    "tt": 9.419741003944742e-05
+   }
+  },
+  "lm__ecram_li_tang2018__sgd": {
+   "analog_pj": {
+    "central": {
+     "device": 1.2230080451284136e-06,
+     "lines": 0.00123310336206267,
+     "mvm": 0.3225806451612903,
+     "total": 0.32381497153139815,
+     "tt": 0.0
+    },
+    "optimistic": {
+     "device": 1.2230080451284136e-06,
+     "lines": 8.676652478133497e-05,
+     "mvm": 0.047619047619047616,
+     "total": 0.04770703715187408,
+     "tt": 0.0
+    },
+    "pessimistic": {
+     "device": 1.2230080451284136e-06,
+     "lines": 0.024329579310313352,
+     "mvm": 0.4098360655737705,
+     "total": 0.43416686789212894,
+     "tt": 0.0
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.0035772496748538245,
+    "ppwr": 0.0012230080451284136,
+    "px": 0.014298445536976767,
+    "reads_pwr": 0.0
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "PROJECTION (pulse) / ESTIMATE (voltage)",
+    "source": "~1 fJ projected for 100 nm x 100 nm Li-ECRAM [tang2018]; a few volts of gate pulse (ours)",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.36544213943633,
+    "measured_mvm_only": 32.36544213943633,
+    "range_high": 234.13559844792752,
+    "range_low": 16.239786749352884
+   },
+   "share_of_total_central": {
+    "device": 3.7768730684208864e-06,
+    "lines": 0.003808049257979118,
+    "mvm": 0.9961881738689524,
+    "tt": 0.0
+   }
+  },
+  "lm__ecram_li_tang2018__ttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 3.8265151632399786e-05,
+     "lines": 0.0013163413227197556,
+     "mvm": 0.3225806451612903,
+     "total": 0.32396576921376746,
+     "tt": 3.0517578125e-05
+    },
+    "optimistic": {
+     "device": 3.8265151632399786e-05,
+     "lines": 0.00012838550510987782,
+     "mvm": 0.047619047619047616,
+     "total": 0.0477918017914149,
+     "tt": 6.103515625e-06
+    },
+    "pessimistic": {
+     "device": 3.8265151632399786e-05,
+     "lines": 0.024745769113598777,
+     "mvm": 0.4098360655737705,
+     "total": 0.4347421701515017,
+     "tt": 0.0001220703125
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.026173619111378988,
+    "ppwr": 0.03826515163239978,
+    "px": 0.058829463727133616,
+    "reads_pwr": 1.52587890625e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "PROJECTION (pulse) / ESTIMATE (voltage)",
+    "source": "~1 fJ projected for 100 nm x 100 nm Li-ECRAM [tang2018]; a few volts of gate pulse (ours)",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.35037686363472,
+    "measured_mvm_only": 32.35037686363472,
+    "range_high": 233.72033016210872,
+    "range_low": 16.218296342739286
+   },
+   "share_of_total_central": {
+    "device": 0.00011811479874946504,
+    "lines": 0.0040632111408386885,
+    "mvm": 0.9957244740521854,
+    "tt": 9.420000822637253e-05
+   }
+  },
+  "lm__ecram_mo_kim2019__agad": {
+   "analog_pj": {
+    "central": {
+     "device": 0.0002671978798457555,
+     "lines": 0.0015074980718961443,
+     "mvm": 0.3225806451612903,
+     "total": 0.3243858586911572,
+     "tt": 3.0517578125e-05
+    },
+    "optimistic": {
+     "device": 0.0002671978798457555,
+     "lines": 0.00022396387969807216,
+     "mvm": 0.047619047619047616,
+     "total": 0.04811631289421645,
+     "tt": 6.103515625e-06
+    },
+    "pessimistic": {
+     "device": 0.0002671978798457555,
+     "lines": 0.025701552859480722,
+     "mvm": 0.4098360655737705,
+     "total": 0.435926886625597,
+     "tt": 0.0001220703125
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.06256807266417004,
+    "ppwr": 0.26719787984575544,
+    "px": 0.17659367886497862,
+    "reads_pwr": 1.52587890625e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.308482149220104,
+    "measured_mvm_only": 32.308482149220104,
+    "range_high": 232.1440489068348,
+    "range_low": 16.17421995413262
+   },
+   "share_of_total_central": {
+    "device": 0.0008237038473990645,
+    "lines": 0.004647237330192652,
+    "mvm": 0.9944349808060357,
+    "tt": 9.407801637264131e-05
+   }
+  },
+  "lm__ecram_mo_kim2019__cttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 0.0003391400101797921,
+     "lines": 0.0015224382855831328,
+     "mvm": 0.3225806451612903,
+     "total": 0.32447274103517826,
+     "tt": 3.0517578125e-05
+    },
+    "optimistic": {
+     "device": 0.0003391400101797921,
+     "lines": 0.00023143398654156642,
+     "mvm": 0.047619047619047616,
+     "total": 0.04819572513139398,
+     "tt": 6.103515625e-06
+    },
+    "pessimistic": {
+     "device": 0.0003391400101797921,
+     "lines": 0.025776253927915663,
+     "mvm": 0.4098360655737705,
+     "total": 0.4360735298243659,
+     "tt": 0.0001220703125
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.07426393055688767,
+    "ppwr": 0.3391400101797921,
+    "px": 0.1769463803972517,
+    "reads_pwr": 1.52587890625e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.299831078403095,
+    "measured_mvm_only": 32.299831078403095,
+    "range_high": 231.76154447888223,
+    "range_low": 16.168780872901017
+   },
+   "share_of_total_central": {
+    "device": 0.001045203393967149,
+    "lines": 0.0046920375521408595,
+    "mvm": 0.9941687062282906,
+    "tt": 9.40528256014313e-05
+   }
+  },
+  "lm__ecram_mo_kim2019__sgd": {
+   "analog_pj": {
+    "central": {
+     "device": 7.456399781363353e-06,
+     "lines": 0.001267356951656455,
+     "mvm": 0.3225806451612903,
+     "total": 0.3238554585127281,
+     "tt": 0.0
+    },
+    "optimistic": {
+     "device": 7.456399781363353e-06,
+     "lines": 0.00010389331957822755,
+     "mvm": 0.047619047619047616,
+     "total": 0.047730397338407206,
+     "tt": 0.0
+    },
+    "pessimistic": {
+     "device": 7.456399781363353e-06,
+     "lines": 0.024500847258282277,
+     "mvm": 0.4098360655737705,
+     "total": 0.4343443692318341,
+     "tt": 0.0
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.008521840235732851,
+    "ppwr": 0.0074563997813633515,
+    "px": 0.036977717551730925,
+    "reads_pwr": 0.0
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.361395954580736,
+    "measured_mvm_only": 32.361395954580736,
+    "range_high": 234.02100792367503,
+    "range_low": 16.233150116973754
+   },
+   "share_of_total_central": {
+    "device": 2.3023850873491768e-05,
+    "lines": 0.0039133413328176015,
+    "mvm": 0.996063634816309,
+    "tt": 0.0
+   }
+  },
+  "lm__ecram_mo_kim2019__ttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 0.0002995491942269462,
+     "lines": 0.001509157260684422,
+     "mvm": 0.3225806451612903,
+     "total": 0.3244198691943267,
+     "tt": 3.0517578125e-05
+    },
+    "optimistic": {
+     "device": 0.0002995491942269462,
+     "lines": 0.00022479347409221103,
+     "mvm": 0.047619047619047616,
+     "total": 0.04814949380299178,
+     "tt": 6.103515625e-06
+    },
+    "pessimistic": {
+     "device": 0.0002995491942269462,
+     "lines": 0.02570984880342211,
+     "mvm": 0.4098360655737705,
+     "total": 0.4359675338839195,
+     "tt": 0.0001220703125
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.06933739681243897,
+    "ppwr": 0.29954919422694615,
+    "px": 0.17116241019112724,
+    "reads_pwr": 1.52587890625e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.3050950948536,
+    "measured_mvm_only": 32.3050950948536,
+    "range_high": 231.9840731749812,
+    "range_low": 16.172711957216464
+   },
+   "share_of_total_central": {
+    "device": 0.0009233380032205025,
+    "lines": 0.004651864463271948,
+    "mvm": 0.9943307293797883,
+    "tt": 9.406815371940135e-05
+   }
+  },
+  "lm__protonic_onen2022__agad": {
+   "analog_pj": {
+    "central": {
+     "device": 6.596752988724481e-05,
+     "lines": 0.003801060722680319,
+     "mvm": 0.3225806451612903,
+     "total": 0.3264781909919829,
+     "tt": 3.0517578125e-05
+    },
+    "optimistic": {
+     "device": 6.596752988724481e-05,
+     "lines": 0.0013707452050901595,
+     "mvm": 0.047619047619047616,
+     "total": 0.04906186386965002,
+     "tt": 6.103515625e-06
+    },
+    "pessimistic": {
+     "device": 6.596752988724481e-05,
+     "lines": 0.037169366113401596,
+     "mvm": 0.4098360655737705,
+     "total": 0.44719346952955935,
+     "tt": 0.0001220703125
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.018408866979962305,
+    "ppwr": 0.026387011954897927,
+    "px": 0.06514349504198347,
+    "reads_pwr": 1.52587890625e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 2.5e-15,
+    "label": "PARTLY-PUBLISHED",
+    "source": "~2.5 fJ per 5 ns pulse (gate charging) and 10 V / -8.5 V pulses [onen2022]",
+    "v": 10.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.10142366060847,
+    "measured_mvm_only": 32.10142366060847,
+    "range_high": 227.67002336903326,
+    "range_low": 15.766726995409725
+   },
+   "share_of_total_central": {
+    "device": 0.0002020579986883863,
+    "lines": 0.01164261757004669,
+    "mvm": 0.9880618493417581,
+    "tt": 9.347508950681915e-05
+   }
+  },
+  "lm__protonic_onen2022__cttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 8.866730081467403e-05,
+     "lines": 0.0038041791007995605,
+     "mvm": 0.3225806451612903,
+     "total": 0.32650400914102956,
+     "tt": 3.0517578125e-05
+    },
+    "optimistic": {
+     "device": 8.866730081467403e-05,
+     "lines": 0.0013723043941497803,
+     "mvm": 0.047619047619047616,
+     "total": 0.04908612282963708,
+     "tt": 6.103515625e-06
+    },
+    "pessimistic": {
+     "device": 8.866730081467403e-05,
+     "lines": 0.0371849580039978,
+     "mvm": 0.4098360655737705,
+     "total": 0.447231761191083,
+     "tt": 0.0001220703125
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.024288836292993454,
+    "ppwr": 0.03546692032586961,
+    "px": 0.059364118571508494,
+    "reads_pwr": 1.52587890625e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 2.5e-15,
+    "label": "PARTLY-PUBLISHED",
+    "source": "~2.5 fJ per 5 ns pulse (gate charging) and 10 V / -8.5 V pulses [onen2022]",
+    "v": 10.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.0988852558187,
+    "measured_mvm_only": 32.0988852558187,
+    "range_high": 227.5575060694631,
+    "range_low": 15.76537705959158
+   },
+   "share_of_total_central": {
+    "device": 0.0002715657337499192,
+    "lines": 0.011651247746720286,
+    "mvm": 0.9879837188215211,
+    "tt": 9.346769800862779e-05
+   }
+  },
+  "lm__protonic_onen2022__sgd": {
+   "analog_pj": {
+    "central": {
+     "device": 3.7068166605063844e-06,
+     "lines": 0.0018043680295180707,
+     "mvm": 0.3225806451612903,
+     "total": 0.3243887200074689,
+     "tt": 0.0
+    },
+    "optimistic": {
+     "device": 3.7068166605063844e-06,
+     "lines": 0.0003723988585090354,
+     "mvm": 0.047619047619047616,
+     "total": 0.047995153294217156,
+     "tt": 0.0
+    },
+    "pessimistic": {
+     "device": 3.7068166605063844e-06,
+     "lines": 0.027185902647590354,
+     "mvm": 0.4098360655737705,
+     "total": 0.4370256750380213,
+     "tt": 0.0
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.0042624785130932225,
+    "ppwr": 0.0014827266642025538,
+    "px": 0.014880441793941318,
+    "reads_pwr": 0.0
+   },
+   "device_pulse": {
+    "e_pulse_j": 2.5e-15,
+    "label": "PARTLY-PUBLISHED",
+    "source": "~2.5 fJ per 5 ns pulse (gate charging) and 10 V / -8.5 V pulses [onen2022]",
+    "v": 10.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.30819716771096,
+    "measured_mvm_only": 32.30819716771096,
+    "range_high": 232.73007641539067,
+    "range_low": 16.133554047114558
+   },
+   "share_of_total_central": {
+    "device": 1.1427082484313995e-05,
+    "lines": 0.00556236366503905,
+    "mvm": 0.9944262092524767,
+    "tt": 0.0
+   }
+  },
+  "lm__protonic_onen2022__ttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 8.232060021445863e-05,
+     "lines": 0.0036913103272937595,
+     "mvm": 0.3225806451612903,
+     "total": 0.3263847936669235,
+     "tt": 3.0517578125e-05
+    },
+    "optimistic": {
+     "device": 8.232060021445863e-05,
+     "lines": 0.00131587000739688,
+     "mvm": 0.047619047619047616,
+     "total": 0.049023341742283955,
+     "tt": 6.103515625e-06
+    },
+    "pessimistic": {
+     "device": 8.232060021445863e-05,
+     "lines": 0.0366206141364688,
+     "mvm": 0.4098360655737705,
+     "total": 0.44666107062295374,
+     "tt": 0.0001220703125
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.02395394752139137,
+    "ppwr": 0.032928240085783454,
+    "px": 0.05605807916550409,
+    "reads_pwr": 1.52587890625e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 2.5e-15,
+    "label": "PARTLY-PUBLISHED",
+    "source": "~2.5 fJ per 5 ns pulse (gate charging) and 10 V / -8.5 V pulses [onen2022]",
+    "v": 10.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.110609710812625,
+    "measured_mvm_only": 32.110609710812625,
+    "range_high": 227.84892454806268,
+    "range_low": 15.785520189545489
+   },
+   "share_of_total_central": {
+    "device": 0.0002522194716536549,
+    "lines": 0.01130968843806109,
+    "mvm": 0.9883445902522182,
+    "tt": 9.350183806707387e-05
+   }
+  },
+  "lm__widrow1960_claimed__agad": {
+   "analog_pj": {
+    "central": {
+     "device": 262122.116293226,
+     "lines": 0.0012109375,
+     "mvm": 0.3225806451612903,
+     "total": 262122.44011532626,
+     "tt": 3.0517578125e-05
+    },
+    "optimistic": {
+     "device": 262122.116293226,
+     "lines": 7.568359375e-05,
+     "mvm": 0.047619047619047616,
+     "total": 262122.16399406074,
+     "tt": 6.103515625e-06
+    },
+    "pessimistic": {
+     "device": 262122.116293226,
+     "lines": 0.02421875,
+     "mvm": 0.4098360655737705,
+     "total": 262122.55047011186,
+     "tt": 0.0001220703125
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.014656598549797423,
+    "ppwr": 0.01747480775288173,
+    "px": 0.05784331342606317,
+    "reads_pwr": 1.52587890625e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": null,
+    "label": "CLAIM+ESTIMATE",
+    "source": "plating energy per level from Widrow's figures (lane ME ENERGY.json widrow_energy_per_level_j)",
+    "v": null
+   },
+   "ratio_gpu_over_analog": {
+    "central": 3.998289776476829e-05,
+    "measured_mvm_only": 3.998289776476829e-05,
+    "range_high": 4.261339645427558e-05,
+    "range_low": 2.6898782022215192e-05
+   },
+   "share_of_total_central": {
+    "device": 0.999998764615116,
+    "lines": 4.619739917983453e-09,
+    "mvm": 1.2306487190465806e-06,
+    "tt": 1.1642489712659911e-10
+   }
+  },
+  "lm__widrow1960_claimed__cttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 323881.64506639756,
+     "lines": 0.0012109375,
+     "mvm": 0.3225806451612903,
+     "total": 323881.9688884978,
+     "tt": 3.0517578125e-05
+    },
+    "optimistic": {
+     "device": 323881.64506639756,
+     "lines": 7.568359375e-05,
+     "mvm": 0.047619047619047616,
+     "total": 323881.6927672323,
+     "tt": 6.103515625e-06
+    },
+    "pessimistic": {
+     "device": 323881.64506639756,
+     "lines": 0.02421875,
+     "mvm": 0.4098360655737705,
+     "total": 323882.0792432834,
+     "tt": 0.0001220703125
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.01856620367822193,
+    "ppwr": 0.02159210967109317,
+    "px": 0.04932618741535005,
+    "reads_pwr": 1.52587890625e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": null,
+    "label": "CLAIM+ESTIMATE",
+    "source": "plating energy per level from Widrow's figures (lane ME ENERGY.json widrow_energy_per_level_j)",
+    "v": null
+   },
+   "ratio_gpu_over_analog": {
+    "central": 3.235874711071291e-05,
+    "measured_mvm_only": 3.235874711071291e-05,
+    "range_high": 3.448764145418728e-05,
+    "range_low": 2.1769581585606847e-05
+   },
+   "share_of_total_central": {
+    "device": 0.999999000184847,
+    "lines": 3.738823449035185e-09,
+    "mvm": 9.959821050499557e-07,
+    "tt": 9.422438127608835e-11
+   }
+  },
+  "lm__widrow1960_claimed__sgd": {
+   "analog_pj": {
+    "central": {
+     "device": 30015.29822179249,
+     "lines": 0.0012109375,
+     "mvm": 0.3225806451612903,
+     "total": 30015.62201337515,
+     "tt": 0.0
+    },
+    "optimistic": {
+     "device": 30015.29822179249,
+     "lines": 7.568359375e-05,
+     "mvm": 0.047619047619047616,
+     "total": 30015.345916523704,
+     "tt": 0.0
+    },
+    "pessimistic": {
+     "device": 30015.29822179249,
+     "lines": 0.02421875,
+     "mvm": 0.4098360655737705,
+     "total": 30015.73227660806,
+     "tt": 0.0
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.005302822004045759,
+    "ppwr": 0.0020010198814528327,
+    "px": 0.01656468091805776,
+    "reads_pwr": 0.0
+   },
+   "device_pulse": {
+    "e_pulse_j": null,
+    "label": "CLAIM+ESTIMATE",
+    "source": "plating energy per level from Widrow's figures (lane ME ENERGY.json widrow_energy_per_level_j)",
+    "v": null
+   },
+   "ratio_gpu_over_analog": {
+    "central": 0.00034916533531480876,
+    "measured_mvm_only": 0.00034916533531480876,
+    "range_high": 0.0003721401620623141,
+    "range_low": 0.0002349027264511374
+   },
+   "share_of_total_central": {
+    "device": 0.9999892125646268,
+    "lines": 4.0343575071021305e-08,
+    "mvm": 1.074709179831577e-05,
+    "tt": 0.0
+   }
+  },
+  "lm__widrow1960_claimed__ttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 326250.36696025304,
+     "lines": 0.0012109375,
+     "mvm": 0.3225806451612903,
+     "total": 326250.69078235334,
+     "tt": 3.0517578125e-05
+    },
+    "optimistic": {
+     "device": 326250.36696025304,
+     "lines": 7.568359375e-05,
+     "mvm": 0.047619047619047616,
+     "total": 326250.4146610878,
+     "tt": 6.103515625e-06
+    },
+    "pessimistic": {
+     "device": 326250.36696025304,
+     "lines": 0.02421875,
+     "mvm": 0.4098360655737705,
+     "total": 326250.8011371389,
+     "tt": 0.0001220703125
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.018689394053958714,
+    "ppwr": 0.02175002446401687,
+    "px": 0.048794556563241144,
+    "reads_pwr": 1.52587890625e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": null,
+    "label": "CLAIM+ESTIMATE",
+    "source": "plating energy per level from Widrow's figures (lane ME ENERGY.json widrow_energy_per_level_j)",
+    "v": null
+   },
+   "ratio_gpu_over_analog": {
+    "central": 3.212380853462876e-05,
+    "measured_mvm_only": 3.212380853462876e-05,
+    "range_high": 3.423724596744182e-05,
+    "range_low": 2.1611525009677626e-05
+   },
+   "share_of_total_central": {
+    "device": 0.9999990074439398,
+    "lines": 3.7116779648685383e-09,
+    "mvm": 9.88750841838029e-07,
+    "tt": 9.354027129204986e-11
+   }
+  },
+  "lm__wox_ysz_chen2023__agad": {
+   "analog_pj": {
+    "central": {
+     "device": 7.168342460904805e-06,
+     "lines": 0.0015202054407695929,
+     "mvm": 0.3225806451612903,
+     "total": 0.32413853652264585,
+     "tt": 3.0517578125e-05
+    },
+    "optimistic": {
+     "device": 7.168342460904805e-06,
+     "lines": 0.0002303175641347965,
+     "mvm": 0.047619047619047616,
+     "total": 0.04786263704126832,
+     "tt": 6.103515625e-06
+    },
+    "pessimistic": {
+     "device": 7.168342460904805e-06,
+     "lines": 0.025765089703847967,
+     "mvm": 0.4098360655737705,
+     "total": 0.43573039393257934,
+     "tt": 0.0001220703125
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.01068983863081251,
+    "ppwr": 0.007168342460904803,
+    "px": 0.02921570211365109,
+    "reads_pwr": 1.52587890625e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused; the measured cell used 100 ms pulses at 5 V [chen2023]",
+    "v": 5.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.33313396616288,
+    "measured_mvm_only": 32.33313396616288,
+    "range_high": 233.3744311685246,
+    "range_low": 16.181513721288876
+   },
+   "share_of_total_central": {
+    "device": 2.2115057770688706e-05,
+    "lines": 0.004689986747883599,
+    "mvm": 0.9951937483951505,
+    "tt": 9.414979919509786e-05
+   }
+  },
+  "lm__wox_ysz_chen2023__cttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 9.512666529700871e-06,
+     "lines": 0.0015303292974435147,
+     "mvm": 0.3225806451612903,
+     "total": 0.32415100470338853,
+     "tt": 3.0517578125e-05
+    },
+    "optimistic": {
+     "device": 9.512666529700871e-06,
+     "lines": 0.00023537949247175738,
+     "mvm": 0.047619047619047616,
+     "total": 0.04787004329367408,
+     "tt": 6.103515625e-06
+    },
+    "pessimistic": {
+     "device": 9.512666529700871e-06,
+     "lines": 0.025815708987217575,
+     "mvm": 0.4098360655737705,
+     "total": 0.43578335754001774,
+     "tt": 0.0001220703125
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.012452682244210016,
+    "ppwr": 0.00951266652970087,
+    "px": 0.028759162587211246,
+    "reads_pwr": 1.52587890625e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused; the measured cell used 100 ms pulses at 5 V [chen2023]",
+    "v": 5.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.33189030085746,
+    "measured_mvm_only": 32.33189030085746,
+    "range_high": 233.33832445494423,
+    "range_low": 16.179547075877423
+   },
+   "share_of_total_central": {
+    "device": 2.934640458204148e-05,
+    "lines": 0.004721038266852909,
+    "mvm": 0.9951554691507584,
+    "tt": 9.414617780662082e-05
+   }
+  },
+  "lm__wox_ysz_chen2023__sgd": {
+   "analog_pj": {
+    "central": {
+     "device": 3.568430896316256e-07,
+     "lines": 0.0012832320163631724,
+     "mvm": 0.3225806451612903,
+     "total": 0.3238642340207431,
+     "tt": 0.0
+    },
+    "optimistic": {
+     "device": 3.568430896316256e-07,
+     "lines": 0.00011183085193158615,
+     "mvm": 0.047619047619047616,
+     "total": 0.04773123531406884,
+     "tt": 0.0
+    },
+    "pessimistic": {
+     "device": 3.568430896316256e-07,
+     "lines": 0.02458022258181586,
+     "mvm": 0.4098360655737705,
+     "total": 0.43441664499867594,
+     "tt": 0.0
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.00253100597517831,
+    "ppwr": 0.00035684308963162555,
+    "px": 0.006797318716843923,
+    "reads_pwr": 0.0
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused; the measured cell used 100 ms pulses at 5 V [chen2023]",
+    "v": 5.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.36051908192935,
+    "measured_mvm_only": 32.36051908192935,
+    "range_high": 234.01689942097943,
+    "range_low": 16.230449337925645
+   },
+   "share_of_total_central": {
+    "device": 1.101829260988326e-06,
+    "lines": 0.003962252949119979,
+    "mvm": 0.996036645221619,
+    "tt": 0.0
+   }
+  },
+  "lm__wox_ysz_chen2023__ttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 9.185628105345227e-06,
+     "lines": 0.0015260420098699274,
+     "mvm": 0.3225806451612903,
+     "total": 0.32414639037739057,
+     "tt": 3.0517578125e-05
+    },
+    "optimistic": {
+     "device": 9.185628105345227e-06,
+     "lines": 0.0002332358486849637,
+     "mvm": 0.047619047619047616,
+     "total": 0.047867572611462926,
+     "tt": 6.103515625e-06
+    },
+    "pessimistic": {
+     "device": 9.185628105345227e-06,
+     "lines": 0.025794272549349635,
+     "mvm": 0.4098360655737705,
+     "total": 0.43576159406372544,
+     "tt": 0.0001220703125
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.0123064961876188,
+    "ppwr": 0.009185628105345227,
+    "px": 0.02835215024721055,
+    "reads_pwr": 1.52587890625e-05
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused; the measured cell used 100 ms pulses at 5 V [chen2023]",
+    "v": 5.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.33235055550292,
+    "measured_mvm_only": 32.33235055550292,
+    "range_high": 233.35036820013454,
+    "range_low": 16.180355139722433
+   },
+   "share_of_total_central": {
+    "device": 2.833790033771708e-05,
+    "lines": 0.004707879079243234,
+    "mvm": 0.9951696355024121,
+    "tt": 9.414751800712517e-05
+   }
+  },
+  "mnist__ecram_li_tang2018__agad": {
+   "analog_pj": {
+    "central": {
+     "device": 5.402929630901065e-05,
+     "lines": 0.0014994384876477846,
+     "mvm": 0.3225806451612903,
+     "total": 0.3251122404492535,
+     "tt": 0.0009781275040064103
+    },
+    "optimistic": {
+     "device": 5.402929630901065e-05,
+     "lines": 0.00021993408757389236,
+     "mvm": 0.047619047619047616,
+     "total": 0.04808863650373181,
+     "tt": 0.00019562550080128203
+    },
+    "pessimistic": {
+     "device": 5.402929630901065e-05,
+     "lines": 0.025661254938238925,
+     "mvm": 0.4098360655737705,
+     "total": 0.43946385982434405,
+     "tt": 0.003912510016025641
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.009788828687167996,
+    "ppwr": 0.05402929630901064,
+    "px": 0.2228732581255616,
+    "reads_pwr": 0.0004890637520032051
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "PROJECTION (pulse) / ESTIMATE (voltage)",
+    "source": "~1 fJ projected for 100 nm x 100 nm Li-ECRAM [tang2018]; a few volts of gate pulse (ours)",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.23629694932562,
+    "measured_mvm_only": 32.23629694932562,
+    "range_high": 232.2776544696736,
+    "range_low": 16.044043646776487
+   },
+   "share_of_total_central": {
+    "device": 0.00016618659523354377,
+    "lines": 0.004612064084624432,
+    "mvm": 0.9922131652611267,
+    "tt": 0.0030085840590154136
+   }
+  },
+  "mnist__ecram_li_tang2018__cttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 0.00013409899534109338,
+     "lines": 0.001467050289803383,
+     "mvm": 0.3225806451612903,
+     "total": 0.3251599219504412,
+     "tt": 0.0009781275040064103
+    },
+    "optimistic": {
+     "device": 0.00013409899534109338,
+     "lines": 0.0002037399886516916,
+     "mvm": 0.047619047619047616,
+     "total": 0.04815251210384169,
+     "tt": 0.00019562550080128203
+    },
+    "pessimistic": {
+     "device": 0.00013409899534109338,
+     "lines": 0.025499313949016916,
+     "mvm": 0.4098360655737705,
+     "total": 0.43938198853415417,
+     "tt": 0.003912510016025641
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.02064308573172998,
+    "ppwr": 0.13409899534109337,
+    "px": 0.18589948669035322,
+    "reads_pwr": 0.0004890637520032051
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "PROJECTION (pulse) / ESTIMATE (voltage)",
+    "source": "~1 fJ projected for 100 nm x 100 nm Li-ECRAM [tang2018]; a few volts of gate pulse (ours)",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.23156981376089,
+    "measured_mvm_only": 32.23156981376089,
+    "range_high": 231.96953192480265,
+    "range_low": 16.047033178863604
+   },
+   "share_of_total_central": {
+    "device": 0.0004124093600979886,
+    "lines": 0.004511780790828771,
+    "mvm": 0.992067666969289,
+    "tt": 0.003008142879784213
+   }
+  },
+  "mnist__ecram_li_tang2018__sgd": {
+   "analog_pj": {
+    "central": {
+     "device": 1.8746671796416852e-05,
+     "lines": 0.0012899056410944332,
+     "mvm": 0.3225806451612903,
+     "total": 0.32388929747418116,
+     "tt": 0.0
+    },
+    "optimistic": {
+     "device": 1.8746671796416852e-05,
+     "lines": 0.00011516766429721662,
+     "mvm": 0.047619047619047616,
+     "total": 0.04775296195514125,
+     "tt": 0.0
+    },
+    "pessimistic": {
+     "device": 1.8746671796416852e-05,
+     "lines": 0.024613590705472168,
+     "mvm": 0.4098360655737705,
+     "total": 0.43446840295103906,
+     "tt": 0.0
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.013493188544526215,
+    "ppwr": 0.01874667179641685,
+    "px": 0.05019079620904898,
+    "reads_pwr": 0.0
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "PROJECTION (pulse) / ESTIMATE (voltage)",
+    "source": "~1 fJ projected for 100 nm x 100 nm Li-ECRAM [tang2018]; a few volts of gate pulse (ours)",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.35801493508175,
+    "measured_mvm_only": 32.35801493508175,
+    "range_high": 233.9104264197157,
+    "range_low": 16.228515814525647
+   },
+   "share_of_total_central": {
+    "device": 5.787987421199443e-05,
+    "lines": 0.003982550986258686,
+    "mvm": 0.9959595691395293,
+    "tt": 0.0
+   }
+  },
+  "mnist__ecram_li_tang2018__ttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 0.00013577686363215347,
+     "lines": 0.001470901961199378,
+     "mvm": 0.3225806451612903,
+     "total": 0.32516545149012827,
+     "tt": 0.0009781275040064103
+    },
+    "optimistic": {
+     "device": 0.00013577686363215347,
+     "lines": 0.00020566582434968905,
+     "mvm": 0.047619047619047616,
+     "total": 0.04815611580783075,
+     "tt": 0.00019562550080128203
+    },
+    "pessimistic": {
+     "device": 0.00013577686363215347,
+     "lines": 0.02551857230599689,
+     "mvm": 0.4098360655737705,
+     "total": 0.4394029247594252,
+     "tt": 0.003912510016025641
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.020851958091959975,
+    "ppwr": 0.13577686363215347,
+    "px": 0.18879680093979653,
+    "reads_pwr": 0.0004890637520032051
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "PROJECTION (pulse) / ESTIMATE (voltage)",
+    "source": "~1 fJ projected for 100 nm x 100 nm Li-ECRAM [tang2018]; a few volts of gate pulse (ours)",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.23102170588644,
+    "measured_mvm_only": 32.23102170588644,
+    "range_high": 231.95217276878444,
+    "range_low": 16.04626858608865
+   },
+   "share_of_total_central": {
+    "device": 0.00041756239172990845,
+    "lines": 0.004523549332989435,
+    "mvm": 0.9920507965499021,
+    "tt": 0.003008091725378473
+   }
+  },
+  "mnist__ecram_mo_kim2019__agad": {
+   "analog_pj": {
+    "central": {
+     "device": 0.0002540159695187129,
+     "lines": 0.0015972450890479615,
+     "mvm": 0.3225806451612903,
+     "total": 0.32541003372386346,
+     "tt": 0.0009781275040064103
+    },
+    "optimistic": {
+     "device": 0.0002540159695187129,
+     "lines": 0.00026883738827398074,
+     "mvm": 0.047619047619047616,
+     "total": 0.0483375264776416,
+     "tt": 0.00019562550080128203
+    },
+    "pessimistic": {
+     "device": 0.0002540159695187129,
+     "lines": 0.026150287945239808,
+     "mvm": 0.4098360655737705,
+     "total": 0.4401528795045547,
+     "tt": 0.003912510016025641
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.03708513538727246,
+    "ppwr": 0.25401596951871286,
+    "px": 0.2744532428772126,
+    "reads_pwr": 0.0004890637520032051
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.20679646859372,
+    "measured_mvm_only": 32.20679646859372,
+    "range_high": 231.08165658617565,
+    "range_low": 16.018928141829136
+   },
+   "share_of_total_central": {
+    "device": 0.0007806027571180114,
+    "lines": 0.0049084076196720845,
+    "mvm": 0.9913051588170324,
+    "tt": 0.003005830806177384
+   }
+  },
+  "mnist__ecram_mo_kim2019__cttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 0.0004851470320193484,
+     "lines": 0.001616006521828489,
+     "mvm": 0.3225806451612903,
+     "total": 0.3256599262191446,
+     "tt": 0.0009781275040064103
+    },
+    "optimistic": {
+     "device": 0.0004851470320193484,
+     "lines": 0.0002782181046642445,
+     "mvm": 0.047619047619047616,
+     "total": 0.0485780382565325,
+     "tt": 0.00019562550080128203
+    },
+    "pessimistic": {
+     "device": 0.0004851470320193484,
+     "lines": 0.026244095109142444,
+     "mvm": 0.4098360655737705,
+     "total": 0.4404778177309579,
+     "tt": 0.003912510016025641
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.06681537605783658,
+    "ppwr": 0.48514703201934833,
+    "px": 0.25985318993288037,
+    "reads_pwr": 0.0004890637520032051
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.18208284531195,
+    "measured_mvm_only": 32.18208284531195,
+    "range_high": 229.937562211654,
+    "range_low": 16.007111060719126
+   },
+   "share_of_total_central": {
+    "device": 0.0014897351284569199,
+    "lines": 0.004962251697929325,
+    "mvm": 0.9905444888672543,
+    "tt": 0.003003524306359402
+   }
+  },
+  "mnist__ecram_mo_kim2019__sgd": {
+   "analog_pj": {
+    "central": {
+     "device": 0.00015082847366930147,
+     "lines": 0.0014093179230349093,
+     "mvm": 0.3225806451612903,
+     "total": 0.3241407915579945,
+     "tt": 0.0
+    },
+    "optimistic": {
+     "device": 0.00015082847366930147,
+     "lines": 0.00017487380526745477,
+     "mvm": 0.047619047619047616,
+     "total": 0.047944749897984376,
+     "tt": 0.0
+    },
+    "pessimistic": {
+     "device": 0.00015082847366930147,
+     "lines": 0.025210652115174547,
+     "mvm": 0.4098360655737705,
+     "total": 0.4351975461626143,
+     "tt": 0.0
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.048081911764961786,
+    "ppwr": 0.15082847366930144,
+    "px": 0.11190230035996525,
+    "reads_pwr": 0.0
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.33290902576067,
+    "measured_mvm_only": 32.33290902576067,
+    "range_high": 232.97474108215422,
+    "range_low": 16.201326065308447
+   },
+   "share_of_total_central": {
+    "device": 0.0004653177804136866,
+    "lines": 0.004347857350076093,
+    "mvm": 0.9951868248695103,
+    "tt": 0.0
+   }
+  },
+  "mnist__ecram_mo_kim2019__ttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 0.0004874987019977478,
+     "lines": 0.0016185113765784364,
+     "mvm": 0.3225806451612903,
+     "total": 0.32566478274387295,
+     "tt": 0.0009781275040064103
+    },
+    "optimistic": {
+     "device": 0.0004874987019977478,
+     "lines": 0.0002794705320392182,
+     "mvm": 0.047619047619047616,
+     "total": 0.048581642353885866,
+     "tt": 0.00019562550080128203
+    },
+    "pessimistic": {
+     "device": 0.0004874987019977478,
+     "lines": 0.02625661938289218,
+     "mvm": 0.4098360655737705,
+     "total": 0.4404926936746861,
+     "tt": 0.003912510016025641
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.06686222988303914,
+    "ppwr": 0.4874987019977478,
+    "px": 0.26182638026086114,
+    "reads_pwr": 0.0004890637520032051
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused",
+    "v": 2.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.18160292519338,
+    "measured_mvm_only": 32.18160292519338,
+    "range_high": 229.92050397073717,
+    "range_low": 16.006570482210538
+   },
+   "share_of_total_central": {
+    "device": 0.0014969340494552434,
+    "lines": 0.004969869210117676,
+    "mvm": 0.9905297172245725,
+    "tt": 0.0030034795158544437
+   }
+  },
+  "mnist__protonic_onen2022__agad": {
+   "analog_pj": {
+    "central": {
+     "device": 0.0001347239948694356,
+     "lines": 0.00866789834716896,
+     "mvm": 0.3225806451612903,
+     "total": 0.33236139500733514,
+     "tt": 0.0009781275040064103
+    },
+    "optimistic": {
+     "device": 0.0001347239948694356,
+     "lines": 0.00380416401733448,
+     "mvm": 0.047619047619047616,
+     "total": 0.05175356113205282,
+     "tt": 0.00019562550080128203
+    },
+    "pessimistic": {
+     "device": 0.0001347239948694356,
+     "lines": 0.06150355423584479,
+     "mvm": 0.4098360655737705,
+     "total": 0.47538685382051044,
+     "tt": 0.003912510016025641
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.00951011961150611,
+    "ppwr": 0.05388959794777424,
+    "px": 0.2310370044907184,
+    "reads_pwr": 0.0004890637520032051
+   },
+   "device_pulse": {
+    "e_pulse_j": 2.5e-15,
+    "label": "PARTLY-PUBLISHED",
+    "source": "~2.5 fJ per 5 ns pulse (gate charging) and 10 V / -8.5 V pulses [onen2022]",
+    "v": 10.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 31.533189120088355,
+    "measured_mvm_only": 31.533189120088355,
+    "range_high": 215.8289294379324,
+    "range_low": 14.831662448252658
+   },
+   "share_of_total_central": {
+    "device": 0.0004053539216444265,
+    "lines": 0.02607973873433063,
+    "mvm": 0.9705719436945168,
+    "tt": 0.00294296364950816
+   }
+  },
+  "mnist__protonic_onen2022__cttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 0.00030744956491206787,
+     "lines": 0.007659788729088052,
+     "mvm": 0.3225806451612903,
+     "total": 0.33152601095929685,
+     "tt": 0.0009781275040064103
+    },
+    "optimistic": {
+     "device": 0.00030744956491206787,
+     "lines": 0.0033001092082940264,
+     "mvm": 0.047619047619047616,
+     "total": 0.051422231893055,
+     "tt": 0.00019562550080128203
+    },
+    "pessimistic": {
+     "device": 0.00030744956491206787,
+     "lines": 0.05646300614544027,
+     "mvm": 0.4098360655737705,
+     "total": 0.4705190313001485,
+     "tt": 0.003912510016025641
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.018115206591408008,
+    "ppwr": 0.12297982596482715,
+    "px": 0.18991225241143242,
+    "reads_pwr": 0.0004890637520032051
+   },
+   "device_pulse": {
+    "e_pulse_j": 2.5e-15,
+    "label": "PARTLY-PUBLISHED",
+    "source": "~2.5 fJ per 5 ns pulse (gate charging) and 10 V / -8.5 V pulses [onen2022]",
+    "v": 10.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 31.61264690712133,
+    "measured_mvm_only": 31.61264690712133,
+    "range_high": 217.21958154134768,
+    "range_low": 14.985105551883368
+   },
+   "share_of_total_central": {
+    "device": 0.0009273769018076081,
+    "lines": 0.02310463877909261,
+    "mvm": 0.973017604947128,
+    "tt": 0.0029503793719718114
+   }
+  },
+  "mnist__protonic_onen2022__sgd": {
+   "analog_pj": {
+    "central": {
+     "device": 4.072844876626633e-05,
+     "lines": 0.0032925030508720973,
+     "mvm": 0.3225806451612903,
+     "total": 0.3259138766609287,
+     "tt": 0.0
+    },
+    "optimistic": {
+     "device": 4.072844876626633e-05,
+     "lines": 0.0011164663691860487,
+     "mvm": 0.047619047619047616,
+     "total": 0.048776242436999934,
+     "tt": 0.0
+    },
+    "pessimistic": {
+     "device": 4.072844876626633e-05,
+     "lines": 0.03462657775436049,
+     "mvm": 0.4098360655737705,
+     "total": 0.44450337177689725,
+     "tt": 0.0
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.010494425197674948,
+    "ppwr": 0.016291379506506533,
+    "px": 0.056652850636908815,
+    "reads_pwr": 0.0
+   },
+   "device_pulse": {
+    "e_pulse_j": 2.5e-15,
+    "label": "PARTLY-PUBLISHED",
+    "source": "~2.5 fJ per 5 ns pulse (gate charging) and 10 V / -8.5 V pulses [onen2022]",
+    "v": 10.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.15700672937657,
+    "measured_mvm_only": 32.15700672937657,
+    "range_high": 229.0032018796603,
+    "range_low": 15.862145927076405
+   },
+   "share_of_total_central": {
+    "device": 0.0001249669059309157,
+    "lines": 0.010102371474957237,
+    "mvm": 0.9897726616191119,
+    "tt": 0.0
+   }
+  },
+  "mnist__protonic_onen2022__ttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 0.00031596234095004075,
+     "lines": 0.007777945218441429,
+     "mvm": 0.3225806451612903,
+     "total": 0.3316526802246882,
+     "tt": 0.0009781275040064103
+    },
+    "optimistic": {
+     "device": 0.00031596234095004075,
+     "lines": 0.0033591874529707143,
+     "mvm": 0.047619047619047616,
+     "total": 0.051489822913769655,
+     "tt": 0.00019562550080128203
+    },
+    "pessimistic": {
+     "device": 0.00031596234095004075,
+     "lines": 0.05705378859220714,
+     "mvm": 0.4098360655737705,
+     "total": 0.4711183265229534,
+     "tt": 0.003912510016025641
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.018688548703878545,
+    "ppwr": 0.1263849363800163,
+    "px": 0.19315040995552238,
+    "reads_pwr": 0.0004890637520032051
+   },
+   "device_pulse": {
+    "e_pulse_j": 2.5e-15,
+    "label": "PARTLY-PUBLISHED",
+    "source": "~2.5 fJ per 5 ns pulse (gate charging) and 10 V / -8.5 V pulses [onen2022]",
+    "v": 10.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 31.60057297858233,
+    "measured_mvm_only": 31.60057297858233,
+    "range_high": 216.93443600374934,
+    "range_low": 14.966043457150713
+   },
+   "share_of_total_central": {
+    "device": 0.0009526904493459315,
+    "lines": 0.02345208008924283,
+    "mvm": 0.9726459769381277,
+    "tt": 0.0029492525232835383
+   }
+  },
+  "mnist__widrow1960_claimed__agad": {
+   "analog_pj": {
+    "central": {
+     "device": 833292.2374172822,
+     "lines": 0.0012109375,
+     "mvm": 0.3225806451612903,
+     "total": 833292.5621869923,
+     "tt": 0.0009781275040064103
+    },
+    "optimistic": {
+     "device": 833292.2374172822,
+     "lines": 7.568359375e-05,
+     "mvm": 0.047619047619047616,
+     "total": 833292.2853076389,
+     "tt": 0.00019562550080128203
+    },
+    "pessimistic": {
+     "device": 833292.2374172822,
+     "lines": 0.02421875,
+     "mvm": 0.4098360655737705,
+     "total": 833292.6753846079,
+     "tt": 0.003912510016025641
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.009493086084899268,
+    "ppwr": 0.05555281582781881,
+    "px": 0.2383896036722104,
+    "reads_pwr": 0.0004890637520032051
+   },
+   "device_pulse": {
+    "e_pulse_j": null,
+    "label": "CLAIM+ESTIMATE",
+    "source": "plating energy per level from Widrow's figures (lane ME ENERGY.json widrow_energy_per_level_j)",
+    "v": null
+   },
+   "ratio_gpu_over_analog": {
+    "central": 1.2577113009957319e-05,
+    "measured_mvm_only": 1.2577113009957319e-05,
+    "range_high": 1.3404559109301948e-05,
+    "range_low": 8.461345642991929e-06
+   },
+   "share_of_total_central": {
+    "device": 0.9999996102572796,
+    "lines": 1.4531960981649365e-09,
+    "mvm": 3.8711571397525886e-07,
+    "tt": 1.173810433924066e-09
+   }
+  },
+  "mnist__widrow1960_claimed__cttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 1725988.7886147725,
+     "lines": 0.0012109375,
+     "mvm": 0.3225806451612903,
+     "total": 1725989.113384483,
+     "tt": 0.0009781275040064103
+    },
+    "optimistic": {
+     "device": 1725988.7886147725,
+     "lines": 7.568359375e-05,
+     "mvm": 0.047619047619047616,
+     "total": 1725988.8365051292,
+     "tt": 0.00019562550080128203
+    },
+    "pessimistic": {
+     "device": 1725988.7886147725,
+     "lines": 0.02421875,
+     "mvm": 0.4098360655737705,
+     "total": 1725989.226582098,
+     "tt": 0.003912510016025641
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.016355297492606093,
+    "ppwr": 0.11506591924098483,
+    "px": 0.19368180152236839,
+    "reads_pwr": 0.0004890637520032051
+   },
+   "device_pulse": {
+    "e_pulse_j": null,
+    "label": "CLAIM+ESTIMATE",
+    "source": "plating energy per level from Widrow's figures (lane ME ENERGY.json widrow_energy_per_level_j)",
+    "v": null
+   },
+   "ratio_gpu_over_analog": {
+    "central": 6.072120990631105e-06,
+    "measured_mvm_only": 6.072120990631105e-06,
+    "range_high": 6.47160367291191e-06,
+    "range_low": 4.085064518140122e-06
+   },
+   "share_of_total_central": {
+    "device": 0.9999998118355974,
+    "lines": 7.01590462309162e-10,
+    "mvm": 1.86896106504834e-07,
+    "tt": 5.667054887086774e-10
+   }
+  },
+  "mnist__widrow1960_claimed__sgd": {
+   "analog_pj": {
+    "central": {
+     "device": 191132.49030497472,
+     "lines": 0.0012109375,
+     "mvm": 0.3225806451612903,
+     "total": 191132.81409655738,
+     "tt": 0.0
+    },
+    "optimistic": {
+     "device": 191132.49030497472,
+     "lines": 7.568359375e-05,
+     "mvm": 0.047619047619047616,
+     "total": 191132.5379997059,
+     "tt": 0.0
+    },
+    "pessimistic": {
+     "device": 191132.49030497472,
+     "lines": 0.02421875,
+     "mvm": 0.4098360655737705,
+     "total": 191132.92435979028,
+     "tt": 0.0
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.00733551239265714,
+    "ppwr": 0.012742166020331647,
+    "px": 0.06477626236962286,
+    "reads_pwr": 0.0
+   },
+   "device_pulse": {
+    "e_pulse_j": null,
+    "label": "CLAIM+ESTIMATE",
+    "source": "plating energy per level from Widrow's figures (lane ME ENERGY.json widrow_energy_per_level_j)",
+    "v": null
+   },
+   "ratio_gpu_over_analog": {
+    "central": 5.4833152405155006e-05,
+    "measured_mvm_only": 5.4833152405155006e-05,
+    "range_high": 5.844068106158218e-05,
+    "range_low": 3.688939188169483e-05
+   },
+   "share_of_total_central": {
+    "device": 0.9999983059341004,
+    "lines": 6.33558138995564e-09,
+    "mvm": 1.6877303182400043e-06,
+    "tt": 0.0
+   }
+  },
+  "mnist__widrow1960_claimed__ttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 1810168.4872856152,
+     "lines": 0.0012109375,
+     "mvm": 0.3225806451612903,
+     "total": 1810168.8120553256,
+     "tt": 0.0009781275040064103
+    },
+    "optimistic": {
+     "device": 1810168.4872856152,
+     "lines": 7.568359375e-05,
+     "mvm": 0.047619047619047616,
+     "total": 1810168.535175972,
+     "tt": 0.00019562550080128203
+    },
+    "pessimistic": {
+     "device": 1810168.4872856152,
+     "lines": 0.02421875,
+     "mvm": 0.4098360655737705,
+     "total": 1810168.9252529407,
+     "tt": 0.003912510016025641
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.01728020654354715,
+    "ppwr": 0.12067789915237434,
+    "px": 0.19820274053683673,
+    "reads_pwr": 0.0004890637520032051
+   },
+   "device_pulse": {
+    "e_pulse_j": null,
+    "label": "CLAIM+ESTIMATE",
+    "source": "plating energy per level from Widrow's figures (lane ME ENERGY.json widrow_energy_per_level_j)",
+    "v": null
+   },
+   "ratio_gpu_over_analog": {
+    "central": 5.789744390238874e-06,
+    "measured_mvm_only": 5.789744390238874e-06,
+    "range_high": 6.170649570287492e-06,
+    "range_low": 3.895093573776498e-06
+   },
+   "share_of_total_central": {
+    "device": 0.999999820585954,
+    "lines": 6.689638512913397e-10,
+    "mvm": 1.7820473041683974e-07,
+    "tt": 5.403515393107518e-10
+   }
+  },
+  "mnist__wox_ysz_chen2023__agad": {
+   "analog_pj": {
+    "central": {
+     "device": 2.7916146515002972e-05,
+     "lines": 0.0022683241537022713,
+     "mvm": 0.3225806451612903,
+     "total": 0.32585501296551406,
+     "tt": 0.0009781275040064103
+    },
+    "optimistic": {
+     "device": 2.7916146515002972e-05,
+     "lines": 0.0006043769206011356,
+     "mvm": 0.047619047619047616,
+     "total": 0.04844696618696504,
+     "tt": 0.00019562550080128203
+    },
+    "pessimistic": {
+     "device": 2.7916146515002972e-05,
+     "lines": 0.029505683268511357,
+     "mvm": 0.4098360655737705,
+     "total": 0.44328217500482253,
+     "tt": 0.003912510016025641
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.008445753845985476,
+    "ppwr": 0.02791614651500297,
+    "px": 0.12799123372850113,
+    "reads_pwr": 0.0004890637520032051
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused; the measured cell used 100 ms pulses at 5 V [chen2023]",
+    "v": 5.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.16281569402111,
+    "measured_mvm_only": 32.16281569402111,
+    "range_high": 230.5596526029092,
+    "range_low": 15.905844506664256
+   },
+   "share_of_total_central": {
+    "device": 8.56704528217812e-05,
+    "lines": 0.006961145489396945,
+    "mvm": 0.9899514579369989,
+    "tt": 0.003001726120782213
+   }
+  },
+  "mnist__wox_ysz_chen2023__cttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 6.875370621248187e-05,
+     "lines": 0.002129568928671738,
+     "mvm": 0.3225806451612903,
+     "total": 0.32575709530018093,
+     "tt": 0.0009781275040064103
+    },
+    "optimistic": {
+     "device": 6.875370621248187e-05,
+     "lines": 0.0005349993080858691,
+     "mvm": 0.047619047619047616,
+     "total": 0.04841842613414725,
+     "tt": 0.00019562550080128203
+    },
+    "pessimistic": {
+     "device": 6.875370621248187e-05,
+     "lines": 0.02881190714335869,
+     "mvm": 0.4098360655737705,
+     "total": 0.4426292364393673,
+     "tt": 0.003912510016025641
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.013540796916504644,
+    "ppwr": 0.06875370621248186,
+    "px": 0.10499229065404221,
+    "reads_pwr": 0.0004890637520032051
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused; the measured cell used 100 ms pulses at 5 V [chen2023]",
+    "v": 5.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.17248335090022,
+    "measured_mvm_only": 32.17248335090022,
+    "range_high": 230.69555509269085,
+    "range_low": 15.929307799279265
+   },
+   "share_of_total_central": {
+    "device": 0.00021105820012646607,
+    "lines": 0.006537291004235434,
+    "mvm": 0.990249022401297,
+    "tt": 0.003002628394341122
+   }
+  },
+  "mnist__wox_ysz_chen2023__sgd": {
+   "analog_pj": {
+    "central": {
+     "device": 6.445508175924743e-06,
+     "lines": 0.0014678928989222543,
+     "mvm": 0.3225806451612903,
+     "total": 0.3240549835683885,
+     "tt": 0.0
+    },
+    "optimistic": {
+     "device": 6.445508175924743e-06,
+     "lines": 0.00020416129321112713,
+     "mvm": 0.047619047619047616,
+     "total": 0.047829654420434665,
+     "tt": 0.0
+    },
+    "pessimistic": {
+     "device": 6.445508175924743e-06,
+     "lines": 0.025503526994611274,
+     "mvm": 0.4098360655737705,
+     "total": 0.43534603807655764,
+     "tt": 0.0
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.009649634256019233,
+    "ppwr": 0.006445508175924743,
+    "px": 0.02350590108878776,
+    "reads_pwr": 0.0
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused; the measured cell used 100 ms pulses at 5 V [chen2023]",
+    "v": 5.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.341470603462895,
+    "measured_mvm_only": 32.341470603462895,
+    "range_high": 233.53536271755567,
+    "range_low": 16.19579996490683
+   },
+   "share_of_total_central": {
+    "device": 1.9890168344115233e-05,
+    "lines": 0.004529764926798203,
+    "mvm": 0.9954503449048577,
+    "tt": 0.0
+   }
+  },
+  "mnist__wox_ysz_chen2023__ttv2": {
+   "analog_pj": {
+    "central": {
+     "device": 6.921332653113426e-05,
+     "lines": 0.0021470752073048647,
+     "mvm": 0.3225806451612903,
+     "total": 0.3257750611991327,
+     "tt": 0.0009781275040064103
+    },
+    "optimistic": {
+     "device": 6.921332653113426e-05,
+     "lines": 0.0005437524474024325,
+     "mvm": 0.047619047619047616,
+     "total": 0.048427638893782474,
+     "tt": 0.00019562550080128203
+    },
+    "pessimistic": {
+     "device": 6.921332653113426e-05,
+     "lines": 0.028899438536524328,
+     "mvm": 0.4098360655737705,
+     "total": 0.4427172274528516,
+     "tt": 0.003912510016025641
+    }
+   },
+   "counts": {
+    "n": 5,
+    "pd": 0.013511587264839368,
+    "ppwr": 0.06921332653113425,
+    "px": 0.10728037496804643,
+    "reads_pwr": 0.0004890637520032051
+   },
+   "device_pulse": {
+    "e_pulse_j": 1e-15,
+    "label": "ESTIMATE",
+    "source": "the Li-ECRAM projection reused; the measured cell used 100 ms pulses at 5 V [chen2023]",
+    "v": 5.0
+   },
+   "ratio_gpu_over_analog": {
+    "central": 32.17070909727018,
+    "measured_mvm_only": 32.17070909727018,
+    "range_high": 230.65166811520174,
+    "range_low": 15.926141814649695
+   },
+   "share_of_total_central": {
+    "device": 0.00021245741241324498,
+    "lines": 0.006590667804348742,
+    "mvm": 0.9901944119783627,
+    "tt": 0.003002462804875422
+   }
+  }
+ },
+ "schema": "altone.x1000.me-paper.energy-system.v1",
+ "unit": "J per weight per row (reported in pJ)",
+ "widrow_energy_per_level_j": 1.5e-05
+}

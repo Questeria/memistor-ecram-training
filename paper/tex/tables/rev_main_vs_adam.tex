@@ -1,0 +1,27 @@
+\begin{table*}[t]\centering\footnotesize\caption{Revised main table (repaired simulator): gap to digital Adam (its own selected learning rate), mean [95 \% $t$-interval] over 5 seeds paired by seed (same initialisation and data order); MNIST and CIFAR in accuracy points, LM in \% of bits per byte; P/F/U = PASS/FAIL/UNRESOLVED against the absolute lines 2 pp, 2 pp, 5 \%.}\label{tab:rev_vs_adam}
+\begin{tabular}{llccc}\toprule Device & Alg. & MNIST & CIFAR & LM\\\midrule
+Li-ECRAM & SGD & 6.39 [3.79, 8.98] F & 20.25 [14.51, 26.00] F & 90.33 [60.59, 120.07] F\\
+Li-ECRAM & TTv2 & 0.42 [0.21, 0.63] P & 9.72 [8.82, 10.62] F & 35.95 [34.87, 37.02] F\\
+Li-ECRAM & c-TTv2 & 0.60 [0.26, 0.93] P & 0.86 [0.17, 1.55] P & 23.49 [22.61, 24.36] F\\
+Li-ECRAM & AGAD & 0.54 [0.26, 0.82] P & 0.23 [-0.38, 0.84] P & 23.89 [22.95, 24.82] F\\
+MO-ECRAM & SGD & 11.48 [4.73, 18.23] F & 28.31 [20.59, 36.03] F & 117.64 [35.42, 199.87] F\\
+MO-ECRAM & TTv2 & 1.90 [1.77, 2.04] U & 8.11 [7.85, 8.38] F & 49.48 [47.97, 50.98] F\\
+MO-ECRAM & c-TTv2 & 1.01 [0.96, 1.06] P & 1.40 [0.28, 2.53] U & 39.47 [37.39, 41.55] F\\
+MO-ECRAM & AGAD & 0.78 [0.60, 0.96] P & 0.28 [-0.30, 0.86] P & 35.33 [31.48, 39.19] F\\
+Protonic-inspired & SGD & 4.06 [2.18, 5.94] F & 13.73 [10.41, 17.05] F & 70.37 [65.57, 75.16] F\\
+Protonic-inspired & TTv2 & 0.54 [0.23, 0.86] P & 7.15 [5.27, 9.04] F & 31.98 [30.89, 33.06] F\\
+Protonic-inspired & c-TTv2 & 0.27 [0.16, 0.38] P & 0.70 [-1.68, 3.07] U & 23.36 [22.15, 24.58] F\\
+Protonic-inspired & AGAD & 0.72 [0.58, 0.86] P & -0.27 [-1.30, 0.75] P & 25.23 [23.43, 27.03] F\\
+W/WO$_x$ ECRAM & SGD & 12.03 [6.56, 17.50] F & 34.07 [28.80, 39.34] F & 90.44 [82.88, 97.99] F\\
+W/WO$_x$ ECRAM & TTv2 & 1.44 [1.23, 1.66] P & 13.60 [11.76, 15.44] F & 53.46 [52.68, 54.24] F\\
+W/WO$_x$ ECRAM & c-TTv2 & 1.50 [1.39, 1.60] P & 11.74 [10.96, 12.52] F & 49.10 [47.30, 50.90] F\\
+W/WO$_x$ ECRAM & AGAD & 1.04 [0.66, 1.42] P & 13.79 [12.70, 14.88] F & 52.40 [51.04, 53.75] F\\
+Memistor (optimistic) & SGD & 1.58 [0.75, 2.41] U & 7.12 [4.95, 9.30] F & 57.52 [53.05, 61.99] F\\
+Memistor (optimistic) & TTv2 & 0.88 [0.57, 1.19] P & 2.46 [0.65, 4.28] U & 29.93 [28.82, 31.03] F\\
+Memistor (optimistic) & c-TTv2 & 0.16 [0.01, 0.30] P & 1.51 [-0.47, 3.49] U & 29.80 [28.39, 31.22] F\\
+Memistor (optimistic) & AGAD & 0.60 [0.35, 0.84] P & 1.09 [-0.24, 2.43] U & 29.99 [28.42, 31.56] F\\
+Ideal 1000-level & SGD & -0.02 [-0.22, 0.18] P & 7.39 [3.31, 11.46] F & 40.53 [38.35, 42.71] F\\
+Ideal 1000-level & TTv2 & 0.81 [0.54, 1.07] P & 5.79 [0.66, 10.91] U & 49.79 [48.21, 51.37] F\\
+Ideal 1000-level & c-TTv2 & 0.27 [0.10, 0.44] P & 19.10 [10.33, 27.87] F & 43.45 [41.48, 45.41] F\\
+Ideal 1000-level & AGAD & 0.75 [0.47, 1.03] P & 20.27 [15.32, 25.22] F & 40.36 [38.70, 42.01] F\\
+\bottomrule\end{tabular}\end{table*}

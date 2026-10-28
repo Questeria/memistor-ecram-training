@@ -1,0 +1,274 @@
+{
+ "algo": "cttv2",
+ "alpha": null,
+ "arm": "device",
+ "budget": {
+  "batch": 32,
+  "ctx": 128,
+  "steps": 3000
+ },
+ "data_sha256": "dc83d9f4f5dbd433bb32b0acbd76e1d450eac786f414a9465361c37003ec7717",
+ "device": "NVIDIA RTX A4000",
+ "diverged": false,
+ "hist": [
+  {
+   "step": 500,
+   "train_loss_nats": 2.76022900390625
+  },
+  {
+   "step": 1000,
+   "train_loss_nats": 2.488362548828125
+  },
+  {
+   "step": 1500,
+   "train_loss_nats": 2.33750244140625
+  },
+  {
+   "step": 2000,
+   "train_loss_nats": 2.190046142578125
+  },
+  {
+   "step": 2500,
+   "train_loss_nats": 2.09167236328125
+  },
+  {
+   "step": 3000,
+   "train_loss_nats": 1.9980728759765625
+  }
+ ],
+ "host": "a2e60714ebe4",
+ "init_sha256": "a69436fa42ef4e879aa24c7b1568ea516402bf248e110730b4018515ef2d4d04",
+ "layers": [
+  {
+   "clip_call_frac": 0.843,
+   "mean_pd": 0.04546983846028646,
+   "mean_px": 0.003836413065592448,
+   "pulses": 2279758848.0,
+   "pulses_per_weight_per_row": 0.0056618423461914065,
+   "reset": "pulse",
+   "reset_extra_reads": 6144000.0,
+   "reset_pulses": 84358272.0,
+   "reset_resid_steps": 7.073149739583333,
+   "rows": 12288000,
+   "shape": [
+    128,
+    256
+   ],
+   "update_lost_frac": 0.23124998254769125
+  },
+  {
+   "clip_call_frac": 0.009666666666666667,
+   "mean_pd": 0.01425241470336914,
+   "mean_px": 0.09813686116536459,
+   "pulses": 25545826304.0,
+   "pulses_per_weight_per_row": 0.042295830620659725,
+   "reset": "pulse",
+   "reset_extra_reads": 9216000.0,
+   "reset_pulses": 289564608.0,
+   "reset_resid_steps": 3.2662237413194446,
+   "rows": 12288000,
+   "shape": [
+    384,
+    128
+   ],
+   "update_lost_frac": 4.870146077529114e-07
+  },
+  {
+   "clip_call_frac": 0.0,
+   "mean_pd": 0.03384590148925781,
+   "mean_px": 0.07148568216959636,
+   "pulses": 15255169024.0,
+   "pulses_per_weight_per_row": 0.07577324422200521,
+   "reset": "pulse",
+   "reset_extra_reads": 3072000.0,
+   "reset_pulses": 103567152.0,
+   "reset_resid_steps": 3.8308971354166665,
+   "rows": 12288000,
+   "shape": [
+    128,
+    128
+   ],
+   "update_lost_frac": 0.0
+  },
+  {
+   "clip_call_frac": 0.0,
+   "mean_pd": 0.010233744939168295,
+   "mean_px": 0.0690301005045573,
+   "pulses": 17998833664.0,
+   "pulses_per_weight_per_row": 0.022350293477376302,
+   "reset": "pulse",
+   "reset_extra_reads": 12288000.0,
+   "reset_pulses": 290770080.0,
+   "reset_resid_steps": 0.9737696940104167,
+   "rows": 12288000,
+   "shape": [
+    512,
+    128
+   ],
+   "update_lost_frac": 0.0
+  },
+  {
+   "clip_call_frac": 0.007333333333333333,
+   "mean_pd": 0.043312347412109375,
+   "mean_px": 0.05241047159830729,
+   "pulses": 56905355264.0,
+   "pulses_per_weight_per_row": 0.07066298929850261,
+   "reset": "pulse",
+   "reset_extra_reads": 12288000.0,
+   "reset_pulses": 425303104.0,
+   "reset_resid_steps": 4.787037434895834,
+   "rows": 12288000,
+   "shape": [
+    128,
+    512
+   ],
+   "update_lost_frac": 2.1771361513600596e-07
+  },
+  {
+   "clip_call_frac": 0.0,
+   "mean_pd": 0.0062384961446126305,
+   "mean_px": 0.08016053771972656,
+   "pulses": 9844083712.0,
+   "pulses_per_weight_per_row": 0.016298697577582465,
+   "reset": "pulse",
+   "reset_extra_reads": 9216000.0,
+   "reset_pulses": 207421104.0,
+   "reset_resid_steps": 0.9401540798611111,
+   "rows": 12288000,
+   "shape": [
+    384,
+    128
+   ],
+   "update_lost_frac": 0.0
+  },
+  {
+   "clip_call_frac": 0.0,
+   "mean_pd": 0.02878747304280599,
+   "mean_px": 0.049455520629882815,
+   "pulses": 9040065536.0,
+   "pulses_per_weight_per_row": 0.0449024912516276,
+   "reset": "pulse",
+   "reset_extra_reads": 3072000.0,
+   "reset_pulses": 89182760.0,
+   "reset_resid_steps": 2.1057132161458334,
+   "rows": 12288000,
+   "shape": [
+    128,
+    128
+   ],
+   "update_lost_frac": 0.0
+  },
+  {
+   "clip_call_frac": 0.0,
+   "mean_pd": 0.010886676788330078,
+   "mean_px": 0.04576573689778646,
+   "pulses": 12923316224.0,
+   "pulses_per_weight_per_row": 0.016047701517740886,
+   "reset": "pulse",
+   "reset_extra_reads": 12288000.0,
+   "reset_pulses": 259100016.0,
+   "reset_resid_steps": 0.6697484130859375,
+   "rows": 12288000,
+   "shape": [
+    512,
+    128
+   ],
+   "update_lost_frac": 8.097856440958395e-08
+  },
+  {
+   "clip_call_frac": 0.0,
+   "mean_pd": 0.04730178833007812,
+   "mean_px": 0.03551852671305339,
+   "pulses": 42320392192.0,
+   "pulses_per_weight_per_row": 0.052551915486653646,
+   "reset": "pulse",
+   "reset_extra_reads": 12288000.0,
+   "reset_pulses": 381077664.0,
+   "reset_resid_steps": 2.994869140625,
+   "rows": 12288000,
+   "shape": [
+    128,
+    512
+   ],
+   "update_lost_frac": 2.932287901380448e-07
+  },
+  {
+   "clip_call_frac": 0.0,
+   "mean_pd": 0.003114374796549479,
+   "mean_px": 0.08256326802571615,
+   "pulses": 3286364160.0,
+   "pulses_per_weight_per_row": 0.008161773681640625,
+   "reset": "pulse",
+   "reset_extra_reads": 6144000.0,
+   "reset_pulses": 68615960.0,
+   "reset_resid_steps": 1.7692625325520834,
+   "rows": 12288000,
+   "shape": [
+    256,
+    128
+   ],
+   "update_lost_frac": -7.970345849983573e-08
+  }
+ ],
+ "lr": 0.0001,
+ "metric": {
+  "bpb": 2.9415541200303608,
+  "split": "test"
+ },
+ "probe_file": "fidprobe__lm_w128__protonic_onen2022__cttv2__lr0.0001__s0__probe.probes.json",
+ "probe_n": 4,
+ "pulse_mode": "surrogate",
+ "results_are": "DEV",
+ "rng": "split",
+ "samples": 12288000,
+ "scale": 1.0,
+ "schema": "altone.x1000.me.run.v1",
+ "schema_paper": "altone.x1000.me-paper.run.v1",
+ "schema_revision": "altone.x1000.me-revision.run.v1",
+ "schema_revision2": "altone.x1000.me-revision2.run.v1",
+ "seconds": 1079.07,
+ "seed": 0,
+ "seq_layers": null,
+ "spec": {
+  "asym": 0.05,
+  "asym_d2d": 0.0,
+  "bound_d2d": 0.05,
+  "bounds_model": "paper",
+  "c2c": 0.3,
+  "d2d": 0.1,
+  "gamma_d2d": 0.0,
+  "gamma_dn": 0.2,
+  "gamma_dn_dtod": 0.0,
+  "gamma_up": 0.2,
+  "gamma_up_dtod": 0.0,
+  "ideal_float": false,
+  "n_states": 1000,
+  "name": "protonic_onen2022",
+  "recenter_sp": false,
+  "ref_err": 0.02,
+  "tau_steps": "inf",
+  "u_hi": 1.0,
+  "u_lo": -1.0
+ },
+ "tag": "fidprobe__lm_w128__protonic_onen2022__cttv2__lr0.0001__s0__probe",
+ "task": "lm",
+ "torch": "2.7.1+cu126",
+ "ucfg": {
+  "BL": 31,
+  "agad_beta": 0.5,
+  "algo": "cttv2",
+  "lr": 0.0001,
+  "tt_cols": 0,
+  "tt_gamma": 0.0,
+  "tt_h_forget": false,
+  "tt_lambda": 0.1,
+  "tt_lr_ratio": 10.0,
+  "tt_max_pulses": 31,
+  "tt_period": 16,
+  "tt_reset": "pulse",
+  "tt_reset_iters": 2,
+  "tt_reset_max": 62,
+  "tt_rho": 0.05
+ },
+ "width": 128
+}

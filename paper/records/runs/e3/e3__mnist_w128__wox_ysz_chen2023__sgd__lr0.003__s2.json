@@ -1,0 +1,136 @@
+{
+ "algo": "sgd",
+ "alpha": null,
+ "arm": "device",
+ "budget": {
+  "batch": 128,
+  "epochs": 10
+ },
+ "device": "NVIDIA RTX A4000",
+ "diverged": false,
+ "hist": [
+  {
+   "epoch": 1,
+   "train_loss": 0.5484850334398674
+  },
+  {
+   "epoch": 2,
+   "train_loss": 0.4703078903518357
+  },
+  {
+   "epoch": 3,
+   "train_loss": 0.45157194693327507
+  },
+  {
+   "epoch": 4,
+   "train_loss": 0.4548691969651442
+  },
+  {
+   "epoch": 5,
+   "train_loss": 0.4503058231238163
+  },
+  {
+   "epoch": 6,
+   "train_loss": 0.4481748567594515
+  },
+  {
+   "epoch": 7,
+   "train_loss": 0.4413949392892264
+  },
+  {
+   "epoch": 8,
+   "train_loss": 0.44668049134296695
+  },
+  {
+   "epoch": 9,
+   "train_loss": 0.44223801406113417
+  },
+  {
+   "epoch": 10,
+   "train_loss": 0.4439469628678613
+  }
+ ],
+ "host": "4954712405bc",
+ "layers": [
+  {
+   "mean_pd": 0.010000550774705437,
+   "mean_px": 0.020982766318154503,
+   "pulses": 677047296.0,
+   "pulses_per_weight_per_row": 0.006143215043884687,
+   "rows": 549120,
+   "shape": [
+    256,
+    784
+   ]
+  },
+  {
+   "mean_pd": 0.007407172409804551,
+   "mean_px": 0.03679497280876676,
+   "pulses": 137921760.0,
+   "pulses_per_weight_per_row": 0.007665060616873361,
+   "rows": 549120,
+   "shape": [
+    128,
+    256
+   ]
+  },
+  {
+   "mean_pd": 0.009773637642671456,
+   "mean_px": 0.08566410802738927,
+   "pulses": 16605165.0,
+   "pulses_per_weight_per_row": 0.02362468159282124,
+   "rows": 549120,
+   "shape": [
+    10,
+    128
+   ]
+  }
+ ],
+ "lr": 0.003,
+ "metric": {
+  "acc": 0.898,
+  "loss": 0.39207076568603516,
+  "n_eval": 10000,
+  "split": "test"
+ },
+ "results_are": "DEV",
+ "samples": 550000,
+ "scale": 1.0,
+ "schema": "altone.x1000.me.run.v1",
+ "schema_paper": "altone.x1000.me-paper.run.v1",
+ "seconds": 19.81,
+ "seed": 2,
+ "spec": {
+  "asym": 0.0,
+  "asym_d2d": 0.0,
+  "bound_d2d": 0.023,
+  "c2c": 2.048,
+  "d2d": 0.023,
+  "gamma_d2d": 0.0,
+  "gamma_dn": 0.6333737691945434,
+  "gamma_up": 0.6333737691945434,
+  "ideal_float": false,
+  "n_states": 256,
+  "name": "wox_ysz_chen2023",
+  "ref_err": 0.02,
+  "tau_steps": "inf"
+ },
+ "tag": "e3__mnist_w128__wox_ysz_chen2023__sgd__lr0.003__s2",
+ "task": "mnist",
+ "torch": "2.7.1+cu126",
+ "ucfg": {
+  "BL": 31,
+  "agad_beta": 0.5,
+  "algo": "sgd",
+  "lr": 0.003,
+  "tt_cols": 0,
+  "tt_gamma": 0.0,
+  "tt_lambda": 0.2,
+  "tt_lr_ratio": 1.0,
+  "tt_max_pulses": 31,
+  "tt_period": 64,
+  "tt_reset": true,
+  "tt_rho": 0.1
+ },
+ "width": 128
+}

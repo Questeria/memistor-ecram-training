@@ -1,0 +1,64 @@
+\subsection{Main comparison: four published devices and the memistor}\label{sec:main}
+Table~\ref{tab:main} and Fig.~\ref{fig:main} give the gap to the exact-update baseline over five seeds.
+
+\paragraph{Plain SGD fails.} On every published electrochemical device, plain SGD lies wholly above the line on all three tasks
+(\REThreeMnistSgdNfail, \REThreeCifarSgdNfail{} and \REThreeLmSgdNfail{} of four devices FAIL on MNIST, CIFAR and the LM). This
+holds even though the Li-ECRAM, protonic and metal-oxide specifications have about a thousand or more levels. Their asymmetric,
+saturating steps pull the weights toward their symmetry points, as predicted by~\cite{gokmen2020,wu2025}.
+
+\paragraph{The Tiki-Taka family recovers most of the gap.}
+\begin{itemize}
+\item \textbf{Best cell per task} among the published devices:
+      \begin{itemize}
+      \item MNIST: \REThreeMnistBestDev{} with \REThreeMnistBestAlgo, \REThreeMnistBestGap\,pp
+            [\REThreeMnistBestLo, \REThreeMnistBestHi], \REThreeMnistBestLabel;
+      \item CIFAR: \REThreeCifarBestDev{} with \REThreeCifarBestAlgo, \REThreeCifarBestGap\,pp
+            [\REThreeCifarBestLo, \REThreeCifarBestHi], \REThreeCifarBestLabel;
+      \item LM: \REThreeLmBestDev{} with \REThreeLmBestAlgo, \REThreeLmBestGap\%
+            [\REThreeLmBestLo, \REThreeLmBestHi], \REThreeLmBestLabel.
+      \end{itemize}
+\item \textbf{Strictest reading} (whole interval below the line on every task):
+      \begin{itemize}
+      \item Mixing algorithms across tasks, \REThreeNpassall{} devices pass all three tasks: \REThreePassallList.
+      \item With one algorithm on all three tasks, \REThreeSameNpass{} pairings pass everywhere.
+      \end{itemize}
+\item \textbf{No cell fails.} \REThreeSameNnofail{} device--algorithm pairings have no FAIL on any task: \REThreeSameNofailList.
+      Their remaining cells are UNRESOLVED: the interval contains the line.
+\end{itemize}
+
+The limiting factor is statistical as well as physical. On the CIFAR subset the FP baseline itself varies by
+\REThreeCifarFpSd\,pp (standard deviation over seeds), so five seeds give intervals about $\pm2$\,pp wide.
+
+\paragraph{The devices separate clearly.}
+\begin{itemize}
+\item \textbf{Li-ECRAM and protonic} are within or near the lines.
+\item \textbf{Metal-oxide ECRAM} is good on MNIST but fails on the LM. Its fitted write noise is twice its (very small) step.
+\item \textbf{W/YSZ/WO$_x$} fails on CIFAR and the LM with every algorithm. Its 256 states and strong nonlinearity are not
+      enough for these tasks, although they suffice for its published $10\times10$ demonstration.
+\item \textbf{Widrow's memistor, as he described it} (thousands of levels, near-linear), does as well as the modern devices on
+      MNIST, where even plain SGD passes on it because his description implies an almost symmetric device. On the LM it sits between the good and the poor modern devices.
+\end{itemize}
+The memistor's ideal was right; what the 1960 device lacked was density, speed and energy, not accuracy
+(Section~\ref{sec:energy}).
+
+\paragraph{Among the tolerant algorithms.}
+\begin{itemize}
+\item c-TTv2 gives the best LM results on Li-ECRAM and protonic devices.
+\item AGAD is the most uniform on MNIST, but it is not uniformly better. On the noisiest device (metal-oxide) AGAD is the best
+      tolerant algorithm on the LM, while on the coarse 20-state device of Section~\ref{sec:validation} it pays an accuracy
+      cost.
+\item Plain TTv2, our pre-registered choice for the specification sheet because it scored best on validation, is not the best
+      on the LM for any device except, marginally, W/YSZ/WO$_x$, where every algorithm fails.
+\end{itemize}
+
+\paragraph{Against Adam.} The pre-registered baseline is SGD with an exact update. For context, the FP-SGD language model is
+\REThreeLmFpvsadam\% worse in bits per byte than the same network trained by Adam in digital. The best analog cells are about as
+far from Adam as FP-SGD is. Analog training here inherits SGD's optimiser gap; closing that gap needs analog-friendly adaptive
+methods, which are beyond this study.
+
+\input{tables/main.tex}
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{figs/fig_main}
+\caption{Gap to the exact-update baseline (mean and 95\% interval over 5 seeds; symmetric-log axis); the dashed line is the
+pre-registered gap line.}\label{fig:main}
+\end{figure}

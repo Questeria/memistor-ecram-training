@@ -1,0 +1,125 @@
+{
+ "algo": "ttv2",
+ "arm": "device",
+ "device": "Quadro P2000",
+ "diverged": false,
+ "hist": [
+  {
+   "epoch": 1,
+   "train_loss": 0.557675936317944
+  },
+  {
+   "epoch": 2,
+   "train_loss": 0.32192838980462446
+  },
+  {
+   "epoch": 3,
+   "train_loss": 0.1657140333648328
+  },
+  {
+   "epoch": 4,
+   "train_loss": 0.11926330230904347
+  },
+  {
+   "epoch": 5,
+   "train_loss": 0.09617872918697642
+  },
+  {
+   "epoch": 6,
+   "train_loss": 0.07906063402935619
+  },
+  {
+   "epoch": 7,
+   "train_loss": 0.0667114152088935
+  },
+  {
+   "epoch": 8,
+   "train_loss": 0.05453018089300477
+  },
+  {
+   "epoch": 9,
+   "train_loss": 0.08438214983699935
+  },
+  {
+   "epoch": 10,
+   "train_loss": 0.049026809209449726
+  }
+ ],
+ "host": "Domain3",
+ "layers": [
+  {
+   "mean_pd": 0.007447788411955455,
+   "mean_px": 0.08572036601073328,
+   "pulses": 5351124343.0,
+   "pulses_per_weight_per_row": 0.048553635410450206,
+   "rows": 549120,
+   "shape": [
+    256,
+    784
+   ]
+  },
+  {
+   "mean_pd": 0.005424859459264452,
+   "mean_px": 0.2743307143484518,
+   "pulses": 1237748005.0,
+   "pulses_per_weight_per_row": 0.06878837310906613,
+   "rows": 549120,
+   "shape": [
+    128,
+    256
+   ]
+  },
+  {
+   "mean_pd": 0.00904990437118736,
+   "mean_px": 0.4069049808945689,
+   "pulses": 96710955.0,
+   "pulses_per_weight_per_row": 0.13759366548978366,
+   "rows": 549120,
+   "shape": [
+    10,
+    128
+   ]
+  }
+ ],
+ "lr": 0.003,
+ "metric": {
+  "acc": 0.9761,
+  "loss": 0.0775477912902832,
+  "n_eval": 10000,
+  "split": "test"
+ },
+ "results_are": "DEV",
+ "samples": 550000,
+ "scale": 1.0,
+ "schema": "altone.x1000.me.run.v1",
+ "seconds": 126.4,
+ "seed": 0,
+ "spec": {
+  "asym": 0.0,
+  "asym_d2d": 0.0,
+  "bound_d2d": 0.0,
+  "c2c": 0.0,
+  "d2d": 0.0,
+  "gamma_dn": 0.0,
+  "gamma_up": 0.0,
+  "ideal_float": false,
+  "n_states": 256,
+  "name": "custom",
+  "ref_err": 0.0,
+  "tau_steps": 100000.0
+ },
+ "tag": "E_tau100000_states256__ttv2__s0",
+ "task": "mnist",
+ "torch": "2.7.1+cu126",
+ "ucfg": {
+  "BL": 31,
+  "algo": "ttv2",
+  "lr": 0.003,
+  "tt_gamma": 0.0,
+  "tt_lambda": 0.1,
+  "tt_lr_ratio": 10.0,
+  "tt_max_pulses": 31,
+  "tt_period": 16,
+  "tt_reset": true
+ }
+}

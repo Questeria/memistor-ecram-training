@@ -1,0 +1,269 @@
+{
+ "algo": "agad",
+ "alpha": null,
+ "arm": "device",
+ "budget": {
+  "batch": 32,
+  "ctx": 128,
+  "steps": 3000
+ },
+ "data_sha256": "974da1adf991b9b2d4484482f4922763ebd22faca41dac142777d22fe4abf76d",
+ "device": "NVIDIA RTX A4000",
+ "diverged": false,
+ "hist": [
+  {
+   "step": 500,
+   "train_loss_nats": 2.83321630859375
+  },
+  {
+   "step": 1000,
+   "train_loss_nats": 2.5640439453125
+  },
+  {
+   "step": 1500,
+   "train_loss_nats": 2.489376220703125
+  },
+  {
+   "step": 2000,
+   "train_loss_nats": 2.386792236328125
+  },
+  {
+   "step": 2500,
+   "train_loss_nats": 2.3037099609375
+  },
+  {
+   "step": 3000,
+   "train_loss_nats": 2.23040966796875
+  }
+ ],
+ "host": "bcfae0f0444e",
+ "init_sha256": "e09adcae72d616cefd4a16d45ad878bd024a82ebc1ec861326ff72093c18dbf4",
+ "layers": [
+  {
+   "clip_call_frac": 0.8323333333333334,
+   "mean_pd": 0.02696876017252604,
+   "mean_px": 0.0038310667673746744,
+   "pulses": 1312777856.0,
+   "pulses_per_weight_per_row": 0.0032603190739949545,
+   "reset": "none",
+   "reset_extra_reads": 0.0,
+   "reset_pulses": 0.0,
+   "reset_resid_steps": null,
+   "rows": 12288000,
+   "shape": [
+    128,
+    256
+   ],
+   "update_lost_frac": 0.20346490784695404
+  },
+  {
+   "clip_call_frac": 0.006,
+   "mean_pd": 0.005459273020426432,
+   "mean_px": 0.11373069254557291,
+   "pulses": 11201299456.0,
+   "pulses_per_weight_per_row": 0.018545818752712672,
+   "reset": "none",
+   "reset_extra_reads": 0.0,
+   "reset_pulses": 0.0,
+   "reset_resid_steps": null,
+   "rows": 12288000,
+   "shape": [
+    384,
+    128
+   ],
+   "update_lost_frac": 1.010694712033633e-06
+  },
+  {
+   "clip_call_frac": 0.0,
+   "mean_pd": 0.017714075724283854,
+   "mean_px": 0.060216588338216144,
+   "pulses": 6554742784.0,
+   "pulses_per_weight_per_row": 0.03255775960286458,
+   "reset": "none",
+   "reset_extra_reads": 0.0,
+   "reset_pulses": 0.0,
+   "reset_resid_steps": null,
+   "rows": 12288000,
+   "shape": [
+    128,
+    128
+   ],
+   "update_lost_frac": 0.0
+  },
+  {
+   "clip_call_frac": 0.0,
+   "mean_pd": 0.005637736638387045,
+   "mean_px": 0.05650703430175781,
+   "pulses": 7926477824.0,
+   "pulses_per_weight_per_row": 0.0098428103129069,
+   "reset": "none",
+   "reset_extra_reads": 0.0,
+   "reset_pulses": 0.0,
+   "reset_resid_steps": null,
+   "rows": 12288000,
+   "shape": [
+    512,
+    128
+   ],
+   "update_lost_frac": 0.0
+  },
+  {
+   "clip_call_frac": 0.0016666666666666668,
+   "mean_pd": 0.022226292928059894,
+   "mean_px": 0.035094024658203125,
+   "pulses": 19037188096.0,
+   "pulses_per_weight_per_row": 0.023639684041341147,
+   "reset": "none",
+   "reset_extra_reads": 0.0,
+   "reset_pulses": 0.0,
+   "reset_resid_steps": null,
+   "rows": 12288000,
+   "shape": [
+    128,
+    512
+   ],
+   "update_lost_frac": 2.1609963918312047e-07
+  },
+  {
+   "clip_call_frac": 0.0006666666666666666,
+   "mean_pd": 0.004150132497151693,
+   "mean_px": 0.08558041381835937,
+   "pulses": 6894354944.0,
+   "pulses_per_weight_per_row": 0.011414877149793837,
+   "reset": "none",
+   "reset_extra_reads": 0.0,
+   "reset_pulses": 0.0,
+   "reset_resid_steps": null,
+   "rows": 12288000,
+   "shape": [
+    384,
+    128
+   ],
+   "update_lost_frac": -7.470928564679014e-08
+  },
+  {
+   "clip_call_frac": 0.0,
+   "mean_pd": 0.01894263203938802,
+   "mean_px": 0.035117154439290366,
+   "pulses": 4134075136.0,
+   "pulses_per_weight_per_row": 0.020534173329671224,
+   "reset": "none",
+   "reset_extra_reads": 0.0,
+   "reset_pulses": 0.0,
+   "reset_resid_steps": null,
+   "rows": 12288000,
+   "shape": [
+    128,
+    128
+   ],
+   "update_lost_frac": 1.865183423266359e-07
+  },
+  {
+   "clip_call_frac": 0.0,
+   "mean_pd": 0.005795122782389323,
+   "mean_px": 0.03999750773111979,
+   "pulses": 5776560128.0,
+   "pulses_per_weight_per_row": 0.007173121134440104,
+   "reset": "none",
+   "reset_extra_reads": 0.0,
+   "reset_pulses": 0.0,
+   "reset_resid_steps": null,
+   "rows": 12288000,
+   "shape": [
+    512,
+    128
+   ],
+   "update_lost_frac": 1.7856020473328016e-07
+  },
+  {
+   "clip_call_frac": 0.0,
+   "mean_pd": 0.032632133483886716,
+   "mean_px": 0.020311106363932293,
+   "pulses": 16607472640.0,
+   "pulses_per_weight_per_row": 0.020622552235921222,
+   "reset": "none",
+   "reset_extra_reads": 0.0,
+   "reset_pulses": 0.0,
+   "reset_resid_steps": null,
+   "rows": 12288000,
+   "shape": [
+    128,
+    512
+   ],
+   "update_lost_frac": 1.2384618697236505e-07
+  },
+  {
+   "clip_call_frac": 0.0,
+   "mean_pd": 0.0025936611493428546,
+   "mean_px": 0.07946615091959636,
+   "pulses": 2586199808.0,
+   "pulses_per_weight_per_row": 0.0064228967030843095,
+   "reset": "none",
+   "reset_extra_reads": 0.0,
+   "reset_pulses": 0.0,
+   "reset_resid_steps": null,
+   "rows": 12288000,
+   "shape": [
+    256,
+    128
+   ],
+   "update_lost_frac": 9.962301650290328e-08
+  }
+ ],
+ "lr": 0.0001,
+ "metric": {
+  "bpb": 3.2683270183456683,
+  "split": "test"
+ },
+ "results_are": "DEV",
+ "rng": "split",
+ "samples": 12288000,
+ "scale": 1.0,
+ "schema": "altone.x1000.me.run.v1",
+ "schema_paper": "altone.x1000.me-paper.run.v1",
+ "schema_revision": "altone.x1000.me-revision.run.v1",
+ "seconds": 378.72,
+ "seed": 3,
+ "spec": {
+  "asym": 0.0,
+  "asym_d2d": 0.0,
+  "bound_d2d": 0.0,
+  "bounds_model": "paper",
+  "c2c": 0.0,
+  "d2d": 0.0,
+  "gamma_d2d": 0.0,
+  "gamma_dn": 0.0,
+  "gamma_dn_dtod": 0.0,
+  "gamma_up": 0.0,
+  "gamma_up_dtod": 0.0,
+  "ideal_float": false,
+  "n_states": 1000,
+  "name": "ideal1000",
+  "recenter_sp": false,
+  "ref_err": 0.0,
+  "tau_steps": "inf",
+  "u_hi": 1.0,
+  "u_lo": -1.0
+ },
+ "tag": "e3__lm_w128__ideal1000__agad__lr0.0001__s3",
+ "task": "lm",
+ "torch": "2.7.1+cu126",
+ "ucfg": {
+  "BL": 31,
+  "agad_beta": 0.3,
+  "algo": "agad",
+  "lr": 0.0001,
+  "tt_cols": 0,
+  "tt_gamma": 0.0,
+  "tt_h_forget": false,
+  "tt_lambda": 0.1,
+  "tt_lr_ratio": 10.0,
+  "tt_max_pulses": 31,
+  "tt_period": 16,
+  "tt_reset": "none",
+  "tt_reset_iters": 2,
+  "tt_reset_max": 62,
+  "tt_rho": 0.2
+ },
+ "width": 128
+}

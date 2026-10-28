@@ -1,0 +1,313 @@
+{
+ "F10_unlogged_deviations": {
+  "interaction_code_adds_base": true,
+  "interaction_plan": true,
+  "interp_code_log_for_c2c_ref": true,
+  "interp_plan_linear_for_c2c_ref": true,
+  "mfu_code_range": true,
+  "mfu_plan_30_55": true,
+  "verdict": "CONFIRMED"
+ },
+ "F11_roadmap": {
+  "bench_replication_in": [
+   "sec_abstract.tex",
+   "sec_roadmap.tex"
+  ],
+  "ci_used_for_hardware_band_in": [
+   "sec_intro.tex"
+  ],
+  "per_cell_pulse_maxima_recorded": false,
+  "verdict": "PARTLY CONFIRMED"
+ },
+ "F12_related_release": {
+  "released_wording_in": [
+   "body.tex",
+   "sec_intro.tex"
+  ],
+  "verdict": "CONFIRMED",
+  "wu2026_cited": false
+ },
+ "F13_presentation": {
+  "abstract_words": 344,
+  "verdict": "CONFIRMED (editorial)"
+ },
+ "F1_init_and_order": {
+  "note": "protonic device, MNIST MLP, one shared torch.Generator as in run.py; layer 1 matches, layers 2-3 and the permutation do not",
+  "verdict": "CONFIRMED",
+  "vs_fp_sgd_seed0": {
+   "agad": {
+    "positions_equal": 1,
+    "same_first_epoch_order": false,
+    "same_logical_init_per_layer": [
+     true,
+     false,
+     false
+    ]
+   },
+   "cttv2": {
+    "positions_equal": 1,
+    "same_first_epoch_order": false,
+    "same_logical_init_per_layer": [
+     true,
+     false,
+     false
+    ]
+   },
+   "sgd": {
+    "positions_equal": 1,
+    "same_first_epoch_order": false,
+    "same_logical_init_per_layer": [
+     true,
+     false,
+     false
+    ]
+   },
+   "ttv2": {
+    "positions_equal": 1,
+    "same_first_epoch_order": false,
+    "same_logical_init_per_layer": [
+     true,
+     false,
+     false
+    ]
+   }
+  }
+ },
+ "F2_reset": {
+  "after_31_alternating_pairs_discrete": 0.7834387184051151,
+  "after_31_up_31_down_surrogate": 0.7834659218788147,
+  "code": "memsim.py _transfer: A.u[:, idx] = ustar (+ one c2c draw); n_pulses += numel * 2 * BL",
+  "implemented_reset_lands_at": 0.12499978393316269,
+  "pairs_for_100fold": 5756.4624590678195,
+  "pulses_for_100fold": 11512.924918135639,
+  "residual_fraction": 0.9755050772908965,
+  "selected_agad_reset": false,
+  "selected_cttv2_reset": true,
+  "selected_ttv2_reset": true,
+  "start": 0.8,
+  "symmetry_point": 0.12499978393316269,
+  "verdict": "CONFIRMED"
+ },
+ "F3_device_mapping": {
+  "note": "the bounds, the bound-scaled slopes and the slope spread differ; the curve comparison against aihwkit itself is done on a pod (records/revision/AIHWKIT-CURVES.json)",
+  "presets": {
+   "ecram_li_tang2018": {
+    "aihwkit_bounds": [
+     -0.8276,
+     1.1724
+    ],
+    "aihwkit_gamma_dtod_abs": [
+     0.05,
+     0.05
+    ],
+    "aihwkit_slope_dn_per_unit_w": 0.6144272595456742,
+    "aihwkit_slope_up_per_unit_w": 0.09834527465029,
+    "paper_bounds": [
+     -1.0,
+     1.0
+    ],
+    "paper_gamma_d2d": 0.0,
+    "paper_slope_dn_per_unit_w": 0.5085,
+    "paper_slope_up_per_unit_w": 0.1153,
+    "symmetry_point_from_upper_bound_aihwkit": 1.1724,
+    "symmetry_point_from_upper_bound_paper": 1.0
+   },
+   "ecram_mo_kim2019": {
+    "aihwkit_bounds": [
+     -0.8286,
+     1.1714
+    ],
+    "aihwkit_gamma_dtod_abs": [
+     0.05,
+     0.05
+    ],
+    "aihwkit_slope_dn_per_unit_w": 0.8860728940381366,
+    "aihwkit_slope_up_per_unit_w": 0.3544476694553526,
+    "paper_bounds": [
+     -1.0,
+     1.0
+    ],
+    "paper_gamma_d2d": 0.0,
+    "paper_slope_dn_per_unit_w": 0.7342,
+    "paper_slope_up_per_unit_w": 0.4152,
+    "symmetry_point_from_upper_bound_aihwkit": 1.1714,
+    "symmetry_point_from_upper_bound_paper": 1.0
+   }
+  },
+  "verdict": "CONFIRMED"
+ },
+ "F4_surrogate": {
+  "clip_case": {
+   "drawn": 30.0,
+   "intended_mean": 5000.0,
+   "max_possible": 31
+  },
+  "down_then_up": 0.334,
+  "exact_mean_condition": "(lr/k_nom) * max|x| * max|d| <= BL",
+  "surrogate_batch": 0.3274923264980316,
+  "up_then_down": 0.31400000000000006,
+  "verdict": "CONFIRMED (synthetic cases; runtime clipping frequency is measured in the repaired sim)"
+ },
+ "F5_spec": {
+  "admitted_gap_up_to": 4.390000000000001,
+  "asym_gap_means": {
+   "0": 4.119999999999997,
+   "0.05": 2.3900000000000006,
+   "0.1": 1.8249999999999993,
+   "0.2": 1.9199999999999982,
+   "0.4": 39.53
+  },
+  "asym_grid_symmetry_point_at_gamma_0p2": {
+   "0": 0.0,
+   "0.05": 0.125,
+   "0.1": 0.25,
+   "0.2": 0.5,
+   "0.4": 1.0
+  },
+  "band_X": 2.0,
+  "cifar_w32_base_gap": 2.3900000000000006,
+  "joint_lm_w64": {
+   "fp_mean": 3.192683573113404,
+   "joint_r1": {
+    "asym": 0.2,
+    "c2c": 1,
+    "gamma": 0.2,
+    "n_states": 500,
+    "ref_err": 0.02,
+    "tau_steps": 10000.0
+   },
+   "joint_r1_gap": {
+    "half": 1.235913783501825,
+    "hi": 5.977965629082914,
+    "lo": 3.5061380620792635,
+    "mean": 4.742051845581089,
+    "n": 3,
+    "sd": 0.49748209779220137
+   },
+   "joint_r1_pass": true,
+   "thresholds": {
+    "asym": {
+     "first_fail": 0.4,
+     "interp": 0.23075041391164255,
+     "status": "base passes",
+     "threshold": 0.2
+    },
+    "c2c": {
+     "first_fail": 2,
+     "interp": 1.1238189822875257,
+     "status": "base passes",
+     "threshold": 1
+    },
+    "gamma": {
+     "first_fail": 0.5,
+     "interp": 0.37904708365546025,
+     "status": "base passes",
+     "threshold": 0.2
+    },
+    "n_states": {
+     "first_fail": 200,
+     "interp": 292.2178500131415,
+     "status": "base passes",
+     "threshold": 500
+    },
+    "ref_err": {
+     "first_fail": 0.05,
+     "interp": 0.02390299570105345,
+     "status": "base passes",
+     "threshold": 0.02
+    },
+    "tau_steps": {
+     "first_fail": 1000.0,
+     "interp": 7201.797185743995,
+     "status": "base passes",
+     "threshold": 10000.0
+    }
+   }
+  },
+  "verdict": "CONFIRMED"
+ },
+ "F6_width": {
+  "fp_lm_bpb_by_width": {
+   "128": {
+    "ci": {
+     "half": 0.23412930993365488,
+     "hi": 3.114635918626593,
+     "lo": 2.646377298759283,
+     "mean": 2.880506608692938,
+     "n": 3,
+     "sd": 0.09424212417990492
+    },
+    "lr": 0.0001
+   },
+   "256": {
+    "ci": {
+     "half": 0.05498125367101154,
+     "hi": 3.154714911756755,
+     "lo": 3.044752404414732,
+     "mean": 3.0997336580857433,
+     "n": 3,
+     "sd": 0.022131146832913045
+    },
+    "lr": 3e-05
+   },
+   "64": {
+    "ci": {
+     "half": 0.13176591448937472,
+     "hi": 3.3244494876027786,
+     "lo": 3.0609176586240294,
+     "mean": 3.192683573113404,
+     "n": 3,
+     "sd": 0.05303863783438836
+    },
+    "lr": 0.0001
+   }
+  },
+  "label": "FLAT",
+  "li_cttv2_lm_gap_mean_by_width": {
+   "128": -0.09456606712301048,
+   "256": -13.72573310980627,
+   "64": -0.5492847266081533
+  },
+  "verdict": "CONFIRMED"
+ },
+ "F7_baselines": {
+  "adam_bpb": 2.3611051132646645,
+  "li_cttv2_bpb": 2.8724767600348553,
+  "near_digital_in": [
+   "sec_abstract.tex",
+   "sec_intro.tex"
+  ],
+  "perplexity_ratio": 1.4254047595488573,
+  "ratio_of_means_pct": 21.658148292395364,
+  "sgd_lr_reused_from_fp": true,
+  "verdict": "CONFIRMED",
+  "vs_adam_pct_paired": 21.659221559785202
+ },
+ "F8_energy": {
+  "gpu_pj": 10.480414724982689,
+  "mvm_pj_12p4": 0.3225806451612903,
+  "mvm_pj_6p94": 0.5763688760806917,
+  "note": "read energy from a PCM inference chip; accuracy from ideal fp32 reads; no energy-to-quality",
+  "record_keys": [
+   "device_pulse",
+   "gpu_pj",
+   "inputs",
+   "mvm_tops_per_w_needed_for_100x",
+   "note",
+   "rows",
+   "schema",
+   "unit",
+   "widrow_energy_per_level_j"
+  ],
+  "verdict": "CONFIRMED"
+ },
+ "F9_validation_scope": {
+  "gh_batch_local": 16,
+  "gh_batch_paper": 1,
+  "historical_claim_in": [
+   "sec_main.tex"
+  ],
+  "reads": "ideal fp32",
+  "verdict": "PARTLY CONFIRMED"
+ }
+}

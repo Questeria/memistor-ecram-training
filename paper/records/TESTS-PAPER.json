@@ -1,0 +1,63 @@
+{
+ "all_ok": true,
+ "checks": {
+  "c_family_learns": {
+   "detail": "mse / untrained: ttv1 0.0005, cttv2 0.0142, agad 0.0100 (each < 0.05)",
+   "passed": true
+  },
+  "c_gamma_d2d_sp": {
+   "detail": "max |u - u*_ij| 1.65e-06 (tol 2e-3); std of gamma_up 0.422 (> 0.2)",
+   "passed": true
+  },
+  "c_identity_sgd_ttv2": {
+   "detail": "sgd: identical=True max|d|=0.000e+00; ttv2: identical=True max|d|=0.000e+00",
+   "passed": true
+  },
+  "c_offset_rejection": {
+   "detail": "|H| ttv2 327; c-TTv2/TTv2 0.036 (< 0.35); AGAD/TTv2 0.0075 (< half of c-TTv2's)",
+   "passed": true
+  },
+  "c_ttv1_direction": {
+   "detail": "max rel err of the mean C change vs +lambda A = 0.023 (tol 0.1)",
+   "passed": true
+  }
+ },
+ "faults": {
+  "A-update inputs not chopped": {
+   "caught": true,
+   "check": "c_family_learns",
+   "detail": "mse / untrained: ttv1 0.0005, cttv2 9.0738, agad 24.7848 (each < 0.05)"
+  },
+  "AGAD reference never set": {
+   "caught": true,
+   "check": "c_offset_rejection",
+   "detail": "|H| ttv2 327; c-TTv2/TTv2 0.036 (< 0.35); AGAD/TTv2 0.0362 (< half of c-TTv2's)"
+  },
+  "TTv1 transfer sign flipped": {
+   "caught": true,
+   "check": "c_ttv1_direction",
+   "detail": "raised ValueError: math domain error"
+  },
+  "chopper demodulation missing": {
+   "caught": true,
+   "check": "c_offset_rejection",
+   "detail": "|H| ttv2 327; c-TTv2/TTv2 1.000 (< 0.35); AGAD/TTv2 0.0075 (< half of c-TTv2's)"
+  },
+  "chopper never flips": {
+   "caught": true,
+   "check": "c_offset_rejection",
+   "detail": "|H| ttv2 327; c-TTv2/TTv2 1.000 (< 0.35); AGAD/TTv2 1.0000 (< half of c-TTv2's)"
+  },
+  "down-branch saturation uses gamma_up": {
+   "caught": true,
+   "check": "c_identity_sgd_ttv2",
+   "detail": "sgd: identical=False max|d|=3.096e-01; ttv2: identical=False max|d|=1.250e-01"
+  },
+  "gamma spread shared by the whole tile": {
+   "caught": true,
+   "check": "c_gamma_d2d_sp",
+   "detail": "max |u - u*_ij| 1.53e-27 (tol 2e-3); std of gamma_up 0.000 (> 0.2)"
+  }
+ },
+ "schema": "altone.x1000.me-paper.tests.v1"
+}

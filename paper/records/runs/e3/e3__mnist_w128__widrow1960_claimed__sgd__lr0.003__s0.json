@@ -1,0 +1,136 @@
+{
+ "algo": "sgd",
+ "alpha": null,
+ "arm": "device",
+ "budget": {
+  "batch": 128,
+  "epochs": 10
+ },
+ "device": "NVIDIA RTX A4000",
+ "diverged": false,
+ "hist": [
+  {
+   "epoch": 1,
+   "train_loss": 0.3800331951577069
+  },
+  {
+   "epoch": 2,
+   "train_loss": 0.23913983253888038
+  },
+  {
+   "epoch": 3,
+   "train_loss": 0.19404203686125074
+  },
+  {
+   "epoch": 4,
+   "train_loss": 0.16786727371749344
+  },
+  {
+   "epoch": 5,
+   "train_loss": 0.15080108286895397
+  },
+  {
+   "epoch": 6,
+   "train_loss": 0.14128220386994192
+  },
+  {
+   "epoch": 7,
+   "train_loss": 0.13007242696268576
+  },
+  {
+   "epoch": 8,
+   "train_loss": 0.12324491025128842
+  },
+  {
+   "epoch": 9,
+   "train_loss": 0.11889380786246631
+  },
+  {
+   "epoch": 10,
+   "train_loss": 0.1122055765076395
+  }
+ ],
+ "host": "4954712405bc",
+ "layers": [
+  {
+   "mean_pd": 0.007618980140952797,
+   "mean_px": 0.0555588195373962,
+   "pulses": 1290004608.0,
+   "pulses_per_weight_per_row": 0.011704907118551091,
+   "rows": 549120,
+   "shape": [
+    256,
+    784
+   ]
+  },
+  {
+   "mean_pd": 0.005682739844689003,
+   "mean_px": 0.116644287109375,
+   "pulses": 326708416.0,
+   "pulses_per_weight_per_row": 0.01815695951590727,
+   "rows": 549120,
+   "shape": [
+    128,
+    256
+   ]
+  },
+  {
+   "mean_pd": 0.0070066607637561005,
+   "mean_px": 0.21324380372231935,
+   "pulses": 29669606.0,
+   "pulses_per_weight_per_row": 0.042211865689648895,
+   "rows": 549120,
+   "shape": [
+    10,
+    128
+   ]
+  }
+ ],
+ "lr": 0.003,
+ "metric": {
+  "acc": 0.967,
+  "loss": 0.11442360649108886,
+  "n_eval": 10000,
+  "split": "test"
+ },
+ "results_are": "DEV",
+ "samples": 550000,
+ "scale": 1.0,
+ "schema": "altone.x1000.me.run.v1",
+ "schema_paper": "altone.x1000.me-paper.run.v1",
+ "seconds": 19.96,
+ "seed": 0,
+ "spec": {
+  "asym": 0.05,
+  "asym_d2d": 0.0,
+  "bound_d2d": 0.1,
+  "c2c": 0.3,
+  "d2d": 0.2,
+  "gamma_d2d": 0.0,
+  "gamma_dn": 0.1,
+  "gamma_up": 0.1,
+  "ideal_float": false,
+  "n_states": 1000,
+  "name": "widrow1960_claimed",
+  "ref_err": 0.02,
+  "tau_steps": "inf"
+ },
+ "tag": "e3__mnist_w128__widrow1960_claimed__sgd__lr0.003__s0",
+ "task": "mnist",
+ "torch": "2.7.1+cu126",
+ "ucfg": {
+  "BL": 31,
+  "agad_beta": 0.5,
+  "algo": "sgd",
+  "lr": 0.003,
+  "tt_cols": 0,
+  "tt_gamma": 0.0,
+  "tt_lambda": 0.2,
+  "tt_lr_ratio": 1.0,
+  "tt_max_pulses": 31,
+  "tt_period": 64,
+  "tt_reset": true,
+  "tt_rho": 0.1
+ },
+ "width": 128
+}

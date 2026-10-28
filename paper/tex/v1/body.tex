@@ -1,0 +1,55 @@
+\input{sec_abstract}
+\input{sec_intro}
+\input{sec_background}
+\input{sec_methods}
+\input{sec_results}
+\input{sec_energy}
+\input{sec_discussion}
+\input{sec_roadmap}
+
+\section{Code and data availability}\label{sec:availability}
+Everything needed to reproduce this paper is released together:
+\begin{itemize}
+\item the pre-registered plan (\texttt{PLAN-PAPER.md}) and its deviations (\texttt{DEVIATIONS-PAPER.md});
+\item the simulator and its checks;
+\item the device catalog with per-field provenance;
+\item every run record (one JSON file per training run, with its configuration, metric, pulse counts and hardware);
+\item the scripts that derive every number, table and figure of this paper from those records (\texttt{analyze.py},
+      \texttt{make\_figures.py}, \texttt{energy/energy\_system.py});
+\item the citation check (every reference verified against Crossref, the arXiv API or the live URL;
+      \texttt{records/CITE-CHECK.json});
+\item the bench protocol.
+\end{itemize}
+The archive DOI will be added on deposit (Zenodo). Data: MNIST, CIFAR-10 and enwik8 are public and pinned by digest. All text
+data used for training is human-written (Wikipedia, 2006).
+
+\section*{Author contributions and use of AI}
+\ifdefined\arxivvariant
+Questeria conceived the study, directed it, and takes full responsibility for the content of this paper.
+
+Claude (Anthropic), an AI system, was used extensively as a research tool, consistent with arXiv's policy on generative AI
+tools~\cite{arxiv_policy}. It wrote the simulator and its checks, designed and pre-registered the experiments under the
+author's direction, ran them on rented cloud GPUs, analysed the records, verified the references, and drafted the text. The
+author reviewed the results and the text. All numbers were produced by scripts from the released records.
+\else
+Questeria conceived and directed the study. Claude (Anthropic), an AI system, wrote the simulator and its checks, designed and
+pre-registered the experiments under Questeria's direction, ran them on rented cloud GPUs, analysed the records, verified the
+references, and drafted the text.
+
+Under the policies of arXiv~\cite{arxiv_policy} and of most journals, an AI system cannot be an author or take responsibility
+for a paper. For any formal submission the arXiv-compliant variant of this paper lists Questeria as the sole author and states
+Claude's role in this section. All numbers were produced by scripts from the released records.
+\fi
+
+\section*{Acknowledgments}
+We thank the authors of the open-access papers and of the open-source AIHWKIT whose published device fits and algorithm
+descriptions made this study possible. No external funding was received. Compute was rented by the author.
+
+\bibliographystyle{unsrtnat}
+\bibliography{refs}
+
+\appendix
+\input{app_bench}
+\input{app_selection}
+\input{app_checks}
+\input{app_laneme}

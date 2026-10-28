@@ -1,0 +1,20 @@
+\begin{abstract}
+In 1960 Widrow and Hoff stored the weights of their adaptive neuron in memistors, three-terminal electrochemical cells; their
+modern descendants are lithium-ion, metal-oxide and protonic ECRAM. We ask, in simulation, how close such devices come to digital
+training when every weight update is made of device pulses, while the forward and backward reads are kept ideal (fp32). We compare
+plain SGD and three Tiki-Taka-family algorithms on five device specifications (two AIHWKIT fits mapped one to one, one measured
+array, a protonic-inspired scenario and an optimistic historical scenario), on MNIST, a CIFAR-10 subset and a byte-level language
+model, with five seeds that share initialisation and data order across arms. Against SGD with exact updates at the same learning
+rate, \RVAllThreeFpN{} pairings (Li-ECRAM and protonic-inspired, each with chopped TTv2 or AGAD) stay within the pre-set margins
+on all three tasks, and plain SGD exceeds them on every published device. Against a separately tuned digital Adam no pairing
+does: on the language model the best analog result is \RVLmAdamBestGap\,\% worse in bits per byte. After per-arm tuning we detect
+no growth of the gap with width over a factor of four, without establishing equivalence. A sensitivity sheet against absolute
+accuracy lines, with three seeds, establishes only a few one-at-a-time ranges (on CIFAR with chopped TTv2, step asymmetry up to
+\RVSpecCttvTwoCifarAsymThr{} and reference error up to \RVSpecCttvTwoCifarRefErrThr), and shows that an earlier asymmetry limit
+was mostly lost weight range. A conditional
+energy projection for the weight-matrix operations, borrowing the read efficiency of an analog inference chip, gives about
+\RVenSysMin--\RVenChipMax$\times$ less energy per weight-row than an H100, reported only where the quality is reached. This
+version repairs the simulator after an independent review (matched random streams, a physically applied reset, the device presets
+mapped one to one) and reports how much each repair moved the original results. We propose, but did not build, a bench
+replication protocol of the 1960 memistor.
+\end{abstract}

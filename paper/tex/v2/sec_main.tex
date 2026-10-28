@@ -1,0 +1,59 @@
+\subsection{Main comparison on the repaired simulator}\label{sec:main}
+Tables~\ref{tab:rev_vs_fp} and~\ref{tab:rev_vs_adam} give the gap of every device--algorithm pairing over five seeds, against
+FP-SGD (the same network, learning rate, initialisation and data order with an exact update) and against digital Adam at its
+own selected learning rate. Every arm of a seed now shares its initial weights and its data order (checked by hash in every
+record). The FP-SGD learning rate is reused for every device arm: this is a restricted question (what happens when the FP-SGD
+rate is reused), not a fair-tuning comparison of the algorithms; Section~\ref{sec:scale} tunes each arm separately.
+
+\paragraph{Against FP-SGD.}
+\begin{itemize}
+\item \textbf{Plain SGD exceeded the line} in \RVSgdPubFail{} of the \RVSgdPubN{} cells of the four published devices, at the
+      FP-selected learning rate.
+\item \textbf{All three tasks:} \RVAllThreeFpN{} pairings pass on every task: \RVAllThreeFpList. No TTv2 pairing does: with the
+      pulse reset, TTv2 fails on CIFAR on every published device.
+\item \textbf{Per task,} \RVMnistFpPassN, \RVCifarFpPassN{} and \RVLmFpPassN{} of the \RVMnistFpCellN{} device cells pass on
+      MNIST, CIFAR and the LM. W/YSZ/WO$_x$ fails on CIFAR and the LM with every algorithm, and MO-ECRAM fails on the LM.
+\item \textbf{Best cells:} \RVMnistFpBestCell{} on MNIST (\RVMnistFpBestGap\,pp), \RVCifarFpBestCell{} on CIFAR
+      (\RVCifarFpBestGap\,pp) and \RVLmFpBestCell{} on the LM (\RVLmFpBestGap\,\%). A negative gap whose interval includes zero
+      is not evidence of superiority; and because these are the best of many cells, they are optimistic.
+\end{itemize}
+
+\paragraph{Against Adam.} Digital Adam is the stronger baseline. On the LM FP-SGD is \RVLmFpSgdVsAdamPct\,\% worse in bits per
+byte than Adam, and \textbf{no analog cell comes within the 5\,\% line of Adam}: the best, \RVLmAdamBestCell, is
+\RVLmAdamBestGap\,\% worse (\RVLmAdamPassN{} of \RVLmAdamCellN{} cells pass). On MNIST and CIFAR, where Adam and FP-SGD are
+close, \RVMnistAdamPassN{} and \RVCifarAdamPassN{} cells pass against Adam. No pairing passes all three tasks against Adam
+(\RVAllThreeAdamN). The analog results are therefore close to the FP-SGD comparator on these tasks, not to the best digital
+training in this study.
+
+\paragraph{The margins.} The lines are practical non-inferiority margins, not equivalence: on MNIST a 2\,pp loss from
+\RVMnistFp\,\% roughly doubles the error rate. UNRESOLVED means insufficient evidence against the margin, never adequate
+performance. The FP-SGD seed standard deviation is \RVCifarFpSd\,pp on CIFAR and \RVLmFpSd{} bits per byte on the LM.
+
+\paragraph{What the update loses.} Two properties of the repaired simulator matter for reading these results.
+\begin{itemize}
+\item \textbf{Clipping.} The TT family drives its $A$ arrays at ten times the SGD rate, which exceeds the $BL=31$ pulse budget
+      in the largest layers: the mean lost fraction of the requested $A$ update reaches \RVLostCifarTtLayerMeanMaxPct\,\% in the
+      CIFAR output layer and \RVLostLmTtLayerMeanMaxPct\,\% in the LM embedding (plain SGD at most \RVLostLmSgdLayerMeanMaxPct\,\%
+      in any layer's mean). This is the hardware's pulse budget, not a simulator error, but it means the effective $A$ rate is
+      capped in those layers.
+\item \textbf{Reset residual.} With at most 62 pulses per weight, the pulse reset leaves a mean residual of
+      \RVResetResidMean{} nominal steps on the read $A$ columns; reset pulses are \RVResetShareMean\,\% of all pulses of the
+      pulse-reset runs.
+\end{itemize}
+
+\paragraph{Ideal-device reference.} The same algorithms on an ideal device (symmetric, constant step, 1000 levels, no noise, no
+spread, exact reference) are the rows ``Ideal 1000-level'' of the tables (deviation R2). On MNIST every algorithm passes on it.
+On CIFAR and the LM none does: plain SGD loses \RVCifarIdealOneZeroZeroZeroSgdVsFpGap\,pp and
+\RVLmIdealOneZeroZeroZeroSgdVsFpGap\,\% (stochastic pulse updates on a 1000-level grid at the FP-SGD rate), and c-TTv2 and AGAD
+lose \RVCifarIdealOneZeroZeroZeroCttvTwoVsFpGap{} and \RVCifarIdealOneZeroZeroZeroAgadVsFpGap\,pp on CIFAR, far more than on the
+saturating Li-ECRAM and protonic-inspired devices. With the settings selected here, the TT family relies on the device's own
+saturation as the decay of its accumulator; the ideal device has none. This is a property of these algorithm settings, not a
+general requirement that devices saturate: a sufficiently precise symmetric device can implement SGD, as the MNIST row shows.
+
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{figs/fig_rev_main}
+\caption{Repaired simulator: gap to FP-SGD (blue) and to digital Adam (orange) per device and algorithm, mean and 95\,\% interval
+over 5 seed-matched runs (symmetric-log axis); the dashed line is the gap line.}\label{fig:rev_main}
+\end{figure}
+\input{tables/rev_main_vs_fp.tex}
+\input{tables/rev_main_vs_adam.tex}

@@ -43,15 +43,29 @@ arXiv and by open-access journals. arXiv offers it in the submission form. The c
 
 ## 4. Code and data DOI (Zenodo)
 <!-- deposit-built -->
-**Status (2026-10-28): the deposit is BUILT and verified; the owner's one command publishes it.**
+**Status (2026-10-28, late evening ET): version 11 of the paper answers review 8. Release v1.1 of the archive, which holds version 11, is BUILT and
+verified as one new local commit in `C:/Projects/memistor-ecram-training`, NOT pushed. The owner's one command publishes it:
+double-click `Publish the memistor deposit v1.1.cmd` (on the Desktop; a copy is in this folder). It pushes the commit to `main` and runs
+`gh release create v1.1`; Zenodo archives the release under the same concept DOI and mints its own version DOI.**
+
+**Release v1.0 (2026-10-28, evening ET): PUBLISHED by the owner's command; version 10 of the paper carries the DOI.**
+
+- Cite the concept DOI **10.5281/zenodo.23748861** (all versions; https://doi.org/10.5281/zenodo.23748861). Version 1.0 is 10.5281/zenodo.23748862
+  (https://zenodo.org/records/23748862; Zenodo dates it 2026-10-29; resource type Software; CC BY 4.0 on the record, MIT for the code as its
+  description states; one file `Questeria/memistor-ecram-training-v1.0.zip`, 100,543,489 bytes, md5 8813e49b550ec91f3b7ee1dca166b074,
+  which is GitHub's archive of tag v1.0). Version 1.0 holds version 9 of the paper, as version 10's availability section says.
+- GitHub, under the author's account: https://github.com/Questeria/memistor-ecram-training; branch `main` and tag `v1.0` are both at
+  076624fbc58b2d50041bf88f2549ff58e37ee52d, the commit verified before publishing (`git ls-remote`, 2026-10-28).
+- Zenodo's Files panel says "Too many files inside the ZIP file.": its previewer does not list an archive this large (3,338 files).
+  It is a display limit; the ZIP downloads whole.
 
 - Where: `C:/Projects/memistor-ecram-training` (repository name `memistor-ecram-training`), a fresh git history of 1 commit ("Release v1.0",
-  branch `main`, author Anthony DeMarco with the GitHub no-reply address), NOT pushed. Built by `make_deposit.py` from an explicit allowlist (this folder);
+  branch `main`, author Anthony DeMarco with the GitHub no-reply address), pushed by the owner's command (2026-10-28). Built by `make_deposit.py` from an explicit allowlist (this folder);
   the commit hash, file count and sizes are in `records/deposit/FINAL-CHECK.json`. Version 9 of the paper (October 28, 2026) is the one deposited.
 - Layout: the deposit mirrors lane ME's folder, so the paper directory is `paper/` and the 12 draws are in `paper/draws/rev3/`; from `paper/`,
   `python -B revision4/rebuild_draw_tables.py --draws draws/rev3` resolves as printed below. The text below is the version-8 plan of the list;
   the deposit holds its own `README.md`, `ENVIRONMENT.md`, `SHA256SUMS`, `VERIFY.json`, `REDACTIONS.md`, `fetch_data.py` and `reproduce_all.py`.
-- To publish: double-click `Publish the memistor paper deposit.cmd` (on the Desktop; a copy is in this folder). If `gh` is missing it runs
+- Published with (2026-10-28, by the owner): double-click `Publish the memistor paper deposit.cmd` (on the Desktop; a copy is in this folder). If `gh` is missing it runs
   `winget install --id GitHub.cli -e` (winget shows its own prompts), if `gh` is not signed in it runs `gh auth login --web --git-protocol https`,
   then it creates the public repository `Questeria/memistor-ecram-training` with `gh repo create`,
   opens https://zenodo.org/account/settings/github/ (sign in with GitHub, accept Zenodo's terms, switch the repository ON), waits for one
@@ -96,6 +110,7 @@ The planned list as written for version 8:
    It must not hold the `sessions/` folders, which contain pod records.
 2. Sign in to https://zenodo.org with GitHub, enable the repository, and create a release. Zenodo mints a DOI.
 3. Put that DOI in the paper's "Code and data availability" paragraph (`tex/body.tex`, the `\availability` text) and rebuild.
+   Done in version 10 (`revision9/edit_10.py`), with the GitHub mirror under the author's account.
 
 ## 5. Submit
 
@@ -106,10 +121,15 @@ The planned list as written for version 8:
    - the generated `main-arxiv.bbl`, which arXiv prefers to running BibTeX itself.
 
    The ready archive is `build/arxiv-source.tar.gz`. The build script assembles it from exactly this list (`pod/build_rev2.sh`
-   for version 3, on a pod; `pod/build_rev3.sh` for version 4, `pod/build_rev4.sh` for version 5, `pod/build_rev5.sh` for version 6 and `pod/build_rev6.sh` for version 7 and `pod/build_rev7.sh` for version 8 and `pod/build_rev8.sh` for version 9, on the desk in WSL Ubuntu with the same tectonic
+   for version 3, on a pod; `pod/build_rev3.sh` for version 4, `pod/build_rev4.sh` for version 5, `pod/build_rev5.sh` for version 6 and `pod/build_rev6.sh` for version 7 and `pod/build_rev7.sh` for version 8 and `pod/build_rev8.sh` for versions 9, 10 and 11, on the desk in WSL Ubuntu with the same tectonic
    0.15.0) and
    compiles main-arxiv.tex from that archive in an empty directory, so a missing file fails the build. Use the archive, not
-   loose copies of the files; `revision8/check_build_v9.py` runs `revision7/check_build_v8.py` and adds the numbers-freshness proof
+   loose copies of the files; `revision10/check_build_v11.py` (version 11) runs `revision6/check_build_v7.py` and reads the version-11 proofs:
+   the name check (`revision9/name_check_v10.py`, the same rule), `revision10/pdf_text_diff_v11.py` (v10 -> v11: the expected edits only),
+   `revision10/check_fig_main.py` (Figure 3 draws every mean and interval of its results; its legend overlaps no label),
+   `sim/test_ideal_reset_cols.py` and the numbers-freshness record; `revision9/check_build_v10.py` (version 10) runs `revision6/check_build_v7.py` and reads the version-10 proofs:
+   `revision9/name_check_v10.py` (the old name appears only inside the GitHub mirror's address, which the owner allowed on 2026-10-28),
+   `revision9/pdf_text_diff_v10.py` (v9 -> v10: the expected edits only) and the numbers-freshness record; `revision8/check_build_v9.py` runs `revision7/check_build_v8.py` and adds the numbers-freshness proof
    (`revision8/check_numbers_fresh.py`: every committed `tex/numbers*.tex` equals what its generator writes now; shown to fail on version 8's
    `numbers_rev.tex`); `revision7/check_build_v8.py` runs `revision6/check_build_v7.py` and adds the name proof (`revision7/name_check.py`: the old name
    appears nowhere in the sources, either PDF's text and metadata, the HTML or the archive); `revision6/check_build_v7.py` runs
@@ -125,8 +145,7 @@ The planned list as written for version 8:
 
    arXiv compiles the source. Check the preview PDF page by page.
 3. Fill in the title. The abstract for the form is ready in `build/arxiv-abstract.txt`: it is generated by `revision2/make_abstract.py` (version 3) `revision3/make_abstract_v4.py` (version 4) and `revision4/make_abstract_v5.py` (versions 5 and 6) from
-   `tex/sec_abstract.tex` with every number macro expanded from the generated `tex/numbers*.tex` (the same numbers as the PDF abstract) and fits arXiv's 1,920-character limit. Add the comments field, e.g. "N pages, 6 figures; code and
-   data: <Zenodo DOI>".
+   `tex/sec_abstract.tex` with every number macro expanded from the generated `tex/numbers*.tex` (the same numbers as the PDF abstract) and fits arXiv's 1,920-character limit. Add the comments field; for version 11: "42 pages, 3 figures; code and data: https://doi.org/10.5281/zenodo.23748861".
 4. Submit. It appears after moderation, usually the next working day.
 
 ## 6. Later: a journal

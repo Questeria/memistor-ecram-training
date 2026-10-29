@@ -165,6 +165,12 @@ class Tile:
             return torch.max(torch.min(u, self.hi), self.lo)
         return u.clamp(-1.0, 1.0)
 
+    def clip_cols(self, u, idx):
+        """clip() for the columns idx only (u holds just those columns; review 8: clip() against the whole tile's bounds failed)"""
+        if self.aihw:
+            return torch.max(torch.min(u, self.hi[:, idx]), self.lo[:, idx])
+        return u.clamp(-1.0, 1.0)
+
     def g_of(self, u):
         if self.aihw:
             return u
@@ -441,7 +447,7 @@ class AnalogLinear(torch.nn.Module):
             us = self.A.ustar[:, idx]
             if not self.A.spec.ideal_float:
                 us = us + self.A.spec.c2c * self.A.k_nom * torch.randn(us.shape, generator=self.gen, device=us.device)
-            self.A.u[:, idx] = self.A.clip(us) if self.A.aihw else us.clamp(-1.0, 1.0)
+            self.A.u[:, idx] = self.A.clip_cols(us, idx)
             self.n_pulses += float(us.numel()) * 2 * u.BL  # reset cost: one up and one down train
             self.n_reset_pulses += float(us.numel()) * 2 * u.BL
         elif self.reset in ("alt", "pulse"):

@@ -184,3 +184,52 @@ Desk Python: `H:/x1000/bench/venv/Scripts/python.exe` (torch 2.7.1+cu126).
   `gh auth login --web --git-protocol https` when not signed in; the static check forbids any other winget form; selftest shows 12 faults caught. NEVER run by Claude.
 - Rebuild order: `make_deposit.py build --out <stage>/memistor-ecram-training`, `deposit_cleanroom.py cleanroom --deposit <stage dir> --room <fresh room>` (CUDA_VISIBLE_DEVICES=-1, guard step),
   `deposit_cleanroom.py assemble`, `make_deposit.py finalize`, `deposit_final_check.py`, then the orphan commit "Release v1.0" in `C:/Projects/memistor-ecram-training`.
+
+## Revision v10 (2026-10-28, director): the public archive and its DOI (no experiment; $0)
+
+- The owner published the deposit with his one command on the evening of 2026-10-28 ET: Zenodo concept DOI 10.5281/zenodo.23748861 (version 1.0: 10.5281/zenodo.23748862);
+  GitHub https://github.com/Questeria/memistor-ecram-training (`main` and tag `v1.0` at 076624fb, the commit verified before publishing).
+- Edits (`revision9/edit_10.py`, each anchor matched once): the availability section names the archive, its DOI and its GitHub mirror under the
+  author's account (owner, 2026-10-28: "The GitHub is fine with Questeria, just make sure it is clear"), the reviews (`reviews/`) and the draws
+  (`draws/rev3/`) inside it, the redactions and `fetch_data.py`; the history gains version 10. No number changed. Every path the section names
+  was checked to exist in the deposit.
+- Build: `pod/build_payload_rev8.py --out H:/x1000/memistor-paper/rev9/v10`, then its `run.sh` (= `pod/build_rev8.sh`, unchanged) in WSL Ubuntu
+  (`wsl -d Ubuntu -e bash -c ...`: without `-e` the default shell expands `$` variables first), tectonic 0.15.0; 42 pages (unchanged); the
+  arXiv archive compiles alone; the HTML is complete and clean (`records/revision9/BUILD-STEPS-v10.txt`). Version 9's outputs are in `build/v9`.
+- Checks: `revision9/check_build_v10.py <out> --json records/revision9/ARTIFACT-CHECK-v10.json` is ALL_OK: `revision6/check_build_v7.py`;
+  `NAME-CHECK-v10.json` (`revision9/name_check_v10.py`: the old name only inside the mirror's address, counted per channel against the address;
+  it fails on a planted name in the HTML, a PDF page, a tex file or an archive member, on a near-miss address and on version 7, and accepts
+  the address broken across two lines); `PDF-TEXT-DIFF-main*.json` (`revision9/pdf_text_diff_v10.py`: v9 -> v10, 10 expected edits and one pure
+  move of appendix B's first block, pages equal); `PDF-TEXT-DIFF-negative-v8-v10.json` (fails as it must); `NUMBERS-FRESH.json` (self-test)
+  and the live numbers check.
+
+## Revision v11 (2026-10-28, director): the answer to review 8 (no experiment; $0)
+
+- Review 8 (ChatGPT in Codex, `reviews/REVIEW-8-chatgpt-20261028-full.md`) audited release v1.0 against version 10: a fresh clone, the
+  CPU reproduction (24 of 24 steps), the simulator suites and a line-by-line read of the computational code. It reported seven minor and
+  two cosmetic findings and no change to a conclusion. Every finding was verified against the files first; all nine are confirmed.
+  `RESPONSE-TO-REVIEW-8.md` gives each one with its verification and change.
+- Changes: `make_figures.py` (Figure 3 plots the mean itself; the legend has its own space; the tick 10 is dropped);
+  `energy/energy_system.py` (a classification run's steps from its smallest layer row count, not from `samples`, which counts the
+  skipped incomplete batch), with `records/ENERGY-SYSTEM.json` and `records/revision/ENERGY-REVISION.json` regenerated and no number
+  file or table changed; `sim/memsim_rev.py` (`Tile.clip_cols`: the ideal reset of a partial column selection under AIHWKIT bounds no
+  longer fails); the methods disclose the LM sampler's off-by-one, which is kept as run. Every change is checked:
+  - `sim/test_ideal_reset_cols.py` checks the reset;
+  - `revision10/check_fig_main.py` checks Figure 3 (version 10's code fails it on exactly the review's two cells);
+  - `revision10/derive_rev_spec_p.py` re-derives Table 12's file byte for byte, so the archive's `reproduce_all.py` now regenerates
+    every table.
+- Edits (`revision10/edit_11.py`): Section 9 names archive v1.1, release v1.1, eight reviews and `RESPONSE-TO-REVIEW-8.md`. Section 3 has
+  the sampler sentence, and the history gains version 11. `revision10/archive_v9_v10.py` archived `tex/v9`, `tex/v10` and `build/v10`.
+- Build: `pod/build_payload_rev8.py --out H:/x1000/memistor-paper/rev10/v11b`, then its `run.sh` in WSL Ubuntu inside `~/me-rev3-venv`
+  (the system `python3` refuses pip installs). The result has 42 pages, an arXiv archive that compiles alone, and complete, clean HTML
+  (`records/revision10/BUILD-STEPS-v11.txt`).
+- Checks: `revision10/check_build_v11.py <out> --json records/revision10/ARTIFACT-CHECK-v11.json` is ALL_OK. It covers:
+  - the v7 artifact checks;
+  - `NAME-CHECK-v11.json`;
+  - `PDF-TEXT-DIFF-main*.json`: v10 -> v11, 14 expected hunks, two reflow hunks and one pure move, pages equal;
+  - `PDF-TEXT-DIFF-negative-v9-v11.json`, which fails as it must;
+  - `NUMBERS-FRESH.json` and the live numbers check;
+  - `FIG-MAIN-CHECK.json` and `TESTS-IDEAL-RESET-COLS.json`.
+- Archive v1.1: `make_deposit.py` builds it into a fresh folder, with the README fixes of findings 5 to 8 (a quick start that runs as
+  written, `requirements.txt` and an install section, the known defects, a size counted last). `deposit_cleanroom.py` reproduces it in a
+  clean room, `sync_deposit.py` lays it over the repository as one commit, and the owner's `Publish the memistor deposit v1.1.cmd` publishes it.

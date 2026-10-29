@@ -1,0 +1,95 @@
+{
+ "pages_old": 42,
+ "pages_new": 42,
+ "words_old": 20699,
+ "words_new": 20898,
+ "hunks": [
+  {
+   "tag": "replace",
+   "removed": "bytes.",
+   "added": "bytes, each window starting at a uniformly random position. The start’s upper bound is one short (found by review 8), so the last window of the training slice is never drawn and the slice’s final byte is never a target; no held-out byte is affected."
+  },
+  {
+   "tag": "replace",
+   "removed": "embed-ding",
+   "added": "embedding"
+  },
+  {
+   "tag": "replace",
+   "removed": "1.0",
+   "added": "1.1"
+  },
+  {
+   "tag": "replace",
+   "removed": "9",
+   "added": "11"
+  },
+  {
+   "tag": "replace",
+   "removed": "paper).",
+   "added": "paper, and version 1.0 holds version 9)."
+  },
+  {
+   "tag": "replace",
+   "removed": "https://github.com/<account>/ memistor-ecram-training",
+   "added": "https://github.com/ <account>/memistor-ecram-training"
+  },
+  {
+   "tag": "replace",
+   "removed": "v1.0).",
+   "added": "v1.1)."
+  },
+  {
+   "tag": "replace",
+   "removed": "seven",
+   "added": "eight"
+  },
+  {
+   "tag": "replace",
+   "removed": "RESPONSE-TO-REVIEW-7.md);",
+   "added": "RESPONSE-TO-REVIEW-7.md, RESPONSE-TO-REVIEW-8.md);"
+  },
+  {
+   "tag": "replace",
+   "removed": "51020",
+   "added": "5"
+  },
+  {
+   "tag": "replace",
+   "removed": "-5-2",
+   "added": "-5 -2"
+  },
+  {
+   "tag": "replace",
+   "removed": "5102050",
+   "added": "5"
+  },
+  {
+   "tag": "replace",
+   "removed": "2026; this paper)",
+   "added": "2026)"
+  },
+  {
+   "tag": "insert",
+   "removed": "",
+   "added": "Version 11 (October 28, 2026; this paper) answers an eighth review, a code audit and reproduction from the public archive (RESPONSE-TO-REVIEW-8.md; no experiment was run). Figure 3 (version 1, superseded) drew two negative LM means at +0.05, with their intervals shifted, and its legend overlapped an axis label; both are corrected. The energy model now counts a classification run’s optimizer steps from the rows its layers trained: the run records’ sample count includes each epoch’s incomplete last batch, which training skips, so the transfer reads were overstated by 0.16 %. No printed number changed; the largest change in a total energy is 0.0005 % in the current projection and 0.0014 % in version 1’s. Section 3 now discloses an off-by-one in the LM sampler. The simulator’s ideal reset of a partial column selection under AIHWKIT bounds, which no result used, no longer fails, and a new check covers it."
+  },
+  {
+   "tag": "delete",
+   "removed": "Wording withdrawn or narrowed. “Near-digital” is not used. “Plain SGD fails on every device” became “every plain-SGD arm at the FP-selected learning rate exceeded the margin”. “The gap does not grow with width” became the equivalence statement of Section 4.4. “Two device properties decide” and “a few hundred levels suffice” became conditional statements about the sweeps of Section 4.5. “The memistor lacked density, speed and energy, not accuracy” became “an optimistic historical-device scenario attained useful accuracy in this simulator”. “32× today with the periphery counted” became the conditional projection of Section 5. “A bench replication” became “a proposed, unbuilt bench replication protocol”. “Every matrix is analog” became “the learned weight matrices use the device model; attention products and other operations are digital”.",
+   "added": ""
+  },
+  {
+   "tag": "insert",
+   "removed": "",
+   "added": "Wording withdrawn or narrowed. “Near-digital” is not used. “Plain SGD fails on every device” became “every plain-SGD arm at the FP-selected learning rate exceeded the margin”. “The gap does not grow with width” became the equivalence statement of Section 4.4. “Two device properties decide” and “a few hundred levels suffice” became conditional statements about the sweeps of Section 4.5. “The memistor lacked density, speed and energy, not accuracy” became “an optimistic historical-device scenario attained useful accuracy in this simulator”. “32× today with the periphery counted” became the conditional projection of Section 5. “A bench replication” became “a proposed, unbuilt bench replication protocol”. “Every matrix is analog” became “the learned weight matrices use the device model; attention products and other operations are digital”."
+  }
+ ],
+ "unexpected_hunks": [],
+ "expected_not_seen": [],
+ "ok": true,
+ "moved_blocks": [
+  "Wording withdrawn or narrowed. “Near-digital” is not used. “Plain SGD fails on e"
+ ],
+ "pages_ok": true
+}

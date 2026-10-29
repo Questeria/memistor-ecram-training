@@ -16,7 +16,8 @@ stamp; figure PNGs: compressed bytes when the decoded pixels are identical) and 
 inputs. Run it from a COPY of the deposit if you want the original bytes kept.
 
 Needs Python 3.10+, numpy and torch (CPU is enough; the checks run with CUDA hidden (CUDA_VISIBLE_DEVICES=-1)) and matplotlib 3.9.2 for the figure steps
-(the paper's figures were drawn with matplotlib 3.9.2). The MNIST/CIFAR/enwik8 files from fetch_data.py are needed by the
+(the paper's figures were drawn with matplotlib 3.9.2); README.md, section "Install (CPU)", and requirements.txt give the commands
+and the versions the clean-room runs used. The MNIST/CIFAR/enwik8 files from fetch_data.py are needed by the
 checks that load data (python fetch_data.py).
 """
 import argparse
@@ -42,6 +43,7 @@ STEPS = [
     ("analyze_d1", "paper", ["-B", "revision/analyze_d1.py"], "regen", None, False),
     ("energy_rev", "paper", ["-B", "energy/energy_rev.py", "--runs", "records/revision/runs/e3", "--out", "records/revision/ENERGY-REVISION.json"], "regen", None, False),
     ("analyze_rev", "paper", ["-B", "revision/analyze_rev.py"], "regen", None, False),
+    ("derive_rev_spec_p", "paper", ["-B", "revision10/derive_rev_spec_p.py"], "regen", None, False),   # Table 12's file (v1.1)
     ("make_figures_rev", "paper", ["-B", "revision/make_figures_rev.py", "--results", "records/revision/RESULTS-REVISION.json", "--out", "tex/figs"], "regen", None, False),
     ("analyze_rev2", "paper", ["-B", "revision2/analyze_rev2.py"], "regen", None, False),
     ("analyze_rev3", "paper", ["-B", "revision3/analyze_rev3.py"], "regen", None, False),
@@ -54,6 +56,9 @@ STEPS = [
     ("fetch_data_selftest", ".", ["-B", "fetch_data.py", "--selftest"], "check", "SELFTEST_OK", False),
     ("bench_parts", "bench", ["-B", "analyze_bench.py", "--parts"], "check", None, False),
     ("bench_selftest", "bench", ["-B", "analyze_bench.py", "--selftest"], "check", None, False),
+    # ---- v1.1 (review 8): Figure 3 draws every mean and interval of its results; the ideal reset of a partial column selection ----
+    ("check_fig_main", "paper", ["-B", "revision10/check_fig_main.py"], "check", "FIG_MAIN_OK", False),
+    ("test_ideal_reset_cols", "paper/sim", ["-B", "test_ideal_reset_cols.py", "--out", "../../_repro/TESTS-IDEAL-RESET-COLS.json"], "check", "ALL_OK", False),
     # ---- the simulators' checks (CPU; CUDA hidden) ----
     ("test_memsim_laneME", "sim", ["-B", "test_memsim.py", "--out", "../_repro/TESTS.json"], "check", "ALL_OK", True),
     ("test_paper", "paper/sim", ["-B", "test_paper.py", "--out", "../../_repro/TESTS-PAPER.json"], "check", "ALL_OK", True),

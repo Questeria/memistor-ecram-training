@@ -1,0 +1,89 @@
+\section{Revision history and response to the independent review}\label{app:revision}
+\paragraph{History.} Version 1 (October 25, 2026) reported the experiments of Appendix~\ref{app:original}. An independent
+technical review (October 26, 2026) recommended major revision with thirteen findings. Version 2 answered them; the
+full response, finding by finding, with the checks that confirmed or qualified each one, is \texttt{RESPONSE-TO-REVIEW.md} in
+the release. The revision plan was committed before any revision run (\texttt{PLAN-REVISION.md}); its deviations R1--R\RVnDev{}
+are recorded in \texttt{DEVIATIONS-PAPER.md}. Version 3 (October 26, 2026) answered a second review (eight findings;
+\texttt{RESPONSE-TO-REVIEW-2.md}, plan \texttt{PLAN-REVISION-2.md}): the pulse-fidelity experiments of
+Section~\ref{sec:fidelity}, the recentred fixed-symmetry control, the width contrasts paired by seed and the revised
+settings tables. Version 4 (October 27, 2026) answers a third review (five findings;
+\texttt{RESPONSE-TO-REVIEW-3.md}, plan \texttt{PLAN-REVISION-3.md}, committed before its runs): the per-sample stream is
+compared with the literal one paired by draw, with bootstrap bounds, in a desk rerun of the update probes that keeps the
+draws; the cross-cell dependence is measured by per-pair correlations that cannot cancel; the training comparison reports
+both arms' labels and every rank reversal; the open training rerun of the one material cell was done; and an interval that
+includes the width margin is no longer read as growth below it. Version 5 (October 27, 2026) answers a
+fourth review (three findings; \texttt{RESPONSE-TO-REVIEW-4.md}, plan \texttt{PLAN-REVISION-4.md}, committed before
+its runs). Version 4's five-seed rerun of the material SGD cell had joined, by seed only, two stream runs whose
+initialisation and example order differed from their controls' (the random draws depend on the GPU model), and it
+had put a seed-0 difference down to GPU rounding; its figures (stream gap \RYAtwoRSeqGap\,pp, change \RYAtwoRD\,pp)
+are withdrawn as an unmatched, mixed-hardware diagnostic. The cell was rerun as matched triples on one GPU, and the
+analysis now refuses a seed whose arms do not share both hashes. The saved pulse draws were added to the deposit inventory with a
+command that rebuilds the probe tables from them, the probe table was split in two for legibility, and the abstract
+states that its probe count is a point-estimate count. Version 6 (October 27, 2026) answers a fifth review
+(one finding and two wording corrections; \texttt{RESPONSE-TO-REVIEW-5.md}; no experiment was run and no number
+changed). The HTML edition of versions 4 and 5 was incomplete: it lacked Sections~\ref{sec:energy}--\ref{sec:availability}, the
+contribution and acknowledgment statements and two appendices, it printed the rows of the simulator-checks table under the
+sensitivity table's caption, and nine references were unresolved. The converter had read two adjacent tables with
+different column-width units as one and dropped everything between them. The conversion now rewrites paragraph-width
+columns, and a new check refuses any HTML that lacks a heading or a table's own rows or that holds an unresolved reference. The
+two wording corrections are in Section~\ref{sec:fidelity} and Section~\ref{sec:availability}. Version 7 (October 27, 2026)
+answers a sixth review (one cosmetic finding; \texttt{RESPONSE-TO-REVIEW-6.md}; no experiment was run, and no
+number or sentence of the PDF changed except this history). The HTML edition of version 6 printed the rule arguments
+as text before ``Seed'' in the header of Table~\ref{tab:rev4_a2m}. The conversion now removes the table-rule
+commands, and the HTML check refuses any leftover rule argument or raw command. Version 8 (October 27, 2026) answers a
+seventh review, which found no actionable defect (\texttt{RESPONSE-TO-REVIEW-7.md}; no experiment was run and no number
+changed). It carries two changes ordered by the author: his official name, Anthony DeMarco, replaces the name printed in versions 1 to 7,
+and the contribution statement credits ChatGPT's reviews. Version 9 (October 28, 2026; this paper) corrects the deviation count R1--R6 to R1--R8, found by the deposit's clean-room regeneration.
+
+\paragraph{What was repaired.}
+\begin{enumerate}
+\item \textbf{Random streams.} The initialisation, the data order, each tile's device population and the pulse/noise draws now
+      have separate generators; every record carries the hashes of its logical initialisation and data order, and every arm
+      of a seed shares them (checked). The old single stream is kept as a mode that replays the original simulator bit for bit.
+\item \textbf{The reset.} The original reset moved $A$ to its symmetry point and charged 62 pulses it never applied; applied
+      through the device model those pulses leave \RVresetResidPct\,\% of the displacement (from $u=0.8$ the state only reaches
+      \RVresetAfter, against a symmetry point of \RVresetSp; about \RVresetPulsesHundredfold{} alternating pulses would be needed
+      for a hundredfold reduction). The repaired pulse reset applies and counts every pulse; the ideal reset is reported only
+      as a labelled variant.
+\item \textbf{The AIHWKIT presets} are mapped one to one (shifted bounds, bound-scaled slopes, slope spread), and their pulse
+      responses were compared with AIHWKIT's own (Section~\ref{sec:validation}): the mapping is \RVaihwAccepted.
+\item \textbf{Measured, not assumed:} the clipping of the pulse probabilities and the lost update are recorded per layer.
+\end{enumerate}
+The \RVnChecks{} checks of the repairs each fail on the old behaviour or a planted fault (\RVnFaults{} faults; \RVtestsAllOk{}
+on the desk and on every pod).
+
+\paragraph{How much the repairs moved the original conclusions (diagnostic D1).} Table~\ref{tab:rev_d1} runs the original and
+the repaired simulator side by side at the original selections, 3 seeds, on MNIST and a 10-epoch CIFAR slice
+(\RVdOneRuns{} runs).
+\begin{itemize}
+\item \textbf{The random streams} moved individual cells by up to \RVdOneRngMnistMaxAbs\,pp on MNIST and
+      \RVdOneRngCifarMaxAbs\,pp on CIFAR (material, i.e.\ more than 1\,pp or a label change, in \RVdOneRngMnistNMaterial{} of
+      \RVdOneRngMnistN{} and \RVdOneRngCifarNMaterial{} of \RVdOneRngCifarN{} cells). With three seeds this is within the noise:
+      the repaired FP-SGD alone spans \RVdOneCifarFpMin--\RVdOneCifarFpMax\,\% on the CIFAR slice. The matched controls did not
+      reduce the paired-gap spread here (median \RVdOneSdRev{} against \RVdOneSdOld\,pp).
+\item \textbf{The reset} moved cells by up to \RVdOneResetMnistMaxAbs\,pp on MNIST and \RVdOneResetCifarMaxAbs\,pp on CIFAR. The
+      ideal reset gave no hidden advantage: a physical reset (pulse, alternating pairs or none) had an equal or smaller gap in
+      \RVdOneResetBetterN{} of \RVdOneResetN{} cells.
+\item \textbf{The mapping} moved Li-ECRAM by at most \RVdOneMapMnistMaxAbs\,pp on MNIST and \RVdOneMapCifarMaxAbs\,pp on CIFAR.
+\item \textbf{Unchanged:} plain SGD fails by far (MNIST \RVdOneSgdMnistMin--\RVdOneSgdMnistMax\,pp, CIFAR slice
+      \RVdOneSgdCifarMin--\RVdOneSgdCifarMax\,pp).
+\end{itemize}
+
+\paragraph{Wording withdrawn or narrowed.} ``Near-digital'' is not used. ``Plain SGD fails on every device'' became ``every
+plain-SGD arm at the FP-selected learning rate exceeded the margin''. ``The gap does not grow with width'' became the equivalence
+statement of Section~\ref{sec:scale}. ``Two device properties decide'' and ``a few hundred levels suffice'' became conditional
+statements about the sweeps of Section~\ref{sec:spec}. ``The memistor lacked density, speed and energy, not accuracy'' became
+``an optimistic historical-device scenario attained useful accuracy in this simulator''. ``32$\times$ today with the periphery
+counted'' became the conditional projection of Section~\ref{sec:energy}. ``A bench replication'' became ``a proposed, unbuilt
+bench replication protocol''. ``Every matrix is analog'' became ``the learned weight matrices use the device model; attention
+products and other operations are digital''.
+
+\input{tables/rev_d1.tex}
+
+\paragraph{Version 3's update probes (superseded).} Table~\ref{tab:v3s_rev2_probe} is version 3's analysis of the update
+probes (pod sitting r6). Its sampling floor for the per-sample stream added the two methods' variances as if their draws were
+independent, although the per-sample stream replays the literal stream's line firings, so the floor was too large and every
+excess of the per-sample stream came out as zero. Version 4 replaces it by the paired analysis of Section~\ref{sec:fidelity}
+(Table~\ref{tab:rev3_probe}). The surrogate's verdicts did not depend on this floor.
+
+\input{tables/v3s_rev2_probe.tex}

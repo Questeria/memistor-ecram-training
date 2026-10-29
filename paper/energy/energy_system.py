@@ -99,7 +99,10 @@ def counts_from_records(paths):
         if r["algo"] != "sgd":
             u = r["ucfg"]
             batch = r["budget"]["batch"] if r.get("budget") else 128
-            steps = r["samples"] / (batch * (r["budget"].get("ctx", 1) if r.get("budget") else 1))
+            # optimizer steps taken: a layer's rows are steps x batch (x ctx, x positions), so the smallest (a dense layer
+            # applied once per example or token) gives the steps exactly. "samples" counted every example of an epoch, the
+            # incomplete last batch that training skips included (review 8: +0.16 % steps on MNIST and CIFAR-10).
+            steps = min(l["rows"] for l in r["layers"]) / (batch * (r["budget"].get("ctx", 1) if r.get("budget") else 1))
             for l in r["layers"]:
                 ncols = u.get("tt_cols") or math.ceil(l["shape"][1] / u["tt_period"])
                 reads += steps * min(ncols, l["shape"][1]) * l["shape"][0]  # weights read over the run

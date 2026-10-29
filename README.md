@@ -1,6 +1,6 @@
 # Can memistor-class electrochemical weights train neural networks?
 
-Code, records and pulse draws for the paper "Can memistor-class electrochemical weights train neural networks?" (Anthony DeMarco, independent researcher; version 9, October 28, 2026).
+Code, records and pulse draws for the paper "Can memistor-class electrochemical weights train neural networks?" (Anthony DeMarco, independent researcher; version 11, October 28, 2026).
 The study asks, in simulation, how close memistor-class electrochemical weights (Li-ion, metal-oxide and protonic ECRAM) come to
 digital training when every weight update is made of device pulses. **All results are simulations**; nothing here is a
 measurement of a physical device (the `bench/` folder is a measurement protocol for a future one).
@@ -12,7 +12,7 @@ paper directory of the deposit (`paper/`): `python -B revision4/rebuild_draw_tab
 
 | Path | Contents |
 |---|---|
-| `paper/` | the paper: `tex/` (sources, generated number macros, tables, figures; `tex/v1..v8` are the archived versions), `build/` (built PDFs and HTML, current and `v1..v8`), the plans, deviations and responses, `analyze.py`, `make_figures.py`, `revision*/` (analysis and verification scripts per revision), `sim/` (the repaired simulator, pulse streams, probes and their checks), `pod/` (pod run and build scripts), `energy/`, `cite/` (citation check), `records/` (every run record and result file), `reviews/` (the seven independent reviews), `draws/rev3/` (the 12 saved pulse-draw archives) |
+| `paper/` | the paper: `tex/` (sources, generated number macros, tables, figures; `tex/v1..v10` are the archived versions), `build/` (built PDFs and HTML, current and `v1..v10`), the plans, deviations and responses, `analyze.py`, `make_figures.py`, `revision*/` (analysis and verification scripts per revision), `sim/` (the repaired simulator, pulse streams, probes and their checks), `pod/` (pod run and build scripts), `energy/`, `cite/` (citation check), `records/` (every run record and result file), `reviews/` (the eight independent reviews), `draws/rev3/` (the 12 saved pulse-draw archives) |
 | `sim/`, `records/` | the first study (lane ME): the original simulator and its checks, the device catalog (`records/CATALOG.json`), the tuned Tiki-Taka choice (`records/TT-CHOICE.json`) and its run records |
 | `bench/`, `BENCH.md` | the bench protocol (parts list, Arduino sketch, analysis) |
 | `energy/`, `pod/` | lane ME's energy model and pod payload scripts |
@@ -37,22 +37,36 @@ Left out on purpose: the pod session records (they hold account identifiers), sc
 See `ENVIRONMENT.md`. In short: runs used torch 2.7.1+cu126 and NumPy 2.2.6 on Python 3.10.12 (pods, RTX A4000) and on the author's
 desk (Quadro P2000 / P2200). The same seed draws a different initialisation and example order on a different GPU model
 (review-4 finding), so training runs are not re-run here; reproduction starts from the saved records and draws. The analysis and
-checks run on CPU with Python 3.10+, NumPy and torch; the figure steps need matplotlib 3.9.2.
+checks run on CPU with torch, NumPy and matplotlib 3.9.2 (the figures' version).
+
+## Install (CPU)
+
+The clean-room runs (the author's, in `VERIFY.json`, and review 8's) used Python 3.13.15, torch 2.7.1, NumPy 2.5.2 and matplotlib 3.9.2
+(review 8 with the CPU build of torch, as below). From the repository root:
+
+    python -m venv .venv
+    .venv\Scripts\activate               # Windows (PowerShell: .venv\Scripts\Activate.ps1); Linux and macOS: source .venv/bin/activate
+    python -m pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
+    python -m pip install -r requirements.txt     # numpy 2.5.2, matplotlib 3.9.2
 
 ## Quick start
 
+Run each line from the repository root, in order; the generators overwrite files in place, so run them in a copy.
+
     python fetch_data.py                 # MNIST, CIFAR-10, enwik8 into data/ (about 0.2 GB), digests checked
     python fetch_data.py --verify-only   # check existing copies
-    python -B reproduce_all.py --sums    # checks every file against SHA256SUMS (run it before the generators, which overwrite files in place)
-    cd paper && python -B revision4/rebuild_draw_tables.py --draws draws/rev3      # prints ALL_OK
-    python -B reproduce_all.py --fast    # regenerate every number file, table and figure, byte-compared (generators overwrite in place: use a copy)
+    python -B reproduce_all.py --sums    # checks every file against SHA256SUMS (run it before the generators)
+    cd paper
+    python -B revision4/rebuild_draw_tables.py --draws draws/rev3      # prints ALL_OK
+    cd ..
+    python -B reproduce_all.py --fast    # regenerate every number file, table and figure of the paper, byte-compared
     python -B reproduce_all.py           # also the simulators' CPU checks (about half an hour)
 
 ## What rebuilds what
 
-Derived by `reproduce_all.py` in the author's clean-room run (`VERIFY.json`): 24 of 24 steps passed
+Derived by `reproduce_all.py` in the author's clean-room run (`VERIFY.json`): 27 of 27 steps passed
 (a step passes when its command exits 0 and prints its token if one is required; the files the generators rewrote are then compared
-with the deposit's copies: 53 byte-identical, 14 identical after one stated normalisation (figure PDFs: only the creation-date stamp; figure PNGs: same decoded pixels, different compressed bytes across platforms), and 0 with a documented difference (none: version 9 of the paper corrected the one count that differed in version 8, `\RVnDev`, and `paper/revision8/check_numbers_fresh.py` fails on any stale `numbers*.tex`). Docstrings of the older scripts show the author's desk interpreter (`H:/x1000/bench/venv/Scripts/python.exe`):
+with the deposit's copies: 55 byte-identical, 13 identical after one stated normalisation (figure PDFs: only the creation-date stamp; figure PNGs: same decoded pixels, different compressed bytes across platforms), and 0 with a documented difference (none: version 9 of the paper corrected the one count that differed in version 8, `\RVnDev`, and `paper/revision8/check_numbers_fresh.py` fails on any stale `numbers*.tex`). Docstrings of the older scripts show the author's desk interpreter (`H:/x1000/bench/venv/Scripts/python.exe`):
 read it as `python`.
 
 | Paper item | File | Command that rebuilds it |
@@ -103,7 +117,7 @@ read it as `python`.
 | Table `tab:rev_vs_adam` (in the paper) | `paper/tex/tables/rev_main_vs_adam.tex` | (from `paper`) `python -B revision/analyze_rev.py` |
 | Table `tab:rev_vs_fp` (in the paper) | `paper/tex/tables/rev_main_vs_fp.tex` | (from `paper`) `python -B revision/analyze_rev.py` |
 | Table `tab:rev_spec` (archived snapshot) | `paper/tex/tables/rev_spec.tex` | (from `paper`) `python -B revision/analyze_rev.py` |
-| Table `tab:rev_spec` (in the paper) | `paper/tex/tables/rev_spec_p.tex` | kept as written by the revision edit scripts (`paper/revision*/edit_*.py`); not regenerated |
+| Table `tab:rev_spec` (in the paper) | `paper/tex/tables/rev_spec_p.tex` | (from `paper`) `python -B revision10/derive_rev_spec_p.py` |
 | Table `tab:rev_width` (in the paper) | `paper/tex/tables/rev_width.tex` | (from `paper`) `python -B revision/analyze_rev.py` |
 | Table `tab:scale` (archived snapshot) | `paper/tex/tables/scale.tex` | (from `paper`) `python -I analyze.py` |
 | Table `tab:spec` (archived snapshot) | `paper/tex/tables/spec.tex` | (from `paper`) `python -I analyze.py` |
@@ -122,7 +136,7 @@ read it as `python`.
 ## How to verify
 
 1. `SHA256SUMS` lists every file; the 12 draw files' digests also appear in `paper/PUBLISHING.md` and in each probe record.
-2. `python -B reproduce_all.py --fast` (above) and `cd paper && python -B revision4/rebuild_draw_tables.py --draws draws/rev3`
+2. `python -B reproduce_all.py --fast` (above) and, from `paper/`, `python -B revision4/rebuild_draw_tables.py --draws draws/rev3`
    (which also has `--selftest`: it shows the check failing on a perturbed draw and on a wrong hash).
 3. `python fetch_data.py --selftest` shows the data check failing on corrupted copies.
 4. `VERIFY.json` holds the author's clean-room result, the secret and privacy scan, and the size check.
@@ -139,9 +153,23 @@ read it as `python`.
   account and funds ledger are left out of the deposit.
 - `paper/reviews/review-3-support/*` are the reviewer's own check scripts and outputs for review 3; local paths in them are shortened (`REDACTIONS.md`).
 
+## Known defects, kept as run
+
+- The LM runners (`paper/sim/run.py`, `paper/sim/run_rev.py`) draw each window's start with `torch.randint(0, len(tr) - ctx - 1)`, whose
+  upper bound is exclusive: the last window of the training slice is never drawn, so the slice's final byte is never a target (review 8,
+  finding 4). No held-out byte is involved. The code is kept as it ran: a corrected bound draws other windows from the same seed, and
+  the records could no longer be traced to this code. Version 11 of the paper discloses it (Section 3).
+- The runners' `samples` field counts every example of an epoch, the incomplete last batch that training skips included (review 8,
+  finding 2). Nothing reads it any more: `paper/energy/energy_system.py` counts a run's steps from its layers' row counts.
+
+## Changes since v1.0
+
+v1.1 answers the eighth review (`paper/reviews/REVIEW-8-chatgpt-20261028-full.md`; the response, with every finding verified, is
+`paper/RESPONSE-TO-REVIEW-8.md`) and holds version 11 of the paper. `RELEASE-NOTES.md` lists the changes; no number the paper prints changed.
+
 ## Citation
 
-See `CITATION.cff`. When a DOI exists (Zenodo mints one for each release; cite the concept DOI), it is added to the paper's
-"Code and data availability" section in the next version.
+Cite the concept DOI [10.5281/zenodo.23748861](https://doi.org/10.5281/zenodo.23748861), which covers every release (v1.0 holds version 9 of the
+paper, v1.1 version 11); `CITATION.cff` has the metadata.
 
-3337 files, 122.9 MB (excluding `SHA256SUMS`).
+3437 files, 128.9 MB (excluding `SHA256SUMS`).

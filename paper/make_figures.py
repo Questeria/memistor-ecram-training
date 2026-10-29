@@ -78,16 +78,19 @@ def fig_main(R, out):
                 g = c["gap"]
                 y = di + (ai - 1.5) * 0.18
                 xe = [[g["mean"] - g["lo"]], [g["hi"] - g["mean"]]] if fin(g.get("lo")) else None
-                ax.errorbar(max(g["mean"], 0.05), y, xerr=xe, fmt="o", ms=3, color=COL[a], label=ALG[a] if di == 0 else None)
+                # the mean itself, negative ones included (the symmetric-log axis shows them); review 8 found the earlier
+                # max(mean, 0.05) drew two negative LM means at +0.05 with their intervals shifted
+                ax.errorbar(g["mean"], y, xerr=xe, fmt="o", ms=3, color=COL[a], label=ALG[a] if di == 0 else None)
         ax.axvline(LINE[t], ls="--", color="r", lw=0.8)
         ax.set_xscale("symlog", linthresh=1.0)
-        ticks = [v for v in (-5, -2, 0, 1, 2, 5, 10, 20, 50) if v >= ax.get_xlim()[0] and v <= ax.get_xlim()[1]]
+        ticks = [v for v in (-5, -2, 0, 1, 2, 5, 20, 50) if v >= ax.get_xlim()[0] and v <= ax.get_xlim()[1]]  # no 10: it overprinted 5 and 20
         ax.set_xticks(ticks); ax.set_xticklabels([str(v) for v in ticks])
         ax.set_yticks(range(len(devs))); ax.set_yticklabels([DEV[d] for d in devs] if t == tasks[0] else [])
         ax.set_xlabel("gap (pp)" if t != "lm" else "gap (% bpb)")
         ax.set_title({"mnist": "MNIST", "cifar": "CIFAR-10 subset", "lm": "char-LM (enwik8)"}[t])
     h, l = axs[0].get_legend_handles_labels()
-    fig.legend(h, l, frameon=False, loc="lower center", ncol=4, bbox_to_anchor=(0.5, -0.06))
+    fig.tight_layout(rect=(0, 0.08, 1, 1))  # room below the axis labels for the legend (it overlapped them before review 8)
+    fig.legend(h, l, frameon=False, loc="lower center", ncol=4, bbox_to_anchor=(0.5, 0.0))
     save(fig, out, "fig_main")
 
 

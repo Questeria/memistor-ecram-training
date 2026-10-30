@@ -53,8 +53,8 @@ Li-ECRAM fit and a protonic-inspired scenario) train three small networks to wit
 when a chopped Tiki-Taka algorithm moves the gradient; plain SGD at the same learning rate does not on any published device. Against
 a tuned digital Adam none of them does, and on the language model the best is \RVLmAdamBestGap\,\% worse in bits per byte. After
 per-arm tuning no arm's gap grows detectably beyond the margin over a factor of four in width; endpoint equivalence was established
-for one CIFAR pairing only, and a paired-by-seed analysis detects growth for another, of a size not resolved against
-the margin. The energy advantage is a
+for one CIFAR pairing only, and both the registered Welch test and a paired-by-seed analysis detect growth for another, of a size
+not resolved against the margin. The energy advantage is a
 conditional projection (\RVenSysMin--\RVenChipMax$\times$ per weight-row at borrowed inference-chip read efficiencies), reported
 only for cells that pass the margin under ideal reads. After an independent review we repaired the simulator and report how much each repair moved the
 original results. The remaining questions are computational and methodological (the fidelity of the update surrogate beyond the cases tested

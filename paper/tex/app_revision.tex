@@ -35,7 +35,7 @@ seventh review, which found no actionable defect (\texttt{RESPONSE-TO-REVIEW-7.m
 changed). It carries two changes ordered by the author: his official name, Anthony DeMarco, replaces the name printed in versions 1 to 7,
 and the contribution statement credits ChatGPT's reviews. Version 9 (October 28, 2026) corrects the deviation count R1--R6 to R1--R8, found by the deposit's clean-room regeneration.
 Version 10 (October 28, 2026) gives the public archive, its DOI and its GitHub mirror in Section~\ref{sec:availability}; no number changed.
-Version 11 (October 28, 2026; this paper) answers an eighth review, a code audit and reproduction from the public archive
+Version 11 (October 28, 2026) answers an eighth review, a code audit and reproduction from the public archive
 (\texttt{RESPONSE-TO-REVIEW-8.md}; no experiment was run). Figure~\ref{fig:main} (version~1, superseded) drew two negative
 LM means at $+0.05$, with their intervals shifted, and its legend overlapped an axis label; both are corrected. The
 energy model now counts a classification run's optimizer steps from the rows its layers trained: the run records' sample
@@ -44,6 +44,14 @@ count includes each epoch's incomplete last batch, which training skips, so the 
 and 0.0014\,\% in version~1's. Section~\ref{sec:methods} now discloses an off-by-one in the LM sampler. The
 simulator's ideal reset of a partial column selection under AIHWKIT bounds, which no result used, no longer fails, and
 a new check covers it.
+Version 12 (October 29, 2026; this paper) answers a ninth review, a second audit and reproduction from the public archive
+(\texttt{RESPONSE-TO-REVIEW-9.md}; no experiment was run). The width study's Welch interval now takes the $t$ quantile at
+the Welch--Satterthwaite degrees of freedom; versions 2 to 11 rounded them down, which the plan does not state (deviation
+R9). This changes one verdict, protonic-inspired c-TTv2 on CIFAR, from inconclusive to grows (Section~\ref{sec:scale}),
+and moves the other Welch intervals by at most 0.18 in their units; the paired contrast is unchanged. The width section now
+says that across widths a seed shares its example order, not its initialisation; the excess correlation of
+Table~\ref{tab:rev3_dep} is defined as an excess in quadrature; and Table~\ref{tab:laneme} labels its version-1 values as
+superseded.
 
 \paragraph{What was repaired.}
 \begin{enumerate}

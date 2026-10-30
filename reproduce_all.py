@@ -15,7 +15,8 @@ _repro/. A regenerated file must be byte-identical, with two narrow, explicit ex
 stamp; figure PNGs: compressed bytes when the decoded pixels are identical) and a table KNOWN_DIFFERENCES (empty since version 9). Nothing is trained: the long runs of the paper are NOT repeated here; their records are the
 inputs. Run it from a COPY of the deposit if you want the original bytes kept.
 
-Needs Python 3.10+, numpy and torch (CPU is enough; the checks run with CUDA hidden (CUDA_VISIBLE_DEVICES=-1)) and matplotlib 3.9.2 for the figure steps
+Needs Python 3.12+ (numpy 2.5.2 requires it; the clean rooms used 3.13.15; the training ran in the pods' own
+environment, see ENVIRONMENT.md), numpy and torch (CPU is enough; the checks run with CUDA hidden (CUDA_VISIBLE_DEVICES=-1)) and matplotlib 3.9.2 for the figure steps
 (the paper's figures were drawn with matplotlib 3.9.2); README.md, section "Install (CPU)", and requirements.txt give the commands
 and the versions the clean-room runs used. The MNIST/CIFAR/enwik8 files from fetch_data.py are needed by the
 checks that load data (python fetch_data.py).
@@ -57,8 +58,10 @@ STEPS = [
     ("bench_parts", "bench", ["-B", "analyze_bench.py", "--parts"], "check", None, False),
     ("bench_selftest", "bench", ["-B", "analyze_bench.py", "--selftest"], "check", None, False),
     # ---- v1.1 (review 8): Figure 3 draws every mean and interval of its results; the ideal reset of a partial column selection ----
-    ("check_fig_main", "paper", ["-B", "revision10/check_fig_main.py"], "check", "FIG_MAIN_OK", False),
+    ("check_fig_main", "paper", ["-B", "revision10/check_fig_main.py", "--selftest"], "check", "FIG_MAIN_OK", False),
     ("test_ideal_reset_cols", "paper/sim", ["-B", "test_ideal_reset_cols.py", "--out", "../../_repro/TESTS-IDEAL-RESET-COLS.json"], "check", "ALL_OK", False),
+    # ---- v1.2 (review 9): the width study's Welch interval at the Welch-Satterthwaite df itself ----
+    ("test_welch_df", "paper", ["-B", "revision11/test_welch_df.py", "--out", "../_repro/TESTS-WELCH-DF.json"], "check", "ALL_OK", False),
     # ---- the simulators' checks (CPU; CUDA hidden) ----
     ("test_memsim_laneME", "sim", ["-B", "test_memsim.py", "--out", "../_repro/TESTS.json"], "check", "ALL_OK", True),
     ("test_paper", "paper/sim", ["-B", "test_paper.py", "--out", "../../_repro/TESTS-PAPER.json"], "check", "ALL_OK", True),
@@ -91,7 +94,7 @@ def sha256(path):
 def snapshot():
     snap = {}
     for dp, dn, fn in os.walk(ROOT):
-        dn[:] = [d for d in dn if d not in (".git", "data", "_repro", "__pycache__")]
+        dn[:] = [d for d in dn if d not in (".git", "data", "_repro", "__pycache__", ".venv")]
         for n in fn:
             p = os.path.join(dp, n)
             st = os.stat(p)
@@ -149,7 +152,7 @@ def check_sums():
     with open(os.path.join(ROOT, "SHA256SUMS"), "rb") as f:
         listed = {l.split("  ", 1)[1] for l in f.read().decode("utf-8").splitlines()}
     for dp, dn, fn in os.walk(ROOT):
-        dn[:] = [d for d in dn if d not in (".git", "data", "_repro", "__pycache__")]
+        dn[:] = [d for d in dn if d not in (".git", "data", "_repro", "__pycache__", ".venv")]
         for x in fn:
             r = os.path.relpath(os.path.join(dp, x), ROOT).replace(os.sep, "/")
             if r not in listed and r != "SHA256SUMS":

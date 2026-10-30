@@ -1,0 +1,83 @@
+\input{sec_abstract}
+\input{sec_intro}
+\input{sec_background}
+\input{sec_methods}
+\input{sec_results}
+\input{sec_energy}
+\input{sec_discussion}
+\input{sec_roadmap}
+
+\section{Code and data availability}\label{sec:availability}
+\begin{sloppypar}
+One public archive holds everything needed to reproduce this paper, with versions, source hashes, dataset digests and split
+offsets, run manifests and licences: Zenodo, \href{https://doi.org/10.5281/zenodo.23748861}{doi:10.5281/zenodo.23748861}
+(this DOI cites all versions; version~1.1 of the archive holds version~11 of this paper, and version~1.0 holds version~9). The same files are on GitHub under
+the author's account, \url{https://github.com/Questeria/memistor-ecram-training} (release v1.1). Code is under the MIT License; records, pulse draws, text and
+figures are under CC~BY~4.0. The archive keeps the study folder's layout, and the paths below are relative to its
+\texttt{paper/} directory. It holds:
+\begin{itemize}
+\item the plans (\texttt{PLAN-PAPER.md}, \texttt{PLAN-REVISION.md}, \texttt{PLAN-REVISION-2.md},
+      \texttt{PLAN-REVISION-3.md}, \texttt{PLAN-REVISION-4.md}), their deviations (\texttt{DEVIATIONS-PAPER.md}), the eight independent reviews
+      (\texttt{reviews/}) and the responses to them (\texttt{RESPONSE-TO-REVIEW.md}, \texttt{RESPONSE-TO-REVIEW-2.md},
+      \texttt{RESPONSE-TO-REVIEW-3.md}, \texttt{RESPONSE-TO-REVIEW-4.md}, \texttt{RESPONSE-TO-REVIEW-5.md}, \texttt{RESPONSE-TO-REVIEW-6.md}, \texttt{RESPONSE-TO-REVIEW-7.md}, \texttt{RESPONSE-TO-REVIEW-8.md});
+\item the original simulator and the repaired one (\texttt{sim/*\_rev.py}), the explicit pulse streams and probes
+      (\texttt{sim/*\_rev2.py}, \texttt{sim/*\_rev3.py}, \texttt{sim/sweep\_rev4.py}), with their checks;
+\item the device catalog with per-field provenance;
+\item every run record (one JSON file per training run, with its configuration, metric, pulse counts and hardware);
+\item the scripts that derive every number, table and figure of this paper from those records (\texttt{analyze.py},
+      \texttt{make\_figures.py}, \texttt{energy/energy\_system.py}; for the revision \texttt{revision/analyze\_rev.py},
+      \texttt{revision/analyze\_d1.py}, \texttt{revision/compare\_curves.py}, \texttt{energy/energy\_rev.py},
+      \texttt{revision2/analyze\_rev2.py}, \texttt{revision3/analyze\_rev3.py}, \texttt{revision4/analyze\_rev4.py});
+\item the saved pulse draws of the update probes: \RZDrawN{} NumPy archives (\RZDrawBytes{} bytes, in
+      \texttt{draws/rev3/}; each file's SHA-256 is in its probe record and in \texttt{PUBLISHING.md}), from which, with the probe records' metadata (layer, clipping figures,
+      bootstrap counts), \texttt{revision4/rebuild\_draw\_tables.py} recomputes every statistic of
+      Tables~\ref{tab:rev4_probe_sur}--\ref{tab:rev3_dep} and checks the rebuilt tables against the paper's byte for byte;
+\item the citation check (every reference verified against Crossref, the arXiv API or the live URL;
+      \texttt{records/CITE-CHECK.json});
+\item the bench protocol.
+\end{itemize}
+In the archive's copies of the reviews and of one response, local file paths are shortened for privacy; the archive's
+\texttt{REDACTIONS.md} lists every change. Data: MNIST, CIFAR-10 and enwik8 are public and pinned by digest; they are not
+redistributed, and the archive's \texttt{fetch\_data.py} downloads them and checks the digests. All text data used for training
+is human-written (Wikipedia, 2006).
+
+\end{sloppypar}
+
+\section*{Author contributions and use of AI}
+\ifdefined\arxivvariant
+Anthony DeMarco conceived the study, directed it, and takes full responsibility for the content of this paper.
+
+Claude (Anthropic), an AI system, was used extensively as a research tool, consistent with arXiv's policy on generative AI
+tools~\cite{arxiv_policy}. It wrote the simulator and its checks, designed and pre-registered the experiments under the
+author's direction, ran them on rented cloud GPUs, analysed the records, verified the references, and drafted the text. The
+author reviewed the results and the text. All numbers were produced by scripts from the saved records.
+
+ChatGPT (OpenAI), also an AI system and not an author, reviewed versions 1 to 7 of this paper in turn: it checked the
+record hashes, independently recomputed the revised statistics, and reported errors, each of which was verified against
+the files and corrected where confirmed (Appendix~\ref{app:revision}).
+\else
+Anthony DeMarco conceived and directed the study. Claude (Anthropic), an AI system, wrote the simulator and its checks, designed and
+pre-registered the experiments under Anthony DeMarco's direction, ran them on rented cloud GPUs, analysed the records, verified the
+references, and drafted the text. ChatGPT (OpenAI), also an AI system and not an author, reviewed versions 1 to 7 of this paper in turn: it checked the
+record hashes, independently recomputed the revised statistics, and reported errors, each of which was verified against
+the files and corrected where confirmed (Appendix~\ref{app:revision}).
+
+Under the policies of arXiv~\cite{arxiv_policy} and of most journals, an AI system cannot be an author or take responsibility
+for a paper. For any formal submission the arXiv-compliant variant of this paper lists Anthony DeMarco as the sole author and states
+Claude's role in this section. All numbers were produced by scripts from the saved records.
+\fi
+
+\section*{Acknowledgments}
+We thank the authors of the open-access papers and of the open-source AIHWKIT whose published device fits and algorithm
+descriptions made this study possible. No external funding was received. Compute was rented by the author.
+
+\bibliographystyle{unsrtnat}
+\bibliography{refs}
+
+\appendix
+\input{app_bench}
+\input{app_selection}
+\input{app_checks}
+\input{app_laneme}
+\input{app_original}
+\input{app_revision}

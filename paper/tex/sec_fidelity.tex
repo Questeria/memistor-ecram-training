@@ -39,7 +39,8 @@ records' metadata (Section~\ref{sec:availability}).
       not a demonstration that it is equivalent to the literal stream.
 \item Shared lines make the literal stream's cells dependent; the surrogate's independent draws do not reproduce this.
       Measured by per-pair correlations, which cannot cancel (Table~\ref{tab:rev3_dep}), the root-mean-square correlation among
-      cells sharing a line exceeds the surrogate's sampling null by up to \RYDepExcessMax{} (mean correlation aligned with the
+      cells sharing a line exceeds the surrogate's sampling null, in quadrature
+      ($\sqrt{\max(0,\,\mathrm{RMS}_{\mathrm{slot}}^2-\mathrm{RMS}_{\mathrm{null}}^2)}$), by up to \RYDepExcessMax{} (mean correlation aligned with the
       expected update's signs up to \RYDepAlignedMax), by more than 0.05 on \RYDepLargeN{} of \RYProbeN{} probes
       (\RYDepLargeList). The statistic of version 3, a pooled, signed normalised covariance, stays within \RYDepVthreePooledMax{}
       in absolute value on the same draws, because positive and negative terms cancel and unequal cell variances are pooled.

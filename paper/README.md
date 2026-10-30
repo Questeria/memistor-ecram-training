@@ -233,3 +233,15 @@ Desk Python: `H:/x1000/bench/venv/Scripts/python.exe` (torch 2.7.1+cu126).
 - Archive v1.1: `make_deposit.py` builds it into a fresh folder, with the README fixes of findings 5 to 8 (a quick start that runs as
   written, `requirements.txt` and an install section, the known defects, a size counted last). `deposit_cleanroom.py` reproduces it in a
   clean room, `sync_deposit.py` lays it over the repository as one commit, and the owner's `Publish the memistor deposit v1.1.cmd` publishes it.
+- Archive v1.1 result: `H:/x1000/memistor-deposit-v1.1b` (the first build, v1.1, failed the clean room only because Figure 3 was drawn with a
+  local-time /CreationDate that the comparison does not normalise; it was redrawn with SOURCE_DATE_EPOCH, as the other figures carry UTC
+  dates). Clean room REPRODUCE_ALL_OK (27 of 27 steps; 55 identical, 13 normalised), mutation tests 4 of 4 caught, VERIFY overall_ok, scan 0
+  unjustified, FINAL_CHECK_OK. `sync_deposit.py` committed it as aaee0bed8 on top of 076624fb in `C:/Projects/memistor-ecram-training`
+  (NOT pushed). `make_launcher_v11.py check` is LAUNCHER_OK.
+- **Archive v1.1 PUBLISHED (2026-10-29, 13:53 ET)** at the owner's word ("Finish the paper and attachments to be released").
+  - What ran: the launcher's two steps, `git push origin main` and `gh release create v1.1`, with the tag pinned to aaee0be.
+  - Checked just before: a clean tree, all 3,437 files matched SHA256SUMS, and the build files were byte-identical to `build/`.
+  - Zenodo version DOI: 10.5281/zenodo.23773334, under the concept DOI 10.5281/zenodo.23748861. PUBLISHING.md section 4 has the
+    details.
+- Left: the arXiv submission of version 11, which is the owner's act (account, endorsement, terms). Everything to upload and paste is
+  in the Desktop folder "memistor paper - arXiv submission (v11)" (SUBMIT-TO-ARXIV.txt).

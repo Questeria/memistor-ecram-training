@@ -1,0 +1,62 @@
+\section{A proposed roadmap for groups with device and fabrication resources}\label{sec:roadmap}
+The simulations suggest what to measure first. None of the criteria below is an established device qualification: each is
+conditional on this simulator (ideal reads, the pulse surrogate, small models) and on the chopped Tiki-Taka setting that passed
+in Section~\ref{sec:main}.
+
+\paragraph{Stage 1: single-device characterisation} (tens of devices, no array).
+\begin{itemize}
+\item \textbf{Measurement.} At least 1000 up and 1000 down pulses at the intended width and voltage, repeated at least three
+      times on at least 32 devices, with the read current measured (not inferred) and incomplete pulses rejected. Fit: step
+      against state (saturation $\gamma_\pm$), up/down asymmetry, cycle-to-cycle noise (separated from read noise),
+      device-to-device spreads, the symmetry point and the signed weight range around it, and drift.
+\item \textbf{What the simulations support} (c-TTv2 sheet, CIFAR $c=32$, absolute 2\,pp line, three seeds,
+      Table~\ref{tab:rev_spec}): a step asymmetry up to \RVSpecCttvTwoCifarAsymThr{} and a reference error up to
+      \RVSpecCttvTwoCifarRefErrThr{} of the half range, one axis at a time around the protonic-inspired base. Thresholds for
+      levels, saturation, write noise and retention are not established by this grid; what it shows is where training clearly
+      fails (no saturation or $\gamma\ge1$, reference error 0.2, retention of $10^3$ updates or less). A device group should
+      therefore measure all of these and simulate its own fitted device, rather than read pass lines off this sheet. Combined
+      deviations are not covered.
+\item \textbf{Endurance and pulse budget.} Report per-array and per-layer pulse distributions and the hottest cells, not only
+      averages; the TT family's $A$ arrays and the resets dominate the write load, and the pulse budget per update clips the
+      largest layers (Section~\ref{sec:main}).
+\end{itemize}
+
+\paragraph{Stage 2: the symmetry point and the reset as physical processes.}
+\begin{itemize}
+\item \textbf{Measurement.} The pulse count, latency and energy to bring a device to its symmetry point or to its read zero; the
+      residual error, its spread and its drift over hours and $10^6$ cycles; the signed range left on each side.
+\item \textbf{Why.} With a realistic pulse budget the reset is incomplete (on the protonic-inspired device, 62 alternating
+      pulses leave \RVresetResidPct\,\% of a displacement), so the reset is a device specification, not a free operation.
+\end{itemize}
+
+\paragraph{Stage 3: small arrays with hardware in the loop.}
+\begin{itemize}
+\item \textbf{Hardware.} Two $64\times64$ arrays per layer ($A$ and $C$); forward and backward passes on the host from the read
+      weights; updates on chip as stochastic pulse coincidences; resets or chopping as the algorithm requires.
+\item \textbf{Prediction first.} Before training, fit the Stage~1 model on several independent chips, run this simulator with
+      the fit, and state a \emph{prediction interval} that includes device-population variation, fit uncertainty, training
+      randomness and measurement noise (not a confidence interval of the simulated mean, which shrinks with more seeds). The
+      hardware should land inside it; independently, within 2\,pp of FP-SGD shows the device works.
+\end{itemize}
+
+\paragraph{Stage 4: full arrays and in-memory reads.} Move the forward and backward reads on chip and measure the system energy
+per weight per row, with the read precision that gives the accuracy, against the conditional projection of
+Section~\ref{sec:energy}; convert retention requirements into time with the full step duration.
+
+\paragraph{The 1960 memistor.} Appendix~\ref{app:bench} gives a proposed, unbuilt bench replication protocol with hobby parts and
+safety notes. Before its fits are used as metrology it must measure the actual read current, keep per-pulse charge, separate
+read from write noise and reject incomplete pulses.
+
+\section{Conclusion}
+In this simulator, with ideal reads and every update made of device pulses, two electrochemical specifications (the AIHWKIT
+Li-ECRAM fit and a protonic-inspired scenario) train three small networks to within the pre-set margins of SGD with exact updates
+when a chopped Tiki-Taka algorithm moves the gradient; plain SGD at the same learning rate does not on any published device. Against
+a tuned digital Adam none of them does, and on the language model the best is \RVLmAdamBestGap\,\% worse in bits per byte. After
+per-arm tuning no arm's gap grows detectably beyond the margin over a factor of four in width; endpoint equivalence was established
+for one CIFAR pairing only, and a paired-by-seed analysis detects growth for another, of a size not resolved against
+the margin. The energy advantage is a
+conditional projection (\RVenSysMin--\RVenChipMax$\times$ per weight-row at borrowed inference-chip read efficiencies), reported
+only for cells that pass the margin under ideal reads. After an independent review we repaired the simulator and report how much each repair moved the
+original results. The remaining questions are computational and methodological (the fidelity of the update surrogate beyond the cases tested
+here, dependence-aware statistics, the construction of controls) as well as experimental (the reset, the reference and the read
+path in real arrays).

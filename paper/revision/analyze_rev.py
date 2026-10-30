@@ -31,6 +31,55 @@ def tq(table, df):
     return table[df - 1] if 1 <= df <= 30 else (1.960 if table is T975 else 1.645)
 
 
+def _betacf(a, b, x):
+    """Continued fraction of the regularized incomplete beta function (modified Lentz)."""
+    tiny = 1e-300
+    c, d = 1.0, 1.0 - (a + b) * x / (a + 1.0)
+    d = 1.0 / (d if abs(d) > tiny else tiny)
+    h = d
+    for m in range(1, 400):
+        for aa in (m * (b - m) * x / ((a + 2 * m - 1) * (a + 2 * m)),
+                   -(a + m) * (a + b + m) * x / ((a + 2 * m) * (a + 2 * m + 1))):
+            d = 1.0 + aa * d
+            d = 1.0 / (d if abs(d) > tiny else tiny)
+            c = 1.0 + aa / c
+            c = c if abs(c) > tiny else tiny
+            h *= d * c
+        if abs(d * c - 1.0) < 1e-15:
+            return h
+    raise ArithmeticError("incomplete beta: no convergence")
+
+
+def _ibeta(a, b, x):
+    """Regularized incomplete beta function I_x(a, b)."""
+    if x <= 0.0:
+        return 0.0
+    if x >= 1.0:
+        return 1.0
+    front = math.exp(math.lgamma(a + b) - math.lgamma(a) - math.lgamma(b) + a * math.log(x) + b * math.log1p(-x))
+    if x < (a + 1.0) / (a + b + 2.0):
+        return front * _betacf(a, b, x) / a
+    return 1.0 - front * _betacf(b, a, 1.0 - x) / b
+
+
+def t_cdf(t, df):
+    """Student-t CDF at a real df > 0."""
+    tail = 0.5 * _ibeta(df / 2.0, 0.5, df / (df + t * t))
+    return 1.0 - tail if t > 0 else tail
+
+
+def t_quantile(p, df):
+    """Student-t quantile (0.5 < p < 1) at a real df > 0, by bisection on t_cdf. REVIEW 9 (DEVIATIONS R9): the Welch interval
+    takes it at the Welch-Satterthwaite df itself; tq() reads its table at the df floored, which the plan does not state."""
+    lo, hi = 0.0, 2.0
+    while t_cdf(hi, df) < p:
+        hi *= 2.0
+    for _ in range(200):
+        mid = 0.5 * (lo + hi)
+        lo, hi = (mid, hi) if t_cdf(mid, df) < p else (lo, mid)
+    return 0.5 * (lo + hi)
+
+
 def ci(xs):
     n = len(xs)
     m = st.fmean(xs)
@@ -137,7 +186,7 @@ def width_verdict(task, gl, gh):
     if any(not math.isfinite(x) for x in gl + gh):
         return dict(verdict="INCONCLUSIVE (a run diverged)")
     D, se, df = welch(gh, gl)
-    t90 = tq(T95, df)
+    t90 = t_quantile(0.95, df)        # REVIEW 9 / DEVIATIONS R9: at the Welch df itself, not floored
     lo90, hi90 = D - t90 * se, D + t90 * se
     if -m < lo90 and hi90 < m:
         v = "EQUIVALENT"
@@ -154,7 +203,7 @@ def width_verdict(task, gl, gh):
 
 def width_paired(task, gl, gh):
     """REVISION 2 (DEVIATIONS R4, added after review 2): the endpoint contrast paired by seed (the arms of one seed share
-    the logical initialisation and the data order across widths), with the registered decision order."""
+    the example order across widths, and within a width also the logical initialisation), with the registered decision order."""
     m = LINE[task]
     if any(not math.isfinite(x) for x in gl + gh):
         return dict(verdict="INCONCLUSIVE (a run diverged)")
@@ -666,7 +715,7 @@ def tables(E3, E4, E5):
         "\\begin{table*}[t]\\centering\\scriptsize\\caption{Revised width study (Li = Li-ECRAM, Prot. = protonic-inspired): mean gap at the narrow / mid / wide "
         "width (5 seeds, each arm at its own selected learning rate; CIFAR $c=16/32/64$ in pp, LM $d=64/128/256$ in \\%), and "
         "the endpoint contrast $D$ (widest minus narrowest) with its 90 \\% interval and verdict, by the pre-registered Welch "
-        "test and, added after review 2 (deviation R4), paired by seed. Verdicts (margins 2 pp, 5 \\%): EQ = equivalent at the "
+        "test (the $t$ quantile at the Welch--Satterthwaite degrees of freedom; versions 1--11 rounded them down: deviation R9) and, added after review 2 (deviation R4), paired by seed. Verdicts (margins 2 pp, 5 \\%): EQ = equivalent at the "
         "endpoints, GR = grows, SH = shrinks, NG = no evidence of growth beyond the margin, INC = inconclusive. An endpoint test says nothing about the "
         "middle width.}\\label{tab:rev_width}\n\\begin{tabular}{llccc}"
         "\\toprule Task & Arm & gap narrow / mid / wide & Welch $D$ [90 \\%] & paired $D$ [90 \\%]\\\\\\midrule\n"

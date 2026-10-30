@@ -1,6 +1,8 @@
 # Publishing the memistor/ECRAM paper: the owner's steps
 
-Nothing has been submitted or posted. Posting is your act: these are the steps, in order.
+The code and data archive is published (release v1.0 on 2026-10-28 and v1.1 on 2026-10-29; section 4). The paper is not yet on arXiv.
+Submitting it needs your arXiv account, an endorsement if asked, and your acceptance of arXiv's terms, so it is your act: sections 2, 3 and 5.
+Everything to upload and paste is in the Desktop folder "memistor paper - arXiv submission (v11)" (SUBMIT-TO-ARXIV.txt there).
 
 ## 1. Which file to submit, and why there are two author variants
 
@@ -43,10 +45,25 @@ arXiv and by open-access journals. arXiv offers it in the submission form. The c
 
 ## 4. Code and data DOI (Zenodo)
 <!-- deposit-built -->
-**Status (2026-10-28, late evening ET): version 11 of the paper answers review 8. Release v1.1 of the archive, which holds version 11, is BUILT and
-verified as one new local commit in `C:/Projects/memistor-ecram-training`, NOT pushed. The owner's one command publishes it:
-double-click `Publish the memistor deposit v1.1.cmd` (on the Desktop; a copy is in this folder). It pushes the commit to `main` and runs
-`gh release create v1.1`; Zenodo archives the release under the same concept DOI and mints its own version DOI.**
+**Release v1.1 (2026-10-29, 13:53 ET): PUBLISHED. It holds version 11 of the paper, which answers review 8.**
+
+- Version DOI **10.5281/zenodo.23773334** (https://zenodo.org/records/23773334; version 1.1, Software, CC BY 4.0, dated 2026-10-29). It has
+  one file, `Questeria/memistor-ecram-training-v1.1.zip`: 103,313,523 bytes, md5 02289e95b2e2fe8bbf358ddc0d748f4d (GitHub's archive of tag
+  v1.1). The ZIP was not downloaded for a read-back; the record's metadata was read through Zenodo's API.
+- GitHub: https://github.com/Questeria/memistor-ecram-training/releases/tag/v1.1. Branch `main` and tag `v1.1` both point at
+  aaee0bed81a95bc909a8df34ba3c9a5e8f26c16e (`git ls-remote`, 2026-10-29).
+- Claude published it at the owner's word (2026-10-29: "Finish the paper and attachments to be released"), running the steps of
+  `Publish the memistor deposit v1.1.cmd` (a copy is in this folder):
+  - `git push origin main`, with gh's stored sign-in passed for that one command;
+  - `gh release create v1.1`, with the tag pinned to the verified commit.
+- Just before publishing:
+  - the deposit tree was clean at aaee0be;
+  - all 3,437 files matched SHA256SUMS;
+  - its four build files were byte-identical to this folder's checked version-11 build.
+- Before that, as built: clean room REPRODUCE_ALL_OK (27 of 27 steps; 55 files identical, 13 after the stated normalisation); 4 of 4 mutation
+  tests caught; scan 0 unjustified; FINAL_CHECK_OK; 3,438 files, 129.4 MB. The records are in `records/deposit/`; v1.0's are in
+  `records/deposit/v1.0/`.
+- The paper cites the concept DOI, which resolves to the newest version, so version 11 needs no rebuild.
 
 **Release v1.0 (2026-10-28, evening ET): PUBLISHED by the owner's command; version 10 of the paper carries the DOI.**
 

@@ -7,8 +7,7 @@ seeds that share initialisation and data order across arms. Against SGD with exa
 \RVAllThreeFpN{} pairings (Li-ECRAM and protonic-inspired, each with chopped TTv2 or AGAD) stay within the pre-set margins on all
 three tasks, while plain SGD exceeds them on every published device. Against a separately tuned digital Adam no pairing does: on
 the language model the best analog result is \RVLmAdamBestGap\,\% worse in bits per byte. Over a factor of four in width no
-arm's gap grows detectably beyond the margin; endpoint equivalence was established for one CIFAR pairing only, and an analysis
-paired by seed detects growth for another without resolving its size against the margin. A sensitivity sheet with three seeds establishes only a few one-at-a-time
+arm's gap grows detectably beyond the margin; endpoint equivalence was established for one CIFAR pairing only, and growth is detected for another without resolving its size against the margin. A sensitivity sheet with three seeds establishes only a few one-at-a-time
 ranges and shows that an earlier asymmetry limit was mostly lost weight range. Against explicit pulse streams the aggregate
 update meets preset point-estimate lines on \RYProbeSurMeetsN{} of \RYProbeN{} probes (bootstrap:
 \RYProbeSurAtNinetyFiveN), not where clipping removes nearly all of an

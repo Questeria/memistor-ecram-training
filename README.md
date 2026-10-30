@@ -1,6 +1,6 @@
 # Can memistor-class electrochemical weights train neural networks?
 
-Code, records and pulse draws for the paper "Can memistor-class electrochemical weights train neural networks?" (Anthony DeMarco, independent researcher; version 11, October 28, 2026).
+Code, records and pulse draws for the paper "Can memistor-class electrochemical weights train neural networks?" (Anthony DeMarco, independent researcher; version 12, October 29, 2026).
 The study asks, in simulation, how close memistor-class electrochemical weights (Li-ion, metal-oxide and protonic ECRAM) come to
 digital training when every weight update is made of device pulses. **All results are simulations**; nothing here is a
 measurement of a physical device (the `bench/` folder is a measurement protocol for a future one).
@@ -12,7 +12,7 @@ paper directory of the deposit (`paper/`): `python -B revision4/rebuild_draw_tab
 
 | Path | Contents |
 |---|---|
-| `paper/` | the paper: `tex/` (sources, generated number macros, tables, figures; `tex/v1..v10` are the archived versions), `build/` (built PDFs and HTML, current and `v1..v10`), the plans, deviations and responses, `analyze.py`, `make_figures.py`, `revision*/` (analysis and verification scripts per revision), `sim/` (the repaired simulator, pulse streams, probes and their checks), `pod/` (pod run and build scripts), `energy/`, `cite/` (citation check), `records/` (every run record and result file), `reviews/` (the eight independent reviews), `draws/rev3/` (the 12 saved pulse-draw archives) |
+| `paper/` | the paper: `tex/` (sources, generated number macros, tables, figures; `tex/v1..v11` are the archived versions), `build/` (built PDFs and HTML, current and `v1..v11`), the plans, deviations and responses, `analyze.py`, `make_figures.py`, `revision*/` (analysis and verification scripts per revision), `sim/` (the repaired simulator, pulse streams, probes and their checks), `pod/` (pod run and build scripts), `energy/`, `cite/` (citation check), `records/` (every run record and result file), `reviews/` (the eight independent reviews), `draws/rev3/` (the 12 saved pulse-draw archives) |
 | `sim/`, `records/` | the first study (lane ME): the original simulator and its checks, the device catalog (`records/CATALOG.json`), the tuned Tiki-Taka choice (`records/TT-CHOICE.json`) and its run records |
 | `bench/`, `BENCH.md` | the bench protocol (parts list, Arduino sketch, analysis) |
 | `energy/`, `pod/` | lane ME's energy model and pod payload scripts |
@@ -41,8 +41,9 @@ checks run on CPU with torch, NumPy and matplotlib 3.9.2 (the figures' version).
 
 ## Install (CPU)
 
-The clean-room runs (the author's, in `VERIFY.json`, and review 8's) used Python 3.13.15, torch 2.7.1, NumPy 2.5.2 and matplotlib 3.9.2
-(review 8 with the CPU build of torch, as below). From the repository root:
+The clean-room runs (the author's, in `VERIFY.json`, and reviews 8 and 9) used Python 3.13.15, torch 2.7.1, NumPy 2.5.2 and
+matplotlib 3.9.2 (the reviews with the CPU build of torch, as below). Python 3.12 or newer is needed (NumPy 2.5.2 requires it).
+From the repository root (`reproduce_all.py --sums` skips the `.venv` folder):
 
     python -m venv .venv
     .venv\Scripts\activate               # Windows (PowerShell: .venv\Scripts\Activate.ps1); Linux and macOS: source .venv/bin/activate
@@ -60,11 +61,11 @@ Run each line from the repository root, in order; the generators overwrite files
     python -B revision4/rebuild_draw_tables.py --draws draws/rev3      # prints ALL_OK
     cd ..
     python -B reproduce_all.py --fast    # regenerate every number file, table and figure of the paper, byte-compared
-    python -B reproduce_all.py           # also the simulators' CPU checks (about half an hour)
+    python -B reproduce_all.py           # also the simulators' CPU checks (about 40 minutes)
 
 ## What rebuilds what
 
-Derived by `reproduce_all.py` in the author's clean-room run (`VERIFY.json`): 27 of 27 steps passed
+Derived by `reproduce_all.py` in the author's clean-room run (`VERIFY.json`): 28 of 28 steps passed
 (a step passes when its command exits 0 and prints its token if one is required; the files the generators rewrote are then compared
 with the deposit's copies: 55 byte-identical, 13 identical after one stated normalisation (figure PDFs: only the creation-date stamp; figure PNGs: same decoded pixels, different compressed bytes across platforms), and 0 with a documented difference (none: version 9 of the paper corrected the one count that differed in version 8, `\RVnDev`, and `paper/revision8/check_numbers_fresh.py` fails on any stale `numbers*.tex`). Docstrings of the older scripts show the author's desk interpreter (`H:/x1000/bench/venv/Scripts/python.exe`):
 read it as `python`.
@@ -162,6 +163,13 @@ read it as `python`.
 - The runners' `samples` field counts every example of an epoch, the incomplete last batch that training skips included (review 8,
   finding 2). Nothing reads it any more: `paper/energy/energy_system.py` counts a run's steps from its layers' row counts.
 
+## Changes since v1.1
+
+v1.2 answers the ninth review (`paper/reviews/REVIEW-9-chatgpt-20261029-full.md`; the response, with every finding verified, is
+`paper/RESPONSE-TO-REVIEW-9.md`) and holds version 12 of the paper. The width study's Welch interval now uses the
+Welch-Satterthwaite degrees of freedom themselves (they were rounded down), which turns one verdict (CIFAR, protonic-inspired c-TTv2)
+from inconclusive to grows; no other verdict and no other printed number changed. `RELEASE-NOTES.md` lists every change.
+
 ## Changes since v1.0
 
 v1.1 answers the eighth review (`paper/reviews/REVIEW-8-chatgpt-20261028-full.md`; the response, with every finding verified, is
@@ -170,6 +178,6 @@ v1.1 answers the eighth review (`paper/reviews/REVIEW-8-chatgpt-20261028-full.md
 ## Citation
 
 Cite the concept DOI [10.5281/zenodo.23748861](https://doi.org/10.5281/zenodo.23748861), which covers every release (v1.0 holds version 9 of the
-paper, v1.1 version 11); `CITATION.cff` has the metadata.
+paper, v1.1 version 11, v1.2 version 12); `CITATION.cff` has the metadata.
 
-3437 files, 128.9 MB (excluding `SHA256SUMS`).
+3490 files, 131.9 MB (excluding `SHA256SUMS`).

@@ -1,11 +1,11 @@
-\begin{table*}[t]\centering\scriptsize\caption{Revised width study (Li = Li-ECRAM, Prot. = protonic-inspired): mean gap at the narrow / mid / wide width (5 seeds, each arm at its own selected learning rate; CIFAR $c=16/32/64$ in pp, LM $d=64/128/256$ in \%), and the endpoint contrast $D$ (widest minus narrowest) with its 90 \% interval and verdict, by the pre-registered Welch test and, added after review 2 (deviation R4), paired by seed. Verdicts (margins 2 pp, 5 \%): EQ = equivalent at the endpoints, GR = grows, SH = shrinks, NG = no evidence of growth beyond the margin, INC = inconclusive. An endpoint test says nothing about the middle width.}\label{tab:rev_width}
+\begin{table*}[t]\centering\scriptsize\caption{Revised width study (Li = Li-ECRAM, Prot. = protonic-inspired): mean gap at the narrow / mid / wide width (5 seeds, each arm at its own selected learning rate; CIFAR $c=16/32/64$ in pp, LM $d=64/128/256$ in \%), and the endpoint contrast $D$ (widest minus narrowest) with its 90 \% interval and verdict, by the pre-registered Welch test (the $t$ quantile at the Welch--Satterthwaite degrees of freedom; versions 1--11 rounded them down: deviation R9) and, added after review 2 (deviation R4), paired by seed. Verdicts (margins 2 pp, 5 \%): EQ = equivalent at the endpoints, GR = grows, SH = shrinks, NG = no evidence of growth beyond the margin, INC = inconclusive. An endpoint test says nothing about the middle width.}\label{tab:rev_width}
 \begin{tabular}{llccc}\toprule Task & Arm & gap narrow / mid / wide & Welch $D$ [90 \%] & paired $D$ [90 \%]\\\midrule
-CIFAR & Li c-TTv2 & -0.36 / 0.66 / -0.71 & -0.34 [-1.34, 0.66] EQ & -0.34 [-1.79, 1.11] EQ\\
-CIFAR & Li TTv2 & 3.29 / 4.12 / 5.20 & 1.91 [-0.37, 4.19] INC & 1.91 [-1.53, 5.35] INC\\
-CIFAR & Prot. c-TTv2 & -2.57 / -1.55 / -0.81 & 1.76 [-0.02, 3.55] INC & 1.76 [0.15, 3.38] GR\\
-CIFAR & Prot. TTv2 & 1.38 / 2.71 / 0.43 & -0.95 [-2.53, 0.62] NG & -0.95 [-3.36, 1.46] NG\\
-LM & Li c-TTv2 & 1.21 / -4.69 / -12.90 & -14.12 [-15.38, -12.86] SH & -14.12 [-15.30, -12.94] SH\\
-LM & Li TTv2 & 9.85 / 13.29 / -3.07 & -12.92 [-14.59, -11.25] SH & -12.92 [-14.99, -10.85] SH\\
-LM & Prot. c-TTv2 & -5.79 / -6.36 / -12.69 & -6.90 [-8.10, -5.70] SH & -6.90 [-7.76, -6.04] SH\\
-LM & Prot. TTv2 & 7.95 / 0.39 / -6.49 & -14.44 [-19.30, -9.57] SH & -14.44 [-19.31, -9.57] SH\\
+CIFAR & Li c-TTv2 & -0.36 / 0.66 / -0.71 & -0.34 [-1.34, 0.65] EQ & -0.34 [-1.79, 1.11] EQ\\
+CIFAR & Li TTv2 & 3.29 / 4.12 / 5.20 & 1.91 [-0.34, 4.16] INC & 1.91 [-1.53, 5.35] INC\\
+CIFAR & Prot. c-TTv2 & -2.57 / -1.55 / -0.81 & 1.76 [0.05, 3.47] GR & 1.76 [0.15, 3.38] GR\\
+CIFAR & Prot. TTv2 & 1.38 / 2.71 / 0.43 & -0.95 [-2.51, 0.60] NG & -0.95 [-3.36, 1.46] NG\\
+LM & Li c-TTv2 & 1.21 / -4.69 / -12.90 & -14.12 [-15.37, -12.87] SH & -14.12 [-15.30, -12.94] SH\\
+LM & Li TTv2 & 9.85 / 13.29 / -3.07 & -12.92 [-14.55, -11.29] SH & -12.92 [-14.99, -10.85] SH\\
+LM & Prot. c-TTv2 & -5.79 / -6.36 / -12.69 & -6.90 [-8.08, -5.72] SH & -6.90 [-7.76, -6.04] SH\\
+LM & Prot. TTv2 & 7.95 / 0.39 / -6.49 & -14.44 [-19.12, -9.75] SH & -14.44 [-19.31, -9.57] SH\\
 \bottomrule\end{tabular}\end{table*}

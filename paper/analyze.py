@@ -617,11 +617,12 @@ def laneme(e3r):
                 cells.append(f"{old} & {new}")
             rows.append(f"{DEV_LABEL[d]} & {ALGO_LABEL[al]} & " + " & ".join(cells) + "\\\\")
     write_table("laneme", "\\begin{table*}[h]\\centering\\footnotesize\\caption{Earlier development results (lane ME: same "
-                "simulator, 1--3 seeds, MNIST on a different GPU, the LM selected on an overlapping split) beside this paper's "
-                "pre-registered 5-seed values. Gaps in pp (MNIST, CIFAR) and \\% (LM). The pessimistic memistor and the pencil "
+                "simulator, 1--3 seeds, MNIST on a different GPU, the LM selected on an overlapping split) beside the "
+                "pre-registered 5-seed values of version 1 of this paper (v1; superseded: the original simulator before its "
+                "repair; the current values are in Tables~\\ref{tab:rev_vs_fp} and \\ref{tab:rev_vs_adam}). Gaps in pp (MNIST, CIFAR) and \\% (LM). The pessimistic memistor and the pencil "
                 "lead appear only in the earlier runs.}\\label{tab:laneme}\n\\begin{tabular}{llcccccc}\\toprule "
                 "& & \\multicolumn{2}{c}{MNIST} & \\multicolumn{2}{c}{CIFAR} & \\multicolumn{2}{c}{LM}\\\\ Device & Alg. & earlier & "
-                "this paper & earlier & this paper & earlier & this paper\\\\\\midrule\n" + "\n".join(rows) +
+                "v1 & earlier & v1 & earlier & v1\\\\\\midrule\n" + "\n".join(rows) +
                 "\n\\bottomrule\\end{tabular}\\end{table*}\n")
     return True
 

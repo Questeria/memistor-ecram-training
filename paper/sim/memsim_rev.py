@@ -36,8 +36,11 @@ and of the back-propagated error d), each sample fires up to BL pulse slots; a w
 coincidence with probability p_x,i * p_d,j per slot. The up count of weight ij is the sum over
 samples whose x_i*d_j < 0 (descent direction positive), the down count the sum over the others;
 both are applied (asymmetry is never cancelled digitally). Counts are drawn as Poisson with the
-exact mean (a sum of many small Bernoulli trials; the Poisson variance is >= the binomial one, so
-this is conservative). Up and down pulses of one batch are applied as uniformly interleaved:
+requested mean. This is a surrogate, not a pulse-by-pulse simulation: the mean is exact only while no
+slot probability clips, and per-cell draws ignore the correlations of shared row and column pulse
+streams, so the larger variance is not claimed to be conservative (the paper, Section 3.2; its update
+probes compare the surrogate with literal pulse streams). Up and down pulses of one batch are applied
+as uniformly interleaved:
 du/ds = A - B u over s in [0, 1] is solved exactly (A, B below).
 """
 import math

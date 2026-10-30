@@ -1,0 +1,57 @@
+{
+ "all_ok": true,
+ "checks": {
+  "c_ideal_reset_cols": {
+   "detail": [
+    {
+     "changed_cols": [
+      0
+     ],
+     "charged": 186.0,
+     "col": 0,
+     "inside_bounds": true,
+     "near_symmetry_point": true
+    },
+    {
+     "changed_cols": [
+      1
+     ],
+     "charged": 186.0,
+     "col": 1,
+     "inside_bounds": true,
+     "near_symmetry_point": true
+    },
+    {
+     "changed_cols": [
+      2
+     ],
+     "charged": 186.0,
+     "col": 2,
+     "inside_bounds": true,
+     "near_symmetry_point": true
+    },
+    {
+     "changed_cols": [
+      3
+     ],
+     "charged": 186.0,
+     "col": 3,
+     "inside_bounds": true,
+     "near_symmetry_point": true
+    }
+   ],
+   "ok": true
+  }
+ },
+ "faults": {
+  "f_whole_tile_bounds": {
+   "caught": true,
+   "check": "c_ideal_reset_cols",
+   "detail": {
+    "exception": "RuntimeError('shape mismatch: value tensor of shape [3, 4] cannot be broadcast to indexing result of shape [3, 1]')"
+   }
+  }
+ },
+ "schema": "altone.x1000.me-paper.v11.tests.v1",
+ "torch": "2.7.1+cu126"
+}

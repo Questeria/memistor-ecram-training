@@ -107,19 +107,19 @@ SGD exceeds them on every published device. Against a separately tuned
 digital Adam no pairing does: on the language model the best analog
 result is 23.36 % worse in bits per byte. Over a factor of four in width
 no arm’s gap grows detectably beyond the margin; endpoint equivalence
-was established for one CIFAR pairing only, and an analysis paired by
-seed detects growth for another without resolving its size against the
-margin. A sensitivity sheet with three seeds establishes only a few
-one-at-a-time ranges and shows that an earlier asymmetry limit was
-mostly lost weight range. Against explicit pulse streams the aggregate
-update meets preset point-estimate lines on 10 of 12 probes (bootstrap:
-1), not where clipping removes nearly all of an update, and ignores
-shared-line dependence; in training one label and two close rankings
-change. A conditional energy projection, borrowing an analog inference
-chip’s read efficiency, gives 17.9–32.4<span class="math inline">\(\times\)</span> less energy per weight-row than an
-H100, for cells that pass the margin under ideal reads. This version
-repairs the simulator after independent reviews and reports how far each
-repair moved the original results.</p>
+was established for one CIFAR pairing only, and growth is detected for
+another without resolving its size against the margin. A sensitivity
+sheet with three seeds establishes only a few one-at-a-time ranges and
+shows that an earlier asymmetry limit was mostly lost weight range.
+Against explicit pulse streams the aggregate update meets preset
+point-estimate lines on 10 of 12 probes (bootstrap: 1), not where
+clipping removes nearly all of an update, and ignores shared-line
+dependence; in training one label and two close rankings change. A
+conditional energy projection, borrowing an analog inference chip’s read
+efficiency, gives 17.9–32.4<span class="math inline">\(\times\)</span>
+less energy per weight-row than an H100, for cells that pass the margin
+under ideal reads. This version repairs the simulator after independent
+reviews and reports how far each repair moved the original results.</p>
 </div>
 </header>
 <nav id="TOC" role="doc-toc">
@@ -1410,17 +1410,18 @@ literal stream.</p></li>
 <li><p>Shared lines make the literal stream’s cells dependent; the
 surrogate’s independent draws do not reproduce this. Measured by
 per-pair correlations, which cannot cancel (Table <a href="#tab:rev3_dep" data-reference-type="ref" data-reference="tab:rev3_dep">8</a>), the root-mean-square correlation
-among cells sharing a line exceeds the surrogate’s sampling null by up
-to 0.345 (mean correlation aligned with the expected update’s signs up
-to 0.208), by more than 0.05 on 6 of 12 probes (LM layer 9 at update
-750; LM layer 9 at update 2250; MNIST layer 0 at update 1000; MNIST
-layer 2 at update 1000; MNIST layer 0 at update 3500; MNIST layer 2 at
-update 3500). The statistic of version 3, a pooled, signed normalised
-covariance, stays within 0.020 in absolute value on the same draws,
-because positive and negative terms cancel and unequal cell variances
-are pooled. The cross-cell dependence is therefore not small everywhere;
-the per-cell lines above do not test it, and whether it matters for
-training is what A2 measures.</p></li>
+among cells sharing a line exceeds the surrogate’s sampling null, in
+quadrature (<span class="math inline">\(\sqrt{\max(0,\,\mathrm{RMS}_{\mathrm{slot}}^2-\mathrm{RMS}_{\mathrm{null}}^2)}\)</span>),
+by up to 0.345 (mean correlation aligned with the expected update’s
+signs up to 0.208), by more than 0.05 on 6 of 12 probes (LM layer 9 at
+update 750; LM layer 9 at update 2250; MNIST layer 0 at update 1000;
+MNIST layer 2 at update 1000; MNIST layer 0 at update 3500; MNIST layer
+2 at update 3500). The statistic of version 3, a pooled, signed
+normalised covariance, stays within 0.020 in absolute value on the same
+draws, because positive and negative terms cancel and unequal cell
+variances are pooled. The cross-cell dependence is therefore not small
+everywhere; the per-cell lines above do not test it, and whether it
+matters for training is what A2 measures.</p></li>
 </ul>
 <p>The probes draw from a generator of their own. On the pod (version 3)
 the MNIST and CIFAR probe runs reproduced their main-table records
@@ -1822,10 +1823,10 @@ A1-P), among cells sharing a row / a column, from per-pair Pearson
 correlations over all pairs (they cannot cancel): root-mean-square
 correlation of the literal stream and of the surrogate (whose cells are
 independent, so its value is the sampling null at the same number of
-draws), the excess RMS beyond that null, the mean correlation aligned
-with the signs of the expected update, the largest per-line RMS, and the
-version-3 statistic (a pooled, signed normalised covariance, which can
-cancel).</caption>
+draws), the excess RMS beyond that null, taken in quadrature (<span class="math inline">\(\sqrt{\max(0,\,\mathrm{RMS}_{\mathrm{slot}}^2-\mathrm{RMS}_{\mathrm{null}}^2)}\)</span>),
+the mean correlation aligned with the signs of the expected update, the
+largest per-line RMS, and the version-3 statistic (a pooled, signed
+normalised covariance, which can cancel).</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Case</th>
@@ -2197,26 +2198,32 @@ mean gap at the widest minus the narrowest width) is tested for
 equivalence within the gap lines (TOST at 5 %). The original paper’s
 “FLAT” label is withdrawn: it did not test equivalence and covered large
 non-monotonic changes. The pre-registered contrast is Welch’s, which
-treats the two widths’ seed samples as independent. They are not: every
-arm of a seed shares the logical initialisation and the data order
-across widths. Beside the registered result we therefore report the
-contrast paired by seed, with the same decision order, as a sensitivity
-analysis added after the second review (deviation R4). Both test the
-endpoints only; neither covers the middle width.</p>
+treats the two widths’ seed samples as independent; its interval takes
+the <span class="math inline">\(t\)</span> quantile at the
+Welch–Satterthwaite degrees of freedom (versions 2 to 11 rounded them
+down, which the plan does not state; review 9 found it, deviation R9).
+The samples are not independent: a seed keeps its example order across
+widths, and within a width every arm of a seed also shares the logical
+initialisation (between widths the layers differ in shape). Beside the
+registered result we therefore report the contrast paired by seed, with
+the same decision order, as a sensitivity analysis added after the
+second review (deviation R4). Both test the endpoints only; neither
+covers the middle width.</p>
 <h4 id="cifar-c16-32-64.">CIFAR (<span class="math inline">\(c=16\)</span>, 32, 64).</h4>
-<p>1 arm is equivalent within <span class="math inline">\(\pm2\)</span> pp (Li-ECRAM c-TTv2, <span class="math inline">\(D=-0.34\)</span> pp, 90 % interval [-1.34, 0.66]);
+<p>1 arm is equivalent within <span class="math inline">\(\pm2\)</span> pp (Li-ECRAM c-TTv2, <span class="math inline">\(D=-0.34\)</span> pp, 90 % interval [-1.34, 0.65]);
 for 1 arm there is no evidence of growth beyond the margin
-(protonic-inspired TTv2); 2 arms are inconclusive (Li-ECRAM TTv2, <span class="math inline">\(D=1.91\)</span> pp; protonic-inspired c-TTv2,
-<span class="math inline">\(D=1.76\)</span> pp). Five seeds are not
-enough to settle a 2 pp margin on this subset. Paired by seed, the
-Li-ECRAM c-TTv2 equivalence survives (90 % interval [-1.79, 1.11]), and
-protonic-inspired c-TTv2 <em>grows</em> ([0.15, 3.38]): the growth is
-detected, but its size against the margin is unresolved: the interval
-includes 2 pp, so growth beyond the margin is not excluded. Both of its
-endpoint cells still pass against their own FP-SGD controls; a gap that
-moves from more negative to less negative can grow while both cells stay
-acceptable. Li-ECRAM TTv2 stays inconclusive, so growth beyond the
-margin is not excluded for it either.</p>
+(protonic-inspired TTv2); 1 arm grows (protonic-inspired c-TTv2, <span class="math inline">\(D=1.76\)</span> pp, 90 % interval [0.05, 3.47]),
+and 1 is inconclusive (Li-ECRAM TTv2, <span class="math inline">\(D=1.91\)</span> pp). Five seeds are not enough to
+settle a 2 pp margin on this subset. Paired by seed, the Li-ECRAM c-TTv2
+equivalence survives (90 % interval [-1.79, 1.11]), and
+protonic-inspired c-TTv2 grows again ([0.15, 3.38]). Its growth is
+detected by both contrasts, but its size against the margin is
+unresolved: both intervals include 2 pp, so growth beyond the margin is
+not excluded. Both of its endpoint cells still pass against their own
+FP-SGD controls; a gap that moves from more negative to less negative
+can grow while both cells stay acceptable. Li-ECRAM TTv2 stays
+inconclusive, so growth beyond the margin is not excluded for it
+either.</p>
 <h4 id="the-lm-d64-128-256.">The LM (<span class="math inline">\(d=64\)</span>, 128, 256).</h4>
 <p>All 4 arms have a gap that shrinks with width (for example Li-ECRAM
 c-TTv2 from 1.21 % to -12.90 %). This is not a favourable scaling law:
@@ -2229,13 +2236,12 @@ quality-matched baselines would be needed to speak of scaling.</p>
 <p>Across a factor of four in width, after per-arm learning-rate
 selection, no arm’s gap grows detectably beyond the margin. Endpoint
 equivalence is established for one CIFAR arm only (Li-ECRAM c-TTv2, by
-both contrasts); the paired analysis detects growth for one other CIFAR
-arm (protonic-inspired c-TTv2), which the registered Welch test does
-not, without resolving its size against the margin; for two arms
-(protonic-inspired c-TTv2 and Li-ECRAM TTv2) growth beyond the margin is
-not excluded. On the LM the apparent shrinkage reflects the FP-SGD
-baseline at a fixed budget. Width dependence is unresolved by this
-study.</p>
+both contrasts); both contrasts detect growth for one other CIFAR arm
+(protonic-inspired c-TTv2), without resolving its size against the
+margin; for two arms (protonic-inspired c-TTv2 and Li-ECRAM TTv2) growth
+beyond the margin is not excluded. On the LM the apparent shrinkage
+reflects the FP-SGD baseline at a fixed budget. Width dependence is
+unresolved by this study.</p>
 <div id="tab:rev_width">
 <table>
 <caption>Revised width study (Li = Li-ECRAM, Prot. = protonic-inspired):
@@ -2243,9 +2249,11 @@ mean gap at the narrow / mid / wide width (5 seeds, each arm at its own
 selected learning rate; CIFAR <span class="math inline">\(c=16/32/64\)</span> in pp, LM <span class="math inline">\(d=64/128/256\)</span> in %), and the endpoint
 contrast <span class="math inline">\(D\)</span> (widest minus narrowest)
 with its 90 % interval and verdict, by the pre-registered Welch test
-and, added after review 2 (deviation R4), paired by seed. Verdicts
-(margins 2 pp, 5 %): EQ = equivalent at the endpoints, GR = grows, SH =
-shrinks, NG = no evidence of growth beyond the margin, INC =
+(the <span class="math inline">\(t\)</span> quantile at the
+Welch–Satterthwaite degrees of freedom; versions 1–11 rounded them down:
+deviation R9) and, added after review 2 (deviation R4), paired by seed.
+Verdicts (margins 2 pp, 5 %): EQ = equivalent at the endpoints, GR =
+grows, SH = shrinks, NG = no evidence of growth beyond the margin, INC =
 inconclusive. An endpoint test says nothing about the middle
 width.</caption>
 <thead>
@@ -2262,56 +2270,56 @@ width.</caption>
 <td style="text-align: left;">CIFAR</td>
 <td style="text-align: left;">Li c-TTv2</td>
 <td style="text-align: center;">-0.36 / 0.66 / -0.71</td>
-<td style="text-align: center;">-0.34 [-1.34, 0.66] EQ</td>
+<td style="text-align: center;">-0.34 [-1.34, 0.65] EQ</td>
 <td style="text-align: center;">-0.34 [-1.79, 1.11] EQ</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">CIFAR</td>
 <td style="text-align: left;">Li TTv2</td>
 <td style="text-align: center;">3.29 / 4.12 / 5.20</td>
-<td style="text-align: center;">1.91 [-0.37, 4.19] INC</td>
+<td style="text-align: center;">1.91 [-0.34, 4.16] INC</td>
 <td style="text-align: center;">1.91 [-1.53, 5.35] INC</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">CIFAR</td>
 <td style="text-align: left;">Prot. c-TTv2</td>
 <td style="text-align: center;">-2.57 / -1.55 / -0.81</td>
-<td style="text-align: center;">1.76 [-0.02, 3.55] INC</td>
+<td style="text-align: center;">1.76 [0.05, 3.47] GR</td>
 <td style="text-align: center;">1.76 [0.15, 3.38] GR</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">CIFAR</td>
 <td style="text-align: left;">Prot. TTv2</td>
 <td style="text-align: center;">1.38 / 2.71 / 0.43</td>
-<td style="text-align: center;">-0.95 [-2.53, 0.62] NG</td>
+<td style="text-align: center;">-0.95 [-2.51, 0.60] NG</td>
 <td style="text-align: center;">-0.95 [-3.36, 1.46] NG</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">LM</td>
 <td style="text-align: left;">Li c-TTv2</td>
 <td style="text-align: center;">1.21 / -4.69 / -12.90</td>
-<td style="text-align: center;">-14.12 [-15.38, -12.86] SH</td>
+<td style="text-align: center;">-14.12 [-15.37, -12.87] SH</td>
 <td style="text-align: center;">-14.12 [-15.30, -12.94] SH</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">LM</td>
 <td style="text-align: left;">Li TTv2</td>
 <td style="text-align: center;">9.85 / 13.29 / -3.07</td>
-<td style="text-align: center;">-12.92 [-14.59, -11.25] SH</td>
+<td style="text-align: center;">-12.92 [-14.55, -11.29] SH</td>
 <td style="text-align: center;">-12.92 [-14.99, -10.85] SH</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">LM</td>
 <td style="text-align: left;">Prot. c-TTv2</td>
 <td style="text-align: center;">-5.79 / -6.36 / -12.69</td>
-<td style="text-align: center;">-6.90 [-8.10, -5.70] SH</td>
+<td style="text-align: center;">-6.90 [-8.08, -5.72] SH</td>
 <td style="text-align: center;">-6.90 [-7.76, -6.04] SH</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">LM</td>
 <td style="text-align: left;">Prot. TTv2</td>
 <td style="text-align: center;">7.95 / 0.39 / -6.49</td>
-<td style="text-align: center;">-14.44 [-19.30, -9.57] SH</td>
+<td style="text-align: center;">-14.44 [-19.12, -9.75] SH</td>
 <td style="text-align: center;">-14.44 [-19.31, -9.57] SH</td>
 </tr>
 </tbody>
@@ -2880,11 +2888,11 @@ than on the saturating devices, so in this configuration the
 accumulator’s decay comes from the device’s saturation.</p></li>
 <li><p><strong>Width</strong> is not resolved: after per-arm tuning no
 arm’s gap grows detectably beyond the margin over a factor of four,
-endpoint equivalence was established for one CIFAR arm only, a
-paired-by-seed analysis detects growth for another without resolving its
-size against the margin (growth beyond it is not excluded there or for
-Li-ECRAM TTv2), and the LM’s shrinking gap reflects a weaker FP-SGD
-baseline at the largest width.</p></li>
+endpoint equivalence was established for one CIFAR arm only, the
+registered Welch test and a paired-by-seed analysis both detect growth
+for another without resolving its size against the margin (growth beyond
+it is not excluded there or for Li-ECRAM TTv2), and the LM’s shrinking
+gap reflects a weaker FP-SGD baseline at the largest width.</p></li>
 <li><p><strong>Energy</strong> is a conditional projection set almost
 entirely by borrowed read efficiencies, and it is reported only for
 cells that pass the stated margin under ideal reads; against Adam on the
@@ -3023,25 +3031,27 @@ not on any published device. Against a tuned digital Adam none of them
 does, and on the language model the best is 23.36 % worse in bits per
 byte. After per-arm tuning no arm’s gap grows detectably beyond the
 margin over a factor of four in width; endpoint equivalence was
-established for one CIFAR pairing only, and a paired-by-seed analysis
-detects growth for another, of a size not resolved against the margin.
-The energy advantage is a conditional projection (17.9–32.4<span class="math inline">\(\times\)</span> per weight-row at borrowed
-inference-chip read efficiencies), reported only for cells that pass the
-margin under ideal reads. After an independent review we repaired the
-simulator and report how much each repair moved the original results.
-The remaining questions are computational and methodological (the
-fidelity of the update surrogate beyond the cases tested here,
-dependence-aware statistics, the construction of controls) as well as
-experimental (the reset, the reference and the read path in real
-arrays).</p>
+established for one CIFAR pairing only, and both the registered Welch
+test and a paired-by-seed analysis detect growth for another, of a size
+not resolved against the margin. The energy advantage is a conditional
+projection (17.9–32.4<span class="math inline">\(\times\)</span> per
+weight-row at borrowed inference-chip read efficiencies), reported only
+for cells that pass the margin under ideal reads. After an independent
+review we repaired the simulator and report how much each repair moved
+the original results. The remaining questions are computational and
+methodological (the fidelity of the update surrogate beyond the cases
+tested here, dependence-aware statistics, the construction of controls)
+as well as experimental (the reset, the reference and the read path in
+real arrays).</p>
 <h1 id="sec:availability">Code and data availability</h1>
 <p>One public archive holds everything needed to reproduce this paper,
 with versions, source hashes, dataset digests and split offsets, run
 manifests and licences: Zenodo, <a href="https://doi.org/10.5281/zenodo.23748861">doi:10.5281/zenodo.23748861</a>
-(this DOI cites all versions; version 1.1 of the archive holds
-version 11 of this paper, and version 1.0 holds version 9). The same
-files are on GitHub under the author’s account, <a href="https://github.com/Questeria/memistor-ecram-training" class="uri">https://github.com/Questeria/memistor-ecram-training</a>
-(release v1.1). Code is under the MIT License; records, pulse draws,
+(this DOI cites all versions; version 1.2 of the archive holds
+version 12 of this paper, version 1.1 holds version 11, and version 1.0
+holds version 9). The same files are on GitHub under the author’s
+account, <a href="https://github.com/Questeria/memistor-ecram-training" class="uri">https://github.com/Questeria/memistor-ecram-training</a>
+(release v1.2). Code is under the MIT License; records, pulse draws,
 text and figures are under CC BY 4.0. The archive keeps the study
 folder’s layout, and the paths below are relative to its
 <code>paper/</code> directory. It holds:</p>
@@ -3049,7 +3059,7 @@ folder’s layout, and the paths below are relative to its
 <li><p>the plans (<code>PLAN-PAPER.md</code>,
 <code>PLAN-REVISION.md</code>, <code>PLAN-REVISION-2.md</code>,
 <code>PLAN-REVISION-3.md</code>, <code>PLAN-REVISION-4.md</code>), their
-deviations (<code>DEVIATIONS-PAPER.md</code>), the eight independent
+deviations (<code>DEVIATIONS-PAPER.md</code>), the nine independent
 reviews (<code>reviews/</code>) and the responses to them
 (<code>RESPONSE-TO-REVIEW.md</code>,
 <code>RESPONSE-TO-REVIEW-2.md</code>,
@@ -3058,7 +3068,8 @@ reviews (<code>reviews/</code>) and the responses to them
 <code>RESPONSE-TO-REVIEW-5.md</code>,
 <code>RESPONSE-TO-REVIEW-6.md</code>,
 <code>RESPONSE-TO-REVIEW-7.md</code>,
-<code>RESPONSE-TO-REVIEW-8.md</code>);</p></li>
+<code>RESPONSE-TO-REVIEW-8.md</code>,
+<code>RESPONSE-TO-REVIEW-9.md</code>);</p></li>
 <li><p>the original simulator and the repaired one
 (<code>sim/*_rev.py</code>), the explicit pulse streams and probes
 (<code>sim/*_rev2.py</code>, <code>sim/*_rev3.py</code>,
@@ -3383,9 +3394,11 @@ would replace the pencil-lead estimate by measurements.</p>
 <table>
 <caption>Earlier development results (lane ME: same simulator, 1–3
 seeds, MNIST on a different GPU, the LM selected on an overlapping
-split) beside this paper’s pre-registered 5-seed values. Gaps in pp
-(MNIST, CIFAR) and % (LM). The pessimistic memistor and the pencil lead
-appear only in the earlier runs.</caption>
+split) beside the pre-registered 5-seed values of version 1 of this
+paper (v1; superseded: the original simulator before its repair; the
+current values are in Tables <a href="#tab:rev_vs_fp" data-reference-type="ref" data-reference="tab:rev_vs_fp">4</a> and <a href="#tab:rev_vs_adam" data-reference-type="ref" data-reference="tab:rev_vs_adam">5</a>). Gaps in pp (MNIST, CIFAR) and %
+(LM). The pessimistic memistor and the pencil lead appear only in the
+earlier runs.</caption>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"></td>
@@ -3398,11 +3411,11 @@ appear only in the earlier runs.</caption>
 <td style="text-align: left;">Device</td>
 <td style="text-align: left;">Alg.</td>
 <td style="text-align: center;">earlier</td>
-<td style="text-align: center;">this paper</td>
+<td style="text-align: center;">v1</td>
 <td style="text-align: center;">earlier</td>
-<td style="text-align: center;">this paper</td>
+<td style="text-align: center;">v1</td>
 <td style="text-align: center;">earlier</td>
-<td style="text-align: center;">this paper</td>
+<td style="text-align: center;">v1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Li-ECRAM (Tang 2018)</td>
@@ -4547,7 +4560,7 @@ revision with thirteen findings. Version 2 answered them; the full
 response, finding by finding, with the checks that confirmed or
 qualified each one, is <code>RESPONSE-TO-REVIEW.md</code> in the
 release. The revision plan was committed before any revision run
-(<code>PLAN-REVISION.md</code>); its deviations R1–R8 are recorded in
+(<code>PLAN-REVISION.md</code>); its deviations R1–R9 are recorded in
 <code>DEVIATIONS-PAPER.md</code>. Version 3 (October 26, 2026) answered
 a second review (eight findings; <code>RESPONSE-TO-REVIEW-2.md</code>,
 plan <code>PLAN-REVISION-2.md</code>): the pulse-fidelity experiments of
@@ -4604,8 +4617,8 @@ to 7, and the contribution statement credits ChatGPT’s reviews. Version
 9 (October 28, 2026) corrects the deviation count R1–R6 to R1–R8, found
 by the deposit’s clean-room regeneration. Version 10 (October 28, 2026)
 gives the public archive, its DOI and its GitHub mirror in Section <a href="#sec:availability" data-reference-type="ref" data-reference="sec:availability">9</a>; no number changed. Version 11
-(October 28, 2026; this paper) answers an eighth review, a code audit
-and reproduction from the public archive
+(October 28, 2026) answers an eighth review, a code audit and
+reproduction from the public archive
 (<code>RESPONSE-TO-REVIEW-8.md</code>; no experiment was run). Figure <a href="#fig:main" data-reference-type="ref" data-reference="fig:main">3</a> (version 1, superseded) drew two
 negative LM means at <span class="math inline">\(+0.05\)</span>, with
 their intervals shifted, and its legend overlapped an axis label; both
@@ -4617,7 +4630,19 @@ number changed; the largest change in a total energy is 0.0005 % in the
 current projection and 0.0014 % in version 1’s. Section <a href="#sec:methods" data-reference-type="ref" data-reference="sec:methods">3</a> now discloses an off-by-one in the LM
 sampler. The simulator’s ideal reset of a partial column selection under
 AIHWKIT bounds, which no result used, no longer fails, and a new check
-covers it.</p>
+covers it. Version 12 (October 29, 2026; this paper) answers a ninth
+review, a second audit and reproduction from the public archive
+(<code>RESPONSE-TO-REVIEW-9.md</code>; no experiment was run). The width
+study’s Welch interval now takes the <span class="math inline">\(t\)</span> quantile at the Welch–Satterthwaite
+degrees of freedom; versions 2 to 11 rounded them down, which the plan
+does not state (deviation R9). This changes one verdict,
+protonic-inspired c-TTv2 on CIFAR, from inconclusive to grows
+(Section <a href="#sec:scale" data-reference-type="ref" data-reference="sec:scale">4.4</a>), and moves the other Welch intervals
+by at most 0.18 in their units; the paired contrast is unchanged. The
+width section now says that across widths a seed shares its example
+order, not its initialisation; the excess correlation of Table <a href="#tab:rev3_dep" data-reference-type="ref" data-reference="tab:rev3_dep">8</a> is defined as an excess in
+quadrature; and Table <a href="#tab:laneme" data-reference-type="ref" data-reference="tab:laneme">16</a> labels its version-1 values as
+superseded.</p>
 <h4 id="what-was-repaired.">What was repaired.</h4>
 <ol>
 <li><p><strong>Random streams.</strong> The initialisation, the data
@@ -5170,7 +5195,7 @@ international electron devices meeting (IEDM)</em>, 2018, pp.
 </div>
 <div id="ref-fuller2017" class="csl-entry" role="doc-biblioentry">
 <div class="csl-left-margin">[5] </div><div class="csl-right-inline">E.
-J. Fuller <em>et al.</em>, <span>“Li‐ion synaptic transistor for low
+J. Fuller <em>et al.</em>, <span>“Li-ion synaptic transistor for low
 power analog computing,”</span> <em>Advanced Materials</em>, vol. 29,
 no. 4, p. 1604310, 2016, doi: <a href="https://doi.org/10.1002/adma.201604310">10.1002/adma.201604310</a>.</div>
 </div>

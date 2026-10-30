@@ -123,3 +123,15 @@ appendix tables (`appendix_below` in `records/revision4/ARTIFACT-CHECK-v5.json`)
 blank area; the fix needed is in `revision4/edit_tex_4b.py`: the sensitivity sheet is input at the start of Section 4.5 from
 a derived copy placed `[p]` (`tex/tables/rev_spec_p.tex`); two intermediate builds that only moved it, or only changed the
 placement, left the blank page (`revision4/page_fill.py`; final: no body page below 0.45 text cover).
+
+
+## R9 (2026-10-29 ET, revision 9, paper version 12): the width study's Welch interval uses the Welch-Satterthwaite df itself
+
+What review 9 found: PLAN-REVISION.md (Width) registers "Welch interval", but `revision/analyze_rev.py` read its t table at the
+Welch-Satterthwaite degrees of freedom rounded down (`tq()` floors the df), from version 2 to version 11; no plan, deviation or
+paper text stated it. It is conservative, and it decided one verdict: CIFAR, protonic-inspired c-TTv2 (D = 1.76 pp, df = 4.68),
+whose interval [-0.02, 3.55] (INCONCLUSIVE) becomes [0.05, 3.47] (GROWS) at the actual df. Every other verdict of the width study
+holds; the intervals move by at most 0.18 in their units. From version 12 the Welch interval takes the t quantile at the actual
+df (`t_quantile`, by the regularized incomplete beta function; `revision11/test_welch_df.py` checks it against closed forms and
+review 9's independent value, and fails it with the df floored). The paired-by-seed contrast (R4) and the integer-df intervals of
+the other analyses are unchanged.

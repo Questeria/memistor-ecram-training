@@ -15,10 +15,15 @@ paper, no code. The reviews' own words are unchanged; only the path text inside 
 | P1 | the author's private project path up to and including the study folder (`C:/Projects/<private repository>/ops/<private folder>/phase2/memistor/`) removed, leaving the study-relative path: `<that prefix>paper/records/X` became `paper/records/X` (in JSON keys and Python strings the same prefix with `\\` separators) | 1085 |
 | P2 | the reviewer's local output folder (`C:/Users/<user>/.codex/visualizations/<date>/<id>/paper-review[-vN]/`) shortened to `paper-review[-vN]/` (the folder in which the reviewer saved its check files) | 33 |
 | P3 | the author's draws folder on drive H: replaced by this deposit's own `paper/draws/rev3` | 1 |
+| P4 | the author's desk folder on drive H: (`H:/<desk folder>`), which review 9 names in its list of internal paths | 2 |
 
 After the rules, the name of the author's private repository, the author's computer account name and the private folder names appear
 nowhere in this deposit (the scan `deposit_scan.py`, category `private_project_name`, reports 0 hits; the build stops if a trace remains
-in the redacted files).
+in the redacted files). That statement covers only those three kinds of name. Other internal context is kept as written, as
+provenance: desk paths (for example `H:/x1000/...` in older docstrings and build records, and the old values in
+`DEPOSIT-PATCHES.json`), the names of the author's other projects and coordination channels in the plans (for example
+`paper/PLAN-REVISION-2.md`), and host names in the training records. None is a credential (review 9 scanned for credential
+patterns and found none).
 
 ## Files changed
 
@@ -32,6 +37,7 @@ in the redacted files).
 | `paper/reviews/REVIEW-5-chatgpt-20261027-full.md` | 11 | `67f2b7a102651e781540055c2d2fad67bc2bc0fa72a0c2da97236d78d2663611` | `3745646ffbeb3742de2b468e9e7a94fe726640261bf9559bc283437a6bd3cebc` |
 | `paper/reviews/REVIEW-6-chatgpt-20261027-full.md` | 9 | `a469c8857ac67dde2d1cc28afa49a6dbceba1e213040c1eaa553c9e422172ce8` | `aeb41f7c12ace5db153aa5d3787b95caa58d8b589d18289eecf4ee90223abe11` |
 | `paper/reviews/REVIEW-7-chatgpt-20261027-full.md` | 8 | `d4b35ec2f2232bc7db06684c4f0d8db6aef54d5bca559e3783de8721cf744859` | `1402f05e3b82b7d6ce25137ea73a1cf135dba0a681e89dbb73bcc52ddfafe7d8` |
+| `paper/reviews/REVIEW-9-chatgpt-20261029-full.md` | 2 | `e4cd05a10be3ea65e3ddcdead3ed512d93436eec3e56cae24762f37704f8c720` | `7d7c5edaa39c1a3c14097ab7085f624576f73b40ea816d98a4fb8303b9738981` |
 | `paper/reviews/review-3-support/SHA256SUMS.txt` | 1 | `5b4f9f70aa3ae7682e4df0217f09ec42f1ea168bb219128f09b100f3006b63ca` | `b58dda9be5cc7fd568521f2c2e7a6d13e02f1286e3030ac3963b09da50b088d7` |
 | `paper/reviews/review-3-support/check_v3.py` | 1 | `459e283a2b8158ecfcbac4981592196f66bd8f691ec200b45877e54f4564acfb` | `dc712d419bb84f1c62c9285088b4c63fcc738a522f53b02fff290ad8f2a361e4` |
 | `paper/reviews/review-3-support/new-record-manifest.json` | 1011 | `1cd67cd3307d34ca0d80030b6dc1605d4c54a75c12b42e42a89b2a1fd1cfcfd9` | `1280c75a912f08fa5f885433e73b538a5a6a1f696ed614dc957b5a2aa0551982` |

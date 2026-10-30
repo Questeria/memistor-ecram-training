@@ -4,7 +4,8 @@ result, and its legend must not overlap any axis label or tick label.
 The check runs make_figures.fig_main on records/RESULTS-PAPER.json with Axes.errorbar wrapped and the figure kept: every drawn
 point must have x = mean, x - left bar = lo and x + right bar = hi (to 1e-9), every finite cell must be drawn once, and the
 legend's box must not intersect the box of any x-axis label or x tick label.  It is shown to FAIL on version 10's make_figures.py
-(git HEAD before version 11), which drew max(mean, 0.05) with the bars of the true mean and put the legend over an axis label.
+(git HEAD before version 11; bundled as revision10/fixtures/make_figures_v10.py, so the self-test needs no private git
+history: review 9), which drew max(mean, 0.05) with the bars of the true mean and put the legend over an axis label.
 
     python -B revision10/check_fig_main.py [--json out.json]           (from paper/; matplotlib 3.9.2)
     python -B revision10/check_fig_main.py --selftest [--json out.json]
@@ -93,7 +94,7 @@ def check(mf_path):
 def main():
     res = dict(current=check(os.path.join(P, "make_figures.py")))
     if "--selftest" in sys.argv:
-        old = subprocess.run(["git", "-C", P, "show", V10_COMMIT + ":./make_figures.py"], capture_output=True, check=True).stdout
+        old = open(os.path.join(HERE, "fixtures", "make_figures_v10.py"), "rb").read()   # = git show V10_COMMIT:./make_figures.py
         with tempfile.TemporaryDirectory() as td:
             p = os.path.join(td, "make_figures_v10.py")
             open(p, "wb").write(old)

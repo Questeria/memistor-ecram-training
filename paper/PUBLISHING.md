@@ -1,8 +1,9 @@
 # Publishing the memistor/ECRAM paper: the owner's steps
 
-The code and data archive is published (release v1.0 on 2026-10-28 and v1.1 on 2026-10-29; section 4). The paper is not yet on arXiv.
+The code and data archive is published (release v1.0 on 2026-10-28 and v1.1 on 2026-10-29; section 4). Release v1.2, which holds
+version 12 (the answer to review 9), was published on 2026-10-29 at 21:38 ET. The paper is not yet on arXiv.
 Submitting it needs your arXiv account, an endorsement if asked, and your acceptance of arXiv's terms, so it is your act: sections 2, 3 and 5.
-Everything to upload and paste is in the Desktop folder "memistor paper - arXiv submission (v11)" (SUBMIT-TO-ARXIV.txt there).
+Everything to upload and paste is in the Desktop folder "memistor paper - arXiv submission (v12)" (SUBMIT-TO-ARXIV.txt there).
 
 ## 1. Which file to submit, and why there are two author variants
 
@@ -45,6 +46,27 @@ arXiv and by open-access journals. arXiv offers it in the submission form. The c
 
 ## 4. Code and data DOI (Zenodo)
 <!-- deposit-built -->
+**Release v1.2 (2026-10-29, 21:38 ET): PUBLISHED. It holds version 12 of the paper, the answer to review 9.**
+
+- Version DOI **10.5281/zenodo.23788075** (https://zenodo.org/records/23788075; version 1.2, Software, CC BY 4.0; Zenodo dates it
+  2026-10-30 in UTC). It has one file, `Questeria/memistor-ecram-training-v1.2.zip`: 104,736,531 bytes, md5
+  60185c563156ab2b2f6a60a14546329e (GitHub's archive of tag v1.2). The ZIP was not downloaded for a read-back; the metadata was read
+  through Zenodo's API.
+- GitHub: https://github.com/Questeria/memistor-ecram-training/releases/tag/v1.2. Branch `main` and tag `v1.2` both point at
+  47da4203630b179779a3433861ca5ecc937e05c4 (`git ls-remote`, 2026-10-29).
+- Claude published it at the owner's word (2026-10-29: "Yes, publish archive v1.2 now"), by the same two steps as v1.1, with the tag
+  pinned to the verified commit. Just before publishing: a clean tree, all 3,490 files equal to SHA256SUMS, and the build files
+  byte-identical to `build/`.
+- As built (below):
+
+- Built on F: (`F:/x1000-deposit/memistor-deposit-v1.2`; H: is kept for the drive-G backup).
+- Clean room: REPRODUCE_ALL_OK, 28 of 28 steps (55 files identical, 13 after the stated normalisation); 4 of 4 mutation tests
+  caught.
+- Scan: 0 unjustified, after two additions. The archived version 11 joins the mirror-address entry, and an email hit is now masked
+  to its domain, because review 9 quotes the account's no-reply address.
+- FINAL_CHECK_OK; 3,491 files, 132.4 MB (`records/deposit/`; v1.1's records are in `records/deposit/v1.1/`).
+- The concept DOI that the paper cites now resolves to v1.2.
+
 **Release v1.1 (2026-10-29, 13:53 ET): PUBLISHED. It holds version 11 of the paper, which answers review 8.**
 
 - Version DOI **10.5281/zenodo.23773334** (https://zenodo.org/records/23773334; version 1.1, Software, CC BY 4.0, dated 2026-10-29). It has
@@ -138,10 +160,13 @@ The planned list as written for version 8:
    - the generated `main-arxiv.bbl`, which arXiv prefers to running BibTeX itself.
 
    The ready archive is `build/arxiv-source.tar.gz`. The build script assembles it from exactly this list (`pod/build_rev2.sh`
-   for version 3, on a pod; `pod/build_rev3.sh` for version 4, `pod/build_rev4.sh` for version 5, `pod/build_rev5.sh` for version 6 and `pod/build_rev6.sh` for version 7 and `pod/build_rev7.sh` for version 8 and `pod/build_rev8.sh` for versions 9, 10 and 11, on the desk in WSL Ubuntu with the same tectonic
+   for version 3, on a pod; `pod/build_rev3.sh` for version 4, `pod/build_rev4.sh` for version 5, `pod/build_rev5.sh` for version 6 and `pod/build_rev6.sh` for version 7 and `pod/build_rev7.sh` for version 8 and `pod/build_rev8.sh` for versions 9, 10, 11 and 12, on the desk in WSL Ubuntu with the same tectonic
    0.15.0) and
    compiles main-arxiv.tex from that archive in an empty directory, so a missing file fails the build. Use the archive, not
-   loose copies of the files; `revision10/check_build_v11.py` (version 11) runs `revision6/check_build_v7.py` and reads the version-11 proofs:
+   loose copies of the files; `revision11/check_build_v12.py` (version 12) runs `revision6/check_build_v7.py` and reads the version-12
+   proofs: the word-count text diff `revision11/pdf_text_diff_v12.py` (v11 -> v12; the extra page reflows floats), the name check,
+   numbers freshness, Figure 3 (its self-test on bundled version-10 code), the reset and `revision11/test_welch_df.py`;
+   `revision10/check_build_v11.py` (version 11) runs `revision6/check_build_v7.py` and reads the version-11 proofs:
    the name check (`revision9/name_check_v10.py`, the same rule), `revision10/pdf_text_diff_v11.py` (v10 -> v11: the expected edits only),
    `revision10/check_fig_main.py` (Figure 3 draws every mean and interval of its results; its legend overlaps no label),
    `sim/test_ideal_reset_cols.py` and the numbers-freshness record; `revision9/check_build_v10.py` (version 10) runs `revision6/check_build_v7.py` and reads the version-10 proofs:
@@ -162,7 +187,7 @@ The planned list as written for version 8:
 
    arXiv compiles the source. Check the preview PDF page by page.
 3. Fill in the title. The abstract for the form is ready in `build/arxiv-abstract.txt`: it is generated by `revision2/make_abstract.py` (version 3) `revision3/make_abstract_v4.py` (version 4) and `revision4/make_abstract_v5.py` (versions 5 and 6) from
-   `tex/sec_abstract.tex` with every number macro expanded from the generated `tex/numbers*.tex` (the same numbers as the PDF abstract) and fits arXiv's 1,920-character limit. Add the comments field; for version 11: "42 pages, 3 figures; code and data: https://doi.org/10.5281/zenodo.23748861".
+   `tex/sec_abstract.tex` with every number macro expanded from the generated `tex/numbers*.tex` (the same numbers as the PDF abstract) and fits arXiv's 1,920-character limit. Add the comments field; for version 12: "43 pages, 3 figures; code and data: https://doi.org/10.5281/zenodo.23748861".
 4. Submit. It appears after moderation, usually the next working day.
 
 ## 6. Later: a journal

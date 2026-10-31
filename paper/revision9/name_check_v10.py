@@ -31,8 +31,8 @@ ALLOWED = "github.com/" + N.OLD + "/memistor-ecram-training"
 
 
 def pdf_text_nows(data, s):
-    doc = fitz.open(stream=data, filetype="pdf")
-    return re.sub(r"\s+", "", "".join(p.get_text() for p in doc)).lower().count(s.lower())
+    with fitz.open(stream=data, filetype="pdf") as doc:
+        return re.sub(r"\s+", "", "".join(p.get_text() for p in doc)).lower().count(s.lower())
 
 
 def channels(out, tex_dir, s):
@@ -80,9 +80,10 @@ def selftest(out, tex_dir):
         res["planted_html_text"] = planted("main.html", html.replace(b"</body>", ("<p>by %s</p></body>" % N.OLD).encode(), 1))
         res["planted_near_miss_address"] = planted("main.html", html.replace(
             b"</body>", ("<p>github.com/%s/another-repository</p></body>" % N.OLD).encode(), 1))
-        d = fitz.open(os.path.join(o2, "main.pdf"))
-        d[0].insert_text((72, 72), "by %s" % N.OLD)
-        res["planted_pdf_text"] = planted("main.pdf", d.tobytes())
+        with fitz.open(os.path.join(o2, "main.pdf")) as d:   # closed before the copy is replaced (Windows locks an open file;
+            d[0].insert_text((72, 72), "by %s" % N.OLD)        # review 10, finding 4)
+            data = d.tobytes()
+        res["planted_pdf_text"] = planted("main.pdf", data)
         tp = os.path.join(o2, "arxiv-source.tar.gz")
         keep = open(tp, "rb").read()
         with tarfile.open(fileobj=io.BytesIO(keep), mode="r:gz") as src, tarfile.open(tp, "w:gz") as dst:
@@ -97,11 +98,11 @@ def selftest(out, tex_dir):
         open(os.path.join(t2, "planted.tex"), "wb").write(("%% %s\n" % N.OLD).encode())
         res["planted_tex"] = judge(o2, t2)["ok"] is False
         os.remove(os.path.join(t2, "planted.tex"))
-        b2 = fitz.open()
-        pg = b2.new_page()
-        pg.insert_text((72, 72), "https://github.com/")
-        pg.insert_text((72, 90), N.OLD + "/memistor-ecram-training")
-        data = b2.tobytes()
+        with fitz.open() as b2:
+            pg = b2.new_page()
+            pg.insert_text((72, 72), "https://github.com/")
+            pg.insert_text((72, 90), N.OLD + "/memistor-ecram-training")
+            data = b2.tobytes()
         res["broken_address_allowed"] = pdf_text_nows(data, N.OLD) == 1 == pdf_text_nows(data, ALLOWED)
     v7 = judge(os.path.join(P, "build", "v7"), os.path.join(P, "tex", "v7"))
     res["v7_fails"] = v7["ok"] is False

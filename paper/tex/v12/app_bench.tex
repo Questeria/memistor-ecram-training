@@ -1,0 +1,51 @@
+\section{Bench replication of the 1960 memistor}\label{app:bench}
+This appendix is a protocol for others to run. We built nothing and bought nothing. It is meant to measure, with hobby parts, the
+properties that Widrow's reports leave open (Section~\ref{sec:background}): levels, up/down symmetry, linearity, write noise,
+drift and energy per step. The measured cell can then be placed on the same map as the modern devices. The full protocol, an
+Arduino sketch, a parts list with estimated prices, and an analysis script that turns the log into a device specification for
+our simulator are in the repository (\texttt{BENCH.md}, \texttt{bench/}).
+
+\paragraph{Pass criteria.} The cell must show at least 32 near-linear, symmetric levels on one lead: over at least 32
+consecutive equal-charge pulses in each direction,
+\begin{enumerate}
+\item the mean up step and the mean down step agree within 10\%;
+\item the step varies by less than $\pm30\%$ across the range ($\gamma\le0.3$);
+\item the pulse-to-pulse scatter is below half a step ($c_{2c}\le0.5$).
+\end{enumerate}
+A four-input ADALINE trained by LMS on four such leads should then cut its mean squared error at least tenfold.
+
+\paragraph{Build.}
+\begin{itemize}
+\item Electrolyte: 0.5\,M copper(II) sulphate in distilled water. Sulphuric acid and brighteners are deliberately left out for
+      safety, so expect some hysteresis.
+\item Electrodes: 2\,mm HB graphite leads with wrapped-wire contacts, the lower contact insulated with nail polish, a wetted
+      length of about 20\,mm, and a bare copper counter electrode.
+\item Electronics: an Arduino Nano, an INA219 current/voltage sensor, and a CD4052 multiplexer for four-wire reads.
+\end{itemize}
+
+\paragraph{Protocol.}
+\begin{enumerate}
+\item Read-noise baseline.
+\item Plating range in 1\,mC pulses.
+\item 64 pulses down and 64 up from mid-range, repeated, to measure the step against conductance, the asymmetry and the scatter.
+\item A two-hour (ideally overnight) drift run, covered and then stirred, to separate oxygen-driven corrosion.
+\item The integral of cell voltage $\times$ current per pulse, which gives the energy per step.
+\item 20 full cycles to measure endurance.
+\item The LMS ADALINE.
+\end{enumerate}
+
+\paragraph{Safety.}
+\begin{itemize}
+\item Copper sulphate is harmful if swallowed, irritates eyes and skin, and is very toxic to aquatic life. Wear splash goggles
+      and nitrile gloves, and work on a tray away from food, children and pets.
+\item Use low voltage only (USB). Keep electronics out of splash range, keep aluminium away from the solution, and reduce the
+      current if bubbles form.
+\item Never pour waste down the drain. Take it to household hazardous-waste collection.
+\item For eye contact, rinse for 15 minutes and seek medical advice.
+\end{itemize}
+
+\paragraph{What the bench cannot show.} A pencil-lead memistor is macroscopic. Its energy per step is set by the copper moved,
+about \RWidrowLevelUJ{}\,$\mu$J per level by Widrow's figures and \RPencilLevelUJ{}\,$\mu$J for our pencil-lead estimate. That is
+many orders of magnitude above an H100's energy per weight update (Section~\ref{sec:energy}). The bench can confirm or refute
+the linearity and symmetry the memistor promised; it cannot make training cheaper. The cheap direction, if any, is the nanoscale
+descendants.

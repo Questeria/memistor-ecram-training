@@ -1,0 +1,46 @@
+\subsection{Width}\label{sec:scale}
+An earlier lane of this project saw the device gap grow with model width. Here every arm (protonic-inspired and Li-ECRAM, each
+with TTv2 and c-TTv2) gets its own learning rate at every width by the edge rule on validation, and then five test seeds per
+width; FP-SGD uses its own selected rate (Table~\ref{tab:rev_width}; the rates are in Table~\ref{tab:rev_selection}). As in the
+rest of the paper, each layer's weight scale $\alpha$ is set from its initialisation bound, so it falls as $1/\sqrt{\text{fan-in}}$
+when the width raises a layer's fan-in (layers with a fixed fan-in keep theirs); this is one mapping policy, not every fixed
+physical mapping.
+
+\paragraph{The test.} The endpoint contrast $D$ (the mean gap at the widest minus the narrowest width) is tested for
+equivalence within the gap lines (TOST at 5\,\%). The original paper's ``FLAT'' label is withdrawn: it did not test equivalence
+and covered large non-monotonic changes. The pre-registered contrast is Welch's, which treats the two widths' seed samples as independent; its interval takes the
+$t$ quantile at the Welch--Satterthwaite degrees of freedom (versions 2 to 11 rounded them down, which the plan does not
+state; review~9 found it, deviation R9). The samples are not independent: a seed keeps its example order across widths, and
+within a width every arm of a seed also shares the logical initialisation (between widths the layers differ in shape). Beside the
+registered result we therefore report the contrast paired by seed, with the same decision order, as a sensitivity analysis
+added after the second review (deviation R4). Both test the endpoints only; neither covers the middle width.
+
+\paragraph{CIFAR ($c=16$, 32, 64).} \RVEFourCifarNEquivalent{} arm is equivalent within $\pm2$\,pp (Li-ECRAM c-TTv2,
+$D=\RVEFourCifarEcramLiTangTwoZeroOneEightCttvTwoD$\,pp, 90\,\% interval [\RVEFourCifarEcramLiTangTwoZeroOneEightCttvTwoLo,
+\RVEFourCifarEcramLiTangTwoZeroOneEightCttvTwoHi]); for \RVEFourCifarNNoEvidenceOfGrowthBeyondTheMargin{} arm there is no evidence
+of growth beyond the margin (protonic-inspired TTv2); \RVEFourCifarNGrows{} arm grows (protonic-inspired c-TTv2,
+$D=\RVEFourCifarProtonicOnenTwoZeroTwoTwoCttvTwoD$\,pp, 90\,\% interval [\RVEFourCifarProtonicOnenTwoZeroTwoTwoCttvTwoLo,
+\RVEFourCifarProtonicOnenTwoZeroTwoTwoCttvTwoHi]), and \RVEFourCifarNInconclusive{} is inconclusive (Li-ECRAM TTv2,
+$D=\RVEFourCifarEcramLiTangTwoZeroOneEightTtvTwoD$\,pp).
+Five seeds are not enough to settle a 2\,pp margin on this subset. Paired by seed, the Li-ECRAM c-TTv2 equivalence survives
+(90\,\% interval [\RVEFourCifarEcramLiTangTwoZeroOneEightCttvTwoPairedLo, \RVEFourCifarEcramLiTangTwoZeroOneEightCttvTwoPairedHi]),
+and protonic-inspired c-TTv2 grows again ([\RVEFourCifarProtonicOnenTwoZeroTwoTwoCttvTwoPairedLo,
+\RVEFourCifarProtonicOnenTwoZeroTwoTwoCttvTwoPairedHi]). Its growth is detected by both contrasts, but its size against the
+margin is unresolved: both intervals include 2\,pp, so growth beyond the margin is not excluded. Both of its
+endpoint cells still pass against their own FP-SGD controls; a gap that moves from more negative to less negative can grow while
+both cells stay acceptable. Li-ECRAM TTv2 stays inconclusive, so growth beyond the margin is not excluded for it either.
+
+\paragraph{The LM ($d=64$, 128, 256).} All \RVEFourLmNShrinks{} arms have a gap that shrinks with width (for example Li-ECRAM
+c-TTv2 from \RVEFourLmEcramLiTangTwoZeroOneEightCttvTwoWSixFourGap\,\% to \RVEFourLmEcramLiTangTwoZeroOneEightCttvTwoWTwoFiveSixGap\,\%).
+This is not a favourable scaling law: FP-SGD itself gets worse at the largest width under the fixed budget
+(\RVEFourLmFpWOneTwoEight{} bits per byte at $d=128$, \RVEFourLmFpWTwoFiveSix{} at $d=256$), so a gap that turns negative partly
+measures a weaker baseline. Converged or quality-matched baselines would be needed to speak of scaling.
+
+\paragraph{What can be said.} Across a factor of four in width, after per-arm learning-rate selection, no arm's gap grows
+detectably beyond the margin. Endpoint equivalence is established for one CIFAR arm only (Li-ECRAM c-TTv2, by both contrasts);
+both contrasts detect growth for one other CIFAR arm (protonic-inspired c-TTv2), without resolving its size against
+the margin; for \RYWidthNotExcludedN{} arms (protonic-inspired c-TTv2 and
+Li-ECRAM TTv2) growth beyond the margin is not excluded. On the LM the apparent shrinkage reflects the FP-SGD
+baseline at a fixed budget. Width dependence is unresolved by this study.
+
+\input{tables/rev_width.tex}

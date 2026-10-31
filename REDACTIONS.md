@@ -16,6 +16,7 @@ paper, no code. The reviews' own words are unchanged; only the path text inside 
 | P2 | the reviewer's local output folder (`C:/Users/<user>/.codex/visualizations/<date>/<id>/paper-review[-vN]/`) shortened to `paper-review[-vN]/` (the folder in which the reviewer saved its check files) | 33 |
 | P3 | the author's draws folder on drive H: replaced by this deposit's own `paper/draws/rev3` | 1 |
 | P4 | the author's desk folder on drive H: (`H:/<desk folder>`), which review 9 names in its list of internal paths | 2 |
+| P5 | the private prefix of the records' machine-readable namespace, which review 10 quotes (`<namespace>.me-revision.results.v1`; the records themselves keep it, as provenance) | 1 |
 
 After the rules, the name of the author's private repository, the author's computer account name and the private folder names appear
 nowhere in this deposit (the scan `deposit_scan.py`, category `private_project_name`, reports 0 hits; the build stops if a trace remains
@@ -31,6 +32,7 @@ patterns and found none).
 |---|---|---|---|
 | `paper/RESPONSE-TO-REVIEW.md` | 1 | `5497b940b67d3ce0a6e03d81506a902bae63b3e8850cbae9d91c763ecdd66122` | `ee74d5fa4eeaa024c7a6baf6208d0cea3bc377aa87a37d93f3c530b4049aceb8` |
 | `paper/reviews/REVIEW-1-chatgpt-20261026-full.md` | 39 | `62a22508ba094eeb83bc42f68ed759e741b6943c0d08e9bd2bda281a4ecde676` | `09a3c81e92609b27abd58952b7f8ce4c100f45f3e98a41af9104289b86eaec00` |
+| `paper/reviews/REVIEW-10-chatgpt-20261029-full.md` | 1 | `842a4e400579b9266569848490e024ebee2c9ec510fef698feadee2c1a8a2956` | `5e5ad2618a6294681890118d16914de7d071d8aa64f03e75d5ff1de08b4f8297` |
 | `paper/reviews/REVIEW-2-chatgpt-20261026-full.md` | 36 | `46a13a2f82998cc213a5c260919fc3a79f0381110d13844e2b2bcd59525252cb` | `6f8af2f92b298d27a0e4f3957285ede19a07666c072164fb9eb20c273ff77074` |
 | `paper/reviews/REVIEW-3-chatgpt-20261027-full.md` | 23 | `a5edbdd1c2f7131b153f949782d1fc55f1bea0cb47511ad2327089f09395223a` | `13a993f45e06d8417d7a27a2e4c4453eb0dee2f5a6832a3b46d8a8196df10542` |
 | `paper/reviews/REVIEW-4-chatgpt-20261027-full.md` | 14 | `5521412a807bb6d28f94929a9b0781c15c09dccb59e0d38808619924af7458f2` | `b45c1575700df4d00bd3b5fd2888b9705738f8797bd72b46d5bdf79cc49b617f` |

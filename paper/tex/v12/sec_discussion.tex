@@ -1,0 +1,54 @@
+\section{Discussion}\label{sec:discussion}
+\paragraph{What the repaired simulations say, within their limits.}
+\begin{itemize}
+\item \textbf{Against FP-SGD, two device specifications reach the line on all three tasks} with a chopped Tiki-Taka algorithm:
+      the AIHWKIT Li-ECRAM fit and the protonic-inspired scenario, each with c-TTv2 or AGAD (\RVAllThreeFpN{} pairings).
+\item \textbf{Against Adam, none does.} On the language model the best analog cell is \RVLmAdamBestGap\,\% worse in bits per
+      byte; the analog results inherit FP-SGD's optimiser gap (\RVLmFpSgdVsAdamPct\,\% on this model). Closing it would need
+      analog-compatible adaptive updates, which this study does not test.
+\item \textbf{Plain SGD at the FP-SGD learning rate} exceeded the margin on every published device and task we ran
+      (\RVSgdPubFail{} of \RVSgdPubN{} cells). This is a statement about that protocol, not about SGD after fair tuning.
+\item \textbf{The algorithm settings use the device.} On an ideal symmetric 1000-level device the selected TT settings lose
+      far more than on the saturating devices, so in this configuration the accumulator's decay comes from the device's
+      saturation.
+\item \textbf{Width} is not resolved: after per-arm tuning no arm's gap grows detectably beyond the margin over a factor of
+      four, endpoint equivalence was established for one CIFAR arm only, the registered Welch test and a paired-by-seed analysis both detect growth for
+      another without resolving its size against the margin (growth beyond it is not excluded there or for
+      Li-ECRAM TTv2), and the LM's shrinking gap reflects a weaker FP-SGD baseline at the largest width.
+\item \textbf{Energy} is a conditional projection set almost entirely by borrowed read efficiencies, and it is reported only
+      for cells that pass the stated margin under ideal reads; against Adam on the LM no cell does.
+\end{itemize}
+
+\paragraph{Widrow's memistor.} Taken at its inventor's description (thousands of near-linear levels), an optimistic
+historical-device scenario attained useful accuracy in this simulator; the pessimistic twin does not. Because its noise,
+asymmetry, drift and variability are largely unknown, this does not settle the accuracy of the real 1960 device. Its energy per
+level, tens of microjoules, is many orders of magnitude worse than today's devices.
+
+\subsection{Limitations}\label{sec:limits}
+\begin{itemize}
+\item \textbf{Simulation only.} Every device is a parametric model; the protonic entry is a scenario with estimated noise,
+      asymmetry and saturation, and its finite retention is replaced by no drift. A 2026 measurement on BEOL-compatible
+      protonic ECRAM~\cite{xu2026} reports 3\,\% cycle-to-cycle and 21\,\% device-to-device variability; we did not refit the
+      catalog to it, and we could not check those values against the full text. Estimated parameters are single points, not
+      propagated ranges.
+\item \textbf{Ideal reads.} Read noise, IR drop, ADC/DAC quantisation and output bounds are not modelled, while the energy
+      projection prices finite-precision reads.
+\item \textbf{The update surrogate.} Pulses of one batch are aggregated and solved as uniformly interleaved; discrete pulses do
+      not commute, per-cell Poisson draws ignore row/column correlations, and the pulse budget clips the TT family's $A$
+      updates by up to \RVLostCifarTtLayerMeanMaxPct\,\% in some layers. Against explicit pulse streams
+      (Section~\ref{sec:fidelity}) the surrogate meets the registered lines on \RYProbeSurMeetsN{} of \RYProbeN{} update probes
+      (point estimates), fails on the most clipped layer and does not reproduce the dependence of cells that share a line; in
+      short training comparisons on MNIST and CIFAR's fully connected layers one label loses PASS, two closely spaced cells swap
+      order and one failing SGD cell moves by more than 1\,pp. The convolutional layers and the LM's training are not compared,
+      and the comparison stream is itself a per-sample approximation of the literal one.
+\item \textbf{The reset.} The pulse reset uses a read and at most 62 pulses per weight; it leaves a residual (mean over runs
+      \RVResetResidMean{} nominal steps, pooled over all reset events \RVResetResidPooled) and its latency and endurance cost are not modelled.
+\item \textbf{Algorithms.} TTv1, TTv2, c-TTv2 and AGAD were implemented from the papers' text; our TTv2 is a local variant
+      (multi-pulse transfer, buffer remainder). The settings were selected once, on MNIST, with a mid device.
+\item \textbf{Small models and short budgets.} $10^5$ to $10^6$ weights, a 10{,}000-image CIFAR subset, a two-layer byte LM,
+      a factor of four in width, fixed training budgets.
+\item \textbf{Statistics.} Five seeds (three in the sensitivity sheet and the diagnostic), no multiplicity correction, and best
+      cells chosen among many; several cells remain UNRESOLVED.
+\item \textbf{Plans.} The plans were committed to our repository before the runs; they are not registered in an external
+      registry.
+\end{itemize}

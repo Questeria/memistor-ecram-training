@@ -715,7 +715,7 @@ def tables(E3, E4, E5):
         "\\begin{table*}[t]\\centering\\scriptsize\\caption{Revised width study (Li = Li-ECRAM, Prot. = protonic-inspired): mean gap at the narrow / mid / wide "
         "width (5 seeds, each arm at its own selected learning rate; CIFAR $c=16/32/64$ in pp, LM $d=64/128/256$ in \\%), and "
         "the endpoint contrast $D$ (widest minus narrowest) with its 90 \\% interval and verdict, by the pre-registered Welch "
-        "test (the $t$ quantile at the Welch--Satterthwaite degrees of freedom; versions 1--11 rounded them down: deviation R9) and, added after review 2 (deviation R4), paired by seed. Verdicts (margins 2 pp, 5 \\%): EQ = equivalent at the "
+        "test (the $t$ quantile at the Welch--Satterthwaite degrees of freedom; versions 2--11 rounded them down: deviation R9) and, added after review 2 (deviation R4), paired by seed. Verdicts (margins 2 pp, 5 \\%): EQ = equivalent at the "
         "endpoints, GR = grows, SH = shrinks, NG = no evidence of growth beyond the margin, INC = inconclusive. An endpoint test says nothing about the "
         "middle width.}\\label{tab:rev_width}\n\\begin{tabular}{llccc}"
         "\\toprule Task & Arm & gap narrow / mid / wide & Welch $D$ [90 \\%] & paired $D$ [90 \\%]\\\\\\midrule\n"

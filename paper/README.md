@@ -245,3 +245,29 @@ Desk Python: `H:/x1000/bench/venv/Scripts/python.exe` (torch 2.7.1+cu126).
     details.
 - Left: the arXiv submission of version 11, which is the owner's act (account, endorsement, terms). Everything to upload and paste is
   in the Desktop folder "memistor paper - arXiv submission (v11)" (SUBMIT-TO-ARXIV.txt).
+
+## Revision v12 (2026-10-29, director): the answer to review 9 (no experiment; $0)
+
+- Review 9 (ChatGPT in Codex, `reviews/REVIEW-9-chatgpt-20261029-full.md`) audited release v1.1 against version 11 before arXiv.
+  - It worked from a fresh clone and ran the README as written, then 27 of 27 steps.
+  - It compared all 68 outputs, recomputed the statistics independently and compiled the arXiv source with pdfLaTeX (42 pages, clean).
+  - It found 1 major, 8 minor and 2 cosmetic issues, and all of review 8's findings fixed or disclosed.
+  - All eleven were verified and confirmed. `RESPONSE-TO-REVIEW-9.md` gives each, with its verification and change.
+- Major: the width study's Welch interval read its t table at the floored df (`revision/analyze_rev.py` `tq()`); the plan registers a
+  Welch interval. Now `t_quantile` at the actual df (DEVIATIONS R9). CIFAR protonic-inspired c-TTv2 becomes GROWS [0.05, 3.47]; no other
+  verdict changes. `revision11/test_welch_df.py` checks it, and the floored df fails it.
+- Text (`revision11/edit_12.py`):
+  - the width section, the abstract, the discussion and the roadmap;
+  - only the example order is shared across widths;
+  - the excess correlation is defined in quadrature (Section 4.3, Table 8);
+  - Table 16's v1 labels; Jacobs-Gedrim; the availability section (v1.2, nine reviews); the history.
+  The paper now has 43 pages. `revision11/archive_v11.py` archived `tex/v11` and `build/v11`.
+- Checks: `revision11/check_build_v12.py <out> --json records/revision11/ARTIFACT-CHECK-v12.json` is ALL_OK. The text diff now counts
+  words (`revision11/pdf_text_diff_v12.py`): 46 expected edits, 0 unexplained; the v10 control fails.
+- Archive v1.2:
+  - The figure self-test needs no private history (`revision10/fixtures/`); `--sums` skips `.venv`; Python 3.12+ is stated.
+  - Docstrings, CITATION.cff and REDACTIONS.md fixed; rule P4.
+  - Clean room 28 of 28 (55 + 13), mutation 4 of 4, scan 0 unjustified, FINAL_CHECK_OK. Committed locally as 47da42036, NOT pushed.
+- **Archive v1.2 PUBLISHED (2026-10-29, 21:38 ET)** at the owner's word. It was pushed and released with the tag pinned to
+  47da42036; the Zenodo version DOI is 10.5281/zenodo.23788075.
+- Left: the owner's arXiv submission of version 12, from the Desktop folder "memistor paper - arXiv submission (v12)".

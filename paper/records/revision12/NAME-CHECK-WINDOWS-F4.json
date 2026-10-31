@@ -1,0 +1,23 @@
+{
+ "finding": "review 10, finding 4: revision9/name_check_v10.py left the copied main.pdf open in its self-test, so leaving TemporaryDirectory failed on Windows",
+ "platform": "Windows 11 (desk), Python 3.13.15, PyMuPDF 1.26.5 (installed with pip --target into a scratch folder on F:)",
+ "build": "version 13 (H:/x1000/memistor-paper/rev12/v13/out), tex/",
+ "before": {
+  "script": "name_check_v10.py as committed in version 12",
+  "returncode": 1,
+  "json_written": false,
+  "last_line": "PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'F:\\\\x1000-deposit\\\\scratch\\\\tmp\\\\tmpc81h3fu5\\\\out\\\\main.pdf'"
+ },
+ "after": {
+  "script": "revision9/name_check_v10.py (PDFs opened with context managers, closed before the copy is replaced)",
+  "returncode": 0,
+  "json": "records/revision12/NAME-CHECK-v13-windows.json",
+  "last_line": "outside the address: 0 | address shown: {'main.pdf:text': 1, 'main-arxiv.pdf:text': 1, 'main.html:visible': 1, 'tex:body.tex': 1, 'tar:body.tex': 1} ... NAME_OK"
+ },
+ "also_checked_on_version_12_build": {
+  "before_rc": 1,
+  "after_rc": 0,
+  "after": "NAME_OK"
+ },
+ "ok": true
+}

@@ -1,6 +1,6 @@
 # Can memistor-class electrochemical weights train neural networks?
 
-Code, records and pulse draws for the paper "Can memistor-class electrochemical weights train neural networks?" (Anthony DeMarco, independent researcher; version 12, October 29, 2026).
+Code, records and pulse draws for the paper "Can memistor-class electrochemical weights train neural networks?" (Anthony DeMarco, independent researcher; version 13, October 31, 2026).
 The study asks, in simulation, how close memistor-class electrochemical weights (Li-ion, metal-oxide and protonic ECRAM) come to
 digital training when every weight update is made of device pulses. **All results are simulations**; nothing here is a
 measurement of a physical device (the `bench/` folder is a measurement protocol for a future one).
@@ -12,7 +12,7 @@ paper directory of the deposit (`paper/`): `python -B revision4/rebuild_draw_tab
 
 | Path | Contents |
 |---|---|
-| `paper/` | the paper: `tex/` (sources, generated number macros, tables, figures; `tex/v1..v11` are the archived versions), `build/` (built PDFs and HTML, current and `v1..v11`), the plans, deviations and responses, `analyze.py`, `make_figures.py`, `revision*/` (analysis and verification scripts per revision), `sim/` (the repaired simulator, pulse streams, probes and their checks), `pod/` (pod run and build scripts), `energy/`, `cite/` (citation check), `records/` (every run record and result file), `reviews/` (the eight independent reviews), `draws/rev3/` (the 12 saved pulse-draw archives) |
+| `paper/` | the paper: `tex/` (sources, generated number macros, tables, figures; `tex/v1..v12` are the archived versions), `build/` (built PDFs and HTML, current and `v1..v12`), the plans, deviations and responses, `analyze.py`, `make_figures.py`, `revision*/` (analysis and verification scripts per revision), `sim/` (the repaired simulator, pulse streams, probes and their checks), `pod/` (pod run and build scripts), `energy/`, `cite/` (citation check), `records/` (every run record and result file), `reviews/` (the ten independent reviews), `draws/rev3/` (the 12 saved pulse-draw archives) |
 | `sim/`, `records/` | the first study (lane ME): the original simulator and its checks, the device catalog (`records/CATALOG.json`), the tuned Tiki-Taka choice (`records/TT-CHOICE.json`) and its run records |
 | `bench/`, `BENCH.md` | the bench protocol (parts list, Arduino sketch, analysis) |
 | `energy/`, `pod/` | lane ME's energy model and pod payload scripts |
@@ -41,7 +41,7 @@ checks run on CPU with torch, NumPy and matplotlib 3.9.2 (the figures' version).
 
 ## Install (CPU)
 
-The clean-room runs (the author's, in `VERIFY.json`, and reviews 8 and 9) used Python 3.13.15, torch 2.7.1, NumPy 2.5.2 and
+The clean-room runs (the author's, in `VERIFY.json`, and reviews 8 to 10) used Python 3.13.15, torch 2.7.1, NumPy 2.5.2 and
 matplotlib 3.9.2 (the reviews with the CPU build of torch, as below). Python 3.12 or newer is needed (NumPy 2.5.2 requires it).
 From the repository root (`reproduce_all.py --sums` skips the `.venv` folder):
 
@@ -163,12 +163,23 @@ read it as `python`.
 - The runners' `samples` field counts every example of an epoch, the incomplete last batch that training skips included (review 8,
   finding 2). Nothing reads it any more: `paper/energy/energy_system.py` counts a run's steps from its layers' row counts.
 
+## Changes since v1.2
+
+v1.3 answers the tenth review (`paper/reviews/REVIEW-10-chatgpt-20261029-full.md`; the response, with every finding verified, is
+`paper/RESPONSE-TO-REVIEW-10.md`) and holds version 13 of the paper. No experiment was run and no number changed. It corrects this
+README's account of v1.2 (below) and its count of the reviews, the start version in Table 11's caption (versions 2 to 11 rounded the
+Welch degrees of freedom; version 1 used another width test), and the name check's self-test, which left a PDF open so that its
+clean-up failed on Windows (`paper/revision9/name_check_v10.py`). `RELEASE-NOTES.md` lists every change.
+
 ## Changes since v1.1
 
 v1.2 answers the ninth review (`paper/reviews/REVIEW-9-chatgpt-20261029-full.md`; the response, with every finding verified, is
 `paper/RESPONSE-TO-REVIEW-9.md`) and holds version 12 of the paper. The width study's Welch interval now uses the
-Welch-Satterthwaite degrees of freedom themselves (they were rounded down), which turns one verdict (CIFAR, protonic-inspired c-TTv2)
-from inconclusive to grows; no other verdict and no other printed number changed. `RELEASE-NOTES.md` lists every change.
+Welch-Satterthwaite degrees of freedom themselves (they were rounded down). This corrects all eight Welch intervals (each moves by at
+most 0.18 in its units) and turns one verdict (CIFAR, protonic-inspired c-TTv2) from inconclusive to grows, so the count of
+inconclusive CIFAR arms falls from 2 to 1; the deviation count becomes 9 (R1 to R9). The paired comparisons are unchanged, and so is
+every experimental result outside the width analysis. (The v1.2 README said that no other printed number changed; review 10 found
+that wrong, finding 1.) `RELEASE-NOTES.md` of v1.2 listed every change.
 
 ## Changes since v1.0
 
@@ -178,6 +189,6 @@ v1.1 answers the eighth review (`paper/reviews/REVIEW-8-chatgpt-20261028-full.md
 ## Citation
 
 Cite the concept DOI [10.5281/zenodo.23748861](https://doi.org/10.5281/zenodo.23748861), which covers every release (v1.0 holds version 9 of the
-paper, v1.1 version 11, v1.2 version 12); `CITATION.cff` has the metadata.
+paper, v1.1 version 11, v1.2 version 12, v1.3 version 13); `CITATION.cff` has the metadata.
 
-3490 files, 131.9 MB (excluding `SHA256SUMS`).
+3543 files, 134.9 MB (excluding `SHA256SUMS`).

@@ -2250,7 +2250,7 @@ selected learning rate; CIFAR <span class="math inline">\(c=16/32/64\)</span> in
 contrast <span class="math inline">\(D\)</span> (widest minus narrowest)
 with its 90 % interval and verdict, by the pre-registered Welch test
 (the <span class="math inline">\(t\)</span> quantile at the
-Welch–Satterthwaite degrees of freedom; versions 1–11 rounded them down:
+Welch–Satterthwaite degrees of freedom; versions 2–11 rounded them down:
 deviation R9) and, added after review 2 (deviation R4), paired by seed.
 Verdicts (margins 2 pp, 5 %): EQ = equivalent at the endpoints, GR =
 grows, SH = shrinks, NG = no evidence of growth beyond the margin, INC =
@@ -3047,11 +3047,11 @@ real arrays).</p>
 <p>One public archive holds everything needed to reproduce this paper,
 with versions, source hashes, dataset digests and split offsets, run
 manifests and licences: Zenodo, <a href="https://doi.org/10.5281/zenodo.23748861">doi:10.5281/zenodo.23748861</a>
-(this DOI cites all versions; version 1.2 of the archive holds
-version 12 of this paper, version 1.1 holds version 11, and version 1.0
-holds version 9). The same files are on GitHub under the author’s
-account, <a href="https://github.com/Questeria/memistor-ecram-training" class="uri">https://github.com/Questeria/memistor-ecram-training</a>
-(release v1.2). Code is under the MIT License; records, pulse draws,
+(this DOI cites all versions; version 1.3 of the archive holds
+version 13 of this paper, version 1.2 holds version 12, version 1.1
+holds version 11, and version 1.0 holds version 9). The same files are
+on GitHub under the author’s account, <a href="https://github.com/Questeria/memistor-ecram-training" class="uri">https://github.com/Questeria/memistor-ecram-training</a>
+(release v1.3). Code is under the MIT License; records, pulse draws,
 text and figures are under CC BY 4.0. The archive keeps the study
 folder’s layout, and the paths below are relative to its
 <code>paper/</code> directory. It holds:</p>
@@ -3059,7 +3059,7 @@ folder’s layout, and the paths below are relative to its
 <li><p>the plans (<code>PLAN-PAPER.md</code>,
 <code>PLAN-REVISION.md</code>, <code>PLAN-REVISION-2.md</code>,
 <code>PLAN-REVISION-3.md</code>, <code>PLAN-REVISION-4.md</code>), their
-deviations (<code>DEVIATIONS-PAPER.md</code>), the nine independent
+deviations (<code>DEVIATIONS-PAPER.md</code>), the ten independent
 reviews (<code>reviews/</code>) and the responses to them
 (<code>RESPONSE-TO-REVIEW.md</code>,
 <code>RESPONSE-TO-REVIEW-2.md</code>,
@@ -3069,7 +3069,8 @@ reviews (<code>reviews/</code>) and the responses to them
 <code>RESPONSE-TO-REVIEW-6.md</code>,
 <code>RESPONSE-TO-REVIEW-7.md</code>,
 <code>RESPONSE-TO-REVIEW-8.md</code>,
-<code>RESPONSE-TO-REVIEW-9.md</code>);</p></li>
+<code>RESPONSE-TO-REVIEW-9.md</code>,
+<code>RESPONSE-TO-REVIEW-10.md</code>);</p></li>
 <li><p>the original simulator and the repaired one
 (<code>sim/*_rev.py</code>), the explicit pulse streams and probes
 (<code>sim/*_rev2.py</code>, <code>sim/*_rev3.py</code>,
@@ -4630,8 +4631,8 @@ number changed; the largest change in a total energy is 0.0005 % in the
 current projection and 0.0014 % in version 1’s. Section <a href="#sec:methods" data-reference-type="ref" data-reference="sec:methods">3</a> now discloses an off-by-one in the LM
 sampler. The simulator’s ideal reset of a partial column selection under
 AIHWKIT bounds, which no result used, no longer fails, and a new check
-covers it. Version 12 (October 29, 2026; this paper) answers a ninth
-review, a second audit and reproduction from the public archive
+covers it. Version 12 (October 29, 2026) answers a ninth review, a
+second audit and reproduction from the public archive
 (<code>RESPONSE-TO-REVIEW-9.md</code>; no experiment was run). The width
 study’s Welch interval now takes the <span class="math inline">\(t\)</span> quantile at the Welch–Satterthwaite
 degrees of freedom; versions 2 to 11 rounded them down, which the plan
@@ -4642,7 +4643,16 @@ by at most 0.18 in their units; the paired contrast is unchanged. The
 width section now says that across widths a seed shares its example
 order, not its initialisation; the excess correlation of Table <a href="#tab:rev3_dep" data-reference-type="ref" data-reference="tab:rev3_dep">8</a> is defined as an excess in
 quadrature; and Table <a href="#tab:laneme" data-reference-type="ref" data-reference="tab:laneme">16</a> labels its version-1 values as
-superseded.</p>
+superseded. Version 13 (October 31, 2026; this paper) answers a tenth
+review, of version 12 and version 1.2 of the archive
+(<code>RESPONSE-TO-REVIEW-10.md</code>; no experiment was run and no
+number changed). It found the Welch correction right and four small
+slips outside the results, all corrected: the archive’s README said that
+no other printed number changed, although all eight Welch intervals
+moved, and counted eight reviews; the caption of Table <a href="#tab:rev_width" data-reference-type="ref" data-reference="tab:rev_width">11</a> dated the rounded degrees of
+freedom to versions 1 to 11, not 2 to 11 (version 1 used another width
+test); and a self-test of the name check left a PDF open, so its
+clean-up failed on Windows.</p>
 <h4 id="what-was-repaired.">What was repaired.</h4>
 <ol>
 <li><p><strong>Random streams.</strong> The initialisation, the data

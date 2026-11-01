@@ -52,12 +52,20 @@ and moves the other Welch intervals by at most 0.18 in their units; the paired c
 says that across widths a seed shares its example order, not its initialisation; the excess correlation of
 Table~\ref{tab:rev3_dep} is defined as an excess in quadrature; and Table~\ref{tab:laneme} labels its version-1 values as
 superseded.
-Version 13 (October 31, 2026; this paper) answers a tenth review, of version 12 and version 1.2 of the archive
+Version 13 (October 31, 2026) answers a tenth review, of version 12 and version 1.2 of the archive
 (\texttt{RESPONSE-TO-REVIEW-10.md}; no experiment was run and no number changed). It found the Welch correction right
 and four small slips outside the results, all corrected: the archive's README said that no other printed number changed,
 although all eight Welch intervals moved, and counted eight reviews; the caption of Table~\ref{tab:rev_width} dated the
 rounded degrees of freedom to versions 1 to 11, not 2 to 11 (version 1 used another width test); and a self-test of the
 name check left a PDF open, so its clean-up failed on Windows.
+Version 14 (October 31, 2026; this paper) answers an eleventh review, of version 13 (\texttt{RESPONSE-TO-REVIEW-11.md}; no
+experiment was run and no result changed). It cites Byun et al.~\cite{byun2024} and states what this study adds to it;
+prints the GPU energy equation with both input ranges (the low end, \RVenGpuMeasLo\,pJ, is 500\,W at 43\,\%; version 13
+named only the utilisation range); says which digital costs of the TT family are inside the energy ratio and that the ratio
+is a per-operation, read-dominated figure; calls the sensitivity sheet an exploratory device sensitivity analysis, in the
+subtitle too, and states that one-at-a-time ranges do not bound joint deviations; adds Figure~\ref{fig:arch}; adds a
+control ladder to the limitations and computational follow-ups to the roadmap; and moves correction history from
+Sections~\ref{sec:methods}, \ref{sec:fidelity}, \ref{sec:scale} and~\ref{sec:spec} to this appendix.
 
 \paragraph{What was repaired.}
 \begin{enumerate}
@@ -109,5 +117,12 @@ probes (pod sitting r6). Its sampling floor for the per-sample stream added the 
 independent, although the per-sample stream replays the literal stream's line firings, so the floor was too large and every
 excess of the per-sample stream came out as zero. Version 4 replaces it by the paired analysis of Section~\ref{sec:fidelity}
 (Table~\ref{tab:rev3_probe}). The surrogate's verdicts did not depend on this floor.
+The statistic of version 3, a pooled, signed normalised covariance, stays within \RYDepVthreePooledMax{} in absolute value on the same draws, because positive and negative terms cancel and unequal cell variances are pooled.
+
+\paragraph{Random realisations of the probe and rerun states.} The probes draw from a generator of their own. On the pod (version 3) the MNIST and CIFAR probe runs reproduced their main-table records exactly; on the desk (Quadro P2200) \RYProbeRunsEqualEThree{} of \RYProbeRunsN{} do, and none shares its initialisation with its version-3 run (the MNIST run not its example order either): the simulator's generators run on the GPU, and the CUDA random kernels assign draws to threads by the GPU's multiprocessor count. The desk's probe runs are therefore fresh training realisations, and the probed states are not version 3's; the comparison within each probe is unaffected, since all three updates start from the same saved state. LM training is not bitwise reproducible even on one card type: configurations repeated exactly in the records differ by up to \RXReproLmMaxPct\,\% in bits per byte (CIFAR \RXReproCifarMaxPct\,\%).
+The material SGD cell of Section~\ref{sec:fidelity} was rerun as matched triples on the desk. The pod's runs of seeds 0--2 are other random realisations of the same seeds, not a rounding variant of them: the simulator's generators run on the GPU, and the CUDA random kernels assign draws to threads by the GPU's multiprocessor count, so another GPU model draws another initialisation and example order (as predicted, the hashes differ from both the pod's and the earlier desk runs'). Per seed the two realisations' gaps differ by up to \RZRealGapDiffMax\,pp, and at the pod's three matched seeds the change was \RZPodNThreeD\,pp [\RZPodNThreeDLo, \RZPodNThreeDHi]: its gap depends strongly on the realisation.
+
+\paragraph{The held-symmetry anchor.} With the symmetry point held at mid-range, version 2 borrowed the ordinary base (whose range is $[-1.125, +0.875]$) as this sweep's anchor and omitted its zero point (deviation R5);
+version 3 ran both with each device's range re-centred (Section~\ref{sec:spec}).
 
 \input{tables/v3s_rev2_probe.tex}

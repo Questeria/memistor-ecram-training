@@ -37,6 +37,7 @@ REFS = [
     ("agarwal2016", "doi", "10.1109/IJCNN.2016.7727298", "resistive memory device requirements", None),
     ("gokmen2020", "doi", "10.3389/fnins.2020.00103", "resistive device arrays", None),
     ("gokmen2021", "doi", "10.3389/frai.2021.699148", "noisy hardware", None),
+    ("byun2024", "doi", "10.1002/aisy.202400543", "device specifications", None),  # VERSION 14: review 11's related work
     ("rasch2024", "doi", "10.1038/s41467-024-51221-z", "fast and robust analog", None),
     ("rasch2023arxiv", "arxiv", "2303.04721", "offset corrected in-memory training", None),
     ("rasch2021aihwkit", "doi", "10.1109/AICAS51828.2021.9458494", "pytorch toolkit", None),
@@ -96,7 +97,7 @@ def get(url, accept=None, timeout=40):
 
 def tex_escape(s):
     s = html.unescape(re.sub(r"<[^>]+>", "", s))
-    s = " ".join(s.split())
+    s = " ".join(s.split()).replace("‐", "-").replace("‑", "-")   # VERSION 14: Unicode hyphens (Wiley titles)
     for a, b in (("&", "\\&"), ("%", "\\%"), ("#", "\\#"), ("_", "\\_")):
         s = s.replace(a, b)
     return s

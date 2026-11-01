@@ -45,9 +45,14 @@ level, tens of microjoules, is many orders of magnitude worse than today's devic
       \RVResetResidMean{} nominal steps, pooled over all reset events \RVResetResidPooled) and its latency and endurance cost are not modelled.
 \item \textbf{Algorithms.} TTv1, TTv2, c-TTv2 and AGAD were implemented from the papers' text; our TTv2 is a local variant
       (multi-pulse transfer, buffer remainder). The settings were selected once, on MNIST, with a mid device.
+\item \textbf{Controls.} The ideal-device reference keeps stochastic pulses, bounds and the selected update management, so it
+      does not separate the optimiser from the device. A full ladder would run exact digital SGD, a digital TT with an
+      explicit accumulator decay, finite pulses and levels on ideal devices, the device imperfections and shared-line pulse
+      streams; we ran the first, the ideal 1000-level device, the catalog and, on MNIST and CIFAR's dense layers, the
+      per-sample stream.
 \item \textbf{Small models and short budgets.} $10^5$ to $10^6$ weights, a 10{,}000-image CIFAR subset, a two-layer byte LM,
       a factor of four in width, fixed training budgets.
-\item \textbf{Statistics.} Five seeds (three in the sensitivity sheet and the diagnostic), no multiplicity correction, and best
+\item \textbf{Statistics.} Five seeds (three in the sensitivity analysis and the diagnostic), no multiplicity correction, and best
       cells chosen among many; several cells remain UNRESOLVED.
 \item \textbf{Plans.} The plans were committed to our repository before the runs; they are not registered in an external
       registry.

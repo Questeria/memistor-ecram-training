@@ -1,9 +1,11 @@
 # Publishing the memistor/ECRAM paper: the owner's steps
 
 The code and data archive is published (release v1.0 on 2026-10-28 and v1.1 on 2026-10-29; section 4). Release v1.2, which holds
-version 12 (the answer to review 9), was published on 2026-10-29 at 21:38 ET. The paper is not yet on arXiv.
+version 12 (the answer to review 9), was published on 2026-10-29 at 21:38 ET. Release v1.3, which holds version 13 (the
+answer to review 10), was published on 2026-10-31 at 19:12 ET (tag v1.3 = 03474b26b; Zenodo version DOI 10.5281/zenodo.23848730,
+record 23848730, zip 106,146,105 bytes). The paper is not yet on arXiv: submit version 13 (not 12).
 Submitting it needs your arXiv account, an endorsement if asked, and your acceptance of arXiv's terms, so it is your act: sections 2, 3 and 5.
-Everything to upload and paste is in the Desktop folder "memistor paper - arXiv submission (v12)" (SUBMIT-TO-ARXIV.txt there).
+Everything to upload and paste is in the Desktop folder "memistor paper - arXiv submission (v13)" (SUBMIT-TO-ARXIV.txt there).
 
 ## 1. Which file to submit, and why there are two author variants
 
@@ -46,6 +48,20 @@ arXiv and by open-access journals. arXiv offers it in the submission form. The c
 
 ## 4. Code and data DOI (Zenodo)
 <!-- deposit-built -->
+**Release v1.3 (2026-10-31 19:10 ET): BUILT and verified, committed LOCALLY as 03474b26b in `C:/Projects/memistor-ecram-training` on top of
+the published 47da42036, NOT pushed. It holds version 13 of the paper, the answer to review 10 (no number changed).**
+
+- Built on F: (`F:/x1000-deposit/memistor-deposit-v1.3`).
+- Clean room: REPRODUCE_ALL_OK, 28 of 28 steps (55 files identical, 13 after the stated normalisation); 4 of 4 mutation tests caught.
+- Scan: 0 unjustified. Path rule P5 (`REDACTIONS.md`) masks the records' namespace prefix that review 10 quotes in its prose,
+  and the archived version 12 joins the mirror-address entry.
+- FINAL_CHECK_OK; 3,544 files, 135.4 MB (`records/deposit/`; v1.2's records are in `records/deposit/v1.2/`).
+- Publishing is one push and one release, as for v1.2 (the same two commands with v1.3 and the new commit):
+  `git -C C:/Projects/memistor-ecram-training push origin main`, then
+  `gh release create v1.3 --repo Questeria/memistor-ecram-training --target 03474b26b --title "v1.3: code, records and pulse
+  draws for the memistor paper (version 13)" --notes-file RELEASE-NOTES.md`, with the tag pinned to the verified commit.
+  The new version DOI comes from Zenodo; the concept DOI stays.
+
 **Release v1.2 (2026-10-29, 21:38 ET): PUBLISHED. It holds version 12 of the paper, the answer to review 9.**
 
 - Version DOI **10.5281/zenodo.23788075** (https://zenodo.org/records/23788075; version 1.2, Software, CC BY 4.0; Zenodo dates it
@@ -160,10 +176,12 @@ The planned list as written for version 8:
    - the generated `main-arxiv.bbl`, which arXiv prefers to running BibTeX itself.
 
    The ready archive is `build/arxiv-source.tar.gz`. The build script assembles it from exactly this list (`pod/build_rev2.sh`
-   for version 3, on a pod; `pod/build_rev3.sh` for version 4, `pod/build_rev4.sh` for version 5, `pod/build_rev5.sh` for version 6 and `pod/build_rev6.sh` for version 7 and `pod/build_rev7.sh` for version 8 and `pod/build_rev8.sh` for versions 9, 10, 11 and 12, on the desk in WSL Ubuntu with the same tectonic
+   for version 3, on a pod; `pod/build_rev3.sh` for version 4, `pod/build_rev4.sh` for version 5, `pod/build_rev5.sh` for version 6 and `pod/build_rev6.sh` for version 7 and `pod/build_rev7.sh` for version 8 and `pod/build_rev8.sh` for versions 9 to 13, on the desk in WSL Ubuntu with the same tectonic
    0.15.0) and
    compiles main-arxiv.tex from that archive in an empty directory, so a missing file fails the build. Use the archive, not
-   loose copies of the files; `revision11/check_build_v12.py` (version 12) runs `revision6/check_build_v7.py` and reads the version-12
+   loose copies of the files; `revision12/check_build_v13.py` (version 13) runs `revision6/check_build_v7.py` and reads the version-13
+   proofs: the word-count text diff `revision12/pdf_text_diff_v13.py` (v12 -> v13, pages equal), the name check in WSL and in
+   Windows, numbers freshness, Figure 3, the reset and the Welch test; `revision11/check_build_v12.py` (version 12) runs `revision6/check_build_v7.py` and reads the version-12
    proofs: the word-count text diff `revision11/pdf_text_diff_v12.py` (v11 -> v12; the extra page reflows floats), the name check,
    numbers freshness, Figure 3 (its self-test on bundled version-10 code), the reset and `revision11/test_welch_df.py`;
    `revision10/check_build_v11.py` (version 11) runs `revision6/check_build_v7.py` and reads the version-11 proofs:
@@ -187,7 +205,7 @@ The planned list as written for version 8:
 
    arXiv compiles the source. Check the preview PDF page by page.
 3. Fill in the title. The abstract for the form is ready in `build/arxiv-abstract.txt`: it is generated by `revision2/make_abstract.py` (version 3) `revision3/make_abstract_v4.py` (version 4) and `revision4/make_abstract_v5.py` (versions 5 and 6) from
-   `tex/sec_abstract.tex` with every number macro expanded from the generated `tex/numbers*.tex` (the same numbers as the PDF abstract) and fits arXiv's 1,920-character limit. Add the comments field; for version 12: "43 pages, 3 figures; code and data: https://doi.org/10.5281/zenodo.23748861".
+   `tex/sec_abstract.tex` with every number macro expanded from the generated `tex/numbers*.tex` (the same numbers as the PDF abstract) and fits arXiv's 1,920-character limit. Add the comments field; for version 13: "43 pages, 3 figures; code and data: https://doi.org/10.5281/zenodo.23748861".
 4. Submit. It appears after moderation, usually the next working day.
 
 ## 6. Later: a journal

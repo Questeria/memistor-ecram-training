@@ -14,19 +14,27 @@ weight-matrix operations of a training step would take if the analog reads ran a
       architecture model, and external components such as system buses and voltage regulators are excluded. We report both. Neither is an ECRAM training array, which also needs
       backward reads, repeated writes, references and Tiki-Taka state.
 \item \textbf{The boundary is the weight matrices.} Per weight and per training row: the forward and backward reads (two MACs)
-      and the update (device pulses, pulse lines and pulse generation, and the TT family's column reads and digital buffer).
+      and the update (device pulses, pulse lines and pulse generation, and, for the TT family, the transfer's column reads, priced
+      as one ADC conversion and one read-add-write of the digital buffer $H$ per read weight).
       Attention products, nonlinearities, normalisation, activation storage, data movement, control, reference maintenance and
-      static power are not modelled on either side, and the digital exclusions do not cancel the analog ones.
-\item \textbf{The GPU side} is H100 board power over its dense BF16 peak~\cite{nvidiah100} at the utilisation of a very large
-      training run, 38--43\,\%~\cite{dubey2024}: \RVenGpuPj\,pJ per weight per row (\RVenGpuMeasLo--\RVenGpuMeasHi\,pJ over that
-      range; \RVenGpuPlannedLo--\RVenGpuPlannedHi\,pJ over the 30--55\,\% range of our original plan).
+      static power are not modelled on either side, and the digital exclusions do not cancel the analog ones. The rest of the TT family's digital work, called the
+      digital TT state below (the storage of $H$, AGAD's averages $p$ and $p^{\mathrm{ref}}$ and their arithmetic, the chopper
+      signs, the threshold tests and the transfer scheduling), is outside the ratio.
+\item \textbf{The GPU side} is H100 board power $P$ over its dense BF16 peak $F$~\cite{nvidiah100} at the utilisation $u$ of
+      a very large training run~\cite{dubey2024}, with 6 FLOP per weight per row (2 each for the forward pass, the input
+      gradient and the weight gradient): $E_{\mathrm{GPU}}=6P/(Fu)$, with $F=989.5$\,TFLOP/s (half the 1979\,TFLOP/s
+      sparsity figure), $P$ from 500\,W (our estimate of a sustained draw) to 700\,W (the rated maximum) and $u$ from 38 to
+      43\,\%. At 700\,W and $u=40.5\,\%$ this is \RVenGpuPj\,pJ per weight per row; over both ranges it is
+      \RVenGpuMeasLo\,pJ (500\,W, 43\,\%) to \RVenGpuMeasHi\,pJ (700\,W, 38\,\%), and with $u$ over the 30--55\,\% range of our
+      original plan \RVenGpuPlannedLo--\RVenGpuPlannedHi\,pJ.
 \end{enumerate}
 
 \paragraph{Projection.} With the repaired pulse counts (resets counted as applied, the pulse reset's extra reads included), the
 GPU-to-analog ratio per weight per row is \RVenChipMin--\RVenChipMax$\times$ at the 12.4\,TOPS/W chip figure and
 \RVenSysMin--\RVenSysMax$\times$ at the 6.94\,TOPS/W system figure, for every published device and algorithm. The reads are at
-least \RVenChipMvmShareMin\,\% of the analog total: the ratio is set almost entirely by the two borrowed efficiencies, and
-changes in the simulated pulse counts barely move it.
+least \RVenChipMvmShareMin\,\% of the analog total: the ratio is set almost entirely by the two borrowed efficiencies, and changes in the simulated pulse counts barely move it. It is therefore a conditional, read-dominated figure per
+operation (one forward read, one backward read and one update of each weight per row), not the energy to train a model to a
+given quality.
 
 \paragraph{Conditional ratios for cells that pass the margin.} A low energy per operation is worth nothing without the
 accuracy. PASS means that the whole confidence interval of the gap lies within the stated non-inferiority margin under ideal reads,

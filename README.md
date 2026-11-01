@@ -1,6 +1,6 @@
 # Can memistor-class electrochemical weights train neural networks?
 
-Code, records and pulse draws for the paper "Can memistor-class electrochemical weights train neural networks?" (Anthony DeMarco, independent researcher; version 13, October 31, 2026).
+Code, records and pulse draws for the paper "Can memistor-class electrochemical weights train neural networks?" (Anthony DeMarco, independent researcher; version 14, October 31, 2026).
 The study asks, in simulation, how close memistor-class electrochemical weights (Li-ion, metal-oxide and protonic ECRAM) come to
 digital training when every weight update is made of device pulses. **All results are simulations**; nothing here is a
 measurement of a physical device (the `bench/` folder is a measurement protocol for a future one).
@@ -12,7 +12,7 @@ paper directory of the deposit (`paper/`): `python -B revision4/rebuild_draw_tab
 
 | Path | Contents |
 |---|---|
-| `paper/` | the paper: `tex/` (sources, generated number macros, tables, figures; `tex/v1..v12` are the archived versions), `build/` (built PDFs and HTML, current and `v1..v12`), the plans, deviations and responses, `analyze.py`, `make_figures.py`, `revision*/` (analysis and verification scripts per revision), `sim/` (the repaired simulator, pulse streams, probes and their checks), `pod/` (pod run and build scripts), `energy/`, `cite/` (citation check), `records/` (every run record and result file), `reviews/` (the ten independent reviews), `draws/rev3/` (the 12 saved pulse-draw archives) |
+| `paper/` | the paper: `tex/` (sources, generated number macros, tables, figures; `tex/v1..v13` are the archived versions), `build/` (built PDFs and HTML, current and `v1..v13`), the plans, deviations and responses, `analyze.py`, `make_figures.py`, `revision*/` (analysis and verification scripts per revision), `sim/` (the repaired simulator, pulse streams, probes and their checks), `pod/` (pod run and build scripts), `energy/`, `cite/` (citation check), `records/` (every run record and result file), `reviews/` (the eleven independent reviews), `draws/rev3/` (the 12 saved pulse-draw archives) |
 | `sim/`, `records/` | the first study (lane ME): the original simulator and its checks, the device catalog (`records/CATALOG.json`), the tuned Tiki-Taka choice (`records/TT-CHOICE.json`) and its run records |
 | `bench/`, `BENCH.md` | the bench protocol (parts list, Arduino sketch, analysis) |
 | `energy/`, `pod/` | lane ME's energy model and pod payload scripts |
@@ -65,13 +65,14 @@ Run each line from the repository root, in order; the generators overwrite files
 
 ## What rebuilds what
 
-Derived by `reproduce_all.py` in the author's clean-room run (`VERIFY.json`): 28 of 28 steps passed
+Derived by `reproduce_all.py` in the author's clean-room run (`VERIFY.json`): 30 of 30 steps passed
 (a step passes when its command exits 0 and prints its token if one is required; the files the generators rewrote are then compared
-with the deposit's copies: 55 byte-identical, 13 identical after one stated normalisation (figure PDFs: only the creation-date stamp; figure PNGs: same decoded pixels, different compressed bytes across platforms), and 0 with a documented difference (none: version 9 of the paper corrected the one count that differed in version 8, `\RVnDev`, and `paper/revision8/check_numbers_fresh.py` fails on any stale `numbers*.tex`). Docstrings of the older scripts show the author's desk interpreter (`H:/x1000/bench/venv/Scripts/python.exe`):
+with the deposit's copies: 55 byte-identical, 15 identical after one stated normalisation (figure PDFs: only the creation-date stamp; figure PNGs: same decoded pixels, different compressed bytes across platforms), and 0 with a documented difference (none: version 9 of the paper corrected the one count that differed in version 8, `\RVnDev`, and `paper/revision8/check_numbers_fresh.py` fails on any stale `numbers*.tex`). Docstrings of the older scripts show the author's desk interpreter (`H:/x1000/bench/venv/Scripts/python.exe`):
 read it as `python`.
 
 | Paper item | File | Command that rebuilds it |
 |---|---|---|
+| Figure `fig_arch` | `paper/tex/figs/fig_arch.pdf, .png` | (from `paper`) `python -B revision13/make_fig_arch.py --out tex/figs` |
 | Figure `fig_energy` | `paper/tex/figs/fig_energy.pdf, .png` | (from `paper`) `python -B make_figures.py --records records --out tex/figs` |
 | Figure `fig:main` | `paper/tex/figs/fig_main.pdf, .png` | (from `paper`) `python -B make_figures.py --records records --out tex/figs` |
 | Figure `fig_oat_cifar` | `paper/tex/figs/fig_oat_cifar.pdf, .png` | (from `paper`) `python -B make_figures.py --records records --out tex/figs` |
@@ -163,6 +164,17 @@ read it as `python`.
 - The runners' `samples` field counts every example of an epoch, the incomplete last batch that training skips included (review 8,
   finding 2). Nothing reads it any more: `paper/energy/energy_system.py` counts a run's steps from its layers' row counts.
 
+## Changes since v1.3
+
+v1.4 answers the eleventh review (`paper/reviews/REVIEW-11-chatgpt-20261031-full.md`, a review of version 13; the response, with every
+finding verified, is `paper/RESPONSE-TO-REVIEW-11.md`) and holds version 14 of the paper. No experiment was run and no result changed;
+the changes are to the text and one new figure. Version 14 cites Byun et al. (Advanced Intelligent Systems, doi 10.1002/aisy.202400543;
+`paper/records/CITE-CHECK.json` now verifies 49 references), prints the GPU energy equation with every input range, states the
+energy ratio's digital-cost boundary, calls the sensitivity sheet an exploratory device sensitivity analysis (in the subtitle too),
+adds Figure 1 (`paper/revision13/make_fig_arch.py`, checked against the simulator by `paper/revision13/check_fig_arch.py`; both are
+steps of `reproduce_all.py`), adds a control ladder and computational follow-ups, and moves correction history from the main text
+into Appendix F. `RELEASE-NOTES.md` lists every change.
+
 ## Changes since v1.2
 
 v1.3 answers the tenth review (`paper/reviews/REVIEW-10-chatgpt-20261029-full.md`; the response, with every finding verified, is
@@ -189,6 +201,6 @@ v1.1 answers the eighth review (`paper/reviews/REVIEW-8-chatgpt-20261028-full.md
 ## Citation
 
 Cite the concept DOI [10.5281/zenodo.23748861](https://doi.org/10.5281/zenodo.23748861), which covers every release (v1.0 holds version 9 of the
-paper, v1.1 version 11, v1.2 version 12, v1.3 version 13); `CITATION.cff` has the metadata.
+paper, v1.1 version 11, v1.2 version 12, v1.3 version 13, v1.4 version 14); `CITATION.cff` has the metadata.
 
-3543 files, 134.9 MB (excluding `SHA256SUMS`).
+3608 files, 138.3 MB (excluding `SHA256SUMS`).

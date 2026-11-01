@@ -46,6 +46,7 @@ STEPS = [
     ("analyze_rev", "paper", ["-B", "revision/analyze_rev.py"], "regen", None, False),
     ("derive_rev_spec_p", "paper", ["-B", "revision10/derive_rev_spec_p.py"], "regen", None, False),   # Table 12's file (v1.1)
     ("make_figures_rev", "paper", ["-B", "revision/make_figures_rev.py", "--results", "records/revision/RESULTS-REVISION.json", "--out", "tex/figs"], "regen", None, False),
+    ("make_fig_arch", "paper", ["-B", "revision13/make_fig_arch.py", "--out", "tex/figs"], "regen", None, False),   # Figure 1 (v1.4)
     ("analyze_rev2", "paper", ["-B", "revision2/analyze_rev2.py"], "regen", None, False),
     ("analyze_rev3", "paper", ["-B", "revision3/analyze_rev3.py"], "regen", None, False),
     ("analyze_rev4", "paper", ["-B", "revision4/analyze_rev4.py"], "regen", None, False),
@@ -62,6 +63,8 @@ STEPS = [
     ("test_ideal_reset_cols", "paper/sim", ["-B", "test_ideal_reset_cols.py", "--out", "../../_repro/TESTS-IDEAL-RESET-COLS.json"], "check", "ALL_OK", False),
     # ---- v1.2 (review 9): the width study's Welch interval at the Welch-Satterthwaite df itself ----
     ("test_welch_df", "paper", ["-B", "revision11/test_welch_df.py", "--out", "../_repro/TESTS-WELCH-DF.json"], "check", "ALL_OK", False),
+    # ---- v1.4 (review 11): Figure 1 says what the simulator does (device and digital state, ideal reads, pulse targets) ----
+    ("check_fig_arch", "paper", ["-B", "revision13/check_fig_arch.py", "--selftest"], "check", "FIG_ARCH_OK", False),
     # ---- the simulators' checks (CPU; CUDA hidden) ----
     ("test_memsim_laneME", "sim", ["-B", "test_memsim.py", "--out", "../_repro/TESTS.json"], "check", "ALL_OK", True),
     ("test_paper", "paper/sim", ["-B", "test_paper.py", "--out", "../../_repro/TESTS-PAPER.json"], "check", "ALL_OK", True),

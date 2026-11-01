@@ -7,10 +7,8 @@ when the width raises a layer's fan-in (layers with a fixed fan-in keep theirs);
 physical mapping.
 
 \paragraph{The test.} The endpoint contrast $D$ (the mean gap at the widest minus the narrowest width) is tested for
-equivalence within the gap lines (TOST at 5\,\%). The original paper's ``FLAT'' label is withdrawn: it did not test equivalence
-and covered large non-monotonic changes. The pre-registered contrast is Welch's, which treats the two widths' seed samples as independent; its interval takes the
-$t$ quantile at the Welch--Satterthwaite degrees of freedom (versions 2 to 11 rounded them down, which the plan does not
-state; review~9 found it, deviation R9). The samples are not independent: a seed keeps its example order across widths, and
+equivalence within the gap lines (TOST at 5\,\%).  The pre-registered contrast is Welch's, which treats the two widths' seed samples as independent; its interval takes the
+$t$ quantile at the Welch--Satterthwaite degrees of freedom (deviation R9; Appendix~\ref{app:revision}). The samples are not independent: a seed keeps its example order across widths, and
 within a width every arm of a seed also shares the logical initialisation (between widths the layers differ in shape). Beside the
 registered result we therefore report the contrast paired by seed, with the same decision order, as a sensitivity analysis
 added after the second review (deviation R4). Both test the endpoints only; neither covers the middle width.

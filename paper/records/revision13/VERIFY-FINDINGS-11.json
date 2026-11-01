@@ -1,0 +1,230 @@
+{
+ "energy_gpu_range": {
+  "equation": "E_GPU = FLOP_per_weight_row * P / (F_dense_bf16 * u)",
+  "flop_per_weight_row": 6.0,
+  "F_dense_bf16": 989500000000000.0,
+  "power_w": {
+   "central": 700.0,
+   "low": 500.0,
+   "high": 700.0,
+   "label": "SPEC (range: ESTIMATE of sustained draw)",
+   "source": "NVIDIA H100 product page: max TDP up to 700 W (SXM) [nvidiah100]; low end ESTIMATE"
+  },
+  "utilisation": {
+   "central": 0.405,
+   "low": 0.38,
+   "high": 0.43
+  },
+  "central_pj": 10.48,
+  "record_range_pj": [
+   7.051,
+   11.17
+  ],
+  "low_end_is": "500 W at 0.43: 7.051 pJ",
+  "high_end_is": "700 W at 0.38: 11.170 pJ",
+  "range_at_700w_only": [
+   9.871,
+   11.17
+  ],
+  "grid_pj": {
+   "500 W at 0.380": 7.979,
+   "500 W at 0.405": 7.486,
+   "500 W at 0.430": 7.051,
+   "700 W at 0.380": 11.17,
+   "700 W at 0.405": 10.48,
+   "700 W at 0.430": 9.871
+  },
+  "macros": {
+   "RVenGpuPj": "10.48",
+   "RVenGpuMeasLo": "7.05",
+   "RVenGpuMeasHi": "11.17",
+   "RVenGpuPlannedLo": "5.51",
+   "RVenGpuPlannedHi": "14.15"
+  },
+  "v13_prints_power_range": false,
+  "v13_prints_equation": false,
+  "verdict": "CONFIRMED: 7.05 pJ is 500 W at 43 % and 11.17 pJ is 700 W at 38 %; the range spans the power estimate as well as the utilisation, and version 13 prints neither the power range nor the equation"
+ },
+ "energy_read_dominated": {
+  "reads_only_pj": {
+   "12.4 TOPS/W": 0.3226,
+   "6.94 TOPS/W": 0.5764
+  },
+  "reads_only_ratio": {
+   "12.4 TOPS/W": 32.49,
+   "6.94 TOPS/W": 18.18
+  },
+  "printed_ratio_ranges": {
+   "chip": [
+    "31.5",
+    "32.4"
+   ],
+   "system": [
+    "17.9",
+    "18.1"
+   ]
+  },
+  "min_read_share_of_analog_published_devices": 0.9702,
+  "macro_RVenChipMvmShareMin": "97.0",
+  "v13_says_reads_set_ratio": true,
+  "v13_says_no_energy_to_target": true,
+  "v13_per_operation_sentence": true,
+  "verdict": "CONFIRMED (arithmetic): the reads alone give 32.49x and 18.18x. PARTLY already in version 13: it states the read share, that a low energy per operation is worth nothing without the accuracy, and that no energy-to-target trajectory is shown, but not plainly that the printed ratio itself is a per-operation, read-dominated figure, not energy to a quality"
+ },
+ "energy_cost_boundary": {
+  "tt_term": "e_tt = reads_pwr * (adc_j_per_conversion + sram_add_j): one ADC conversion and one read-add-write of H per read weight",
+  "adc": "an 8-bit SAR conversion; the range spans the published survey's energy-efficient designs to conservative ones [murmann_adc]",
+  "sram": "one read-add-write of the 16-32 bit buffer H per read weight (ours; cf. [horowitz2014])",
+  "v13_inside": true,
+  "v13_outside": true,
+  "not_in_the_model": [
+   "storage of H",
+   "AGAD's leaky average p and reference p_ref (their arithmetic beyond one buffer add)",
+   "chopper signs and flips",
+   "threshold tests and transfer scheduling"
+  ],
+  "verdict": "CONFIRMED (wording): both phrases are in version 13 and refer to different costs, but the text does not say which"
+ },
+ "clipping": {
+  "cifar_tt_layer_mean_max_pct": "57.5",
+  "lm_tt_layer_mean_max_pct": "27.8",
+  "worst_record_pct": "96.4",
+  "v13_policy_sentence": true,
+  "v13_proposes_comparison": false,
+  "verdict": "CONFIRMED: the losses are as quoted and the text calls clipping a policy, but proposes no pulse-length or update-management comparison"
+ },
+ "controls": {
+  "v13_ideal_reference_caveat": true,
+  "v13_has_ladder": false,
+  "verdict": "CONFIRMED: version 13 says the ideal-device row is not an algorithm-only reference, but gives no control ladder"
+ },
+ "sgd_rate": {
+  "v13_main": true,
+  "v13_discussion": true,
+  "verdict": "CONFIRMED and already stated (Sections 4.2 and 5); the roadmap does not list fair tuning as a follow-up"
+ },
+ "fidelity_scope": {
+  "probe_meets": "10 of 12",
+  "bootstrap": "1",
+  "v13_lm_update_level_only": true,
+  "v13_followup_full_trajectories": false,
+  "verdict": "CONFIRMED and already stated as a limit; full CIFAR and LM trajectories with correlated streams are not named as the first follow-up"
+ },
+ "spec_sheet": {
+  "title": "Can memistor-class electrochemical weights train neural networks?\\\\[2pt] \\large A pre-registered simulation study from Widrow's 1960 memistor to modern ECRAM, with a device specification sheet and an experimental roadmap",
+  "title_promises_sheet": true,
+  "main_text_uses": [],
+  "sensitivity_sheet_in": [
+   "sec_abstract.tex",
+   "sec_intro.tex",
+   "sec_discussion.tex"
+  ],
+  "v13_exploratory": true,
+  "v13_combined": true,
+  "lm_threshold_established": false,
+  "verdict": "CONFIRMED for the subtitle (the body already says 'sensitivity sheet' and 'exploratory'); the joint-deviation point is stated only as 'combined deviations ... are not covered'"
+ },
+ "architecture_figure": {
+  "v13_figures": [
+   "fig_main",
+   "fig_rev_main",
+   "fig_validation"
+  ],
+  "verdict": "CONFIRMED: no figure shows which parts are device operations and which digital"
+ },
+ "byun": {
+  "in_v13_refs": null,
+  "crossref": {
+   "fetched_title": "Device Specifications for Neural Network Training with Analog Resistive Cross‐Point Arrays Using Tiki‐Taka Algorithms",
+   "authors": [
+    "Jinho Byun",
+    "Seungkun Kim",
+    "Doyoon Kim",
+    "Jimin Lee",
+    "Wonjae Ji",
+    "Seyoung Kim"
+   ],
+   "year": 2024,
+   "venue": "Advanced Intelligent Systems",
+   "volume": "7",
+   "issue": "5",
+   "pages": "2400543",
+   "published_online": [
+    [
+     2024,
+     9,
+     24
+    ]
+   ],
+   "published_print": [
+    [
+     2025,
+     5
+    ]
+   ],
+   "abstract_phrases": {
+    "Tiki-Taka algorithm versions 1 (TTv1) and 2 (TTv2)": true,
+    "asymmetry, retention, number of pulses, and cycle-to-cycle variation": true,
+    "pattern-recognition accuracy": true,
+    "stochastic gradient descent": true,
+    "TTv2 permits more lenient device specifications than the TTv1": true
+   },
+   "not_in_abstract": {
+    "chopped": false,
+    "AGAD": false,
+    "ECRAM": false,
+    "language model": false,
+    "CIFAR": false
+   }
+  },
+  "verdict": "CONFIRMED: a real, closely related paper (Crossref), not cited in version 13"
+ },
+ "xu": {
+  "pubmed_doi": [
+   "10.1021/acsnano.6c09861"
+  ],
+  "pubmed_title": "Quantifying Variability, Symmetry, and Nonlinearity of Protonic Electrochemical Random-Access Memory for Hardware Neural Network Training.",
+  "abstract_phrases": {
+   "cycle-to-cycle (CtoC) variability (3%)": true,
+   "device-to-device (DtoD) variability (21%)": true,
+   "back-end-of-line (BEOL)-compatible": true,
+   "hardware training simulations": true
+  },
+  "in_refs_bib": true,
+  "verdict": "ALREADY CITED (xu2026, since version 2): PubMed 42915660 is the same paper; its abstract gives the 3 % and 21 % the paper prints"
+ },
+ "spot_checks": {
+  "pass_counts_vs_fp": [
+   "14",
+   "6",
+   "4"
+  ],
+  "pass_counts_vs_adam": [
+   "14",
+   "4",
+   "0"
+  ],
+  "a2m_change": [
+   "0.02",
+   "-0.47",
+   "0.52"
+  ],
+  "lm_best_vs_adam": [
+   "23.36",
+   "22.15",
+   "24.58"
+  ],
+  "asym_confound": [
+   "42.92",
+   "6.20"
+  ],
+  "width_growth": [
+   "1.76",
+   "0.15",
+   "3.38"
+  ],
+  "mnist_fp": "97.77",
+  "sgd_fail": "12 of 12",
+  "verdict": "AGREE: every number review 11 quotes matches the version-13 macros"
+ }
+}

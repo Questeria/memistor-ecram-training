@@ -1,8 +1,7 @@
 \subsection{Fidelity of the aggregate update}\label{sec:fidelity}
 The simulator draws each batch's pulses as independent Poisson counts per cell and applies them in one exact step of the
 interleaved dynamics (Section~\ref{sec:model}). A physical stochastic-pulse array instead fires row and column lines per slot
-and per sample; a cell is pulsed when both of its lines fire, and the samples follow one another. After the second review we
-compared the two, pre-registered with pass lines (\texttt{PLAN-REVISION-2.md}, experiment A), on the operating regime of the
+and per sample; a cell is pulsed when both of its lines fire, and the samples follow one another. We compared the two, pre-registered with pass lines (\texttt{PLAN-REVISION-2.md}, experiment A), on the operating regime of the
 main table.
 
 \paragraph{Update level (A1).} At two points of training, one batch's inputs, errors and array state were taken from surrogate
@@ -14,12 +13,11 @@ per sample at the pre-sample state (standard deviation $c_{2c}\sqrt{n}$ times th
 applied after each sample, where the literal stream applies noise and bounds after every pulse. The cases cover clipped and
 unclipped layers: MNIST Li-ECRAM c-TTv2 (first and output layer), CIFAR MO-ECRAM AGAD (fully connected and output layer; the
 worst-clipped layer of the main table) and the LM protonic-inspired c-TTv2 (embedding and output layer), \RYProbeN{} probes.
-Version 3 compared seq with the literal stream as if their draws were independent, although they share the line firings, so
-its sampling floor could hide a real difference (Table~\ref{tab:v3s_rev2_probe}, Appendix~\ref{app:revision}). The probes were
-therefore run again with the draws kept, 16 per probe, and seq is now compared paired by draw, with bootstrap bounds over whole
-draws (Tables~\ref{tab:rev4_probe_sur} and~\ref{tab:rev3_probe}; \texttt{PLAN-REVISION-3.md}); the draws are in
+Because seq replays the literal stream's line firings, the two are compared paired by draw, with the draws kept (16 per
+probe) and bootstrap bounds over whole draws (Tables~\ref{tab:rev4_probe_sur} and~\ref{tab:rev3_probe}; \texttt{PLAN-REVISION-3.md}); the draws are in
 the deposit inventory, and Tables~\ref{tab:rev4_probe_sur}--\ref{tab:rev3_dep} can be rebuilt from them and the probe
-records' metadata (Section~\ref{sec:availability}).
+records' metadata (Section~\ref{sec:availability}); an earlier, unpaired analysis is superseded
+(Appendix~\ref{app:revision}).
 \begin{itemize}
 \item The surrogate, whose draws are independent of the literal stream's, meets the pre-registered lines (realised gain along
       the requested update within 10\,\%, mean difference beyond sampling noise at most 0.10, median variance ratio in
@@ -42,19 +40,11 @@ records' metadata (Section~\ref{sec:availability}).
       cells sharing a line exceeds the surrogate's sampling null, in quadrature
       ($\sqrt{\max(0,\,\mathrm{RMS}_{\mathrm{slot}}^2-\mathrm{RMS}_{\mathrm{null}}^2)}$), by up to \RYDepExcessMax{} (mean correlation aligned with the
       expected update's signs up to \RYDepAlignedMax), by more than 0.05 on \RYDepLargeN{} of \RYProbeN{} probes
-      (\RYDepLargeList). The statistic of version 3, a pooled, signed normalised covariance, stays within \RYDepVthreePooledMax{}
-      in absolute value on the same draws, because positive and negative terms cancel and unequal cell variances are pooled.
-      The cross-cell dependence is therefore not small everywhere; the per-cell lines above do not test it, and whether it
+      (\RYDepLargeList). The cross-cell dependence is therefore not small everywhere; the per-cell lines above do not test it, and whether it
       matters for training is what A2 measures.
 \end{itemize}
-The probes draw from a generator of their own. On the pod (version 3) the MNIST and CIFAR probe runs reproduced their main-table
-records exactly; on the desk (Quadro P2200) \RYProbeRunsEqualEThree{} of \RYProbeRunsN{} do, and none shares its
-initialisation with its version-3 run (the MNIST run not its example order either): the simulator's generators run on
-the GPU, and the CUDA random kernels assign draws to threads by the GPU's multiprocessor count. The desk's probe runs
-are therefore fresh training realisations, and the probed states are not version 3's; the comparison within each
-probe is unaffected, since all three updates start from the same saved state. LM training is not bitwise reproducible even on one card
-type: configurations repeated exactly in the records differ by up to \RXReproLmMaxPct\,\% in bits per byte (CIFAR
-\RXReproCifarMaxPct\,\%).
+The probed states are fresh training realisations on the desk's GPU (Appendix~\ref{app:revision}); the comparison within each
+probe is unaffected, since all three updates start from the same saved state.
 
 \paragraph{Training level (A2).} The same selections, learning rates and seeds as the main table were trained with the
 per-sample stream (MNIST: every analog layer, three devices $\times$ SGD, c-TTv2, AGAD; CIFAR: the two fully connected layers,
@@ -69,17 +59,14 @@ half the line (1\,pp) or two cells whose gaps differ by more than 1\,pp swap ord
       \RXFidMnistEcramMoKimTwoZeroOneNineSgdHi]). At three seeds both of its arms are
       \RYFidMnistEcramMoKimTwoZeroOneNineSgdSurLabel{} (surrogate [\RYFidMnistEcramMoKimTwoZeroOneNineSgdSurLo,
       \RYFidMnistEcramMoKimTwoZeroOneNineSgdSurHi], stream [\RYFidMnistEcramMoKimTwoZeroOneNineSgdSeqLo,
-      \RYFidMnistEcramMoKimTwoZeroOneNineSgdSeqHi]\,pp). The rerun flagged in version 3 was done as matched triples on one GPU (experiment A2-M, Table~\ref{tab:rev4_a2m};
+      \RYFidMnistEcramMoKimTwoZeroOneNineSgdSeqHi]\,pp). It was rerun as matched triples on one GPU (experiment A2-M, Table~\ref{tab:rev4_a2m};
       \texttt{PLAN-REVISION-4.md}): on the desk's \RZAtwoMGpu, each of seeds 0--4 trained the FP-SGD control, the
       surrogate and the stream from one initialisation and one example order (equal hashes, checked; the analysis refuses
       a seed without them). At these \RZAtwoMN{} matched seeds the stream's gap is \RZAtwoMSeqGap\,pp [\RZAtwoMSeqLo,
       \RZAtwoMSeqHi], \RZAtwoMSeqLabel, against \RZAtwoMSurGap\,pp [\RZAtwoMSurLo, \RZAtwoMSurHi], \RZAtwoMSurLabel,
       with the surrogate; the paired change is \RZAtwoMD\,pp [\RZAtwoMDLo, \RZAtwoMDHi] (\RZAtwoMMaterial; its interval lies within $\pm1$\,pp). The FAIL label holds under either update.
-      The pod's runs of seeds 0--2 are other random realisations of the same seeds, not a rounding variant of them: the simulator's generators run on the GPU, and the CUDA random kernels assign draws to threads by the GPU's multiprocessor count, so another GPU model draws another initialisation and example order (as predicted, the hashes differ from both the pod's and the earlier desk runs').
-      Per seed the two realisations' gaps differ by up to \RZRealGapDiffMax\,pp, and at the pod's three matched seeds the
-      change was \RZPodNThreeD\,pp [\RZPodNThreeDLo, \RZPodNThreeDHi]: this cell's gap depends strongly on the
-      realisation, and the update's effect on it is measured only by the paired comparisons within each matched set.
-      Version 4's five-seed figures for this cell mixed matched and unmatched pairs and are withdrawn (Appendix~\ref{app:revision}).
+      This cell's gap depends strongly on the random realisation (Appendix~\ref{app:revision}), and the update's effect on it is measured only by the paired comparisons within each matched set.
+      
 \item One label changes at the same three seeds: \RYFidTransList. Its mean gap moves by only
       \RXFidCifarEcramLiTangTwoZeroOneEightCttvTwoD\,pp, but the stream's interval
       ([\RYFidCifarEcramLiTangTwoZeroOneEightCttvTwoSeqLo, \RYFidCifarEcramLiTangTwoZeroOneEightCttvTwoSeqHi]\,pp) is wider and

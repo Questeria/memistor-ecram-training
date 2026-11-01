@@ -271,3 +271,28 @@ Desk Python: `H:/x1000/bench/venv/Scripts/python.exe` (torch 2.7.1+cu126).
 - **Archive v1.2 PUBLISHED (2026-10-29, 21:38 ET)** at the owner's word. It was pushed and released with the tag pinned to
   47da42036; the Zenodo version DOI is 10.5281/zenodo.23788075.
 - Left: the owner's arXiv submission of version 12, from the Desktop folder "memistor paper - arXiv submission (v12)".
+
+## Revision v13 (2026-10-31, director lane): the answer to review 10 (no experiment; no number changed; $0)
+
+- Review 10 (ChatGPT in Codex, `reviews/REVIEW-10-chatgpt-20261029-full.md`) re-audited release v1.2 against version 12: a fresh clone, the
+  README as written, 28 of 28 steps, 68 outputs and 2,232 macros, the eight Welch intervals recomputed from the records, pdfLaTeX 43
+  pages. It found the Welch fix right, no new major or critical issue, and four small findings. All four are verified and confirmed
+  (`RESPONSE-TO-REVIEW-10.md`).
+- F1: the archive README ("Changes since v1.1", in `make_deposit.py`) said no other printed number changed; all eight Welch intervals
+  did. Corrected, with a new "Changes since v1.2".
+- F2: the archive README's layout table said eight reviews; it says ten.
+- F3: Table 11's caption said versions 1--11; it says 2--11 (version 1 had no Welch test). Fixed in `revision/analyze_rev.py`, table
+  regenerated; nothing else changed (numbers FRESH).
+- F4: `revision9/name_check_v10.py` closes every PDF (context managers), so its self-test cleans up on Windows. Old: exit 1
+  (WinError 32); new: NAME_OK (`records/revision12/NAME-CHECK-WINDOWS-F4.json`).
+- Text (`revision12/edit_13.py`): availability (archive v1.3, release v1.3, ten reviews, the tenth response) and the history
+  (version 13). The concept DOI is unchanged. `revision12/archive_v12.py` archived `tex/v12` and `build/v12`.
+- Build: `pod/build_payload_rev8.py --out H:/x1000/memistor-paper/rev12/v13`, `run.sh` in WSL. Both variants have 43 pages.
+- Checks: `revision12/check_build_v13.py <out> --json records/revision12/ARTIFACT-CHECK-v13.json` is ALL_OK. The word-count diff
+  v12 -> v13 has 8 expected edits and 0 unexplained, pages equal; the v11 control fails. Paper commit 75616d335.
+- Archive v1.3 (`F:/x1000-deposit/memistor-deposit-v1.3`): clean room REPRODUCE_ALL_OK, 28 of 28 steps (55 files identical, 13 after the stated normalisation); mutation 4 of 4; scan 0 unjustified;
+  FINAL_CHECK_OK; 3,544 files, 135.4 MB. Committed as 03474b26b.
+- **Archive v1.3 PUBLISHED (2026-10-31, 19:12 ET)** at the owner's word: pushed and released with the tag pinned to 03474b26b; the
+  Zenodo version DOI is 10.5281/zenodo.23848730.
+- Left:
+  - the owner's arXiv submission of version 13, from the Desktop folder "memistor paper - arXiv submission (v13)".

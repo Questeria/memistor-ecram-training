@@ -3,6 +3,13 @@ The simulations suggest what to measure first. None of the criteria below is an 
 conditional on this simulator (ideal reads, the pulse surrogate, small models) and on the chopped Tiki-Taka setting that passed
 in Section~\ref{sec:main}.
 
+\paragraph{Computational follow-ups (no hardware).} In order of value: (1) train the passing configurations over full CIFAR and
+LM trajectories with correlated, shared-line pulse streams on every analog layer (so far compared in training only on MNIST
+and CIFAR's dense layers, Section~\ref{sec:fidelity}); (2) compare pulse lengths and update-management policies where the
+update clips (mean lost fraction up to \RVLostCifarTtLayerMeanMaxPct\,\%, worst layer record \RVLostMaxPct\,\%); (3) run the
+control ladder of Section~\ref{sec:limits}; (4) tune each analog arm, plain SGD included, with a search budget comparable to
+the digital baselines' (the main table reuses the FP-SGD learning rate).
+
 \paragraph{Stage 1: single-device characterisation} (tens of devices, no array).
 \begin{itemize}
 \item \textbf{Measurement.} At least 1000 up and 1000 down pulses at the intended width and voltage, repeated at least three
@@ -14,8 +21,9 @@ in Section~\ref{sec:main}.
       \RVSpecCttvTwoCifarRefErrThr{} of the half range, one axis at a time around the protonic-inspired base. Thresholds for
       levels, saturation, write noise and retention are not established by this grid; what it shows is where training clearly
       fails (no saturation or $\gamma\ge1$, reference error 0.2, retention of $10^3$ updates or less). A device group should
-      therefore measure all of these and simulate its own fitted device, rather than read pass lines off this sheet. Combined
-      deviations are not covered.
+      therefore measure all of these and simulate its own fitted device, rather than read pass lines off this sheet. Combined deviations are not covered. Published variability of BEOL-compatible protonic ECRAM~\cite{xu2026}
+      (3\,\% cycle-to-cycle, 21\,\% device-to-device) is a starting point for such a fit, once its definitions are reconciled
+      with this model's $c_{2c}$ and $\sigma_{\mathrm{d2d}}$.
 \item \textbf{Endurance and pulse budget.} Report per-array and per-layer pulse distributions and the hottest cells, not only
       averages; the TT family's $A$ arrays and the resets dominate the write load, and the pulse budget per update clips the
       largest layers (Section~\ref{sec:main}).

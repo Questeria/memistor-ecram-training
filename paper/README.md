@@ -296,3 +296,35 @@ Desk Python: `H:/x1000/bench/venv/Scripts/python.exe` (torch 2.7.1+cu126).
   Zenodo version DOI is 10.5281/zenodo.23848730.
 - Left:
   - the owner's arXiv submission of version 13, from the Desktop folder "memistor paper - arXiv submission (v13)".
+
+## Revision v14 (2026-10-31, director lane): the answer to review 11 (no experiment; no result changed; $0)
+
+- Review 11 (ChatGPT, `reviews/REVIEW-11-chatgpt-20261031-full.md`, pasted by the owner) read version 13 (43 pages), spot-checked its
+  numbers (all agree) and compared related work; it did not rerun anything. Every finding was verified against `tex/v13`, the records,
+  the code and primary metadata (`revision13/verify_findings_11.py`, `revision13/cite_check_v14.py`); `RESPONSE-TO-REVIEW-11.md` gives
+  each verdict.
+- Related work: Byun et al. (Adv. Intell. Syst. 7(5) 2400543, doi 10.1002/aisy.202400543) confirmed on Crossref and cited, with what
+  this study adds; `records/CITE-CHECK.json` 49 of 49. Xu et al. (PubMed 42915660) is the existing `xu2026`, now also in Stage 1.
+- Energy (Section 5): the GPU equation 6P/(Fu) with every input range (the low end 7.05 pJ is 500 W at 43 %); the TT family's
+  digital-cost boundary; the ratio is a per-operation, read-dominated figure, not energy to a quality.
+- Wording: the subtitle's "device specification sheet" is now "exploratory device sensitivity analysis" (judgement call; the title is
+  otherwise unchanged), as are the abstract, introduction, Section 4.5 (one-at-a-time ranges do not bound joint deviations),
+  limitations and Appendix B.
+- New Figure 1 (`revision13/make_fig_arch.py`): device vs digital, for SGD and the TT family; `revision13/check_fig_arch.py` checks it
+  against `sim/memsim_rev.py` (`records/revision13/FIG-ARCH-CHECK.json`, 4 of 4 faults caught).
+- Limitations: the control ladder; roadmap: computational follow-ups (full CIFAR and LM trajectories with correlated streams first,
+  pulse-length and update-management comparisons, the ladder, fair tuning of analog SGD).
+- Correction history moved word for word from Sections 3, 4.3, 4.4 and 4.5 into Appendix F, or removed where E or F already held it.
+- Text: `revision13/edit_14.py`; availability (archive v1.4, eleven reviews, the eleventh response) and the history (version 14).
+  `revision13/archive_v13.py` archived `tex/v13` and `build/v13`.
+- Build: `pod/build_payload_rev9.py --out H:/x1000/memistor-paper/rev13/v14e`, `run.sh` in WSL. Both variants have 44 pages
+  (version 13: 43).
+- Checks: `revision13/check_build_v14.py <out> --json records/revision13/ARTIFACT-CHECK-v14.json` is ALL_OK. The word-count diff
+  v13 -> v14 has 58 expected edits and 0 unexplained in both variants (reference numbers as [#]), one page more; the v12 control
+  fails. Paper commit 3cbefba20.
+- Archive v1.4 (`F:/x1000-deposit/memistor-deposit-v1.4`): clean room REPRODUCE_ALL_OK, 30 of 30 steps (55 files identical, 15 after the stated normalisation); mutation 4 of 4; scan 0 unjustified;
+  FINAL_CHECK_OK; 3,609 files, 138.8 MB. Committed as 39c6ed7fe.
+- **Archive v1.4 PUBLISHED (2026-10-31, 22:18 ET)** at the owner's word: pushed and released with the tag pinned to 39c6ed7fe; the
+  Zenodo version DOI is 10.5281/zenodo.23851109.
+- Left:
+  - the owner's arXiv submission of version 14, from the Desktop folder "memistor paper - arXiv submission (v14)".

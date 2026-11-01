@@ -1,0 +1,312 @@
+{
+ "A": {
+  "verdict": "confirmed",
+  "environment": "WSL Ubuntu 24.04 on the desk (Intel Xeon W-2123), Python 3.12.3, torch 2.7.1+cpu, NumPy 2.5.2, matplotlib 3.9.2; paper/revision/compare_curves.py of release v1.4, unchanged inputs",
+  "floats_differing": 26,
+  "other_differences": [],
+  "largest_change_by_field": {
+   "ours": 4.76837014318221e-10,
+   "max_abs_mean_diff": 4.26173210144043e-06,
+   "worst_mean_diff_in_tolerance_units": 0.00038476613483051647,
+   "median_sd_ratio": 5.2336318798751336e-06
+  },
+  "largest_weight_change": 4.26173210144043e-06,
+  "largest_tolerance_unit_change": 0.00038476613483051647,
+  "largest_accepted_discrepancy_tolerance_units": 0.6418935919787765,
+  "printed_values_v14": {
+   "RVaihwLiMaxDiff": "0.0111",
+   "RVaihwMoMaxDiff": "0.0113",
+   "RVaihwLiOldMaxDiff": "0.174",
+   "RVaihwMoOldMaxDiff": "0.173",
+   "accepted": true
+  },
+  "printed_values_py312": {
+   "RVaihwLiMaxDiff": "0.0111",
+   "RVaihwMoMaxDiff": "0.0113",
+   "RVaihwLiOldMaxDiff": "0.174",
+   "RVaihwMoOldMaxDiff": "0.173",
+   "accepted": true
+  },
+  "printed_equal": true,
+  "review_12": {
+   "floats_differing": 26,
+   "largest_weight_change": 5.69e-06,
+   "largest_tolerance_unit_change": 0.00047,
+   "environment": "Python 3.12.14, torch 2.7.1+cpu, NumPy 2.5.2, matplotlib 3.9.2"
+  },
+  "reference_environment": "Python 3.13.15, Windows 11 (build 26200), torch 2.7.1+cu126 with CUDA hidden, NumPy 2.5.2, matplotlib 3.9.2, Pillow 13.0.0 (records/deposit/VERIFY.json of v1.4)"
+ },
+ "B": {
+  "verdict": "confirmed",
+  "main_experiment_device_records_reset": {
+   "agad": {
+    "none": 90
+   },
+   "cttv2": {
+    "pulse": 90
+   },
+   "ttv2": {
+    "pulse": 90
+   }
+  },
+  "selection_table_rows": [
+   "TTv2: pulse (at most 62 pulses, 2 read-correct iterations)",
+   "c-TTv2: pulse (at most 62 pulses, 2 read-correct iterations)",
+   "AGAD: none"
+  ],
+  "v14_check_builds_every_layer_with_pulse_reset": true,
+  "v14_check_reads_selected_configurations": false,
+  "v14_figure_A_label_shared_by_TTv2_cTTv2_AGAD": true,
+  "v14_figure_input_c_odot_x_for_all_three": true,
+  "v15_check": "revision14/check_fig_arch.py: records/revision14/FIG-ARCH-CHECK.json",
+  "v15_check_result": {
+   "all_ok": true,
+   "faults": {
+    "buffer_as_device": true,
+    "chopper_left_out": true,
+    "read_as_device": true,
+    "label_on_label": true,
+    "agad_drawn_with_pulse_reset": true,
+    "ttv2_drawn_with_chopper": true,
+    "v14_synthetic_configuration_simulated": true,
+    "v14_a_label_put_back": true
+   }
+  }
+ },
+ "C": {
+  "verdict": "confirmed",
+  "v14_order": {
+   "gokmen2016": 1607,
+   "byun2024": 2034,
+   "agarwal2016": 2320
+  },
+  "v14_agarwal_after_byun": true,
+  "v14_agarwal_sentence": "Agarwal et al.~\\cite{agarwal2016} reached similar conclusion",
+  "v15_order": {
+   "gokmen2016": 1607,
+   "agarwal2016": 2037,
+   "byun2024": 2212
+  },
+  "v15_agarwal_before_byun": true,
+  "v15_says_conventional_sgd": true,
+  "v15_similar_conclusions_after_byun": false,
+  "agarwal2016_year": 2016,
+  "bib": "Resistive memory device requirements for a neural algorithm accelerator"
+ },
+ "D1": {
+  "verdict": "confirmed (a conservative approximation; labelled in Section 5, not separated)",
+  "model": "energy/energy_system.py analog_e: tt = reads_pwr * (adc + sram_add); energy/energy_rev.py adds reset_extra_reads_pwr to reads_pwr",
+  "largest_share_of_analog_energy": 0.0014973277313009956,
+  "largest_at": [
+   "mnist__ecram_li_tang2018__cttv2",
+   "chip_12p4"
+  ],
+  "printed_bound": "0.15 %",
+  "if_separated_printed": {
+   "RVenChipMin": "31.6",
+   "RVenChipMax": "32.4",
+   "RVenChipMvmShareMin": "97.2",
+   "RVenSysMin": "17.9",
+   "RVenSysMax": "18.1",
+   "RVenSysMvmShareMin": "98.4"
+  },
+  "printed_now": {
+   "RVenChipMin": "31.5",
+   "RVenChipMax": "32.4",
+   "RVenChipMvmShareMin": "97.0",
+   "RVenSysMin": "17.9",
+   "RVenSysMax": "18.1",
+   "RVenSysMvmShareMin": "98.3"
+  },
+  "if_separated_changes": {
+   "RVenChipMin": [
+    "31.5",
+    "31.6"
+   ],
+   "RVenChipMvmShareMin": [
+    "97.0",
+    "97.2"
+   ],
+   "RVenSysMvmShareMin": [
+    "98.3",
+    "98.4"
+   ]
+  },
+  "note": "the desk experiment of separating the two read categories also moved RVenNeedTopsMax 42.2 -> 41.9"
+ },
+ "D2": {
+  "verdict": "confirmed; no classification changes",
+  "largest_table_error": 0.00047056135712875147,
+  "interval_endpoints_changed_in_tables": [
+   {
+    "table": "rev_main_vs_fp.tex",
+    "row": "Li-ECRAM SGD",
+    "task": "LM",
+    "end": "lo",
+    "v14": "31.64",
+    "v15": "31.63",
+    "label": "F"
+   },
+   {
+    "table": "rev_main_vs_fp.tex",
+    "row": "Li-ECRAM SGD",
+    "task": "LM",
+    "end": "hi",
+    "v14": "71.63",
+    "v15": "71.64",
+    "label": "F"
+   },
+   {
+    "table": "rev_main_vs_fp.tex",
+    "row": "MO-ECRAM SGD",
+    "task": "LM",
+    "end": "lo",
+    "v14": "7.33",
+    "v15": "7.32",
+    "label": "F"
+   },
+   {
+    "table": "rev_main_vs_fp.tex",
+    "row": "MO-ECRAM SGD",
+    "task": "LM",
+    "end": "hi",
+    "v14": "140.35",
+    "v15": "140.36",
+    "label": "F"
+   },
+   {
+    "table": "rev_main_vs_fp.tex",
+    "row": "MO-ECRAM TTv2",
+    "task": "LM",
+    "end": "lo",
+    "v14": "15.06",
+    "v15": "15.05",
+    "label": "F"
+   },
+   {
+    "table": "rev_main_vs_fp.tex",
+    "row": "W/WO$_x$ ECRAM TTv2",
+    "task": "LM",
+    "end": "lo",
+    "v14": "18.93",
+    "v15": "18.92",
+    "label": "F"
+   },
+   {
+    "table": "rev_main_vs_fp.tex",
+    "row": "Memistor (optimistic) SGD",
+    "task": "MNIST",
+    "end": "hi",
+    "v14": "2.33",
+    "v15": "2.34",
+    "label": "U"
+   },
+   {
+    "table": "rev_main_vs_fp.tex",
+    "row": "Memistor (optimistic) TTv2",
+    "task": "CIFAR",
+    "end": "hi",
+    "v14": "2.52",
+    "v15": "2.53",
+    "label": "U"
+   },
+   {
+    "table": "rev_main_vs_adam.tex",
+    "row": "Li-ECRAM SGD",
+    "task": "LM",
+    "end": "hi",
+    "v14": "120.07",
+    "v15": "120.08",
+    "label": "F"
+   },
+   {
+    "table": "rev_main_vs_adam.tex",
+    "row": "MO-ECRAM SGD",
+    "task": "MNIST",
+    "end": "hi",
+    "v14": "18.23",
+    "v15": "18.24",
+    "label": "F"
+   },
+   {
+    "table": "rev_main_vs_adam.tex",
+    "row": "MO-ECRAM SGD",
+    "task": "LM",
+    "end": "lo",
+    "v14": "35.42",
+    "v15": "35.41",
+    "label": "F"
+   },
+   {
+    "table": "rev_main_vs_adam.tex",
+    "row": "MO-ECRAM SGD",
+    "task": "LM",
+    "end": "hi",
+    "v14": "199.87",
+    "v15": "199.88",
+    "label": "F"
+   },
+   {
+    "table": "rev_main_vs_adam.tex",
+    "row": "MO-ECRAM c-TTv2",
+    "task": "CIFAR",
+    "end": "lo",
+    "v14": "0.28",
+    "v15": "0.27",
+    "label": "U"
+   },
+   {
+    "table": "rev_main_vs_adam.tex",
+    "row": "MO-ECRAM AGAD",
+    "task": "LM",
+    "end": "lo",
+    "v14": "31.48",
+    "v15": "31.47",
+    "label": "F"
+   },
+   {
+    "table": "rev_main_vs_adam.tex",
+    "row": "Ideal 1000-level TTv2",
+    "task": "CIFAR",
+    "end": "hi",
+    "v14": "10.91",
+    "v15": "10.92",
+    "label": "U"
+   },
+   {
+    "table": "rev_main_vs_adam.tex",
+    "row": "Ideal 1000-level c-TTv2",
+    "task": "CIFAR",
+    "end": "hi",
+    "v14": "27.87",
+    "v15": "27.88",
+    "label": "F"
+   }
+  ],
+  "n_endpoints_changed": 16,
+  "results_records": {
+   "revision/RESULTS-REVISION.json": {
+    "floats_changed": 1318,
+    "largest_change": 0.013183459112298124,
+    "non_float_differences": []
+   },
+   "revision2/RESULTS-REV2.json": {
+    "floats_changed": 108,
+    "largest_change": 0.0007855951909085945,
+    "non_float_differences": []
+   },
+   "revision3/RESULTS-REV3.json": {
+    "floats_changed": 123,
+    "largest_change": 0.0011344037492015957,
+    "non_float_differences": []
+   },
+   "revision4/RESULTS-REV4.json": {
+    "floats_changed": 18,
+    "largest_change": 0.0011344037492015957,
+    "non_float_differences": []
+   }
+  },
+  "labels_unchanged": true
+ },
+ "all_confirmed": true
+}

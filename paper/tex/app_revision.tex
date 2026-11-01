@@ -58,7 +58,7 @@ and four small slips outside the results, all corrected: the archive's README sa
 although all eight Welch intervals moved, and counted eight reviews; the caption of Table~\ref{tab:rev_width} dated the
 rounded degrees of freedom to versions 1 to 11, not 2 to 11 (version 1 used another width test); and a self-test of the
 name check left a PDF open, so its clean-up failed on Windows.
-Version 14 (October 31, 2026; this paper) answers an eleventh review, of version 13 (\texttt{RESPONSE-TO-REVIEW-11.md}; no
+Version 14 (October 31, 2026) answers an eleventh review, of version 13 (\texttt{RESPONSE-TO-REVIEW-11.md}; no
 experiment was run and no result changed). It cites Byun et al.~\cite{byun2024} and states what this study adds to it;
 prints the GPU energy equation with both input ranges (the low end, \RVenGpuMeasLo\,pJ, is 500\,W at 43\,\%; version 13
 named only the utilisation range); says which digital costs of the TT family are inside the energy ratio and that the ratio
@@ -66,6 +66,16 @@ is a per-operation, read-dominated figure; calls the sensitivity sheet an explor
 subtitle too, and states that one-at-a-time ranges do not bound joint deviations; adds Figure~\ref{fig:arch}; adds a
 control ladder to the limitations and computational follow-ups to the roadmap; and moves correction history from
 Sections~\ref{sec:methods}, \ref{sec:fidelity}, \ref{sec:scale} and~\ref{sec:spec} to this appendix.
+Version 15 (November 1, 2026; this paper) answers a twelfth review, of version 14 and version 1.4 of the archive
+(\texttt{RESPONSE-TO-REVIEW-12.md}; no experiment was run and no result changed), which recomputed the statistics and the
+energy accounting from the records and ran the archive's fast reproduction. Figure~\ref{fig:arch} and its caption now
+show the selected settings (TTv2 and c-TTv2 reset $A$ with pulses, AGAD does not; TTv2 has no chopper), and its check takes
+them from the main experiment's settings and records; Section~\ref{sec:background} cites Agarwal et al.\ before the
+Tiki-Taka studies; the ordinary and paired intervals take the exact $t$ quantile, as the Welch interval already did, which
+moves 16 endpoints in Tables~\ref{tab:rev_vs_fp} and~\ref{tab:rev_vs_adam} by 0.01 and changes no classification;
+Section~\ref{sec:energy} states that the reset's extra reads carry a buffer allowance; and outside its reference
+environment the archive's reproduction compares its one CPU re-simulation of float32 pulse sequences (the AIHWKIT
+comparison) under a stated numeric tolerance.
 
 \paragraph{What was repaired.}
 \begin{enumerate}

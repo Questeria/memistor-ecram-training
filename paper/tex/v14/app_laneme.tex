@@ -1,0 +1,24 @@
+\section{Earlier development results}\label{app:laneme}
+This study began as an exploratory screen with the same simulator (SGD and TTv2 only, 1--3 seeds). The screen is summarised
+here because some of its observations motivated the pre-registered experiments:
+\begin{itemize}
+\item a CIFAR gap ``just over 2\,pp'';
+\item a gap that ``grows with width'';
+\item a ``pencil lead built today'' that fails every task.
+\end{itemize}
+
+The earlier runs differ from this paper's in three ways:
+\begin{itemize}
+\item MNIST ran on a different GPU;
+\item the LM's selection split overlapped its training data (corrected here, Section~\ref{sec:tasks});
+\item CIFAR and the LM had one or two seeds.
+\end{itemize}
+
+With five seeds the earlier point estimates are mostly confirmed (Table~\ref{tab:laneme}), but the earlier pass/fail readings
+were not meaningful at that sample size. The CIFAR baseline's seed-to-seed spread is comparable to the gap line itself.
+
+The pessimistic memistor and the pencil-lead estimate were run only in the earlier screen. Both fail every task with SGD and with
+TTv2. Their specifications are estimates; the bench protocol of Appendix~\ref{app:bench} would replace the pencil-lead estimate
+by measurements.
+
+\input{tables/laneme.tex}

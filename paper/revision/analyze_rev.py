@@ -15,7 +15,8 @@ P = os.path.join(HERE, "..")
 REC = os.path.join(P, "records", "revision")
 TEX = os.path.join(P, "tex")
 LINE = {"mnist": 2.0, "cifar": 2.0, "lm": 5.0}
-# Student t quantiles: one-sided 0.975 and 0.95 for df 1..30 (df > 30: the normal value)
+# Student t quantiles: one-sided 0.975 and 0.95 for df 1..30 (df > 30: the normal value). REVIEW 12: no longer used by the
+# analysis (ci() and width_paired() take t_quantile, as width_verdict() has since review 9); kept for the tests of earlier versions.
 T975 = [12.706, 4.303, 3.182, 2.776, 2.571, 2.447, 2.365, 2.306, 2.262, 2.228, 2.201, 2.179, 2.160, 2.145, 2.131, 2.120,
         2.110, 2.101, 2.093, 2.086, 2.080, 2.074, 2.069, 2.064, 2.060, 2.056, 2.052, 2.048, 2.045, 2.042]
 T95 = [6.314, 2.920, 2.353, 2.132, 2.015, 1.943, 1.895, 1.860, 1.833, 1.812, 1.796, 1.782, 1.771, 1.761, 1.753, 1.746,
@@ -86,7 +87,7 @@ def ci(xs):
     if n < 2:
         return dict(mean=m, n=n, lo=None, hi=None, sd=None, half=None)
     sd = st.stdev(xs)
-    h = tq(T975, n - 1) * sd / math.sqrt(n)
+    h = t_quantile(0.975, n - 1) * sd / math.sqrt(n)   # REVIEW 12: the exact quantile (versions 2-14: tq's three-decimal table)
     return dict(mean=m, n=n, lo=m - h, hi=m + h, sd=sd, half=h)
 
 
@@ -210,7 +211,7 @@ def width_paired(task, gl, gh):
     dd = [h - l for h, l in zip(gh, gl)]
     n = len(dd)
     D, se = st.fmean(dd), st.stdev(dd) / math.sqrt(n)
-    t90 = tq(T95, n - 1)
+    t90 = t_quantile(0.95, n - 1)    # REVIEW 12: the exact quantile, as the Welch interval (versions 2-14: tq's three-decimal table)
     lo90, hi90 = D - t90 * se, D + t90 * se
     if -m < lo90 and hi90 < m:
         v = "EQUIVALENT"

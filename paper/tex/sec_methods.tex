@@ -82,7 +82,9 @@ parts are simulated as device operations and which are digital.
 \begin{figure}[t]\centering
 \includegraphics[width=\linewidth]{figs/fig_arch}
 \caption{Device operations and digital ones, for one learned weight matrix: (a) plain SGD; (b) TTv2, c-TTv2 and AGAD as run
-here, with forward weight $C$ (TTv1, used only in Section~\ref{sec:validation}, has no buffer and no reset). Pulse probabilities
+here, with forward weight $C$ (TTv1, used only in Section~\ref{sec:validation}, has no buffer and no reset). In the selected
+configurations (Table~\ref{tab:rev_selection}) TTv2 and c-TTv2 reset $A$ with pulses and AGAD does not reset it; in the
+common notation $c\odot x$, $c=\mathbf{1}$ for TTv2, and c-TTv2 and AGAD use chopper signs. Pulse probabilities
 are computed digitally; the pulses go through the device model; the forward and backward reads are ideal fp32 products of the
 device state; biases, layer norms, nonlinearities, attention products and the LM's position table are digital. The energy
 projection (Section~\ref{sec:energy}) prices the reads as finite-precision analog reads, the pulses at device energies and, for
@@ -137,8 +139,7 @@ Every experiment was pre-registered in a committed plan before it ran (Section~\
 \item \textbf{Hyperparameters} were chosen on validation splits only, with an edge rule: whenever the best value of a grid lies
       at its edge, the next half-decade point is added. The learning rate of every device arm in the main table is the FP
       validation choice. The scale study instead tunes each arm separately.
-\item \textbf{Statistics.} The main table uses five seeds per arm. Gaps are paired by seed, and we report the mean and a 95\%
-      Student-$t$ interval. A cell PASSES when the whole interval lies below the gap line (2\,pp for classification, 5\% for
+\item \textbf{Statistics.} The main table uses five seeds per arm. Gaps are paired by seed, and we report the mean and a 95\% Student-$t$ interval (the $t$ quantile computed exactly). A cell PASSES when the whole interval lies below the gap line (2\,pp for classification, 5\% for
       the LM), FAILS when it lies wholly above, and is UNRESOLVED otherwise.
 \item \textbf{Multiplicity.} We make no correction for multiplicity. The intervals describe each cell, not the family, and a
       best cell chosen among many is optimistic.

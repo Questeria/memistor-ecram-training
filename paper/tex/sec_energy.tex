@@ -15,7 +15,10 @@ weight-matrix operations of a training step would take if the analog reads ran a
       backward reads, repeated writes, references and Tiki-Taka state.
 \item \textbf{The boundary is the weight matrices.} Per weight and per training row: the forward and backward reads (two MACs)
       and the update (device pulses, pulse lines and pulse generation, and, for the TT family, the transfer's column reads, priced
-      as one ADC conversion and one read-add-write of the digital buffer $H$ per read weight).
+      as one ADC conversion and one read-add-write of the digital buffer $H$ per read weight). The pulse reset's extra
+      column reads are priced the same way although they do not update $H$, a conservative approximation: the buffer
+      allowance stands for the arithmetic that turns each re-read into a correction pulse count, and without it the analog
+      energy would be at most 0.15\,\% lower.
       Attention products, nonlinearities, normalisation, activation storage, data movement, control, reference maintenance and
       static power are not modelled on either side, and the digital exclusions do not cancel the analog ones. The rest of the TT family's digital work, called the
       digital TT state below (the storage of $H$, AGAD's averages $p$ and $p^{\mathrm{ref}}$ and their arithmetic, the chopper

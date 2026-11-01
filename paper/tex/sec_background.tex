@@ -19,10 +19,10 @@ transistors.
 Gokmen and Vlasov~\cite{gokmen2016} defined the resistive processing unit (RPU). Updates are stochastic pulse trains whose
 coincidences change the conductance by a fixed step (stochastic computing,~\cite{gaines1967}). They derived device
 specifications for plain SGD on MNIST at a small error penalty: about a thousand levels, up/down asymmetry of a few percent, and
-tolerance to large cycle-to-cycle and device-to-device variation. Byun et al.~\cite{byun2024} derived such specifications for
-TTv1 and TTv2 by multiparameter simulation of asymmetry, retention, pulse count and cycle-to-cycle variation: in their
-simulations TTv2 permits more lenient specifications than TTv1, and plain SGD needs the most stringent. Agarwal et al.~\cite{agarwal2016} reached similar conclusions;
-the requirements were extended to convolutional networks~\cite{gokmen2017cnn}, and reviews cover the device
+tolerance to large cycle-to-cycle and device-to-device variation. Agarwal et al.~\cite{agarwal2016} reached similar conclusions for conventional (SGD) training, and the requirements were extended to convolutional networks~\cite{gokmen2017cnn}.
+Byun et al.~\cite{byun2024} derived such specifications for
+TTv1 and TTv2 by multiparameter simulation of asymmetry, retention, pulse count and cycle-to-cycle variation: in their simulations TTv2 permits more lenient specifications than TTv1, and plain SGD needs the most stringent.
+Reviews cover the device
 landscape~\cite{burr2017,ielmini2018,sebastian2020,haensch2019}. Mixed-precision schemes~\cite{nandakumar2020} accumulate the
 gradient digitally and program the devices rarely. They relax the device demands but give up the fully parallel in-memory update.
 

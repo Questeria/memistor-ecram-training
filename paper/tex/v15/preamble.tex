@@ -1,0 +1,28 @@
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[section]{placeins}
+\setlength{\emergencystretch}{1.5em}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage[numbers,sort&compress]{natbib}
+% every \fitbox logs its table, natural width, text width and font size (revision4/check_build_v5.py reads them)
+\newsavebox{\fitboxbox}
+\makeatletter
+\newcommand{\fitbox}[1]{\sbox{\fitboxbox}{#1}\typeout{FITBOX table=\thetable\space wd=\the\wd\fitboxbox\space tw=\the\textwidth\space size=\f@size}%
+  \resizebox{\ifdim\wd\fitboxbox>\textwidth\textwidth\else\wd\fitboxbox\fi}{!}{\usebox{\fitboxbox}}}
+\makeatother
+\input{numbers}
+\input{numbers_rev}
+\input{numbers_rev2}
+\input{numbers_rev3}
+\input{numbers_rev4}
+\title{Can memistor-class electrochemical weights train neural networks?\\[2pt]
+\large A pre-registered simulation study from Widrow's 1960 memistor to modern ECRAM, with an exploratory device
+sensitivity analysis and an experimental roadmap}
+\authorblock
+\date{November 2026}

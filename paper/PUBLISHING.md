@@ -5,9 +5,13 @@ version 12 (the answer to review 9), was published on 2026-10-29 at 21:38 ET. Re
 answer to review 10), was published on 2026-10-31 at 19:12 ET (tag v1.3 = 03474b26b; Zenodo version DOI 10.5281/zenodo.23848730,
 record 23848730, zip 106,146,105 bytes). Release v1.4, which holds version 14 (the answer to review 11), was
 published on 2026-10-31 at 22:18 ET (tag v1.4 = 39c6ed7fe; Zenodo version DOI 10.5281/zenodo.23851109, record 23851109, zip
-107,820,671 bytes). The paper is not yet on arXiv: submit version 14 (not 13).
+107,820,671 bytes). Release v1.5, which holds version 15 (the answer to review 12), was published on
+2026-11-01 at 01:01 EST (after the 02:00 EDT fall-back) (tag v1.5 = b5f86bed2; Zenodo version DOI 10.5281/zenodo.23852922, record 23852922, zip 109,418,606 bytes). Release v1.6, which holds
+version 16 (the answer to review 13), is built and verified and waits for publishing. The
+paper is not yet on arXiv: submit version 16 (not 15), after release v1.6 is published.
 Submitting it needs your arXiv account, an endorsement if asked, and your acceptance of arXiv's terms, so it is your act: sections 2, 3 and 5.
-Everything to upload and paste is in the Desktop folder "memistor paper - arXiv submission (v14)" (SUBMIT-TO-ARXIV.txt there).
+Everything to upload and paste is in the Desktop folder "memistor paper - arXiv submission (v16)" (SUBMIT-TO-ARXIV.txt there).
+Review 13 (ChatGPT, of release v1.5) recommends submission: the round is closed; its one optional self-test fix is in release v1.6, which holds version 16 (the contribution statement counts all thirteen reviews).
 
 ## 1. Which file to submit, and why there are two author variants
 
@@ -29,7 +33,7 @@ policy page.
 
 Version 8 prints your official name, "Anthony DeMarco", with the affiliation "Independent researcher", in both files (your word of
 2026-10-27); there is nothing left to replace. The contribution statement of both variants also credits ChatGPT (OpenAI), an AI
-system and not an author, for its reviews of versions 1 to 7. Neither variant prints an email address. arXiv shows the submitter's name, and lets you add an affiliation or leave "Independent researcher".
+system and not an author, for its thirteen reviews (versions 1 to 7 and 10 to 15). Neither variant prints an email address. arXiv shows the submitter's name, and lets you add an affiliation or leave "Independent researcher".
 
 ## 2. arXiv account and endorsement
 
@@ -50,6 +54,43 @@ arXiv and by open-access journals. arXiv offers it in the submission form. The c
 
 ## 4. Code and data DOI (Zenodo)
 <!-- deposit-built -->
+**Release v1.6 (2026-11-01 22:44 EST): BUILT and verified, committed LOCALLY as 24be25ce2 in `C:/Projects/memistor-ecram-training` on top of
+the published b5f86bed2, NOT pushed. It holds version 16 of the paper, the answer to review 13 (the contribution statement counts
+all thirteen reviews; the policy self-test's negative control no longer depends on the starting value; no result changed).**
+
+- Built on F: (`F:/x1000-deposit/memistor-deposit-v1.6`).
+- Clean room (reference environment): REPRODUCE_ALL_OK, 31 of 31 steps (57 files identical, 13 after the stated normalisation); 6 of 6 mutation tests caught.
+- Python 3.12.3 / torch 2.7.1+cpu (WSL) on the finalized v1.6: REPRODUCE_ALL_OK, 26 of 26 fast steps (58 identical, 11 normalised, 1 within the numeric policy: AIHWKIT-COMPARE.json, 26 float fields differ within the numeric policy)
+  (`records/deposit/PY312-FAST.json`; v1.5's records are in `records/deposit/v1.5/`).
+- Scan: 0 unjustified. The archived version 15 joins the mirror-address entry, and version 16's record script joins those of
+  versions 10, 13, 14 and 15.
+- FINAL_CHECK_OK; 3,731 files, 145.3 MB (`records/deposit/`).
+- Publishing is one push and one release, as for v1.5 (the same two commands with v1.6 and the new commit):
+  `git -C C:/Projects/memistor-ecram-training push origin main`, then
+  `gh release create v1.6 --repo Questeria/memistor-ecram-training --target 24be25ce2 --title "v1.6: code, records and pulse
+  draws for the memistor paper (version 16)" --notes-file RELEASE-NOTES.md`, with the tag pinned to the verified commit.
+  The new version DOI comes from Zenodo; the concept DOI stays.
+
+**Release v1.5 (2026-11-01 01:43 EDT): BUILT and verified, committed as b5f86bed2 in `C:/Projects/memistor-ecram-training` on top of
+the published 39c6ed7fe; PUBLISHED 2026-11-01 at 01:01 EST (after the 02:00 EDT fall-back), Zenodo version DOI 10.5281/zenodo.23852922. It holds version 15 of the paper, the answer to review 12 (Figure 1's settings, the
+reproduction's numeric policy, the Agarwal order, the exact t quantile: 16 interval endpoints move by 0.01; no result changed).**
+
+- Built on F: (`F:/x1000-deposit/memistor-deposit-v1.5`).
+- Clean room (reference environment): REPRODUCE_ALL_OK, 31 of 31 steps (57 files identical, 13 after the stated normalisation); 6 of 6 mutation tests caught (M5 and M6 are new: a flipped
+  acceptance boolean and a discrepancy past its line in AIHWKIT-COMPARE.json must fail). `reproduce_all.py` gains one step,
+  the numeric policy's self-test; Figure 1's two steps now run `revision14/`.
+- Python 3.12.3 / torch 2.7.1+cpu (WSL) on the finalized v1.5: REPRODUCE_ALL_OK, 26 of 26 fast steps (58 identical, 11 normalised, 1 within the numeric policy: AIHWKIT-COMPARE.json, 26 float fields differ within the numeric policy). For comparison, release v1.4 itself under the same Python 3.12 setting: 25 of 25 fast steps passed and 69 files matched, 1 differed (paper/records/revision/AIHWKIT-COMPARE.json): REPRODUCE_FAILED, as review 12 found
+  (`records/deposit/PY312-FAST.json`).
+- Scan: 0 unjustified. The archived version 14 joins the mirror-address entry, and version 15's record script joins those of
+  versions 10, 13 and 14; one long keyword identifier in `revision14/verify_findings_12.py`, read by the scan as a
+  high-entropy token, is justified as an identifier.
+- FINAL_CHECK_OK; 3,671 files, 142.1 MB (`records/deposit/`; v1.4's records are in `records/deposit/v1.4/`).
+- Publishing is one push and one release, as for v1.4 (the same two commands with v1.5 and the new commit):
+  `git -C C:/Projects/memistor-ecram-training push origin main`, then
+  `gh release create v1.5 --repo Questeria/memistor-ecram-training --target b5f86bed2 --title "v1.5: code, records and pulse
+  draws for the memistor paper (version 15)" --notes-file RELEASE-NOTES.md`, with the tag pinned to the verified commit.
+  The new version DOI comes from Zenodo; the concept DOI stays.
+
 **Release v1.4 (2026-10-31 22:13 ET): BUILT and verified, committed LOCALLY as 39c6ed7fe in `C:/Projects/memistor-ecram-training` on top of
 the published 03474b26b, NOT pushed. It holds version 14 of the paper, the answer to review 11 (text and one new figure; no
 result changed).**
@@ -194,10 +235,16 @@ The planned list as written for version 8:
    - the generated `main-arxiv.bbl`, which arXiv prefers to running BibTeX itself.
 
    The ready archive is `build/arxiv-source.tar.gz`. The build script assembles it from exactly this list (`pod/build_rev2.sh`
-   for version 3, on a pod; `pod/build_rev3.sh` for version 4, `pod/build_rev4.sh` for version 5, `pod/build_rev5.sh` for version 6 and `pod/build_rev6.sh` for version 7 and `pod/build_rev7.sh` for version 8 and `pod/build_rev8.sh` for versions 9 to 13 and `pod/build_rev9.sh` for version 14, on the desk in WSL Ubuntu with the same tectonic
+   for version 3, on a pod; `pod/build_rev3.sh` for version 4, `pod/build_rev4.sh` for version 5, `pod/build_rev5.sh` for version 6 and `pod/build_rev6.sh` for version 7 and `pod/build_rev7.sh` for version 8 and `pod/build_rev8.sh` for versions 9 to 13 and `pod/build_rev9.sh` for version 14 and `pod/build_rev10.sh` for versions 15 and 16, on the desk in WSL Ubuntu with the same tectonic
    0.15.0) and
    compiles main-arxiv.tex from that archive in an empty directory, so a missing file fails the build. Use the archive, not
-   loose copies of the files; `revision13/check_build_v14.py` (version 14) runs `revision6/check_build_v7.py` and reads the version-14
+   loose copies of the files; `revision15/check_build_v16.py` (version 16) runs `revision6/check_build_v7.py` and reads the version-16
+   proofs: the word-count text diff `revision15/pdf_text_diff_v16.py` (v15 -> v16, reference numbers as [#], the same 44 pages),
+   the name check in WSL and in Windows, numbers freshness, Figures 1 and 4, the reset and the Welch test;
+   `revision14/check_build_v15.py` (version 15) runs `revision6/check_build_v7.py` and reads the version-15
+   proofs: the word-count text diff `revision14/pdf_text_diff_v15.py` (v14 -> v15, reference numbers as [#], the same 44 pages),
+   the name check in WSL and in Windows, numbers freshness, Figure 1 against the selected settings, the records and the
+   simulator, Figure 4, the reset and the Welch test; `revision13/check_build_v14.py` (version 14) runs `revision6/check_build_v7.py` and reads the version-14
    proofs: the word-count text diff `revision13/pdf_text_diff_v14.py` (v13 -> v14, reference numbers as [#], one page more), the
    name check in WSL and in Windows, numbers freshness, Figure 1 against the simulator, Figure 4, the reset and the Welch test;
    `revision12/check_build_v13.py` (version 13) runs `revision6/check_build_v7.py` and reads the version-13
@@ -226,7 +273,7 @@ The planned list as written for version 8:
 
    arXiv compiles the source. Check the preview PDF page by page.
 3. Fill in the title. The abstract for the form is ready in `build/arxiv-abstract.txt`: it is generated by `revision2/make_abstract.py` (version 3) `revision3/make_abstract_v4.py` (version 4) and `revision4/make_abstract_v5.py` (versions 5 and 6) from
-   `tex/sec_abstract.tex` with every number macro expanded from the generated `tex/numbers*.tex` (the same numbers as the PDF abstract) and fits arXiv's 1,920-character limit. Add the comments field; for version 14: "44 pages, 4 figures; code and data: https://doi.org/10.5281/zenodo.23748861".
+   `tex/sec_abstract.tex` with every number macro expanded from the generated `tex/numbers*.tex` (the same numbers as the PDF abstract) and fits arXiv's 1,920-character limit. Add the comments field; for version 16: "44 pages, 4 figures; code and data: https://doi.org/10.5281/zenodo.23748861".
 4. Submit. It appears after moderation, usually the next working day.
 
 ## 6. Later: a journal

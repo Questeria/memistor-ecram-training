@@ -1,6 +1,6 @@
 # Can memistor-class electrochemical weights train neural networks?
 
-Code, records and pulse draws for the paper "Can memistor-class electrochemical weights train neural networks?" (Anthony DeMarco, independent researcher; version 15, November 1, 2026).
+Code, records and pulse draws for the paper "Can memistor-class electrochemical weights train neural networks?" (Anthony DeMarco, independent researcher; version 16, November 1, 2026).
 The study asks, in simulation, how close memistor-class electrochemical weights (Li-ion, metal-oxide and protonic ECRAM) come to
 digital training when every weight update is made of device pulses. **All results are simulations**; nothing here is a
 measurement of a physical device (the `bench/` folder is a measurement protocol for a future one).
@@ -12,7 +12,7 @@ paper directory of the deposit (`paper/`): `python -B revision4/rebuild_draw_tab
 
 | Path | Contents |
 |---|---|
-| `paper/` | the paper: `tex/` (sources, generated number macros, tables, figures; `tex/v1..v14` are the archived versions), `build/` (built PDFs and HTML, current and `v1..v14`), the plans, deviations and responses, `analyze.py`, `make_figures.py`, `revision*/` (analysis and verification scripts per revision), `sim/` (the repaired simulator, pulse streams, probes and their checks), `pod/` (pod run and build scripts), `energy/`, `cite/` (citation check), `records/` (every run record and result file), `reviews/` (the twelve independent reviews), `draws/rev3/` (the 12 saved pulse-draw archives) |
+| `paper/` | the paper: `tex/` (sources, generated number macros, tables, figures; `tex/v1..v15` are the archived versions), `build/` (built PDFs and HTML, current and `v1..v15`), the plans, deviations and responses, `analyze.py`, `make_figures.py`, `revision*/` (analysis and verification scripts per revision), `sim/` (the repaired simulator, pulse streams, probes and their checks), `pod/` (pod run and build scripts), `energy/`, `cite/` (citation check), `records/` (every run record and result file), `reviews/` (the thirteen independent reviews), `draws/rev3/` (the 12 saved pulse-draw archives) |
 | `sim/`, `records/` | the first study (lane ME): the original simulator and its checks, the device catalog (`records/CATALOG.json`), the tuned Tiki-Taka choice (`records/TT-CHOICE.json`) and its run records |
 | `bench/`, `BENCH.md` | the bench protocol (parts list, Arduino sketch, analysis) |
 | `energy/`, `pod/` | lane ME's energy model and pod payload scripts |
@@ -42,7 +42,7 @@ checks run on CPU with torch, NumPy and matplotlib 3.9.2 (the figures' version).
 ## Install (CPU)
 
 The clean-room runs (the author's, in `VERIFY.json`, and reviews 8 to 10) used Python 3.13.15, torch 2.7.1, NumPy 2.5.2 and
-matplotlib 3.9.2 (the reviews with the CPU build of torch, as below); review 12 used Python 3.12.14 with the same packages. Python 3.12
+matplotlib 3.9.2 (the reviews with the CPU build of torch, as below); reviews 12 and 13 used Python 3.12.14 with the same packages. Python 3.12
 or newer is needed (NumPy 2.5.2 requires it).
 From the repository root (`reproduce_all.py --sums` skips the `.venv` folder):
 
@@ -59,7 +59,9 @@ run on the CPU (CUDA hidden), **NumPy 2.5.2**, **matplotlib 3.9.2**, **Pillow 13
 file can differ in its last digits: `paper/records/revision/AIHWKIT-COMPARE.json`, which `paper/revision/compare_curves.py` computes by
 re-simulating up to 56,000 float32 pulses per device on the CPU, so its rounding depends on the CPU kernels torch dispatches to. Review
 12 (Python 3.12.14, torch 2.7.1+cpu) and the author (Python 3.12.3, torch 2.7.1+cpu, WSL) both found the same 26 float fields different
-(largest changes 5.7e-6 weight units and 4.7e-4 tolerance units) and every boolean, string and printed value unchanged. Outside the
+(largest changes 5.7e-6 weight units and 4.7e-4 tolerance units) and every boolean, string and printed value unchanged; review 13 ran v1.5
+under Python 3.12.14 and found that file accepted under the policy and all other files matching (58 byte-identical, 11 after the figure
+normalisation, 0 unmatched). Outside the
 reference environment that file is therefore compared under a numeric policy (`NUMERIC_POLICY` in `reproduce_all.py`):
 
 - exact: the JSON structure (keys at every level, list lengths, value types), every string (schema, AIHWKIT version), integer (device
@@ -73,8 +75,8 @@ reference environment that file is therefore compared under a numeric policy (`N
 
 Such a file is reported as `within_policy`, with the number of differing floats and the largest change per field.
 `python -B reproduce_all.py --policy-selftest` (also a step of the run) shows another environment's output passing and every
-meaningful perturbation failing. Every other file must still match exactly (or after the figure normalisations); in both Python 3.12
-runs, all of them did.
+meaningful perturbation failing. Every other file must still match exactly (or after the figure normalisations); in the author's Python 3.12
+run and in the runs of reviews 12 and 13, all of them did.
 
 ## Quick start
 
@@ -190,6 +192,15 @@ read it as `python`.
 - The runners' `samples` field counts every example of an epoch, the incomplete last batch that training skips included (review 8,
   finding 2). Nothing reads it any more: `paper/energy/energy_system.py` counts a run's steps from its layers' row counts.
 
+## Changes since v1.5
+
+v1.6 answers the thirteenth review (`paper/reviews/REVIEW-13-chatgpt-20261101-full.md`, of v1.5 and version 15, which found no substantive
+defect and judged the paper ready to submit; the response is `paper/RESPONSE-TO-REVIEW-13.md`) and holds version 16 of the paper. No
+experiment was run and no result changed. The negative control of `reproduce_all.py --policy-selftest` that shifted a printed value by a
+fixed 4e-5 now computes its shift from the starting value (`printed_flip_value`), so it holds for any starting value the policy permits
+(the review's one optional finding); the paper's contribution statement counts all thirteen reviews and its abstract no longer says that this version repairs the simulator. `RELEASE-NOTES.md` lists every
+change.
+
 ## Changes since v1.4
 
 v1.5 answers the twelfth review (`paper/reviews/REVIEW-12-chatgpt-20261031-full.md`, an audit of v1.4 and version 14 that recomputed the
@@ -238,6 +249,6 @@ v1.1 answers the eighth review (`paper/reviews/REVIEW-8-chatgpt-20261028-full.md
 ## Citation
 
 Cite the concept DOI [10.5281/zenodo.23748861](https://doi.org/10.5281/zenodo.23748861), which covers every release (v1.0 holds version 9 of the
-paper, v1.1 version 11, v1.2 version 12, v1.3 version 13, v1.4 version 14, v1.5 version 15); `CITATION.cff` has the metadata.
+paper, v1.1 version 11, v1.2 version 12, v1.3 version 13, v1.4 version 14, v1.5 version 15, v1.6 version 16); `CITATION.cff` has the metadata.
 
-3670 files, 141.6 MB (excluding `SHA256SUMS`).
+3730 files, 144.8 MB (excluding `SHA256SUMS`).

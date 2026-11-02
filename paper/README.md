@@ -32,7 +32,7 @@ Desk Python: `H:/x1000/bench/venv/Scripts/python.exe` (torch 2.7.1+cu126).
 ## Results and products (2026-10-25, all simulation)
 
 - **The paper.**
-  - PDF: `build/main.pdf` (authors Questeria and Claude (Anthropic)) and `build/main-arxiv.pdf` (Questeria only, per arXiv's
+  - PDF: `build/main.pdf` (authors Anthony DeMarco and Claude (Anthropic)) and `build/main-arxiv.pdf` (Anthony DeMarco only, per arXiv's
     policy).
   - HTML for reading: `build/main.html`, self-contained.
   - Source: `tex/`.
@@ -328,3 +328,68 @@ Desk Python: `H:/x1000/bench/venv/Scripts/python.exe` (torch 2.7.1+cu126).
   Zenodo version DOI is 10.5281/zenodo.23851109.
 - Left:
   - the owner's arXiv submission of version 14, from the Desktop folder "memistor paper - arXiv submission (v14)".
+
+## Revision v15 (2026-11-01, director lane): the answer to review 12 (no experiment; no result changed; $0)
+
+- Review 12 (ChatGPT, `reviews/REVIEW-12-chatgpt-20261031-full.md`, pasted by the owner) audited release v1.4 (39c6ed7fe): checksums,
+  the 165 main comparisons, the width and sensitivity analyses and the energy output recomputed from the records (all agree; the energy
+  byte for byte), and the fast reproduction under Python 3.12.14 / torch 2.7.1+cpu. Minor revision. Every finding was verified
+  (`revision14/verify_findings_12.py` -> `records/revision14/VERIFY-FINDINGS-12.json`); `RESPONSE-TO-REVIEW-12.md` gives each verdict.
+- A (confirmed): `AIHWKIT-COMPARE.json` re-simulates float32 pulse sequences on the CPU; under Python 3.12.3 / torch 2.7.1+cpu (WSL)
+  the same 26 floats differ (largest 4.3e-6 weight units), every boolean and printed value equal
+  (`records/revision14/AIHWKIT-COMPARE-py312.json`). `deposit-src/reproduce_all.py` compares that one file under a stated numeric
+  policy (exact structure, strings, integers, booleans, unnamed floats and printed values; 5e-5 weight units, 5e-3 tolerance units,
+  1e-4 spread ratio) with a `--policy-selftest` step (14 cases); the archive README names the reference environment (Python 3.13.15,
+  Windows 11, torch 2.7.1+cu126 on the CPU, NumPy 2.5.2, matplotlib 3.9.2, Pillow 13.0.0); clean-room mutations M5 and M6.
+- B (confirmed): Figure 1 shows the selected settings (TTv2, c-TTv2: pulse reset; AGAD: none; TTv2: c = 1) and its caption says so
+  (`revision14/make_fig_arch.py`); `revision14/check_fig_arch.py` reads them from `CHOICES-REVISION.json` and all 90 main-experiment
+  device records per algorithm and simulates each layer in that configuration (8 of 8 planted faults caught).
+- C (confirmed): Section 2.2 cites Agarwal et al. ("for conventional (SGD) training") and the CNN extension before Byun et al.
+- D1 (confirmed; labelled, not separated): the reset re-reads' buffer allowance, at most 0.15 % of the analog energy, is called a
+  conservative approximation in Section 5; no number changed.
+- D2 (confirmed): `revision/analyze_rev.py` takes the exact t quantile for the ordinary and paired intervals; 16 endpoints in Tables
+  4 and 5 move by 0.01 (each listed in `RESPONSE-TO-REVIEW-12.md`); no label or other printed number changed.
+- Text: `revision14/edit_15.py`; availability (archive v1.5, twelve reviews, the twelfth response) and the history (version 15); date
+  November 2026. `revision14/archive_v14.py` archived `tex/v14` and `build/v14`.
+- Build: `pod/build_payload_rev10.py --out H:/x1000/memistor-paper/rev14/v15`, `run.sh` in WSL. Both variants have 44 pages (as v14).
+- Checks: `revision14/check_build_v15.py <out> --json records/revision14/ARTIFACT-CHECK-v15.json` is ALL_OK. The word-count diff
+  v14 -> v15 has 30 expected edits and 0 unexplained in both variants; the v13 control fails. Paper commit 22235e630.
+- Archive v1.5 (`F:/x1000-deposit/memistor-deposit-v1.5`): clean room REPRODUCE_ALL_OK, 31 of 31 steps (57 files identical, 13 after the stated normalisation); mutation 6 of 6; Python 3.12 fast path
+  REPRODUCE_ALL_OK, 26 of 26 fast steps (58 identical, 11 normalised, 1 within the numeric policy: AIHWKIT-COMPARE.json, 26 float fields differ within the numeric policy); scan 0 unjustified; FINAL_CHECK_OK; 3,671 files, 142.1 MB. Committed as b5f86bed2.
+- **Archive v1.5 PUBLISHED (2026-11-01 at 01:01 EST (after the 02:00 EDT fall-back))** at the owner's word: pushed and released with the tag pinned to b5f86bed2; the Zenodo
+  version DOI is 10.5281/zenodo.23852922.
+- Left:
+  - the owner's arXiv submission of version 15, from the Desktop folder "memistor paper - arXiv submission (v15)" (superseded by version 16, see "Revision v16" below).
+
+## Review 13 (2026-11-01, director lane): the round closes; no new version
+
+- Review 13 (ChatGPT, `reviews/REVIEW-13-chatgpt-20261101-full.md`, of release v1.5) says the paper is ready to submit and finds one
+  optional, low-severity problem: the `--policy-selftest` negative control that adds a fixed 4e-5 to the Li-ECRAM value could leave
+  the printed four-decimal number unchanged for another starting value the policy permits (a false test failure).
+- Confirmed and fixed in the source for the next maintenance release (`deposit-src/reproduce_all.py`: `printed_flip_value` takes the
+  nearest rounding boundary of the printed value, within the weight tolerance). Evidence: `records/revision14/POLICY-SELFTEST-FIX-R13.json`;
+  `RESPONSE-TO-REVIEW-13.md`. The published v1.5 (b5f86bed2), version 15 and the arXiv kit are unchanged. (Later the same day this became version 16 and archive
+  v1.6; see the next section.)
+- Left: the owner's arXiv submission of version 15, as above.
+
+## Revision v16 (2026-11-01, director lane): the answer to review 13 (no experiment; no result changed; $0)
+
+- Review 13 (ChatGPT, `reviews/REVIEW-13-chatgpt-20261101-full.md`, of release v1.5 and version 15) found the version-15 changes right
+  and the paper ready to submit; its one optional finding (the `--policy-selftest` negative control added a fixed 4e-5, so it could
+  fail for another valid starting value) was confirmed and fixed in `deposit-src/reproduce_all.py` (`printed_flip_value`, commit
+  389b1b305; evidence `records/revision14/POLICY-SELFTEST-FIX-R13.json`). `RESPONSE-TO-REVIEW-13.md`.
+- Text (`revision15/edit_16.py`): the contribution statement of both variants counts all thirteen reviews ("versions 1 to 7 and 10 to
+  15 of this paper in turn, thirteen reviews in all"; it said versions 1 to 7); the availability section (archive v1.6, release v1.6,
+  thirteen reviews, the thirteenth response); Appendix F (version 15 no longer "this paper", a version-16 entry); and, in a second pass
+  (`revision15/edit_16b.py`, the owner's "fix anything stale"), the abstract's last sentence ("This version repairs the simulator after
+  independent reviews ..." -> "The simulator was repaired after independent reviews, and the paper reports how far each repair moved the
+  original results."). Nothing else.
+  `revision15/archive_v15.py` archived `tex/v15` and `build/v15`.
+- Build: `pod/build_payload_rev10.py --out H:/x1000/memistor-paper/rev15/v16`, `pod/build_rev10.sh` as `run.sh` in WSL. Both variants
+  have 44 pages (as v15). BUILD-STEPS: `records/revision15/BUILD-STEPS-v16.txt`.
+- Checks: `revision15/check_build_v16.py <out> --json records/revision15/ARTIFACT-CHECK-v16.json` is ALL_OK. The word-count diff
+  v15 -> v16 has 8 expected edits and 0 unexplained in both variants; the v14 -> v16 control fails. Paper commit b772e887d.
+- Archive v1.6 (`F:/x1000-deposit/memistor-deposit-v1.6`): clean room REPRODUCE_ALL_OK, 31 of 31 steps (57 files identical, 13 after the stated normalisation); mutation 6 of 6; Python 3.12 fast path
+  REPRODUCE_ALL_OK, 26 of 26 fast steps (58 identical, 11 normalised, 1 within the numeric policy: AIHWKIT-COMPARE.json, 26 float fields differ within the numeric policy); scan 0 unjustified; FINAL_CHECK_OK; 3,731 files, 145.3 MB. Committed locally as 24be25ce2, NOT pushed.
+- arXiv kit: Desktop folder "memistor paper - arXiv submission (v16)" (step 0: publish archive v1.6 first).
+- Left: publish archive v1.6, then the owner's arXiv submission of version 16, from the Desktop folder "memistor paper - arXiv submission (v16)".

@@ -1,0 +1,54 @@
+\section{Introduction}\label{sec:intro}
+
+Training a neural network on a digital processor moves every weight from memory to arithmetic and back at every update.
+In 1960, Widrow and Hoff took a different route: they stored each weight of their adaptive ADALINE neuron in a
+\emph{memistor}, an electrochemical cell whose conductance is set by the time integral of a current through a third
+terminal~\cite{widrow1960adaline,widrow1960switching,widrow1990}. The weight was read without being disturbed, and it was
+adapted in place. The device was macroscopic, the cells were wet, and no multilayer learning rule existed yet, so the line ended
+with the Madaline hardware of the early 1960s~\cite{widrow1990}. That machine was a working analog learning system.
+
+Sixty years later, three-terminal electrochemical devices have returned at the nanoscale. Lithium-ion
+ECRAM~\cite{tang2018,fuller2017}, CMOS-compatible metal-oxide ECRAM~\cite{kim2019}, protonic programmable
+resistors~\cite{onen2022,xu2026} and open-loop programmable arrays~\cite{chen2023} all decouple the read path from the write path,
+just as the memistor did. They report hundreds to thousands of conductance levels, nanosecond pulses and femtojoule-scale write
+energies. In parallel, algorithms for training on imperfect analog weights have matured: the stochastic pulse-coincidence update
+of the resistive processing unit (RPU)~\cite{gokmen2016}, Tiki-Taka~\cite{gokmen2020} and its successors
+TTv2~\cite{gokmen2021}, chopped TTv2 and AGAD~\cite{rasch2024}, and residual learning with convergence guarantees~\cite{wu2025}.
+
+That electrochemical weights can train small networks is already established: Chen et al.\ trained in situ on an ECRAM array and
+simulated larger networks~\cite{chen2023}, and Rasch et al.\ studied reference correction, retention and device requirements for
+the TT family~\cite{rasch2024}. Most recently, Wu et al.~\cite{wu2026scale} simulated ECRAM-calibrated Transformers of up to about
+123 million parameters with finite converters and device nonidealities, keeping the weight-gradient path digital. Byun et al.~\cite{byun2024} derived device specifications for TTv1 and TTv2 by
+simulation; relative to that analysis, this study covers the chopped algorithms c-TTv2 and AGAD and a catalog of published
+electrochemical devices, and reports seed-paired intervals against absolute margins, a language model beside the image
+tasks and a test of the aggregate update against explicit pulse streams; its own sensitivity analysis is narrower. Our
+contribution is narrower and specific: \emph{a reproducible, seed-matched simulation comparison} of plain SGD and three
+device-tolerant algorithms on a catalog of published (or, where nothing is published, labelled hypothetical) electrochemical
+devices, with the weight update done entirely in the devices, on three small tasks; a sensitivity analysis against absolute
+accuracy lines; and a \emph{conditional} energy projection. Results are stated against two digital baselines: SGD with exact
+updates at the same learning rate, and a separately tuned Adam.
+
+What this paper provides:
+\begin{enumerate}
+\item \textbf{A simulator with stated limits.} Reads are ideal (fp32); only the update is analog (Fig.~\ref{fig:arch}). It reproduces selected
+      published outcomes of Gokmen and Haensch 2020 under this simplified read model, and the offset-robustness ordering of
+      Rasch et al.\ 2024 (Section~\ref{sec:validation}). After an independent review it was repaired (separate random streams, a
+      reset made of pulses, the AIHWKIT device presets mapped one to one) and each repair is tested (Section~\ref{sec:methods},
+      Appendix~\ref{app:revision}).
+\item \textbf{A seed-matched comparison} of SGD, TTv2, chopped TTv2 and AGAD on five device specifications, three tasks (MNIST, a
+      CIFAR-10 subset, a byte-level language model on human-written text) and five seeds, with every arm of a seed sharing its
+      initial weights and data order (Section~\ref{sec:main}).
+\item \textbf{A width study} with per-arm learning rates and an equivalence test (Section~\ref{sec:scale}).
+\item \textbf{An exploratory device sensitivity analysis} against absolute accuracy lines, one property at a time with three
+      seeds (not fabrication tolerances), with the asymmetry sweep repeated at a fixed symmetry point
+      so that asymmetry is not confounded with lost weight range (Section~\ref{sec:spec}).
+\item \textbf{A conditional energy projection} for the weight-matrix operations, reported only where the device reaches the
+      stated quality (Section~\ref{sec:energy}).
+\item \textbf{A proposed roadmap} of device experiments and a proposed, unbuilt bench replication protocol of the 1960
+      memistor (Section~\ref{sec:roadmap}, Appendix~\ref{app:bench}).
+\end{enumerate}
+
+Every experiment was planned in a committed plan before it ran; the plans are internal, timestamped by the repository, not an
+external registry. The original runs and the revision runs are kept apart, and every deviation is recorded
+(Section~\ref{sec:availability}). All results are simulations, and every device parameter carries a provenance label
+(measured, fitted, claimed, estimated or assumed).

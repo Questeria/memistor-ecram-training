@@ -177,10 +177,26 @@ def numeric_policy(old_bytes, new_bytes):
                   + "); structure, strings, integers, every boolean and every printed value equal")
 
 
-def policy_selftest():
-    """The policy passes the reference and another environment's output, and fails every meaningful perturbation."""
+def printed_flip_value(d):
+    """(key, new value) that moves the Li-ECRAM printed 4-decimal value (the maximum over the noise-free and noisy fields, `.4f`)
+    to the other side of its nearest rounding boundary while changing the stored float by at most the weight tolerance. It is
+    computed from d, so it holds for any starting value the policy permits (review 13: a fixed +4e-5 does not)."""
+    P_ = d["presets"]["EcRamPresetDevice"]
+    key = max(("noise_free__aihwkit_mode", "noisy__aihwkit_mode"), key=lambda k: P_[k]["max_abs_mean_diff"])
+    x = P_[key]["max_abs_mean_diff"]
+    n = round(x * 1e4)                                   # printed integer, in units of 1e-4
+    cands = [(n + 0.5) * 1e-4 + 1e-8, (n - 0.5) * 1e-4 - 1e-8]    # just past either neighbouring boundary
+    new = min(cands, key=lambda c: abs(c - x))
+    assert abs(new - x) <= NUMERIC_TOL["max_abs_mean_diff"] and f"{new:.4f}" != f"{x:.4f}", (x, new)
+    return key, new
+
+
+def policy_selftest(ref_b=None, quiet=False):
+    """The policy passes the reference and another environment's output, and fails every meaningful perturbation.
+    ref_b: optional starting file (bytes) in place of the deposited one, for testing other starting values."""
     import copy
-    ref_b = open(os.path.join(ROOT, NUMERIC_POLICY_FILE), "rb").read()
+    if ref_b is None:
+        ref_b = open(os.path.join(ROOT, NUMERIC_POLICY_FILE), "rb").read()
     ref = json.loads(ref_b.decode("utf-8"))
     enc = lambda d: (json.dumps(d, indent=1, sort_keys=True) + "\n").encode("utf-8")
 
@@ -201,8 +217,8 @@ def policy_selftest():
               mutated(lambda d: li(d).__setitem__("worst_mean_diff_in_tolerance_units", 1.05)), False),
              ("a key renamed (median_sd_ratio)", mutated(lambda d: li(d).__setitem__("median_sd_ratio_", li(d).pop("median_sd_ratio"))), False),
              ("a key removed (extremes/dev_min)", mutated(lambda d: li(d)["extremes"].pop("dev_min")), False),
-             ("a change within the weight tolerance that changes a printed value (Li-ECRAM 0.0111 -> 0.0112)",
-              mutated(lambda d: li(d).__setitem__("max_abs_mean_diff", li(d)["max_abs_mean_diff"] + 4e-5)), False),
+             ("a change within the weight tolerance that changes a printed value (Li-ECRAM, across the nearest rounding boundary)",
+              mutated(lambda d: d["presets"]["EcRamPresetDevice"][printed_flip_value(d)[0]].__setitem__("max_abs_mean_diff", printed_flip_value(d)[1])), False),
              ("an exact-only float changed (the AIHWKIT side of an extreme)",
               mutated(lambda d: li(d)["extremes"]["dev_max"].__setitem__("aihwkit", li(d)["extremes"]["dev_max"]["aihwkit"] + 1e-12)), False),
              ("a metadata string changed (AIHWKIT version)", mutated(lambda d: d.__setitem__("aihwkit", "1.1.1")), False),
@@ -214,8 +230,10 @@ def policy_selftest():
         ok, detail = numeric_policy(ref_b, new)
         good = ok == want
         ok_all &= good
-        print(f"{'ok  ' if good else 'BAD '} {'passes' if ok else 'fails '} (want {'pass' if want else 'fail'}) {name}: {detail[:160]}")
-    print("POLICY_SELFTEST_OK" if ok_all else "POLICY_SELFTEST_FAILED")
+        if not quiet:
+            print(f"{'ok  ' if good else 'BAD '} {'passes' if ok else 'fails '} (want {'pass' if want else 'fail'}) {name}: {detail[:160]}")
+    if not quiet:
+        print("POLICY_SELFTEST_OK" if ok_all else "POLICY_SELFTEST_FAILED")
     return 0 if ok_all else 1
 
 

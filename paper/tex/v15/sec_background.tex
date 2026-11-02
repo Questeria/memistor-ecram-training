@@ -1,0 +1,71 @@
+\section{Background and related work}\label{sec:background}
+
+\subsection{The memistor (1960)}
+Widrow and Hoff introduced the ADALINE and the least-mean-squares (LMS) rule in 1960~\cite{widrow1960switching}. To store its
+weights they built the memistor~\cite{widrow1960adaline}. A pencil-lead (graphite) substrate sits in a copper-sulphate plating
+bath. Copper is plated onto it or removed from it by a current through a third electrode, and the conductance between the
+lead's two ends is sensed with a small AC signal that does not disturb the state. Widrow, Pierce and Angell described elements
+with ``thousands'' of analog levels that spanned roughly 100 to 1 ohm in about ten seconds at a few milliamperes; this description
+is reported in secondary sources, see~\cite{mouttet2010}. Mouttet analyses the memistor as a three-terminal memristive system
+and summarises Widrow's ideal: a conductance linear in the plating charge, reversible, non-volatile and free of
+hysteresis~\cite{mouttet2010}. Widrow and Lehr recount that the Madaline~I machine was built in hardware with memistor weights and used for pattern
+recognition research~\cite{widrow1990}.
+Write noise, up/down asymmetry, retention and endurance were never reported in a form we could find, so in our catalog these
+are estimates (Section~\ref{sec:catalog}). The memistor predates Chua's memristor~\cite{chua1971} and its later physical
+identification in titanium-oxide films~\cite{strukov2008}. It is the conceptual ancestor of today's three-terminal synaptic
+transistors.
+
+\subsection{Device requirements for training}
+Gokmen and Vlasov~\cite{gokmen2016} defined the resistive processing unit (RPU). Updates are stochastic pulse trains whose
+coincidences change the conductance by a fixed step (stochastic computing,~\cite{gaines1967}). They derived device
+specifications for plain SGD on MNIST at a small error penalty: about a thousand levels, up/down asymmetry of a few percent, and
+tolerance to large cycle-to-cycle and device-to-device variation. Agarwal et al.~\cite{agarwal2016} reached similar conclusions for conventional (SGD) training, and the requirements were extended to convolutional networks~\cite{gokmen2017cnn}.
+Byun et al.~\cite{byun2024} derived such specifications for
+TTv1 and TTv2 by multiparameter simulation of asymmetry, retention, pulse count and cycle-to-cycle variation: in their simulations TTv2 permits more lenient specifications than TTv1, and plain SGD needs the most stringent.
+Reviews cover the device
+landscape~\cite{burr2017,ielmini2018,sebastian2020,haensch2019}. Mixed-precision schemes~\cite{nandakumar2020} accumulate the
+gradient digitally and program the devices rarely. They relax the device demands but give up the fully parallel in-memory update.
+
+\subsection{Algorithms that tolerate asymmetric devices}
+Real devices change their conductance by different amounts up and down, and the step depends on the state (soft bounds). Under
+plain SGD this acts as an implicit penalty that pulls weights toward each device's symmetry point~\cite{gokmen2020,wu2025}.
+\begin{itemize}
+\item \textbf{Tiki-Taka (TTv1)}~\cite{gokmen2020} uses two arrays. The gradient is accumulated on an array $A$, and its columns
+      are periodically transferred into the weight array $C$, with $W=\gamma A+C$. Asymmetry then acts as a useful decay on $A$
+      instead of a bias on $W$.
+\item \textbf{TTv2}~\cite{gokmen2021} inserts a digital buffer $H$ between the two arrays. $H$ low-pass filters the reads of $A$,
+      and a pulse is sent to $C$ only when a threshold is crossed. TTv2 still needs every device's symmetry point to be
+      subtracted by a reference.
+\item \textbf{Chopped TTv2 (c-TTv2)} and \textbf{AGAD}~\cite{rasch2024,rasch2023arxiv} remove this sensitivity. A random sign
+      modulates the inputs and the reads (c-TTv2). AGAD additionally replaces the static reference with a digital, on-the-fly
+      reference taken from the recent history of $A$.
+\item \textbf{Residual learning}~\cite{wu2025} gives convergence guarantees for this family.
+\end{itemize}
+IBM's open-source AIHWKIT~\cite{rasch2021aihwkit} implements these algorithms with fitted device presets, including the
+Li-ECRAM and metal-oxide ECRAM presets whose parameters we use. In the revision these two presets are mapped one to one onto
+AIHWKIT's own LinearStepDevice model, with its shifted bounds and slope spread, and checked against AIHWKIT's pulse responses
+(Section~\ref{sec:catalog}).
+
+\subsection{Electrochemical three-terminal devices}
+\begin{itemize}
+\item \textbf{Lithium-ion synaptic transistors and ECRAM.} Fuller et al.~\cite{fuller2017} showed a lithium-ion synaptic
+      transistor, followed by an ionic floating-gate array~\cite{fuller2019}. Tang et al.~\cite{tang2018} reported Li-WO$_3$ ECRAM
+      with about a thousand symmetric, linear states and nanosecond pulses.
+\item \textbf{Metal-oxide ECRAM.} Kim et al.~\cite{kim2019} made it CMOS-compatible.
+\item \textbf{Protonic resistors.} Onen et al.~\cite{onen2022} reported nanosecond protonic programmable resistors with a
+      phosphosilicate-glass electrolyte. In 2026, Xu et al.~\cite{xu2026} quantified cycle-to-cycle (3\%) and device-to-device
+      (21\%) variability of BEOL-compatible protonic ECRAM.
+\item \textbf{Open-loop programmable arrays.} Chen et al.~\cite{chen2023} demonstrated a $10\times10$ W/YSZ/WO$_x$ array with
+      256 states.
+\item \textbf{Organic devices.} Organic electrochemical synapses~\cite{vandeburgt2017} extend the family to low voltages.
+\end{itemize}
+In-situ training on ECRAM hardware has so far been shown on small arrays, for example a $3\times3$ array by Li et
+al.~\cite{li2021ecram} and the $10\times10$ array of~\cite{chen2023}. Other memory technologies have gone further. Phase-change and
+resistive arrays have trained or run networks at larger scale~\cite{prezioso2015,ambrogio2018,yao2020,wan2022}, and analog-AI
+inference chips with on-chip periphery now report measured efficiencies of about 10~TOPS/W~\cite{ambrogio2023,legallo2023}.
+
+\paragraph{Scaling analog training.} Wu et al.~\cite{wu2026scale} co-designed the weight mapping, the optimizer and the
+converters, and simulated ECRAM-calibrated Transformers up to about 123 million parameters with finite converter resolution and
+device nonidealities. Their weight-gradient path stays digital, so they do not test the fully in-memory update studied here.
+The two studies answer complementary questions: what an analog update saves in computation and data movement, and what it
+costs in accuracy and calibration. Our models are far smaller (Section~\ref{sec:discussion}).

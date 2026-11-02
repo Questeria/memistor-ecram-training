@@ -66,7 +66,7 @@ is a per-operation, read-dominated figure; calls the sensitivity sheet an explor
 subtitle too, and states that one-at-a-time ranges do not bound joint deviations; adds Figure~\ref{fig:arch}; adds a
 control ladder to the limitations and computational follow-ups to the roadmap; and moves correction history from
 Sections~\ref{sec:methods}, \ref{sec:fidelity}, \ref{sec:scale} and~\ref{sec:spec} to this appendix.
-Version 15 (November 1, 2026; this paper) answers a twelfth review, of version 14 and version 1.4 of the archive
+Version 15 (November 1, 2026) answers a twelfth review, of version 14 and version 1.4 of the archive
 (\texttt{RESPONSE-TO-REVIEW-12.md}; no experiment was run and no result changed), which recomputed the statistics and the
 energy accounting from the records and ran the archive's fast reproduction. Figure~\ref{fig:arch} and its caption now
 show the selected settings (TTv2 and c-TTv2 reset $A$ with pulses, AGAD does not; TTv2 has no chopper), and its check takes
@@ -76,6 +76,13 @@ moves 16 endpoints in Tables~\ref{tab:rev_vs_fp} and~\ref{tab:rev_vs_adam} by 0.
 Section~\ref{sec:energy} states that the reset's extra reads carry a buffer allowance; and outside its reference
 environment the archive's reproduction compares its one CPU re-simulation of float32 pulse sequences (the AIHWKIT
 comparison) under a stated numeric tolerance.
+Version 16 (November 1, 2026; this paper) answers a thirteenth review, of version 15 and version 1.5 of the archive
+(\texttt{RESPONSE-TO-REVIEW-13.md}; no experiment was run and no result changed), which found the version-15 changes right
+and no defect in the paper. The contribution statement now counts all thirteen reviews (versions 1 to 7 and 10 to 15)
+instead of versions 1 to 7, and the abstract no longer says that this version repairs the simulator. The review's one optional finding concerned the archive's \texttt{reproduce\_all.py}: the
+negative control of its numeric-policy self-test shifted a printed value by a fixed amount, which for another starting
+value the policy permits would not change the printed number; the control now computes the shift from the starting value, as
+the review suggested, to just across the nearest rounding boundary of the printed number and within the stated tolerance.
 
 \paragraph{What was repaired.}
 \begin{enumerate}

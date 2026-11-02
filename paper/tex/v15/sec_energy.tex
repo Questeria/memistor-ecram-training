@@ -1,0 +1,63 @@
+\section{A conditional energy projection for the weight-matrix operations}\label{sec:energy}
+This section is an accounting scenario, not an energy measurement of a training system. It asks how much energy the
+weight-matrix operations of a training step would take if the analog reads ran at the efficiency of a published analog-AI
+\emph{inference} chip and the updates cost the published or projected pulse energies, and it compares that with an H100.
+
+\paragraph{Assumptions, stated first.}
+\begin{enumerate}
+\item \textbf{Different read assumptions for accuracy and energy.} The accuracies of Section~\ref{sec:main} are simulated with
+      ideal fp32 reads; the energy prices finite-precision analog reads. We have not shown that one operating point gives both
+      the reported accuracy and the assumed read efficiency.
+\item \textbf{The read efficiency is borrowed from a phase-change inference chip}~\cite{ambrogio2023}: up to 12.4\,TOPS/W
+      sustained, measured on one chip, and 6.94\,TOPS/W, the authors' \emph{projected} full-system figure for their five-chip
+      system: the chips were not integrated with digital processing, whose time and energy the authors estimate from their
+      architecture model, and external components such as system buses and voltage regulators are excluded. We report both. Neither is an ECRAM training array, which also needs
+      backward reads, repeated writes, references and Tiki-Taka state.
+\item \textbf{The boundary is the weight matrices.} Per weight and per training row: the forward and backward reads (two MACs)
+      and the update (device pulses, pulse lines and pulse generation, and, for the TT family, the transfer's column reads, priced
+      as one ADC conversion and one read-add-write of the digital buffer $H$ per read weight). The pulse reset's extra
+      column reads are priced the same way although they do not update $H$, a conservative approximation: the buffer
+      allowance stands for the arithmetic that turns each re-read into a correction pulse count, and without it the analog
+      energy would be at most 0.15\,\% lower.
+      Attention products, nonlinearities, normalisation, activation storage, data movement, control, reference maintenance and
+      static power are not modelled on either side, and the digital exclusions do not cancel the analog ones. The rest of the TT family's digital work, called the
+      digital TT state below (the storage of $H$, AGAD's averages $p$ and $p^{\mathrm{ref}}$ and their arithmetic, the chopper
+      signs, the threshold tests and the transfer scheduling), is outside the ratio.
+\item \textbf{The GPU side} is H100 board power $P$ over its dense BF16 peak $F$~\cite{nvidiah100} at the utilisation $u$ of
+      a very large training run~\cite{dubey2024}, with 6 FLOP per weight per row (2 each for the forward pass, the input
+      gradient and the weight gradient): $E_{\mathrm{GPU}}=6P/(Fu)$, with $F=989.5$\,TFLOP/s (half the 1979\,TFLOP/s
+      sparsity figure), $P$ from 500\,W (our estimate of a sustained draw) to 700\,W (the rated maximum) and $u$ from 38 to
+      43\,\%. At 700\,W and $u=40.5\,\%$ this is \RVenGpuPj\,pJ per weight per row; over both ranges it is
+      \RVenGpuMeasLo\,pJ (500\,W, 43\,\%) to \RVenGpuMeasHi\,pJ (700\,W, 38\,\%), and with $u$ over the 30--55\,\% range of our
+      original plan \RVenGpuPlannedLo--\RVenGpuPlannedHi\,pJ.
+\end{enumerate}
+
+\paragraph{Projection.} With the repaired pulse counts (resets counted as applied, the pulse reset's extra reads included), the
+GPU-to-analog ratio per weight per row is \RVenChipMin--\RVenChipMax$\times$ at the 12.4\,TOPS/W chip figure and
+\RVenSysMin--\RVenSysMax$\times$ at the 6.94\,TOPS/W system figure, for every published device and algorithm. The reads are at
+least \RVenChipMvmShareMin\,\% of the analog total: the ratio is set almost entirely by the two borrowed efficiencies, and changes in the simulated pulse counts barely move it. It is therefore a conditional, read-dominated figure per
+operation (one forward read, one backward read and one update of each weight per row), not the energy to train a model to a
+given quality.
+
+\paragraph{Conditional ratios for cells that pass the margin.} A low energy per operation is worth nothing without the
+accuracy. PASS means that the whole confidence interval of the gap lies within the stated non-inferiority margin under ideal reads,
+not that the losses are equal; we therefore print the ratio only for cells that PASS against the stated baseline
+(Table~\ref{tab:rev_energy}), mark FAIL cells as missing the margin and UNRESOLVED cells as ``criterion not established'':
+\begin{itemize}
+\item against FP-SGD: \RVenEqFpMnistN, \RVenEqFpCifarN{} and \RVenEqFpLmN{} of the \RVenCellsMnistN{} published-device cells per
+      task (MNIST, CIFAR, LM);
+\item against Adam: \RVenEqAdamMnistN, \RVenEqAdamCifarN{} and \RVenEqAdamLmN{} cells. \textbf{On the LM no analog cell passes
+      the margin against Adam, so no conditional ratio exists against the stronger digital baseline.}
+\end{itemize}
+The comparison is at a fixed training budget; reaching a quality at a different number of steps is not modelled. No joint
+finite-read operating point of accuracy and energy, and no energy-to-target training trajectory, is demonstrated; finite
+precision, tiling and utilisation, reference maintenance, the digital TT state, update scheduling and full-system costs stay
+outside the ratio.
+
+\paragraph{What 100$\times$ would need.} At the central GPU figure, a 100$\times$ ratio needs reads at about
+\RVenNeedTopsMin--\RVenNeedTopsMax\,TOPS/W including their periphery, several times the chip figure above.
+
+\paragraph{The memistor.} Widrow's macroscopic memistor moves tens of microjoules of plating charge per level; its ratio is at
+most \RVenWidrowRatioMax{} (far worse than the GPU), as expected for wet, centimetre-scale cells.
+
+\input{tables/rev_energy.tex}
